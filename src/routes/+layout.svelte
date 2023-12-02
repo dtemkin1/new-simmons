@@ -4,6 +4,8 @@
 
 	import simmons_logo from '$lib/assets/logo_crop.png';
 
+	export const prerender = true;
+
 	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png';
 	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png';
 
