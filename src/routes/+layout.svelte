@@ -1,12 +1,13 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar, LightSwitch, modeCurrent } from '@skeletonlabs/skeleton';
+	import { base } from '$app/paths';
 
 	import simmons_logo from '$lib/assets/logo_crop.png';
-
 	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png';
 	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png';
 
+	$: simmons_img = simmons_logo;
 	$: mit_logo = $modeCurrent ? mit_logo_dark : mit_logo_light;
 
 	// Floating UI for Popups
@@ -23,25 +24,31 @@
 		<!-- App Bar -->
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<a href="/">
-					<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_logo} />
+				<a href="{base}/">
+					<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_img} />
 				</a>
 			</svelte:fragment>
-			<a href="/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
+			<a href="{base}/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
 			<svelte:fragment slot="trail">
-				<a class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary" href="/about/">
+				<a class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary" href="{base}/about">
 					About
 				</a>
 				<a
 					class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-					href="/prospectives/"
+					href="{base}/prospectives"
 				>
 					Prospectives
 				</a>
-				<a class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary" href="/visitors/">
+				<a
+					class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
+					href="{base}/visitors"
+				>
 					Visitors
 				</a>
-				<a class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary" href="/residents/">
+				<a
+					class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
+					href="{base}/residents"
+				>
 					Residents
 				</a>
 				<LightSwitch />
