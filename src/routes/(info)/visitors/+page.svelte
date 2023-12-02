@@ -43,7 +43,7 @@
 		href="mailto:nika_h@mit.edu">nika_h@mit.edu</a
 	>) to register the event and the Reservations Chair (<a
 		class="anchor"
-		href="simmmons-reservations@mit.edu">simmons-reservations@mit.edu</a
+		href="mailto:simmmons-reservations@mit.edu">simmons-reservations@mit.edu</a
 	>) to confirm availability.
 </p>
 

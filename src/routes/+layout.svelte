@@ -61,7 +61,7 @@
 	<svelte:fragment slot="pageFooter">
 		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 			<svelte:fragment slot="lead">
-				<a href="https://www.mit.edu">
+				<a href="https://web.mit.edu/">
 					<img class="max-h-12 w-auto" alt="MIT Logo" src={mit_logo} />
 				</a>
 			</svelte:fragment>
