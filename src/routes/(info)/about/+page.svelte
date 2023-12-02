@@ -96,7 +96,7 @@
 		{#each images as image}
 			<div class="snap-center h-[500px] min-w-[800px] rounded-container-token relative">
 				<img src={image.image} alt={image.title} />
-				<div class="absolute bottom-0 px-4 py-3 bg-surface-500/90 w-full">
+				<div class="absolute bottom-0 px-4 py-3 bg-gray-500/90 w-full">
 					<h3 class="h3">{@html image.title}</h3>
 					{@html image.description}
 				</div>
