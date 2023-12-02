@@ -1,5 +1,6 @@
 <script lang="ts">
-	import '../app.postcss';
+	import '../../app.postcss';
+	import '../info.postcss';
 	import { AppShell, AppBar, LightSwitch, modeCurrent } from '@skeletonlabs/skeleton';
 	import { base } from '$app/paths';
 
@@ -7,7 +8,6 @@
 	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png';
 	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png';
 
-	$: simmons_img = simmons_logo;
 	$: mit_logo = $modeCurrent ? mit_logo_dark : mit_logo_light;
 
 	// Floating UI for Popups
@@ -25,7 +25,7 @@
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<a href="{base}/">
-					<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_img} />
+					<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_logo} />
 				</a>
 			</svelte:fragment>
 			<a href="{base}/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
@@ -56,7 +56,12 @@
 		</AppBar>
 	</svelte:fragment>
 	<!-- Page Route Content -->
-	<slot />
+	<div class="container h-full mx-auto flex justify-center items-center">
+		<div class="card p-4 flex flex-col space-y-4 max-w-5xl m-4">
+			<slot />
+		</div>
+	</div>
+	<!-- Page Footer -->
 	<svelte:fragment slot="pageFooter">
 		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 			<svelte:fragment slot="lead">
