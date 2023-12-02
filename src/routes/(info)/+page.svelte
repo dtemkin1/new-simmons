@@ -6,7 +6,7 @@
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
-<video class="h-full w-full rounded-md max-w-4xl" controls poster={i3_thumbnail}>
+<video class="h-full w-full rounded-md max-w-[787px]" controls poster={i3_thumbnail}>
 	<source src={i3_video} type="video/mp4" />
 </video>
 

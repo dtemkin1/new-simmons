@@ -46,7 +46,7 @@
 			image: image6,
 			title: 'Multi-Purpose Room',
 			description:
-				'Simmons Hall houses a giant two story Multi-Purpose Room (MPR), which has seating for over 200 people and is equipped with a 12 foot projection screen, surround sound system, Blu-Ray player, and D<small>IREC</small>TV.'
+				'Simmons Hall houses a giant two story Multi-Purpose Room (MPR), which has seating for over 200 people and is equipped with a 12 foot projection screen, surround sound system, Blu-Ray player, and D<span class="text-sm">IREC</span>TV.'
 		},
 		{
 			image: image7,
@@ -86,19 +86,22 @@
 </script>
 
 <h1 class="h1">About</h1>
-<div class="p-4 grid grid-cols-[auto_1fr_auto] gap-4 items-center">
+<div class="p-4 grid grid-cols-[auto_1fr_auto] gap-4 items-center content-center self-center">
 	<!-- Button: Left -->
 	<button type="button" class="btn-icon variant-filled" on:click={carouselLeft}>
 		<i class="fa-solid fa-arrow-left" />
 	</button>
 	<!-- Full Images -->
-	<div bind:this={elemCarousel} class="snap-x snap-mandatory scroll-smooth flex overflow-x-auto">
+	<div
+		bind:this={elemCarousel}
+		class="snap-x snap-mandatory scroll-smooth flex overflow-x-auto max-w-[800px]"
+	>
 		{#each images as image}
-			<div class="snap-center h-[500px] min-w-[800px] rounded-container-token relative">
-				<img src={image.image} alt={image.title} />
-				<div class="absolute bottom-0 px-4 py-3 bg-gray-500/90 w-full">
+			<div class="snap-center w-[800px] rounded-container-token relative flex shrink-0">
+				<img class="h-full w-full" src={image.image} alt={image.title} />
+				<div class="absolute bottom-0 px-4 py-3 dark:bg-surface-900/90 bg-surface-100/90 w-full">
 					<h3 class="h3">{@html image.title}</h3>
-					{@html image.description}
+					<p>{@html image.description}</p>
 				</div>
 			</div>
 		{/each}

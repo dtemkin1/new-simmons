@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.postcss';
+	import '@fortawesome/fontawesome-free/css/all.min.css';
 	import { AppShell, AppBar, LightSwitch, modeCurrent } from '@skeletonlabs/skeleton';
 	import { base } from '$app/paths';
 
