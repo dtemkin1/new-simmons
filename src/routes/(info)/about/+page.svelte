@@ -233,7 +233,7 @@ old_desc
 			<a
 				class="anchor"
 				target="_blank"
-				href=" http://aeroastro.mit.edu/faculty-research/faculty-list/steven-r-hall"
+				href="http://aeroastro.mit.edu/faculty-research/faculty-list/steven-r-hall"
 			>
 				Associate Head of House Steve Hall
 			</a>
