@@ -3,12 +3,14 @@
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 	import { AppShell, AppBar, LightSwitch, modeCurrent } from '@skeletonlabs/skeleton';
 	import { base } from '$app/paths';
+	import { page } from '$app/stores';
 
 	import simmons_logo from '$lib/assets/logo_crop.png';
 	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png';
 	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png';
 
 	$: mit_logo = $modeCurrent ? mit_logo_dark : mit_logo_light;
+	$: current_page = $page.url.pathname;
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -21,56 +23,61 @@
 	initializeStores();
 	const drawerStore = getDrawerStore();
 	const navDrawer: DrawerSettings = { id: 'nav' };
+
+	const pages = [
+		{
+			name: 'About',
+			url: `${base}/about`
+		},
+		{
+			name: 'Prospectives',
+			url: `${base}/prospectives`
+		},
+		{
+			name: 'Visitors',
+			url: `${base}/visitors`
+		},
+		{
+			name: 'Residents',
+			url: `${base}/residents`
+		}
+	];
 </script>
 
 <svelte:head><title>Simmons Hall</title></svelte:head>
 
 <!-- Drawer -->
 <Drawer>
-	{#if $drawerStore.id === 'nav'}<div class="flex flex-col gap-2 min-h-full">
-			<div class="inline-flex items-center gap-4 mt-12 self-center">
+	{#if $drawerStore.id === 'nav'}
+		<div class="flex flex-col gap-2 min-h-full items-center">
+			<a
+				href="{base}/"
+				class="inline-flex items-center gap-4 mt-12 mb-4 self-center"
+				on:click={() => {
+					drawerStore.close();
+				}}
+			>
 				<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_logo} />
-				<a href="{base}/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
-			</div>
-			<a
-				on:click={() => {
-					drawerStore.close();
-				}}
-				class="btn variant-surface hover:variant-soft-primary"
-				href="{base}/about"
-			>
-				About
+				<strong class="text-xl uppercase">Simmons Hall</strong>
 			</a>
-			<a
-				on:click={() => {
-					drawerStore.close();
-				}}
-				class="btn variant-surface hover:variant-soft-primary"
-				href="{base}/prospectives"
-			>
-				Prospectives
-			</a>
-			<a
-				on:click={() => {
-					drawerStore.close();
-				}}
-				class="btn variant-surface hover:variant-soft-primary"
-				href="{base}/visitors"
-			>
-				Visitors
-			</a>
-			<a
-				on:click={() => {
-					drawerStore.close();
-				}}
-				class="btn variant-surface hover:variant-soft-primary"
-				href="{base}/residents"
-			>
-				Residents
-			</a>
-			<div class="grow"></div>
+			<!-- <div class="grow" /> -->
+			{#each pages as page}
+				<a
+					on:click={() => {
+						drawerStore.close();
+					}}
+					class="btn hover:variant-soft-primary w-min"
+					class:variant-filled-primary={page.url === current_page}
+					class:variant-surface={page.url !== current_page}
+					href={page.url}
+				>
+					{page.name}
+				</a>
+			{/each}
+			<div class="grow" />
 			<LightSwitch class="self-center mb-12" />
-		</div>{/if}
+		</div>
+	{/if}
 </Drawer>
 
 <!-- App Shell -->
@@ -86,30 +93,16 @@
 			<a href="{base}/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
 			<svelte:fragment slot="trail">
 				<div class="hidden md:inline-flex gap-4 items-center">
-					<a
-						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-						href="{base}/about"
-					>
-						About
-					</a>
-					<a
-						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-						href="{base}/prospectives"
-					>
-						Prospectives
-					</a>
-					<a
-						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-						href="{base}/visitors"
-					>
-						Visitors
-					</a>
-					<a
-						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-						href="{base}/residents"
-					>
-						Residents
-					</a>
+					{#each pages as page}
+						<a
+							class="btn btn-sm hover:variant-soft-primary"
+							class:variant-filled-primary={page.url === current_page}
+							class:variant-surface={page.url !== current_page}
+							href={page.url}
+						>
+							{page.name}
+						</a>
+					{/each}
 					<LightSwitch />
 				</div>
 				<div class="md:hidden">
