@@ -44,7 +44,10 @@
 	];
 </script>
 
-<svelte:head><title>Simmons Hall</title></svelte:head>
+<svelte:head>
+	<title>Simmons Hall</title>
+	<meta name="description" content="" />
+</svelte:head>
 
 <!-- Drawer -->
 <Drawer>
@@ -113,8 +116,11 @@
 							drawerStore.open(navDrawer);
 						}}
 						type="button"
-						class="btn-icon"><i class="fa-solid fa-bars text-2xl"></i></button
+						class="btn-icon"
+						id="navMenu"
 					>
+						<i class="fa-solid fa-bars text-2xl"></i>
+					</button>
 				</div>
 			</svelte:fragment>
 		</AppBar>
