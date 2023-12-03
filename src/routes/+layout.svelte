@@ -118,6 +118,7 @@
 						type="button"
 						class="btn-icon"
 						id="navMenu"
+						aria-label="Navigation Menu"
 					>
 						<i class="fa-solid fa-bars text-2xl"></i>
 					</button>
