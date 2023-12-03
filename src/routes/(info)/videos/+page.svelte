@@ -14,32 +14,32 @@
 		},
 		{
 			title: '2015 i3',
-			link: 'http://www.youtube.com/embed/-PE9Fds84Zg',
+			link: 'https://www.youtube.com/embed/-PE9Fds84Zg',
 			beforeDescription: 'A place beyond your wildest dreams',
 			afterDescription: ''
 		},
 		{
 			title: '2014 i3',
-			link: 'http://www.youtube.com/embed/A6apDU2fqbk',
+			link: 'https://www.youtube.com/embed/A6apDU2fqbk',
 			beforeDescription: 'In The Sponge',
 			afterDescription: ''
 			// '<a class="anchor" href="http://simmons.mit.edu/inthesponge">"In The Sponge" Explained</a>: a shot-by-shot guide to the video.'
 		},
 		{
 			title: '2013 i3',
-			link: 'http://www.youtube.com/embed/yq5NlwvV8Ec',
+			link: 'https://www.youtube.com/embed/yq5NlwvV8Ec',
 			beforeDescription: 'What is Simmons?',
 			afterDescription: ''
 		},
 		{
 			title: '2012 i3',
-			link: 'http://www.youtube.com/embed/vx_hJE8I0mA',
+			link: 'https://www.youtube.com/embed/vx_hJE8I0mA',
 			beforeDescription: 'At the end of the day...',
 			afterDescription: ''
 		},
 		{
 			title: 'Simmons Anthem',
-			link: 'http://www.youtube.com/embed/u5kVxB63xEY',
+			link: 'https://www.youtube.com/embed/u5kVxB63xEY',
 			beforeDescription: 'Oh Spongey-Sponge',
 			afterDescription: ''
 		}
