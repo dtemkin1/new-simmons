@@ -94,14 +94,14 @@
 	<!-- Full Images -->
 	<div
 		bind:this={elemCarousel}
-		class="snap-x snap-mandatory scroll-smooth flex overflow-x-auto max-w-[800px]"
+		class="snap-x snap-mandatory scroll-smooth flex g-0 overflow-x-auto max-w-[800px] aspect-[8/5]"
 	>
 		{#each images as image}
-			<div class="snap-center w-[800px] rounded-container-token relative flex shrink-0">
-				<img class="h-full w-full" src={image.image} alt={image.title} />
-				<div class="absolute bottom-0 px-4 py-3 dark:bg-surface-900/90 bg-surface-100/90 w-full">
-					<h3 class="h3">{@html image.title}</h3>
-					<p>{@html image.description}</p>
+			<div class="snap-center rounded-container-token relative flex shrink-0 w-fit">
+				<img class="w-full" src={image.image} alt={image.title} />
+				<div class="absolute bottom-0 px-4 py-3 dark:bg-surface-900/75 bg-surface-100/75 w-full">
+					<p class="text-sm font-bold">{@html image.title}</p>
+					<p class="text-sm">{@html image.description}</p>
 				</div>
 			</div>
 		{/each}
