@@ -83,6 +83,15 @@
 				: elemCarousel.scrollLeft + elemCarousel.clientWidth; // step right
 		elemCarousel.scroll(x, 0);
 	}
+
+	import { onMount } from 'svelte';
+
+	function runInterval() {
+		setTimeout(carouselRight, 5000);
+		setTimeout(runInterval, 5000);
+	}
+
+	onMount(runInterval);
 </script>
 
 <h1 class="h1">About</h1>
