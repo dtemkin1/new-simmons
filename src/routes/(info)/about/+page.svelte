@@ -86,12 +86,13 @@
 
 	import { onMount } from 'svelte';
 
-	function runInterval() {
-		setTimeout(carouselRight, 5000);
-		setTimeout(runInterval, 5000);
-	}
+	onMount(() => {
+		const interval = setInterval(() => {
+			carouselRight();
+		}, 5000);
 
-	onMount(runInterval);
+		return () => clearInterval(interval);
+	});
 </script>
 
 <h1 class="h1">About</h1>
@@ -109,8 +110,8 @@
 			<div class="snap-center rounded-container-token relative flex shrink-0 w-fit">
 				<img class="w-full" src={image.image} alt={image.title} />
 				<div class="absolute bottom-0 px-4 py-3 bg-surface-backdrop-token w-full">
-					<p class="text-sm font-bold">{@html image.title}</p>
-					<p class="text-sm">{@html image.description}</p>
+					<p class="text-sm font-bold text-on-surface-token">{@html image.title}</p>
+					<p class="text-sm text-on-surface-token">{@html image.description}</p>
 				</div>
 			</div>
 		{/each}
