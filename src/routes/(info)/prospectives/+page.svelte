@@ -168,7 +168,11 @@
 </p>
 
 <!-- svelte-ignore a11y-media-has-caption -->
-<video class="h-full w-full rounded-md max-w-[787px] self-center" controls poster={i3_thumbnail}>
+<video
+	class="h-full w-full rounded-container-token max-w-[787px] self-center"
+	controls
+	poster={i3_thumbnail}
+>
 	<source src={i3_video} type="video/mp4" />
 </video>
 

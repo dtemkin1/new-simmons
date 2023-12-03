@@ -103,7 +103,7 @@
 	<!-- Full Images -->
 	<div
 		bind:this={elemCarousel}
-		class="snap-x snap-mandatory scroll-smooth flex g-0 overflow-x-auto max-w-[800px] aspect-[8/5]"
+		class="snap-x snap-mandatory scroll-smooth flex g-0 overflow-x-auto max-w-[800px] aspect-[8/5] rounded-container-token"
 	>
 		{#each images as image}
 			<div class="snap-center rounded-container-token relative flex shrink-0 w-fit">
