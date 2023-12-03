@@ -16,7 +16,8 @@
 	a change away from the self-governance model, but formalization and strengthening of it. The
 	Simmons Hall governance model is intended to allow the dorm to have more independence and a
 	stronger voice in the decisions that affect it. Moreover, it is intended to better define the
-	relationship of Heads of House<sup>1</sup> and Graduate Resident Tutors<sup>2</sup> to the governance
+	relationship of Heads of House<a id="link-to-f1" href="#f1" class="anchor"><sup>1</sup></a> and
+	Graduate Resident Tutors<a id="link-to-f2" href="#f2" class="anchor"><sup>2</sup></a> to the governance
 	process, encouraging their participation and support but ensuring that they do not assume control over
 	governance functions.
 </p>
@@ -924,11 +925,12 @@
 						MIT specially selects individuals to live in Simmons Hall in order to ensure the health,
 						safety and well-being of residents and to promote a vibrant and diverse social life.
 						These include Head of Houses and Graduate Resident Advisors (GRAs), Visiting Scholars,
-						and the Assistant Director / Area Director<sup>3</sup> among others. Along with the House
-						Manager and staff, these individuals collectively form a House Support Team, with the Head
-						of Houses serving as its head, that operates independently of the House government but must
-						remain in contact with the House government in order to ensure a mutually supportive working
-						relationship.
+						and the Assistant Director / Area Director<a id="link-to-f3" href="#f3" class="anchor"
+							><sup>3</sup></a
+						> among others. Along with the House Manager and staff, these individuals collectively form
+						a House Support Team, with the Head of Houses serving as its head, that operates independently
+						of the House government but must remain in contact with the House government in order to
+						ensure a mutually supportive working relationship.
 					</li>
 					<li>
 						Head of Houses, GRAs, and any other individuals who are specially selected by MIT to
@@ -1086,10 +1088,28 @@
 </ol>
 <hr />
 <ol class="list-decimal mx-4 px-4 py-2">
-	<li>Housemasters (HM) are now called Heads of House (HOH)</li>
-	<li>Graduate Residence Tutors (GRTs) are now called Graduate Residence Advisors (GRAs)</li>
+	<li id="f1">
+		Housemasters (HM) are now called Heads of House (HOH) <a
+			href="#link-to-f1"
+			id="f1"
+			class="anchor"
+		>
+			<i class="fa-solid fa-arrow-up"></i>
+		</a>
+	</li>
+	<li>
+		Graduate Residence Tutors (GRTs) are now called Graduate Residence Advisors (GRAs) <a
+			href="#link-to-f2"
+			id="f2"
+			class="anchor"
+		>
+			<i class="fa-solid fa-arrow-up"></i>
+		</a>
+	</li>
 	<li>
 		Residential Life Area Directors (RLADs) are now called Assistant Director / Area Director
-		(AD/AD)
+		(AD/AD) <a href="#link-to-f3" id="f3" class="anchor">
+			<i class="fa-solid fa-arrow-up"></i>
+		</a>
 	</li>
 </ol>
