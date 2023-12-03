@@ -13,7 +13,7 @@
 </h2>
 <p>Check here for important information and FAQs about the fall semester.</p>
 
-<h2 class="h2"><a class="anchor" data-sveltekit-reload href="{base}/sds">Simmons DB</a></h2>
+<h2 class="h2"><a class="anchor" href="{base}/sds">Simmons DB</a></h2>
 <p>
 	This is the Simmons DB, a student-created database of our dorm life. Check this out for a
 	directory, your current packages, and the current house government proposals.

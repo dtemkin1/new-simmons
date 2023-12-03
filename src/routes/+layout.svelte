@@ -73,3 +73,16 @@
 		</AppBar>
 	</svelte:fragment>
 </AppShell>
+
+<style>
+	:global(html, body) {
+		@apply h-full;
+	}
+	:global(body) {
+		background-image: url('$lib/assets/bg.jpg');
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+</style>
