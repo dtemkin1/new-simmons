@@ -27,10 +27,18 @@
 			<svelte:fragment slot="lead"><i class="fa-solid fa-person text-2xl"></i></svelte:fragment>
 			<span>Personal Info</span>
 		</AppRailTile>
-		<AppRailTile bind:group={currentTile} name="packages" value={4} title="tile-3">
+		<!-- <AppRailTile bind:group={currentTile} name="packages" value={4} title="tile-3">
 			<svelte:fragment slot="lead"><i class="fa-solid fa-box text-2xl"></i></svelte:fragment>
 			<span>Packages</span>
-		</AppRailTile>
+		</AppRailTile> -->
+		<AppRailAnchor
+			href="{base}/sds/packages/mypackages"
+			title="desk"
+			on:click={() => (currentTile = 0)}
+		>
+			<svelte:fragment slot="lead"><i class="fa-solid fa-box text-2xl"></i></svelte:fragment>
+			<span>Packages</span></AppRailAnchor
+		>
 		<AppRailTile bind:group={currentTile} name="movies" value={5} title="movies">
 			<svelte:fragment slot="lead"><i class="fa-solid fa-film text-2xl"></i></svelte:fragment>
 			<span>Movies</span>
@@ -39,12 +47,18 @@
 			<svelte:fragment slot="lead"><i class="fa-solid fa-book text-2xl"></i></svelte:fragment>
 			<span>Library</span>
 		</AppRailTile>
-		<AppRailTile bind:group={currentTile} name="desk" value={7} title="desk">
+		<!-- <AppRailTile bind:group={currentTile} name="desk" value={7} title="desk">
 			<svelte:fragment slot="lead"
 				><i class="fa-solid fa-envelopes-bulk text-2xl"></i></svelte:fragment
 			>
 			<span>Desk</span>
-		</AppRailTile>
+		</AppRailTile> -->
+		<AppRailAnchor href="{base}/sds/desk/calendar" title="desk" on:click={() => (currentTile = 0)}>
+			<svelte:fragment slot="lead"
+				><i class="fa-solid fa-envelopes-bulk text-2xl"></i></svelte:fragment
+			>
+			<span>Desk</span></AppRailAnchor
+		>
 		<!-- --- -->
 		<svelte:fragment slot="trail">
 			<AppRailAnchor href="{base}/sds/login/certs/login" title="Account"
