@@ -14,9 +14,64 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	// Initalize Drawer
+	import { Drawer, getDrawerStore, initializeStores } from '@skeletonlabs/skeleton';
+	import type { DrawerSettings } from '@skeletonlabs/skeleton';
+	initializeStores();
+	const drawerStore = getDrawerStore();
+	const navDrawer: DrawerSettings = { id: 'nav' };
 </script>
 
 <svelte:head><title>Simmons Hall</title></svelte:head>
+
+<!-- Drawer -->
+<Drawer>
+	{#if $drawerStore.id === 'nav'}<div class="flex flex-col gap-2 min-h-full">
+			<div class="inline-flex items-center gap-4 mt-12 self-center">
+				<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_logo} />
+				<a href="{base}/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
+			</div>
+			<a
+				on:click={() => {
+					drawerStore.close();
+				}}
+				class="btn variant-surface hover:variant-soft-primary"
+				href="{base}/about"
+			>
+				About
+			</a>
+			<a
+				on:click={() => {
+					drawerStore.close();
+				}}
+				class="btn variant-surface hover:variant-soft-primary"
+				href="{base}/prospectives"
+			>
+				Prospectives
+			</a>
+			<a
+				on:click={() => {
+					drawerStore.close();
+				}}
+				class="btn variant-surface hover:variant-soft-primary"
+				href="{base}/visitors"
+			>
+				Visitors
+			</a>
+			<a
+				on:click={() => {
+					drawerStore.close();
+				}}
+				class="btn variant-surface hover:variant-soft-primary"
+				href="{base}/residents"
+			>
+				Residents
+			</a>
+			<div class="grow"></div>
+			<LightSwitch class="self-center mb-12" />
+		</div>{/if}
+</Drawer>
 
 <!-- App Shell -->
 <AppShell>
@@ -30,28 +85,42 @@
 			</svelte:fragment>
 			<a href="{base}/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
 			<svelte:fragment slot="trail">
-				<a class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary" href="{base}/about">
-					About
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-					href="{base}/prospectives"
-				>
-					Prospectives
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-					href="{base}/visitors"
-				>
-					Visitors
-				</a>
-				<a
-					class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
-					href="{base}/residents"
-				>
-					Residents
-				</a>
-				<LightSwitch />
+				<div class="hidden md:inline-flex gap-4 items-center">
+					<a
+						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
+						href="{base}/about"
+					>
+						About
+					</a>
+					<a
+						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
+						href="{base}/prospectives"
+					>
+						Prospectives
+					</a>
+					<a
+						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
+						href="{base}/visitors"
+					>
+						Visitors
+					</a>
+					<a
+						class="btn btn-sm variant-ghost-surface hover:variant-ghost-primary"
+						href="{base}/residents"
+					>
+						Residents
+					</a>
+					<LightSwitch />
+				</div>
+				<div class="md:hidden">
+					<button
+						on:click={() => {
+							drawerStore.open(navDrawer);
+						}}
+						type="button"
+						class="btn-icon"><i class="fa-solid fa-bars text-2xl"></i></button
+					>
+				</div>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
