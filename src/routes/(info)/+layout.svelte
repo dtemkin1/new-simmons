@@ -6,7 +6,7 @@
 
 <style>
 	:global(html, body) {
-		height: 100%;
+		@apply h-full;
 	}
 	:global(body) {
 		background-image: url('$lib/assets/bg.jpg');
