@@ -66,8 +66,9 @@
 					on:click={() => {
 						drawerStore.close();
 					}}
-					class="btn hover:variant-soft-primary w-min"
+					class="btn w-min"
 					class:variant-filled-primary={page.url === current_page}
+					class:hover:variant-soft-primary={page.url !== current_page}
 					class:variant-surface={page.url !== current_page}
 					href={page.url}
 				>
@@ -95,8 +96,9 @@
 				<div class="hidden md:inline-flex gap-4 items-center">
 					{#each pages as page}
 						<a
-							class="btn btn-sm hover:variant-soft-primary"
+							class="btn btn-sm"
 							class:variant-filled-primary={page.url === current_page}
+							class:hover:variant-soft-primary={page.url !== current_page}
 							class:variant-surface={page.url !== current_page}
 							href={page.url}
 						>
