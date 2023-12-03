@@ -180,6 +180,7 @@
 {#each rawData.schedule as { date, events }}
 	<h2 class="h2">{date}</h2>
 	<Table
+		regionCell="!whitespace-normal"
 		source={{
 			head: ['Time', 'Event', 'Location'],
 			body: tableMapperValues(events, ['time', 'event', 'location'])
