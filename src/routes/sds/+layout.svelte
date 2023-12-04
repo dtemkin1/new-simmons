@@ -145,9 +145,11 @@
 		</svelte:fragment>
 	</AppRail>
 
-	<div class="flex">
+	<div class="flex max-h-fit">
 		{#if currentTile !== 0}
-			<section class="p-4 pb-20 space-y-4 w-full sm:w-72 overflow-y-auto bg-surface-100-800-token">
+			<section
+				class="p-4 pb-20 space-y-4 w-full md:w-72 md:min-w-fit overflow-y-auto bg-surface-100-800-token"
+			>
 				<nav class="list-nav">
 					<ul>
 						{#each links[currentTile] as link}
@@ -169,7 +171,7 @@
 				</nav>
 			</section>
 		{/if}
-		<div class="grow sm:!block" class:hidden={currentTile !== 0}>
+		<div class="grow md:!block overflow-auto" class:hidden={currentTile !== 0}>
 			<slot />
 		</div>
 	</div>
