@@ -64,7 +64,7 @@
 		Email: <a class="anchor" href="mailto:ribbeck@mit.edu">ribbeck@mit.edu</a><br />
 		Phone: (617) 715-4575<br />
 		Office: 56-341C<br />
-		Lab Website: <a class="anchor" href="kr-lab.mit.edu">kr-lab.mit.edu</a><br />
+		Lab Website: <a class="anchor" href="https://kr-lab.mit.edu">kr-lab.mit.edu</a><br />
 		Courses: 20.363J, 20.380, 20.463J<br />
 		<br />
 		Research areas:
