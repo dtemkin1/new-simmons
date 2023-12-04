@@ -137,15 +137,16 @@
 					<img class="max-h-12 w-auto" alt="MIT Logo" src={mit_logo} />
 				</a>
 			</svelte:fragment>
-			<address class="text-center text-sm">
-				<a href="https://maps.app.goo.gl/LQT2FtoPtvGegjNx9" class="anchor"
-					>229 Vassar St.<br />Cambridge, MA 02139</a
+			<p class="text-center text-sm">
+				Copyright &copy; {new Date().getFullYear()} Simmons Hall<br /><a
+					class="anchor"
+					href="https://accessibility.mit.edu/">Accessibility</a
 				>
-			</address>
+			</p>
 			<svelte:fragment slot="trail">
-				<span class="text-right text-sm"
-					>Designed by Simmons Tech<br />&copy; {new Date().getFullYear()} Simmons Hall</span
-				>
+				<address class="text-right text-sm">
+					229 Vassar St.<br />Cambridge, MA 02139
+				</address>
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
