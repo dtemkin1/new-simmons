@@ -147,7 +147,7 @@
 
 	<div class="flex">
 		{#if currentTile !== 0}
-			<section class="p-4 pb-20 space-y-4 w-72 overflow-y-auto bg-surface-100-800-token">
+			<section class="p-4 pb-20 space-y-4 w-full sm:w-72 overflow-y-auto bg-surface-100-800-token">
 				<nav class="list-nav">
 					<ul>
 						{#each links[currentTile] as link}
@@ -169,6 +169,8 @@
 				</nav>
 			</section>
 		{/if}
-		<slot />
+		<div class="grow sm:!block" class:hidden={currentTile !== 0}>
+			<slot />
+		</div>
 	</div>
 </div>
