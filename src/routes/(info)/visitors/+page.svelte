@@ -33,7 +33,7 @@
 	for more information.
 </p>
 <!-- <h2>Residential Scholar Events</h2>
-        <p>Join us for a Simmons Residential Scholar Event. <a href="scholars.html"> More info</a></p> -->
+        <p>Join us for a Simmons Residential Scholar Event. <a href="{base}/scholars}"> More info</a></p> -->
 
 <h2 class="h2">Reserving the Multipurpose Room</h2>
 <p>

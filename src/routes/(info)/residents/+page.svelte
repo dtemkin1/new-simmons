@@ -145,7 +145,7 @@
 	you have any questions or need any further assistance.
 </p>
 
-<h2 class="h2"><a class="anchor" href="http://simmons.mit.edu/procard">Procard Form</a></h2>
+<h2 class="h2"><a class="anchor" href="{base}/procard">Procard Form</a></h2>
 <p>Ask RLAD Kristen Shannon to pay for things with her procurement card.</p>
 <p>
 	Contact <a class="anchor" href="mailto:simmons-treasurer@mit.edu">simmons-treasurer@mit.edu</a>
