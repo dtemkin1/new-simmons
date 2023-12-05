@@ -96,7 +96,9 @@
 </script>
 
 <h1 class="h1">About</h1>
-<div class="p-4 grid grid-cols-[auto_1fr_auto] gap-4 items-center content-center self-center">
+<div
+	class="p-4 grid grid-cols-[auto_1fr_auto] gap-0 md:gap-4 items-center content-center self-center"
+>
 	<!-- Button: Left -->
 	<button type="button" class="btn-icon variant-filled hidden md:block" on:click={carouselLeft}>
 		<i class="fa-solid fa-arrow-left" />
