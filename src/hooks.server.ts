@@ -10,3 +10,45 @@
 
 // 	return response;
 // }) satisfies Handle;
+
+import { SvelteKitAuth } from '@auth/sveltekit';
+import type { OIDCConfig } from '@auth/core/providers';
+// import GitHub from "@auth/core/providers/github"
+// import { GITHUB_ID, GITHUB_SECRET } from "$env/static/private"
+
+const AUTHORITY_URI = 'https://petrock.mit.edu';
+
+interface Profile {
+	sub: string;
+	email: string;
+	affiliation: string;
+	name: string;
+	given_name: string;
+	family_name: string;
+}
+
+export const handle = SvelteKitAuth({
+	providers: [
+		{
+			id: 'petrock',
+			name: 'Touchstone',
+			type: 'oidc',
+			issuer: AUTHORITY_URI,
+			authorization: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
+			token: `${AUTHORITY_URI}/oidc/token`,
+			userInfo: `${AUTHORITY_URI}/oidc/userinfo`,
+			profile(profile: Profile) {
+				return {
+					sub: profile.sub,
+					email: profile.email,
+					affiliation: profile.affiliation,
+					name: profile.name,
+					given_name: profile.given_name,
+					family_name: profile.family_name
+				};
+			},
+			clientId: process.env.CLIENT_ID,
+			clientSecret: process.env.CLIENT_SECRET
+		} satisfies OIDCConfig
+	]
+});
