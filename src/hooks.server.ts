@@ -50,5 +50,6 @@ export const handle = SvelteKitAuth({
 			clientId: process.env.CLIENT_ID,
 			clientSecret: process.env.CLIENT_SECRET
 		} satisfies OIDCConfig
+		// TODO: ADD CREDENTIALS PROVIDER
 	]
 });

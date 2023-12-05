@@ -1,10 +1,11 @@
 import { redirect } from '@sveltejs/kit';
-import type { PageLoad } from './$types';
+import type { LayoutLoad } from './$types';
+import { base } from '$app/paths';
 
-export const load: PageLoad = async ({ parent }) => {
+export const load: LayoutLoad = async ({ parent }) => {
 	const { session } = await parent();
 	if (!session?.user) {
-		throw redirect(302, '/sds');
+		throw redirect(302, `${base}/sds`);
 	}
 	return {};
 };
