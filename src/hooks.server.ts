@@ -19,7 +19,7 @@ import { CLIENT_ID, CLIENT_SECRET } from '$env/static/private';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
-interface Profile {
+interface Profile extends Record<string, string> {
 	sub: string;
 	email: string;
 	affiliation: string;
@@ -34,9 +34,11 @@ export const handle = SvelteKitAuth({
 			id: 'petrock',
 			name: 'Touchstone',
 			type: 'oidc',
-			// scope: 'openid email profile',
 			issuer: AUTHORITY_URI,
-			authorization: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
+			authorization: {
+				url: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
+				params: { scope: 'openid email profile' }
+			},
 			token: `${AUTHORITY_URI}/oidc/token`,
 			userinfo: `${AUTHORITY_URI}/oidc/userinfo`,
 			profile(profile: Profile) {
