@@ -44,22 +44,8 @@ export const handle = SvelteKitAuth({
 			clientId: CLIENT_ID,
 			clientSecret: CLIENT_SECRET,
 			profile(profile: Profile) {
-				console.log(profile);
-				console.log({
-					id: profile.sub,
-					email: profile.email,
-					affiliation: profile.affiliation,
-					name: profile.name,
-					given_name: profile.given_name,
-					family_name: profile.family_name
-				});
 				return {
-					id: profile.sub,
-					email: profile.email,
-					affiliation: profile.affiliation,
-					name: profile.name,
-					given_name: profile.given_name,
-					family_name: profile.family_name
+					id: profile.sub.split('@')[0]
 				};
 			}
 		} satisfies OIDCConfig<Profile>
