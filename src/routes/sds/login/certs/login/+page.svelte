@@ -1,6 +1,7 @@
 <script>
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import { page } from '$app/stores';
+	import { base } from '$app/paths';
 </script>
 
 <div class="flex items-center justify-center h-full">
@@ -29,7 +30,10 @@
 				<span>Password</span>
 				<input class="input" title="password" type="password" />
 			</label>
-			<button type="button" class="btn variant-filled" on:click={() => signIn('credentials')}
+			<button
+				type="button"
+				class="btn variant-filled"
+				on:click={() => signIn('credentials', { callbackUrl: `${base}/sds/home` })}
 				>Sign In with Credentials</button
 			>
 			<hr />

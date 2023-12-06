@@ -14,7 +14,6 @@
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/core/providers';
 import { CLIENT_ID, CLIENT_SECRET, AUTH_SECRET } from '$env/static/private';
-import type { User } from '@auth/core/types';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
