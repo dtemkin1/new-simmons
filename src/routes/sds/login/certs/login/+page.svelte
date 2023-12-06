@@ -11,8 +11,8 @@
 		{/if} -->
 			<span class="signedInText">
 				<p>
-					You are currently logged in as <span class="text-strong"
-						>{$page.data.session.user?.id ? $page.data.session.user.id : 'User'}</span
+					You are currently logged in as <span class="font-bold"
+						>{$page.data.session.user?.id ?? 'Guest'}</span
 					>.
 				</p>
 			</span>
