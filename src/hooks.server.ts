@@ -42,7 +42,18 @@ export const handle = SvelteKitAuth({
 			token: `${AUTHORITY_URI}/oidc/token`,
 			userinfo: `${AUTHORITY_URI}/oidc/userinfo`,
 			clientId: CLIENT_ID,
-			clientSecret: CLIENT_SECRET
+			clientSecret: CLIENT_SECRET,
+			profile(profile: Profile) {
+				console.log(profile);
+				return {
+					id: profile.sub,
+					email: profile.email,
+					affiliation: profile.affiliation,
+					name: profile.name,
+					given_name: profile.given_name,
+					family_name: profile.family_name
+				};
+			}
 		} satisfies OIDCConfig<Profile>
 		// TODO: ADD CREDENTIALS PROVIDER
 	]
