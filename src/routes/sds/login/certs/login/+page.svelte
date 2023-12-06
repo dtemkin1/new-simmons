@@ -1,6 +1,8 @@
 <script>
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import { page } from '$app/stores';
+
+	console.log($page.data.session);
 </script>
 
 <div class="flex items-center justify-center h-full">
@@ -12,7 +14,7 @@
 			<span class="signedInText">
 				<p>
 					You are currently logged in as <span class="text-strong"
-						>{$page.data.session.user?.id && $page.data.session.user.id}</span
+						>{$page.data.session.user?.id ?? 'User'}</span
 					>.
 				</p>
 			</span>
