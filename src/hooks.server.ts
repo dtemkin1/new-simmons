@@ -22,7 +22,7 @@ const AUTHORITY_URI = 'https://petrock.mit.edu';
 interface Profile extends Record<string, string> {
 	sub: string;
 	email: string;
-	affiliation: string;
+	affiliation: 'student' | 'faculty' | 'staff' | 'affiliate';
 	name: string;
 	given_name: string;
 	family_name: string;
@@ -45,10 +45,16 @@ export const handle = SvelteKitAuth({
 			clientSecret: CLIENT_SECRET,
 			profile(profile: Profile) {
 				return {
-					id: profile.sub.split('@')[0]
+					id: profile.sub,
+					email: profile.email,
+					affiliation: profile.affiliation,
+					name: profile.name,
+					given_name: profile.given_name,
+					family_name: profile.family_name
 				};
 			}
 		} satisfies OIDCConfig<Profile>
 		// TODO: ADD CREDENTIALS PROVIDER
-	]
+	],
+	debug: true
 });

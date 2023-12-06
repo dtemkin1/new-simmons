@@ -1,8 +1,6 @@
 <script>
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import { page } from '$app/stores';
-
-	console.log($page.data.session);
 </script>
 
 <div class="flex items-center justify-center h-full">
