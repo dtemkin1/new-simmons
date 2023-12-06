@@ -12,7 +12,7 @@
 			<span class="signedInText">
 				<p>
 					You are currently logged in as <span class="text-strong"
-						>{$page.data.session.user?.name ?? 'User'}</span
+						>{$page.data.session.user?.id ?? 'User'}</span
 					>.
 				</p>
 			</span>
