@@ -19,14 +19,14 @@ import { CLIENT_ID, CLIENT_SECRET } from '$env/static/private';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
-interface Profile extends Record<string, string> {
-	sub: string;
-	email: string;
-	affiliation: 'student' | 'faculty' | 'staff' | 'affiliate';
-	name: string;
-	given_name: string;
-	family_name: string;
-}
+// interface Profile extends Record<string, string> {
+// 	sub: string;
+// 	email: string;
+// 	affiliation: 'student' | 'faculty' | 'staff' | 'affiliate';
+// 	name: string;
+// 	given_name: string;
+// 	family_name: string;
+// }
 
 export const handle = SvelteKitAuth({
 	providers: [
@@ -54,7 +54,7 @@ export const handle = SvelteKitAuth({
 			// 		family_name: profile.family_name
 			// 	};
 			// }
-		} satisfies OIDCConfig<Profile>
+		} satisfies OIDCConfig
 		// TODO: ADD CREDENTIALS PROVIDER
 	]
 });
