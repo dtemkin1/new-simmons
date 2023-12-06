@@ -13,48 +13,56 @@
 
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/core/providers';
-import { CLIENT_ID, CLIENT_SECRET } from '$env/static/private';
-// import GitHub from "@auth/core/providers/github"
-// import { GITHUB_ID, GITHUB_SECRET } from "$env/static/private"
+import { CLIENT_ID, CLIENT_SECRET, AUTH_SECRET } from '$env/static/private';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
-// interface Profile extends Record<string, string> {
-// 	sub: string;
-// 	email: string;
-// 	affiliation: 'student' | 'faculty' | 'staff' | 'affiliate';
-// 	name: string;
-// 	given_name: string;
-// 	family_name: string;
-// }
+interface Profile extends Record<string, string> {
+	sub: string;
+	email: string;
+	affiliation: 'student' | 'faculty' | 'staff' | 'affiliate';
+	name: string;
+	given_name: string;
+	family_name: string;
+}
 
-export const handle = SvelteKitAuth({
-	providers: [
-		{
-			id: 'petrock',
-			name: 'Touchstone',
-			type: 'oidc',
-			issuer: AUTHORITY_URI,
-			// authorization: {
-			// 	url: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
-			// 	params: { scope: 'openid email profile' }
-			// },
-			// token: `${AUTHORITY_URI}/oidc/token`,
-			// userinfo: `${AUTHORITY_URI}/oidc/userinfo`,
-			clientId: CLIENT_ID,
-			clientSecret: CLIENT_SECRET,
-			wellKnown: `${AUTHORITY_URI}/.well-known/openid-configuration`
-			// profile(profile: Profile) {
-			// 	return {
-			// 		id: profile.sub,
-			// 		email: profile.email,
-			// 		affiliation: profile.affiliation,
-			// 		name: profile.name,
-			// 		given_name: profile.given_name,
-			// 		family_name: profile.family_name
-			// 	};
-			// }
-		} satisfies OIDCConfig
-		// TODO: ADD CREDENTIALS PROVIDER
-	]
+const petrockProvider: OIDCConfig<Profile> = {
+	id: 'petrock',
+	name: 'Touchstone',
+	type: 'oidc',
+	issuer: AUTHORITY_URI,
+	authorization: {
+		url: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
+		params: { scope: 'openid email profile' }
+	},
+	clientId: CLIENT_ID,
+	clientSecret: CLIENT_SECRET,
+	wellKnown: `${AUTHORITY_URI}/.well-known/openid-configuration`,
+	profile(profile) {
+		return {
+			id: profile.sub
+		};
+	}
+};
+
+const authConfig = SvelteKitAuth({
+	providers: [petrockProvider],
+	secret: AUTH_SECRET,
+	callbacks: {
+		async jwt({ token, account }) {
+			if (account && account?.providerAccountId === 'petrock') {
+				token.accessToken = account.access_token;
+				token.idToken = account.id_token;
+			}
+			return token;
+		},
+		async session({ session, token }) {
+			session.accessToken = token.accessToken;
+			session.idToken = token.idToken;
+			return session;
+		}
+	},
+	debug: process.env.NODE_ENV !== 'production'
 });
+
+export const handle = authConfig;
