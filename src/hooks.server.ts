@@ -13,7 +13,12 @@
 
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/core/providers';
-import { CLIENT_ID, CLIENT_SECRET, AUTH_SECRET } from '$env/static/private';
+import {
+	CLIENT_ID,
+	CLIENT_SECRET,
+	AUTH_SECRET,
+	AUTH_REDIRECT_PROXY_URL
+} from '$env/static/private';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
@@ -60,6 +65,7 @@ const petrockProvider: OIDCConfig<Profile> = {
 };
 
 const authConfig = SvelteKitAuth({
+	redirectProxyUrl: AUTH_REDIRECT_PROXY_URL,
 	providers: [petrockProvider],
 	secret: AUTH_SECRET,
 	callbacks: {
