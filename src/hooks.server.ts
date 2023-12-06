@@ -35,25 +35,25 @@ export const handle = SvelteKitAuth({
 			name: 'Touchstone',
 			type: 'oidc',
 			issuer: AUTHORITY_URI,
-			authorization: {
-				url: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
-				params: { scope: 'openid email profile' }
-			},
-			token: `${AUTHORITY_URI}/oidc/token`,
-			userinfo: `${AUTHORITY_URI}/oidc/userinfo`,
+			// authorization: {
+			// 	url: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
+			// 	params: { scope: 'openid email profile' }
+			// },
+			// token: `${AUTHORITY_URI}/oidc/token`,
+			// userinfo: `${AUTHORITY_URI}/oidc/userinfo`,
 			clientId: CLIENT_ID,
-			clientSecret: CLIENT_SECRET,
-			profile(profile: Profile) {
-				return {
-					id: profile.sub,
-					email: profile.email,
-					affiliation: profile.affiliation,
-					name: profile.name,
-					given_name: profile.given_name,
-					family_name: profile.family_name
-				};
-			}
-		} satisfies OIDCConfig<Profile>
+			clientSecret: CLIENT_SECRET
+			// profile(profile: Profile) {
+			// 	return {
+			// 		id: profile.sub,
+			// 		email: profile.email,
+			// 		affiliation: profile.affiliation,
+			// 		name: profile.name,
+			// 		given_name: profile.given_name,
+			// 		family_name: profile.family_name
+			// 	};
+			// }
+		} satisfies OIDCConfig
 		// TODO: ADD CREDENTIALS PROVIDER
 	],
 	debug: true
