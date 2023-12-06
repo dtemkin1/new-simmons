@@ -14,12 +14,31 @@
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-	// Initalize Drawer
-	import { Drawer, getDrawerStore, initializeStores } from '@skeletonlabs/skeleton';
+	// Initalize Drawer and Modal
+	import {
+		Drawer,
+		getDrawerStore,
+		initializeStores,
+		Modal,
+		getModalStore,
+		type ModalSettings
+	} from '@skeletonlabs/skeleton';
+	import { onMount } from 'svelte';
 	initializeStores();
 	const drawerStore = getDrawerStore();
+	const modalStore = getModalStore();
 
-	let currentTile: number;
+	const betaModal: ModalSettings = {
+		type: 'alert',
+		// Data
+		title: 'Simmons Website Beta',
+		body: 'Hello! Welcome to the beta Simmons website. Pleae report any bugs or sent any feature requests to <a class="anchor" href="mailto:dtemkin@mit.edu">Simmons Tech</a>. Happy exploring!',
+		buttonTextCancel: 'Close'
+	};
+
+	onMount(() => {
+		modalStore.trigger(betaModal);
+	});
 </script>
 
 <svelte:head>
@@ -34,6 +53,9 @@
 	{/if}
 </Drawer>
 
+<!-- Modal -->
+<Modal />
+
 <!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="header">
@@ -43,12 +65,12 @@
 
 	<svelte:fragment slot="sidebarLeft">
 		{#if $page.url.pathname.includes('/sds')}
-			<DBSidebar bind:currentTile />
+			<DBSidebar />
 		{/if}
 	</svelte:fragment>
 
 	<!-- Page Route Content -->
-	<slot {currentTile} />
+	<slot />
 
 	<!-- Page Footer -->
 	<svelte:fragment slot="pageFooter">
