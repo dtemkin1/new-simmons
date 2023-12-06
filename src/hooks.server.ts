@@ -41,16 +41,6 @@ export const handle = SvelteKitAuth({
 			},
 			token: `${AUTHORITY_URI}/oidc/token`,
 			userinfo: `${AUTHORITY_URI}/oidc/userinfo`,
-			profile(profile: Profile) {
-				return {
-					id: profile.sub,
-					email: profile.email,
-					affiliation: profile.affiliation,
-					name: profile.name,
-					given_name: profile.given_name,
-					family_name: profile.family_name
-				};
-			},
 			clientId: CLIENT_ID,
 			clientSecret: CLIENT_SECRET
 		} satisfies OIDCConfig<Profile>
