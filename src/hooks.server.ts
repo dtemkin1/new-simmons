@@ -49,16 +49,21 @@ const authConfig = SvelteKitAuth({
 	providers: [petrockProvider],
 	secret: AUTH_SECRET,
 	callbacks: {
-		async jwt({ token, account }) {
-			if (account && account?.providerAccountId === 'petrock') {
-				token.accessToken = account.access_token;
-				token.idToken = account.id_token;
+		async jwt({ token, account, user }) {
+			if (account) {
+				token.access_token = account.access_token;
+				token.id_token = account.id_token;
+			}
+			if (user) {
+				token.user = user;
 			}
 			return token;
 		},
 		async session({ session, token }) {
-			session.accessToken = token.accessToken;
-			session.idToken = token.idToken;
+			if (session.user) {
+				session.user.id = token.user.id;
+			}
+
 			return session;
 		}
 	},
