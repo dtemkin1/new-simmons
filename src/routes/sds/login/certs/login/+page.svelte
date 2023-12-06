@@ -37,7 +37,10 @@
 				>Sign In with Credentials</button
 			>
 			<hr />
-			<button type="button" class="btn variant-filled-success" on:click={() => signIn('petrock')}
+			<button
+				type="button"
+				class="btn variant-filled-success"
+				on:click={() => signIn('petrock', { callbackUrl: `${base}/sds/home` })}
 				>Sign In with Touchstone</button
 			>
 		{/if}
