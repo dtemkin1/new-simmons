@@ -55,6 +55,5 @@ export const handle = SvelteKitAuth({
 			// }
 		} satisfies OIDCConfig
 		// TODO: ADD CREDENTIALS PROVIDER
-	],
-	debug: true
+	]
 });
