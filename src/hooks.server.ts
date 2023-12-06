@@ -49,11 +49,7 @@ const authConfig = SvelteKitAuth({
 	providers: [petrockProvider],
 	secret: AUTH_SECRET,
 	callbacks: {
-		async jwt({ token, account, user }) {
-			if (account) {
-				token.access_token = account.access_token;
-				token.id_token = account.id_token;
-			}
+		async jwt({ token, user }) {
 			if (user) {
 				token.user = user;
 			}
@@ -63,7 +59,6 @@ const authConfig = SvelteKitAuth({
 			if (session.user) {
 				session.user.id = token.user.id;
 			}
-
 			return session;
 		}
 	},
