@@ -20,8 +20,12 @@ export const headerLinks = [
 ];
 
 export const sdsLinks = [
-	[{ href: `${base}/sds/homes`, label: 'Home', badge: 'Work in Progress' }],
-	[{ href: '', label: '', badge: '' }],
+	[
+		{ href: `${base}/sds/home`, label: 'Home', badge: 'Work in Progress' },
+		{ href: `${base}/sds/directory`, label: 'Directory', badge: 'Work in Progress' },
+		{ href: `${base}/sds/directory/calendar`, label: 'Events Calendar', badge: '' },
+		{ href: `${base}/calendar`, label: 'Reservations Calendar', badge: '' }
+	],
 	[{ href: '', label: '', badge: '' }],
 	[{ href: '', label: '', badge: '' }],
 	[{ href: `${base}/sds/packages/mypackages`, label: 'My Packages', badge: '' }],

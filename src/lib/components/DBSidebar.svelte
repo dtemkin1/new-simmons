@@ -136,7 +136,7 @@
 			>
 				<nav class="list-nav md:pr-0 pr-20">
 					<ul>
-						{#each links[currentTile] as link}
+						{#each links[currentTile - 1] as link}
 							<li>
 								<a
 									href={link.href}
