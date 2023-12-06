@@ -35,7 +35,10 @@ export const handle = SvelteKitAuth({
 			name: 'Touchstone',
 			type: 'oidc',
 			issuer: AUTHORITY_URI,
-			authorization: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
+			authorization: {
+				url: `${AUTHORITY_URI}/touchstone/oidc/authorization`,
+				params: { scope: 'openid email profile' }
+			},
 			token: `${AUTHORITY_URI}/oidc/token`,
 			userinfo: `${AUTHORITY_URI}/oidc/userinfo`,
 			clientId: CLIENT_ID,
