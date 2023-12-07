@@ -3,15 +3,18 @@
 	import { base } from '$app/paths';
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center p-4">
 	<div class="flex flex-col items-center h-full gap-4 container self-center">
+		<div class="self-center">
+			<h1 class="h1 text-center">Welcome to the Simmons DB</h1>
+		</div>
 		<div class="self-center">
 			<h2 class="h2 text-center">15 Seconds Of Frame</h2>
 			<p class="mt-0 italic text-center">
 				<a class="anchor" href="{base}/sds/directory">Simmons Hall Resident</a> of the Moment
 			</p>
-			<UserInfo />
 		</div>
+		<div><UserInfo /></div>
 
 		<div class="space-y-4">
 			<p>

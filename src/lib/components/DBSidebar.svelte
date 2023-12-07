@@ -125,7 +125,8 @@
 			</AppRailTile>
 			<svelte:fragment slot="trail">
 				<AppRailAnchor href="{base}/sds/login/certs/login" title="Account" on:click={onClickAnchor}
-					><i class="fa-solid fa-user text-2xl"></i></AppRailAnchor
+					><svelte:fragment slot="lead"><i class="fa-solid fa-user text-2xl"></i></svelte:fragment
+					>{$page.data.session.user?.id ?? 'Guest'}</AppRailAnchor
 				>
 			</svelte:fragment>
 		</AppRail>
