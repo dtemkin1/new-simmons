@@ -6,8 +6,6 @@
 
 	import { headerLinks } from '$lib/data/navLinks';
 
-	import simmons_logo from '$lib/assets/logo_crop.png';
-
 	$: current_page = $page.url.pathname;
 
 	const drawerStore = getDrawerStore();
@@ -17,7 +15,7 @@
 <AppBar>
 	<svelte:fragment slot="lead">
 		<a href="{base}/">
-			<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_logo} />
+			<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png" />
 		</a>
 	</svelte:fragment>
 	<a href="{base}/"><strong class="text-xl uppercase">Simmons Hall</strong></a>

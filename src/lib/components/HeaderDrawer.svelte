@@ -4,8 +4,6 @@
 	import { LightSwitch, getDrawerStore } from '@skeletonlabs/skeleton';
 	import { headerLinks } from '$lib/data/navLinks';
 
-	import simmons_logo from '$lib/assets/logo_crop.png';
-
 	const drawerStore = getDrawerStore();
 
 	$: current_page = $page.url.pathname;
@@ -19,7 +17,7 @@
 			drawerStore.close();
 		}}
 	>
-		<img alt="Simmons Logo" class="max-h-12 w-auto" src={simmons_logo} />
+		<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png" />
 		<strong class="text-xl uppercase">Simmons Hall</strong>
 	</a>
 	<!-- <div class="grow" /> -->

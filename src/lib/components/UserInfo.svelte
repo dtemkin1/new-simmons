@@ -9,7 +9,7 @@
 			<p class="text-right">Hometown:</p>
 			<p class="text-left">City, ST</p>
 			<p class="text-right">URL:</p>
-			<p class="text-left"><a class="anchor" href="">www.example.com</a></p>
+			<p class="text-left"><a class="anchor" href="https://www.example.com">www.example.com</a></p>
 			<p class="text-right">Favorite _____:</p>
 			<p class="text-left">This!</p>
 		</div>

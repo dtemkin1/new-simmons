@@ -1,8 +1,8 @@
 <script>
 	import { AppBar, modeCurrent } from '@skeletonlabs/skeleton';
 
-	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png';
-	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png';
+	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png?enhanced';
+	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png?enhanced';
 
 	$: mit_logo = $modeCurrent ? mit_logo_dark : mit_logo_light;
 </script>
@@ -10,7 +10,7 @@
 <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 	<svelte:fragment slot="lead">
 		<a href="https://web.mit.edu/">
-			<img class="max-h-12 w-auto" alt="MIT Logo" src={mit_logo} />
+			<enhanced:img class="max-h-12 w-auto" alt="MIT Logo" src={mit_logo} />
 		</a>
 	</svelte:fragment>
 	<address class="text-center text-sm">
