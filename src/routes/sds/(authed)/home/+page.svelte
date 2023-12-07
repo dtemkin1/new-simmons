@@ -1,6 +1,10 @@
 <script lang="ts">
 	import UserInfo from '$lib/components/UserInfo.svelte';
 	import { base } from '$app/paths';
+
+	function getRandomResident() {
+		return '';
+	}
 </script>
 
 <div class="flex flex-col items-center p-4">
@@ -14,7 +18,7 @@
 				<a class="anchor" href="{base}/sds/directory">Simmons Hall Resident</a> of the Moment
 			</p>
 		</div>
-		<div><UserInfo /></div>
+		<div><UserInfo username={getRandomResident()} /></div>
 
 		<div class="space-y-4">
 			<p>

@@ -42,7 +42,7 @@
 </script>
 
 <svelte:head>
-	<title>Simmons Hall</title>
+	<title>{$page.url.pathname.includes('/sds') ? 'Simmons DB' : 'Simmons Hall'}</title>
 	<meta name="description" content="" />
 </svelte:head>
 
