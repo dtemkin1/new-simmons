@@ -33,14 +33,13 @@
 			</p>
 
 			<p>
-				<span class="font-strong">Important note:</span> If you're unfamiliar with the new GovTracker
-				system for managing the house's and lounges' proposals and finances, please ask an officer or
-				upperclassmen before submitting anything. In general, submitting data to any GovTracker system
-				cannot be undone.
+				<span class="font-bold">Important note:</span> If you're unfamiliar with the new GovTracker system
+				for managing the house's and lounges' proposals and finances, please ask an officer or upperclassmen
+				before submitting anything. In general, submitting data to any GovTracker system cannot be undone.
 			</p>
 
 			<p>
-				The Simmons DB is set up to use <a class="font-strong anchor" href="http://ca.mit.edu/"
+				The Simmons DB is set up to use <a class="font-bold anchor" href="http://ca.mit.edu/"
 					>MIT Certificates</a
 				>
 				to authenticate logins, but you can also set up the system to let you
