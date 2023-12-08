@@ -19,22 +19,24 @@
 		<AppRail>
 			<svelte:fragment slot="lead">
 				{#each sdsLinks as tileLinks}
-					<AppRailTile
-						bind:group={currentTile}
-						name={tileLinks.id}
-						value={tileLinks.value}
-						title={tileLinks.id}
-						on:click={() => {
-							if (currentTile == tileLinks.value) {
-								onClickAnchor();
-							}
-						}}
-					>
-						<svelte:fragment slot="lead"
-							><i class="fa-solid fa-{tileLinks.icon} text-2xl"></i></svelte:fragment
+					{#if tileLinks.links.length > 0}
+						<AppRailTile
+							bind:group={currentTile}
+							name={tileLinks.id}
+							value={tileLinks.value}
+							title={tileLinks.id}
+							on:click={() => {
+								if (currentTile == tileLinks.value) {
+									onClickAnchor();
+								}
+							}}
 						>
-						<span>{tileLinks.name}</span>
-					</AppRailTile>
+							<svelte:fragment slot="lead"
+								><i class="fa-solid fa-{tileLinks.icon} text-2xl"></i></svelte:fragment
+							>
+							<span>{tileLinks.name}</span>
+						</AppRailTile>
+					{/if}
 				{/each}
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
@@ -44,7 +46,7 @@
 				>
 			</svelte:fragment>
 		</AppRail>
-		{#if currentTile !== 0}
+		{#if currentTile !== 0 && sdsLinks[currentTile - 1].links.length > 0}
 			<section
 				class="p-4 pb-20 space-y-4 md:w-72 w-screen overflow-y-auto bg-surface-100-800-token"
 			>
