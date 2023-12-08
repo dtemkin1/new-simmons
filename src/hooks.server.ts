@@ -1,16 +1,3 @@
-// import { connectToDB } from '$lib/db';
-// import type { Handle } from '@sveltejs/kit';
-
-// export const handle = (async ({ event, resolve }) => {
-// 	const dbconn = await connectToDB();
-// 	event.locals = { dbconn };
-
-// 	const response = await resolve(event);
-// 	dbconn.release();
-
-// 	return response;
-// }) satisfies Handle;
-
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/core/providers';
 import {
@@ -64,7 +51,7 @@ const petrockProvider: OIDCConfig<Profile> = {
 	}
 };
 
-const authConfig = SvelteKitAuth({
+const authHandle = SvelteKitAuth({
 	redirectProxyUrl: AUTH_REDIRECT_PROXY_URL,
 	providers: [petrockProvider],
 	secret: AUTH_SECRET,
@@ -85,4 +72,4 @@ const authConfig = SvelteKitAuth({
 	debug: process.argv.includes('dev')
 });
 
-export const handle = authConfig;
+export const handle = authHandle;

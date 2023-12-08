@@ -2,6 +2,9 @@
 	import UserInfo from '$lib/components/UserInfo.svelte';
 	import { base } from '$app/paths';
 
+	import type { PageData } from './$types';
+	export let data: PageData;
+
 	function getRandomResident() {
 		return '';
 	}
@@ -18,7 +21,7 @@
 				<a class="anchor" href="{base}/sds/directory">Simmons Hall Resident</a> of the Moment
 			</p>
 		</div>
-		<div><UserInfo username={getRandomResident()} /></div>
+		<div><UserInfo username={data.randomResident} /></div>
 
 		<div class="space-y-4">
 			<p>
