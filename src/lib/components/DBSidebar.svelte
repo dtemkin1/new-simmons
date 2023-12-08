@@ -12,117 +12,31 @@
 	}
 
 	$: linkActive = (href: string) => (href === $page.url.pathname ? '!bg-primary-active-token' : '');
-
-	const links = sdsLinks;
 </script>
 
 <div class="h-full flex flex-row">
 	{#if $page.data.session}
 		<AppRail>
-			<svelte:fragment slot="lead"></svelte:fragment>
-			<!-- --- -->
-			<AppRailTile
-				bind:group={currentTile}
-				name="home"
-				value={1}
-				title="home"
-				on:click={() => {
-					if (currentTile == 1) {
-						onClickAnchor();
-					}
-				}}
-			>
-				<svelte:fragment slot="lead"><i class="fa-solid fa-house text-2xl"></i></svelte:fragment>
-				<span>Simmons DB</span>
-			</AppRailTile>
-			<AppRailTile
-				bind:group={currentTile}
-				name="gov"
-				value={2}
-				title="gov"
-				on:click={() => {
-					if (currentTile == 2) {
-						onClickAnchor();
-					}
-				}}
-			>
-				<svelte:fragment slot="lead"
-					><i class="fa-solid fa-check-to-slot text-2xl"></i></svelte:fragment
-				>
-				<span>GovTracker</span>
-			</AppRailTile>
-			<AppRailTile
-				bind:group={currentTile}
-				name="personal"
-				value={3}
-				title="personal"
-				on:click={() => {
-					if (currentTile == 3) {
-						onClickAnchor();
-					}
-				}}
-			>
-				<svelte:fragment slot="lead"><i class="fa-solid fa-person text-2xl"></i></svelte:fragment>
-				<span>Personal Info</span>
-			</AppRailTile>
-			<AppRailTile
-				bind:group={currentTile}
-				name="packages"
-				value={4}
-				title="packages"
-				on:click={() => {
-					if (currentTile == 4) {
-						onClickAnchor();
-					}
-				}}
-			>
-				<svelte:fragment slot="lead"><i class="fa-solid fa-box text-2xl"></i></svelte:fragment>
-				<span>Packages</span>
-			</AppRailTile>
-			<AppRailTile
-				bind:group={currentTile}
-				name="movies"
-				value={5}
-				title="movies"
-				on:click={() => {
-					if (currentTile == 5) {
-						onClickAnchor();
-					}
-				}}
-			>
-				<svelte:fragment slot="lead"><i class="fa-solid fa-film text-2xl"></i></svelte:fragment>
-				<span>Movies</span>
-			</AppRailTile>
-			<AppRailTile
-				bind:group={currentTile}
-				name="library"
-				value={6}
-				title="library"
-				on:click={() => {
-					if (currentTile == 6) {
-						onClickAnchor();
-					}
-				}}
-			>
-				<svelte:fragment slot="lead"><i class="fa-solid fa-book text-2xl"></i></svelte:fragment>
-				<span>Library</span>
-			</AppRailTile>
-			<AppRailTile
-				bind:group={currentTile}
-				name="desk"
-				value={7}
-				title="desk"
-				on:click={() => {
-					if (currentTile == 7) {
-						onClickAnchor();
-					}
-				}}
-			>
-				<svelte:fragment slot="lead">
-					<i class="fa-solid fa-envelopes-bulk text-2xl"></i>
-				</svelte:fragment>
-				<span>Desk</span>
-			</AppRailTile>
+			<svelte:fragment slot="lead">
+				{#each sdsLinks as tileLinks}
+					<AppRailTile
+						bind:group={currentTile}
+						name={tileLinks.id}
+						value={tileLinks.value}
+						title={tileLinks.id}
+						on:click={() => {
+							if (currentTile == tileLinks.value) {
+								onClickAnchor();
+							}
+						}}
+					>
+						<svelte:fragment slot="lead"
+							><i class="fa-solid fa-{tileLinks.icon} text-2xl"></i></svelte:fragment
+						>
+						<span>{tileLinks.name}</span>
+					</AppRailTile>
+				{/each}
+			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<AppRailAnchor href="{base}/sds/login/certs/login" title="Account" on:click={onClickAnchor}
 					><svelte:fragment slot="lead"><i class="fa-solid fa-user text-2xl"></i></svelte:fragment
@@ -130,14 +44,13 @@
 				>
 			</svelte:fragment>
 		</AppRail>
-
 		{#if currentTile !== 0}
 			<section
 				class="p-4 pb-20 space-y-4 md:w-72 w-screen overflow-y-auto bg-surface-100-800-token"
 			>
 				<nav class="list-nav md:pr-0 pr-20">
 					<ul>
-						{#each links[currentTile - 1] as link}
+						{#each sdsLinks[currentTile - 1].links as link}
 							<li>
 								<a
 									href={link.href}
