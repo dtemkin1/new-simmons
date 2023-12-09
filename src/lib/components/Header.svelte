@@ -44,7 +44,7 @@
 				id="navMenu"
 				aria-label="Navigation Menu"
 			>
-				<i class="fa-solid fa-bars text-2xl"></i>
+				<i class="fa-solid fa-bars text-2xl" />
 			</button>
 		</div>
 	</svelte:fragment>
