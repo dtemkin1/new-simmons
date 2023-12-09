@@ -2,7 +2,6 @@
 	import { VERSION } from 'svelte/compiler';
 
 	import type { PageData } from './$types';
-	import DbSidebar from '$lib/components/DBSidebar.svelte';
 	export let data: PageData;
 </script>
 
