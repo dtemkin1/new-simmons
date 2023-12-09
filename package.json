@@ -26,6 +26,7 @@
     "@tailwindcss/forms": "0.5.7",
     "@tailwindcss/typography": "0.5.10",
     "@types/node": "20.10.3",
+    "@types/pg": "^8.10.9",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "autoprefixer": "10.4.16",
@@ -50,7 +51,6 @@
     "@auth/sveltekit": "^0.3.15",
     "@floating-ui/dom": "1.5.3",
     "@fortawesome/fontawesome-free": "^6.5.1",
-    "@types/pg": "^8.10.9",
     "pg": "^8.11.3",
     "svelte-markdown": "^0.4.0"
   }
