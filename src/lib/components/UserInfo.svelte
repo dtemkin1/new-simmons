@@ -1,8 +1,8 @@
 <!-- TODO: MAKE USERINFO COMPONENT -->
 
 <script lang="ts">
+	export let username: string;
 	import SvelteMarkdown from 'svelte-markdown';
-	export const username: string = '';
 
 	import {
 		Heading,
