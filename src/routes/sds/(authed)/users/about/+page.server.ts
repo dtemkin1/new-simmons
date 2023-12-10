@@ -1,21 +1,19 @@
-import { connectToDB } from '$lib/db';
+import { query } from '$lib/db';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	const db = await connectToDB();
-
-	const versionQuery = db.query("SELECT split_part(version(),' on ',1)");
-	const dbNameQuery = db.query('SELECT current_database()');
-	const adminsQuery = db.query(
+	const versionQuery = query("SELECT split_part(version(),' on ',1)");
+	const dbNameQuery = query('SELECT current_database()');
+	const adminsQuery = query(
 		"SELECT username,lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='ADMINISTRATORS' ORDER BY lastname ASC"
 	);
-	const modsQuery = db.query(
+	const modsQuery = query(
 		"SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='MODERATORS' ORDER BY lastname ASC"
 	);
-	const housecommLeadershipQuery = db.query(
+	const housecommLeadershipQuery = query(
 		"SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='HOUSE-COMM-LEADERSHIP' ORDER BY lastname ASC"
 	);
-	const financialAdminsQuery = db.query(
+	const financialAdminsQuery = query(
 		"SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='FINANCIAL-ADMINS' ORDER BY lastname ASC"
 	);
 
