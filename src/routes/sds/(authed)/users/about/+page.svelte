@@ -10,8 +10,7 @@
 		<div class="self-center">
 			<h1 class="h1 text-center">About the Simmons DB</h1>
 		</div>
-		<h2 class="h2 text-center">The Simmons DB</h2>
-		<p>
+		<p class="text-center">
 			<span class="font-bold italic">Original authors:</span>
 			dramage, 2002; with bonawitz, dheera, psaindon<br />
 			<span class="font-bold italic">GovTracker:</span>
@@ -25,6 +24,9 @@
 					>Administrators (IT Committee)</a
 				>
 				<ul class="list">
+					<!-- {#each data.admins as admin}
+						<li><span class="flex-auto">{admin.username}</span></li>
+					{/each} -->
 					<li><span class="flex-auto">Sarah Pomerantz</span></li>
 					<li><span class="flex-auto">Andi Qu</span></li>
 					<li><span class="flex-auto">Mohan Richter-Addo</span></li>
@@ -50,7 +52,7 @@
 			<div class="col-span-2">
 				<p class="italic">
 					Want to help make the Simmons DB better?<br />
-					Then join the <a href="mailto:simmons-tech@mit.edu">IT Committee!</a>
+					Then join the <a class="anchor" href="mailto:simmons-tech@mit.edu">IT Committee!</a>
 				</p>
 			</div>
 			<div>
@@ -64,10 +66,10 @@
 				</ul>
 			</div>
 			<div class="col-span-3">
-				<span class="font-bold">Technical specs</span><br />
+				<span class="font-bold">Technical Specifications</span><br />
 				<ul class="list">
 					<li><code class="code flex-auto">Svelte {VERSION}</code></li>
-					<li><code class="code flex-auto">PostgreSQL {data.version}</code></li>
+					<li><code class="code flex-auto">{data.version}</code></li>
 					<li><code class="code flex-auto">Current Database: {data.dbName}</code></li>
 				</ul>
 			</div>

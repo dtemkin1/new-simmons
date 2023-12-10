@@ -26,7 +26,7 @@ export const sdsLinks = [
 		value: 1,
 		icon: 'house',
 		links: [
-			{ href: `${base}/sds/home`, label: 'Home', badge: 'Work in Progress' },
+			{ href: `${base}/sds/home`, label: 'Home', badge: '' },
 			{ href: `${base}/sds/directory`, label: 'Directory', badge: 'Work in Progress' },
 			{ href: `${base}/sds/directory/calendar`, label: 'Events Calendar', badge: '' },
 			{ href: `${base}/sds/directory/reservations`, label: 'Reservations Calendar', badge: '' },

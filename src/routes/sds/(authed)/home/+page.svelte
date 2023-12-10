@@ -1,13 +1,9 @@
 <script lang="ts">
-	import UserInfo from '$lib/components/UserInfo.svelte';
+	import FifteenSeconds from '$lib/components/FifteenSeconds.svelte';
 	import { base } from '$app/paths';
 
-	import type { PageData } from './$types';
-	export let data: PageData;
-
-	function getRandomResident() {
-		return '';
-	}
+	import type { PageServerData } from './$types';
+	export let data: PageServerData;
 </script>
 
 <div class="flex flex-col items-center p-4">
@@ -21,7 +17,7 @@
 				<a class="anchor" href="{base}/sds/directory">Simmons Hall Resident</a> of the Moment
 			</p>
 		</div>
-		<div><UserInfo username={data.randomResident} /></div>
+		<div><FifteenSeconds userInfo={data.randomResident} /></div>
 
 		<div class="space-y-4">
 			<p>
