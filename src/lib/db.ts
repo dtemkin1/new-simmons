@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import pg from 'pg';
 import {
 	POSTGRES_DB,
 	POSTGRES_USERNAME,
@@ -7,7 +7,7 @@ import {
 	POSTGRES_PORT
 } from '$env/static/private';
 
-const pool = new Pool({
+const pool = new pg.Pool({
 	user: POSTGRES_USERNAME || 'postgres',
 	host: POSTGRES_HOST || 'localhost',
 	database: POSTGRES_DB || 'postgres',
