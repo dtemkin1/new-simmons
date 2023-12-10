@@ -110,7 +110,9 @@
 						<td class="text-right">{tag[0]}:</td>
 						<td class="text-left"
 							>{#if tag[0] == 'URL'}
-								<a class="anchor" href={tag[1]}>{tag[1]}</a>
+								<a class="anchor" href={`${tag[1].includes('://') ? '' : 'http://'}${tag[1]}`}
+									>{tag[1]}</a
+								>
 							{:else}{tag[1]}
 							{/if}</td
 						>
