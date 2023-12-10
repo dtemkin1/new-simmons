@@ -8,10 +8,19 @@ export const load: PageServerLoad = async () => {
 		   favorite_value,homepage,home_city,home_state,home_country
 	FROM public_active_directory
 	WHERE trim(trailing ' \n\t' from quote) != '' OR
-		  (favorite_category != '' AND favorite_value != '')`);
+		  (favorite_category != '' AND favorite_value != '')
+	ORDER BY random()
+	LIMIT 1`);
 
-	const residents = (await residentsQuery).rows;
-	const randomResident = residents[Math.floor(Math.random() * residents.length)];
+	const randomResident = (await residentsQuery).rows[0];
+	if (randomResident.type !== 'U') {
+		const typeQuery = query(`SELECT description FROM user_types WHERE type=$1`, [
+			randomResident.type
+		]);
+		randomResident.type = (await typeQuery).rows[0].description;
+	} else {
+		randomResident.type = '';
+	}
 
 	return { randomResident: randomResident };
 };

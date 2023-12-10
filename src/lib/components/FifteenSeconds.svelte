@@ -87,7 +87,7 @@
 		if (user.favorite_category && user.favorite_value) {
 			tags.push([`Favorite ${user.favorite_category}`, user.favorite_value]);
 		}
-		return { username: username, name: name, tags: tags, quote: `${user.quote}` };
+		return { username: username, name: name, tags: tags, quote: `${user.quote}`, type: user.type };
 	}
 
 	let userInfoGenerated = getUserInfo(userInfo);
@@ -98,6 +98,9 @@
 		<a href={`mailto:${userInfoGenerated.username}@mit.edu`} class="anchor"
 			>{userInfoGenerated.name}</a
 		>
+		{#if userInfoGenerated.type !== ''}
+			<br /><span class="text-sm text-surface-500-400-token">{userInfoGenerated.type}</span>
+		{/if}
 	</header>
 	<section class="p-4 flex items-center justify-center">
 		<table class="table-auto self-center border-separate border-spacing-x-1">
