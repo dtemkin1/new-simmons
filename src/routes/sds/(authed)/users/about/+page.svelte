@@ -18,61 +18,71 @@
 			<span class="font-bold italic">Simmons DB 2.0:</span>
 			dtemkin, 2026
 		</p>
-		<div class="grid grid-cols-3 grid-rows-3 gap-4">
-			<div>
-				<a class="anchor font-bold" href="mailto:simmons-tech@mit.edu"
-					>Administrators (IT Committee)</a
-				>
-				<ul class="list">
-					<!-- {#each data.admins as admin}
-						<li><span class="flex-auto">{admin.username}</span></li>
-					{/each} -->
-					<li><span class="flex-auto">Sarah Pomerantz</span></li>
-					<li><span class="flex-auto">Andi Qu</span></li>
-					<li><span class="flex-auto">Mohan Richter-Addo</span></li>
-					<li><span class="flex-auto">Jordan Wilke</span></li>
-					<li><span class="flex-auto">Alex Yi</span></li>
-				</ul>
-			</div>
-			<div>
-				<a class="anchor font-bold" href="mailto:simmons-moderators@mit.edu">Moderators</a>
-				<ul class="list">
-					<li><span class="flex-auto">Mohan Richter-Addo</span></li>
-					<li><span class="flex-auto">Jordan Wilke</span></li>
-				</ul>
-			</div>
-			<div>
-				<span class="font-bold">GovTracker House Committee Editors</span>
-				<ul class="list">
-					<li><span class="flex-auto">Sarah Pomerantz</span></li>
-					<li><span class="flex-auto">Mohan Richter-Addo</span></li>
-					<li><span class="flex-auto">Jordan Wilke</span></li>
-				</ul>
-			</div>
-			<div class="col-span-2">
-				<p class="italic">
-					Want to help make the Simmons DB better?<br />
-					Then join the <a class="anchor" href="mailto:simmons-tech@mit.edu">IT Committee!</a>
-				</p>
-			</div>
-			<div>
-				<span class="font-bold">GovTracker Financial Editors</span>
-				<ul class="list">
-					<li><span class="flex-auto">Liam Coy</span></li>
-					<li><span class="flex-auto">Lawrence Liu</span></li>
-					<li><span class="flex-auto">Andi Qu</span></li>
-					<li><span class="flex-auto">Mohan Richter-Addo</span></li>
-					<li><span class="flex-auto">Jordan Wilke</span></li>
-				</ul>
-			</div>
-			<div class="col-span-3">
-				<span class="font-bold">Technical Specifications</span><br />
-				<ul class="list">
-					<li><code class="code flex-auto">Svelte {VERSION}</code></li>
-					<li><code class="code flex-auto">{data.version}</code></li>
-					<li><code class="code flex-auto">Current Database: {data.dbName}</code></li>
-				</ul>
-			</div>
-		</div>
+		<table class="table-auto self-center border-separate border-spacing-4">
+			<tbody class="align-top">
+				<tr>
+					<td>
+						<a class="anchor font-bold" href="mailto:simmons-tech@mit.edu"
+							>Administrators (IT Committee)</a
+						>
+						<ul class="list">
+							{#each data.admins as admin}
+								<li><span class="flex-auto">{`${admin.firstname} ${admin.lastname}`}</span></li>
+							{/each}
+						</ul>
+					</td>
+					<td>
+						<a class="anchor font-bold" href="mailto:simmons-moderators@mit.edu">Moderators</a>
+						<ul class="list">
+							{#each data.mods as mod}
+								<li><span class="flex-auto">{`${mod.firstname} ${mod.lastname}`}</span></li>
+							{/each}
+						</ul>
+					</td>
+					<td>
+						<span class="font-bold">GovTracker House Committee Editors</span>
+						<ul class="list">
+							{#each data.housecommLeadership as housecommLeadership}
+								<li>
+									<span class="flex-auto"
+										>{`${housecommLeadership.firstname} ${housecommLeadership.lastname}`}</span
+									>
+								</li>
+							{/each}
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="align-middle">
+						<p class="italic">
+							Want to help make the Simmons DB better?<br />
+							Then join the <a class="anchor" href="mailto:simmons-tech@mit.edu">IT Committee!</a>
+						</p>
+					</td>
+					<td>
+						<span class="font-bold">GovTracker Financial Editors</span>
+						<ul class="list">
+							{#each data.financialAdmins as financialAdmin}
+								<li>
+									<span class="flex-auto"
+										>{`${financialAdmin.firstname} ${financialAdmin.lastname}`}</span
+									>
+								</li>
+							{/each}
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<span class="font-bold">Technical Specifications</span><br />
+						<ul class="list">
+							<li><code class="code flex-auto">Svelte {VERSION}</code></li>
+							<li><code class="code flex-auto">{data.version}</code></li>
+							<li><code class="code flex-auto">Current Database: {data.dbName}</code></li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
