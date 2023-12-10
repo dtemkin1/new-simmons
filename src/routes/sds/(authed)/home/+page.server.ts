@@ -12,5 +12,7 @@ export const load: PageServerLoad = async () => {
 		  (favorite_category != '' AND favorite_value != '')`);
 
 	const residents = (await query).rows;
-	return { randomResident: residents[Math.floor(Math.random() * residents.length)] };
+	const randomResident = residents[Math.floor(Math.random() * residents.length)];
+
+	return { randomResident: randomResident };
 };

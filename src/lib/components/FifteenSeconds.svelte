@@ -87,7 +87,7 @@
 		if (user.favorite_category && user.favorite_value) {
 			tags.push([`Favorite ${user.favorite_category}`, user.favorite_value]);
 		}
-		return { username: username, name: name, tags: tags, quote: user.quote };
+		return { username: username, name: name, tags: tags, quote: `${user.quote}` };
 	}
 
 	let userInfoGenerated = getUserInfo(userInfo);
@@ -99,20 +99,29 @@
 			>{userInfoGenerated.name}</a
 		>
 	</header>
-	<section class="p-4">
-		<div class="grid grid-cols-2 gap-1 grid-flow-row-dense">
+	<section class="p-4 flex items-center justify-center">
+		<table class="table-auto self-center border-separate border-spacing-x-1">
 			{#each userInfoGenerated.tags as tag}
-				<p class="text-right">{tag[0]}</p>
-				{#if tag[0] == 'URL'}<p class="text-left"><a class="anchor" href={tag[1]}>{tag[1]}</a></p>
-				{:else}<p class="text-left">{tag[1]}</p>
-				{/if}
+				<tr>
+					<td class="text-right">{tag[0]}:</td>
+					<td class="text-left"
+						>{#if tag[0] == 'URL'}
+							<a class="anchor" href={tag[1]}>{tag[1]}</a>
+						{:else}{tag[1]}
+						{/if}</td
+					>
+				</tr>
 			{/each}
-		</div>
+		</table>
 	</section>
 
 	{#if userInfo.quote}
 		<footer class="card-footer">
-			<SvelteMarkdown renderers={renderer} source={userInfoGenerated.quote} />
+			<SvelteMarkdown
+				options={{ breaks: true, gfm: true }}
+				renderers={renderer}
+				source={userInfoGenerated.quote}
+			/>
 		</footer>
 	{/if}
 </div>
