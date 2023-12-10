@@ -17,6 +17,7 @@ const pool = new pg.Pool({
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const query = async (text: string, params?: any[]) => {
+	if (!process.argv.includes('dev')) return await pool.query(text, params); // remove logging in prod
 	const start = Date.now();
 	const res = await pool.query(text, params);
 	const duration = Date.now() - start;
@@ -26,6 +27,7 @@ export const query = async (text: string, params?: any[]) => {
 
 // TODO: ADD BACK ONCE NEEDED
 // export const getClient = async () => {
+// 	if (!process.argv.includes('dev')) return await pool.connect(); // remove logging in prod
 // 	const client = await pool.connect();
 // 	const query = client.query;
 // 	const release = client.release;
