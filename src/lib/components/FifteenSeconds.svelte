@@ -119,11 +119,13 @@
 
 	{#if userInfo.quote}
 		<footer class="card-footer">
-			<SvelteMarkdown
-				options={{ breaks: true, gfm: true }}
-				renderers={renderer}
-				source={userInfoGenerated.quote}
-			/>
+			<blockquote class="blockquote">
+				<SvelteMarkdown
+					options={{ breaks: true }}
+					renderers={renderer}
+					source={userInfoGenerated.quote}
+				/>
+			</blockquote>
 		</footer>
 	{/if}
 </div>
