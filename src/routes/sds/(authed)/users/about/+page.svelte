@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { VERSION } from 'svelte/compiler';
+	import { VERSION as svelteVersion } from 'svelte/compiler';
+	import { VERSION as svelteKitVersion } from '@sveltejs/kit';
 
 	import type { PageData } from './$types';
 	export let data: PageData;
@@ -76,7 +77,8 @@
 					<td colspan="3">
 						<span class="font-bold">Technical Specifications</span><br />
 						<ul class="list">
-							<li><code class="code flex-auto">Svelte {VERSION}</code></li>
+							<li><code class="code flex-auto">Svelte {svelteVersion}</code></li>
+							<li><code class="code flex-auto">SvelteKit {svelteKitVersion}</code></li>
 							<li><code class="code flex-auto">{data.version}</code></li>
 							<li><code class="code flex-auto">Current Database: {data.dbName}</code></li>
 						</ul>

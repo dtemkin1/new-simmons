@@ -20,55 +20,7 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	export let userInfo: UserInfo;
 
-	import {
-		Heading,
-		Paragraph,
-		Text,
-		Image,
-		Link,
-		Em,
-		Strong,
-		Codespan,
-		Del,
-		Table,
-		TableHead,
-		TableBody,
-		TableRow,
-		TableCell,
-		List,
-		ListItem,
-		Hr,
-		Html,
-		Blockquote,
-		Code,
-		Br
-	} from '$lib/components/markdown';
-
-	const renderer = {
-		heading: Heading,
-		paragraph: Paragraph,
-		text: Text,
-		image: Image,
-		link: Link,
-		em: Em,
-		strong: Strong,
-		codespan: Codespan,
-		del: Del,
-		table: Table,
-		tablehead: TableHead,
-		tablebody: TableBody,
-		tablerow: TableRow,
-		tablecell: TableCell,
-		list: List,
-		orderedlistitem: null,
-		unorderedlistitem: null,
-		listitem: ListItem,
-		hr: Hr,
-		html: Html,
-		blockquote: Blockquote,
-		code: Code,
-		br: Br
-	};
+	import { renderer } from '$lib/components/markdown';
 
 	function getUserInfo(user: UserInfo) {
 		let username = user.username;
