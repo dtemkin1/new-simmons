@@ -1,6 +1,6 @@
-<script lang="ts">
-	import { base } from '$app/paths';
-	import { redirect } from '@sveltejs/kit';
+<!-- <script lang="ts">
+	import type { PageLoad } from './$types';
+	export let data: PageLoad;
+</script> -->
 
-	throw redirect(302, `${base}/SimmonsReimbursement.pdf`);
-</script>
+If you're seeing this, something is wrong...
