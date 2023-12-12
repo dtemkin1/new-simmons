@@ -44,7 +44,7 @@
 			image: imagesGlob['/src/lib/assets/carousel/image6.jpg'],
 			title: 'Multi-Purpose Room',
 			description:
-				'Simmons Hall houses a giant two story Multi-Purpose Room (MPR), which has seating for over 200 people and is equipped with a 12 foot projection screen, surround sound system, Blu-Ray player, and D<span class="text-sm">IREC</span>TV.'
+				'Simmons Hall houses a giant two story Multi-Purpose Room (MPR), which has seating for over 200 people and is equipped with a 12 foot projection screen, surround sound system, Blu-Ray player, and D<span class="text-xs">IREC</span>TV.'
 		},
 		{
 			image: imagesGlob['/src/lib/assets/carousel/image7.jpg'],
