@@ -1,5 +1,5 @@
 <h2 class="h2">The Constitution of Simmons Hall</h2>
-<p>Last updated October 18, 2019</p>
+<p>Last updated February 12, 2023</p>
 
 <hr />
 
@@ -108,9 +108,9 @@
 					</li>
 					<li>
 						Chair Policies are determined by each current chair. These policies serve to clarify
-						chairs’ roles and responsibilities as assigned by the constitution. They also serve to
+						chairs' roles and responsibilities as assigned by the constitution. They also serve to
 						inform members of the House of officers roles and responsibilities. The content of each
-						chair’s policies can be changed by said chair, however these changes must be announced
+						chair's policies can be changed by said chair, however these changes must be announced
 						at a House Meeting to take effect. It is encouraged that a chair solicit house opinion
 						before changing his or her policies.
 					</li>
@@ -195,7 +195,14 @@
 					<li>
 						During debate on a proposal, motions may be raised. After a member of the House states
 						intention to raise a motion, another member must second the motion in order for it to
-						have any effect (i.e. “be raised”).
+						have any effect (i.e. "be raised").
+					</li>
+					<li>
+						Proposals may be approved during a House meeting following a motion to vote. Once
+						seconded, the House chair should direct and tally a vote, unless a motion to object is
+						raised and seconded. In such cases, the House should return to debate on the proposal.
+						Proposals are approved by a majority vote yes, with the exception that proposals for
+						Constitutional Amendments require a two-thirds majority vote for approval.
 					</li>
 					<li>
 						Proposals may be approved during a House meeting following a motion to vote. Once
@@ -275,7 +282,7 @@
 						President, each for a one year term.
 					</li>
 					<li>
-						The Chair of the House is the chief administrator of the House’s internal affairs. The
+						The Chair of the House is the chief administrator of the House's internal affairs. The
 						Chair is responsible for: (a) creating and distributing to all members a schedule of
 						House meetings for each academic semester, prior to the start of that semester; (b)
 						explaining to the House how House meetings work at the start of each semester; (c)
@@ -286,7 +293,8 @@
 						allows all members an opportunity to speak; (f) conducting elections; (g) generally
 						overseeing the business of the House and directly overseeing the Historian, Social
 						Chairs, Facilities, Inventory, and Sustainability Chair (FISCHair, pronounced Fish
-						Chair), Technology Chair and the Rooming Chairs.
+						Chair), Technology Chair and the Rooming Chairs (also known as "Scootah Hockey Draft
+						Moderatahs").
 					</li>
 					<li>
 						The President is the chief diplomat of Simmons Hall and the administrator of the House’s
@@ -369,9 +377,9 @@
 						Lab Chair; (e) the Library Chair; (f) the Entertainment Chair; (g) the Reservations
 						Chair; (h) the Workshop Chair; (i) the Rooming Chairs; (j) the FROSH Chairs; (k) the
 						Athletics Chair; (l) the Publicity Chair; (m) the Historian; (n) the Kitchen Chair; the
-						Gym Chair (o). These Chairs and their committees must exist at all times, and are
-						elected for a one year term. The roles and responsibilities of these committees are
-						stated in this Article of the Simmons Hall Constitution.
+						Gym Chair (o); the Craft Room Chair (p). These Chairs and their committees must exist at
+						all times, and are elected for a one year term. The roles and responsibilities of these
+						committees are stated in this Article of the Simmons Hall Constitution.
 					</li>
 					<li>
 						Each Committee Chair is responsible for: (a) maintaining a committee membership list;
@@ -409,7 +417,7 @@
 					</li>
 					<li>
 						Committee meetings should be held at appropriate times given the particular topic of the
-						committee’s attention. Committee meetings should typically occur once each month, unless
+						committee's attention. Committee meetings should typically occur once each month, unless
 						there is no business to be discussed at that time.
 					</li>
 					<li>

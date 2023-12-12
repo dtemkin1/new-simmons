@@ -7,6 +7,36 @@ import {
 	AUTH_REDIRECT_PROXY_URL
 } from '$env/static/private';
 
+import { pool } from '$lib/db';
+import { createSqlTag } from 'slonik';
+import { z } from 'zod';
+
+const sql = createSqlTag({
+	typeAliases: {
+		id: z.object({
+			id: z.number()
+		}),
+		void: z.object({}).strict(),
+		groups: z.object({ groupname: z.string() })
+	}
+});
+
+async function getGroups(username: string) {
+	const dbResult = await pool.connect(async (connection) => {
+		const groupsQuery = connection.query(
+			sql.typeAlias(
+				'groups'
+			)`SELECT groupname FROM sds_group_membership_cache WHERE username=${username}`
+		);
+		const groups = await groupsQuery;
+		return groups;
+	});
+
+	return dbResult.rows.map(function (groups) {
+		return groups.groupname;
+	});
+}
+
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
 interface Profile extends Record<string, string> {
@@ -64,7 +94,8 @@ const authHandle = SvelteKitAuth({
 		},
 		async session({ session, token }) {
 			if (session.user) {
-				session.user = token.user as OIDCProfile;
+				session.user.id = (token.user as OIDCProfile).id;
+				session.user.groups = await getGroups(session.user.id);
 			}
 			return session;
 		}
