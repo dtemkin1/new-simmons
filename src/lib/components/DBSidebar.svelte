@@ -4,6 +4,8 @@
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 
+	import { CircleUser } from 'lucide-svelte';
+
 	import { sdsLinks } from '$lib/data/navLinks';
 	export let currentTile: number = 0;
 
@@ -31,28 +33,21 @@
 								}
 							}}
 						>
-							<svelte:fragment slot="lead"
-								><i class="fa-solid fa-{tileLinks.icon} text-2xl" /></svelte:fragment
-							>
+							<svelte:fragment slot="lead">
+								<div class="flex justify-center items-center">
+									<svelte:component this={tileLinks.icon} size={'1.5rem'}></svelte:component>
+								</div>
+							</svelte:fragment>
 							<span>{tileLinks.name}</span>
 						</AppRailTile>
 					{/if}
 				{/each}
 			</svelte:fragment>
-			<!-- so that svelte stops deleting css... this is janky find some other way later -->
-			<div class="invisible max-h-0 max-w-0">
-				<i class="fa-solid fa-house text-2xl" />
-				<i class="fa-solid fa-check-to-slot text-2xl" />
-				<i class="fa-solid fa-person text-2xl" />
-				<i class="fa-solid fa-box text-2xl" />
-				<i class="fa-solid fa-film text-2xl" />
-				<i class="fa-solid fa-book text-2xl" />
-				<i class="fa-solid fa-envelopes-bulk text-2xl" />
-			</div>
 			<svelte:fragment slot="trail">
 				<AppRailAnchor href="{base}/sds/login/certs/login" title="Account" on:click={onClickAnchor}
-					><svelte:fragment slot="lead"><i class="fa-solid fa-user text-2xl" /></svelte:fragment
-					>{$page.data.session.user?.id ?? 'Guest'}</AppRailAnchor
+					><svelte:fragment slot="lead">
+						<CircleUser size={'1.5rem'} />
+					</svelte:fragment>{$page.data.session.user?.id ?? 'Guest'}</AppRailAnchor
 				>
 			</svelte:fragment>
 		</AppRail>

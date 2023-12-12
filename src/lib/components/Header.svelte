@@ -2,6 +2,7 @@
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { AppBar, LightSwitch, getDrawerStore } from '@skeletonlabs/skeleton';
+	import { Menu } from 'lucide-svelte';
 	import type { DrawerSettings } from '@skeletonlabs/skeleton';
 
 	import { headerLinks } from '$lib/data/navLinks';
@@ -44,7 +45,7 @@
 				id="navMenu"
 				aria-label="Navigation Menu"
 			>
-				<i class="fa-solid fa-bars text-2xl" />
+				<Menu size={'2rem'} />
 			</button>
 		</div>
 	</svelte:fragment>

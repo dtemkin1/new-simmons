@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.postcss';
-	import '@fortawesome/fontawesome-free/css/all.min.css';
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';

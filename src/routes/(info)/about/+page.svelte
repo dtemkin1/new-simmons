@@ -1,67 +1,65 @@
 <script lang="ts">
+	import { ArrowLeft } from 'lucide-svelte';
+	import { ArrowRight } from 'lucide-svelte';
+
 	let elemCarousel: HTMLDivElement;
 
-	import image1 from '$lib/assets/carousel/image1.jpg';
-	import image2 from '$lib/assets/carousel/image2.jpg';
-	import image3 from '$lib/assets/carousel/image3.jpg';
-	import image4 from '$lib/assets/carousel/image4.jpg';
-	import image5 from '$lib/assets/carousel/image5.jpg';
-	import image6 from '$lib/assets/carousel/image6.jpg';
-	import image7 from '$lib/assets/carousel/image7.jpg';
-	import image8 from '$lib/assets/carousel/image8.jpg';
-	import image9 from '$lib/assets/carousel/image9.jpg';
+	const imagesGlob: Record<string, string> = import.meta.glob('$lib/assets/carousel/image*.jpg', {
+		import: 'default',
+		eager: true
+	});
 
 	const images = [
 		{
-			image: image1,
+			image: imagesGlob['/src/lib/assets/carousel/image1.jpg'],
 			title: 'Simmons Hall',
 			description:
 				'Simmons Hall is an MIT Undergraduate Residence Hall. It is home to 340 undergraduates, 10 graduate students, 2 MIT professors and their families, and 5 Resident Scholars who are visiting MIT for the academic year.'
 		},
 		{
-			image: image2,
+			image: imagesGlob['/src/lib/assets/carousel/image2.jpg'],
 			title: 'During Construction',
 			description:
 				'Simmons Hall was opened to the MIT community in 2002. Designed by Steven Holl, it has won multiple awards for its unique architectural features.'
 		},
 		{
-			image: image3,
+			image: imagesGlob['/src/lib/assets/carousel/image3.jpg'],
 			title: 'Dining',
 			description:
 				'There are 5 dining halls on the MIT campus. Simmons Hall has the best, open 7 days a week for breakfast and dinner. We have a smaller dining facility with personable staff that we love.'
 		},
 		{
-			image: image4,
+			image: imagesGlob['/src/lib/assets/carousel/image4.jpg'],
 			title: 'Gym',
 			description:
 				'A well equipped, two story, gym with a phenomenal view of the Boston skyline. Use the elliptical, treadmill, free weights, yoga station, indoor rower, or the massive two story LED display built by residents.'
 		},
 		{
-			image: image5,
+			image: imagesGlob['/src/lib/assets/carousel/image5.jpg'],
 			title: 'Ball Pit',
 			description:
 				'<a target="_blank" class="anchor" href="http://xkcd.com/150/">http://xkcd.com/150/</a>'
 		},
 		{
-			image: image6,
+			image: imagesGlob['/src/lib/assets/carousel/image6.jpg'],
 			title: 'Multi-Purpose Room',
 			description:
 				'Simmons Hall houses a giant two story Multi-Purpose Room (MPR), which has seating for over 200 people and is equipped with a 12 foot projection screen, surround sound system, Blu-Ray player, and D<span class="text-sm">IREC</span>TV.'
 		},
 		{
-			image: image7,
+			image: imagesGlob['/src/lib/assets/carousel/image7.jpg'],
 			title: 'Lounges',
 			description:
 				'Simmons has community lounges for studying and play. All lounges are equipped with 42” LCD TVs, Rokus, and PS3s. During the week residents use them late into the night to work on problem sets, and on weekends they turn into rooms for movies and games.'
 		},
 		{
-			image: image8,
+			image: imagesGlob['/src/lib/assets/carousel/image8.jpg'],
 			title: 'Rooms',
 			description:
 				"Simmons Hall consists of doubles and singles located throughout the building's ten floors and three towers. Three residents generally share a bathroom."
 		},
 		{
-			image: image9,
+			image: imagesGlob['/src/lib/assets/carousel/image9.jpg'],
 			title: 'Laundry',
 			description:
 				'Simmons has laundry rooms on almost every floor. Each laundry room has two washers and two dryers.'
@@ -101,7 +99,9 @@
 >
 	<!-- Button: Left -->
 	<button type="button" class="btn-icon variant-filled hidden md:block" on:click={carouselLeft}>
-		<i class="fa-solid fa-arrow-left" />
+		<div class="flex justify-center items-center">
+			<ArrowLeft />
+		</div>
 	</button>
 	<!-- Full Images -->
 	<div
@@ -120,7 +120,9 @@
 	</div>
 	<!-- Button: Right -->
 	<button type="button" class="btn-icon variant-filled hidden md:block" on:click={carouselRight}>
-		<i class="fa-solid fa-arrow-right" />
+		<div class="flex justify-center items-center">
+			<ArrowRight />
+		</div>
 	</button>
 </div>
 <h2 class="h2">Simmons Government</h2>
