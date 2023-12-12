@@ -2,19 +2,19 @@
 
 <script lang="ts">
 	interface UserInfo {
-		username?: string;
-		lastname?: string;
-		firstname?: string;
-		title?: string;
-		year?: string;
-		type?: string;
-		quote?: string;
-		favorite_category?: string;
-		favorite_value?: string;
-		homepage?: string;
-		home_city?: string;
-		home_state?: string;
-		home_country?: string;
+		username: string;
+		lastname: string;
+		firstname: string;
+		title: string | null;
+		year: number | null;
+		type: string;
+		quote: string;
+		favorite_category: string;
+		favorite_value: string;
+		homepage: string;
+		home_city: string;
+		home_state: string;
+		home_country: string;
 	}
 
 	import SvelteMarkdown from 'svelte-markdown';
@@ -61,7 +61,7 @@
 					<tr>
 						<td class="text-right">{tag[0]}:</td>
 						<td class="text-left"
-							>{#if tag[0] == 'URL'}
+							>{#if tag[0] == 'URL' && typeof tag[1] == 'string'}
 								<a class="anchor" href={`${tag[1].includes('://') ? '' : 'http://'}${tag[1]}`}
 									>{tag[1]}</a
 								>
