@@ -1,53 +1,44 @@
-import { getClient } from '$lib/db';
+import { pool } from '$lib/db';
+import { sql } from 'slonik';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	const dbConnection = await getClient();
+	const dbResult = await pool.connect(async (connection) => {
+		const versionQuery = connection.query(sql.unsafe`SELECT split_part(version(),' on ',1)`);
+		const dbNameQuery = connection.query(sql.unsafe`SELECT current_database()`);
+		const adminsQuery = connection.query(
+			sql.unsafe`SELECT username,lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='ADMINISTRATORS' ORDER BY lastname ASC`
+		);
+		const modsQuery = connection.query(
+			sql.unsafe`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='MODERATORS' ORDER BY lastname ASC`
+		);
+		const housecommLeadershipQuery = connection.query(
+			sql.unsafe`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='HOUSE-COMM-LEADERSHIP' ORDER BY lastname ASC`
+		);
+		const financialAdminsQuery = connection.query(
+			sql.unsafe`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='FINANCIAL-ADMINS' ORDER BY lastname ASC`
+		);
 
-	const versionQuery = dbConnection.query("SELECT split_part(version(),' on ',1)");
-	const dbNameQuery = dbConnection.query('SELECT current_database()');
-	const adminsQuery = dbConnection.query(
-		"SELECT username,lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='ADMINISTRATORS' ORDER BY lastname ASC"
-	);
-	const modsQuery = dbConnection.query(
-		"SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='MODERATORS' ORDER BY lastname ASC"
-	);
-	const housecommLeadershipQuery = dbConnection.query(
-		"SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='HOUSE-COMM-LEADERSHIP' ORDER BY lastname ASC"
-	);
-	const financialAdminsQuery = dbConnection.query(
-		"SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='FINANCIAL-ADMINS' ORDER BY lastname ASC"
-	);
+		const [version, dbName, admins, mods, housecommLeadership, financialAdmins] = await Promise.all(
+			[
+				(await versionQuery).rows[0].split_part,
+				(await dbNameQuery).rows[0].current_database,
+				(await adminsQuery).rows,
+				(await modsQuery).rows,
+				(await housecommLeadershipQuery).rows,
+				(await financialAdminsQuery).rows
+			]
+		);
 
-	interface User {
-		username: string;
-		lastname: string;
-		firstname: string;
-	}
+		return {
+			dbName: dbName,
+			version: version,
+			admins: admins,
+			mods: mods,
+			housecommLeadership: housecommLeadership,
+			financialAdmins: financialAdmins
+		};
+	});
 
-	interface UserNoUsername {
-		username: string;
-		lastname: string;
-		firstname: string;
-	}
-
-	const [version, dbName, admins, mods, housecommLeadership, financialAdmins] = await Promise.all([
-		(await versionQuery).rows[0].split_part as string,
-		(await dbNameQuery).rows[0].current_database as string,
-		(await adminsQuery).rows as User[],
-		(await modsQuery).rows as UserNoUsername[],
-		(await housecommLeadershipQuery).rows as UserNoUsername[],
-		(await financialAdminsQuery).rows as UserNoUsername[]
-	]);
-
-	dbConnection.release();
-
-	return {
-		dbName: dbName,
-		version: version,
-		admins: admins,
-		mods: mods,
-		housecommLeadership: housecommLeadership,
-		financialAdmins: financialAdmins
-	};
+	return dbResult;
 };

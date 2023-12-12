@@ -1,10 +1,10 @@
-import { getClient } from '$lib/db';
+import { pool } from '$lib/db';
+import { sql } from 'slonik';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	const dbConnection = await getClient();
-
-	const residentsQuery = dbConnection.query(`
+	const dbResult = await pool.connect(async (connection) => {
+		const residentsQuery = connection.query(sql.unsafe`
 	SELECT username,lastname,firstname,title,year,type,quote,favorite_category,
 		   favorite_value,homepage,home_city,home_state,home_country
 	FROM public_active_directory
@@ -13,35 +13,19 @@ export const load: PageServerLoad = async () => {
 	ORDER BY random()
 	LIMIT 1`);
 
-	interface Resident {
-		username: string;
-		lastname: string;
-		firstname: string;
-		title: string | null;
-		year: number | null;
-		type: string;
-		quote: string;
-		favorite_category: string;
-		favorite_value: string;
-		homepage: string;
-		home_city: string;
-		home_state: string;
-		home_country: string;
-	}
+		const randomResident = (await residentsQuery).rows[0];
 
-	const randomResident = (await residentsQuery).rows[0] as Resident;
+		if (randomResident.type !== 'U') {
+			const typeQuery = connection.query(
+				sql.unsafe`SELECT description FROM user_types WHERE type=${randomResident.type}`
+			);
+			randomResident.type = (await typeQuery).rows[0].description;
+		} else {
+			randomResident.type = '';
+		}
 
-	console.log(randomResident);
-	if (randomResident.type !== 'U') {
-		const typeQuery = dbConnection.query(`SELECT description FROM user_types WHERE type=$1`, [
-			randomResident.type
-		]);
-		randomResident.type = (await typeQuery).rows[0].description as typeof randomResident.type;
-	} else {
-		randomResident.type = '';
-	}
+		return { randomResident: randomResident };
+	});
 
-	dbConnection.release();
-
-	return { randomResident: randomResident };
+	return dbResult;
 };
