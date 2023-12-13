@@ -1,5 +1,5 @@
 import { SvelteKitAuth } from '@auth/sveltekit';
-import type { OIDCConfig } from '@auth/core/providers';
+import type { OIDCConfig } from '@auth/sveltekit/providers';
 import {
 	CLIENT_ID,
 	CLIENT_SECRET,

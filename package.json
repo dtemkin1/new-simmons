@@ -47,8 +47,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@auth/core": "^0.18.5",
-    "@auth/sveltekit": "^0.3.16",
+    "@auth/sveltekit": "^0.4.0",
     "@floating-ui/dom": "1.5.3",
     "lucide-svelte": "^0.294.0",
     "slonik": "^37.2.0",
