@@ -4,7 +4,7 @@ declare module '@auth/core/types' {
 	interface Session {
 		user: {
 			id: string;
-			groups: string[];
+			groups: readonly string[];
 		} & DefaultSession['user'];
 	}
 }
