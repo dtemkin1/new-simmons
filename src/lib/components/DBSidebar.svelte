@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 
+	export let groups: readonly string[] | undefined;
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 
@@ -13,14 +14,31 @@
 		currentTile = 0;
 	}
 
+	let userLinks: typeof sdsLinks = [];
+	for (const linkGroup of sdsLinks) {
+		const allLinks = linkGroup.links.filter((link) =>
+			groups?.some((group) => link.groupNeeded.includes(group))
+		);
+		if (allLinks.length > 0) {
+			userLinks.push({
+				id: linkGroup.id,
+				name: linkGroup.name,
+				value: linkGroup.value,
+				icon: linkGroup.icon,
+				links: allLinks
+			});
+		}
+	}
+
 	$: linkActive = (href: string) => (href === $page.url.pathname ? '!bg-primary-active-token' : '');
+	$: activeGroup = userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] };
 </script>
 
 <div class="h-full flex flex-row">
-	{#if $page.data.session}
+	{#if $page.data.session?.user}
 		<AppRail>
 			<svelte:fragment slot="lead">
-				{#each sdsLinks as tileLinks}
+				{#each userLinks as tileLinks}
 					{#if tileLinks.links.length > 0}
 						<AppRailTile
 							bind:group={currentTile}
@@ -57,11 +75,10 @@
 			>
 				<nav class="list-nav md:pr-0 pr-20">
 					<ul>
-						{#each sdsLinks[currentTile - 1].links as link}
+						{#each activeGroup.links as link}
 							<li>
 								<a
 									href={link.href}
-									data-sveltekit-preload-data="hover"
 									on:keypress
 									on:click={onClickAnchor}
 									class={linkActive(link.href)}

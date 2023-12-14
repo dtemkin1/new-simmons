@@ -6,6 +6,7 @@
 	import HeaderDrawer from '$lib/components/HeaderDrawer.svelte';
 	import DBSidebar from '$lib/components/DBSidebar.svelte';
 
+	import type { LayoutServerLoad } from './$types';
 	import { page } from '$app/stores';
 
 	// Floating UI for Popups
@@ -23,6 +24,7 @@
 		type ModalSettings
 	} from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
+
 	initializeStores();
 	const drawerStore = getDrawerStore();
 	const modalStore = getModalStore();
@@ -64,7 +66,7 @@
 
 	<svelte:fragment slot="sidebarLeft">
 		{#if $page.url.pathname.includes('/sds')}
-			<DBSidebar />
+			<DBSidebar groups={$page.data.session?.user.groups} />
 		{/if}
 	</svelte:fragment>
 
