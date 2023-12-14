@@ -23,7 +23,7 @@ const sql = createSqlTag({
 
 async function getGroups(username: string) {
 	const dbResult = await pool.connect(async (connection) => {
-		const groupsQuery = connection.query(
+		const groupsQuery = connection.manyFirst(
 			sql.typeAlias(
 				'groups'
 			)`SELECT groupname FROM sds_group_membership_cache WHERE username=${username}`
@@ -32,9 +32,7 @@ async function getGroups(username: string) {
 		return groups;
 	});
 
-	return dbResult.rows.map(function (groups) {
-		return groups.groupname;
-	});
+	return dbResult;
 }
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';

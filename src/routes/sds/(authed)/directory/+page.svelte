@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { PageServerData } from './$types';
+
 	let firstname = '';
 	let lastname = '';
 	let title = '';
@@ -8,8 +10,10 @@
 	let lounge = '';
 	let gra = '';
 
+	export let data: PageServerData;
+
 	let submitSearch = () => {};
-	// TODO: replace select values with values from DB
+	// TODO: make search function
 </script>
 
 <div class="flex items-center justify-center h-full">
@@ -39,12 +43,9 @@
 			<span>Year</span>
 			<select class="select" title="year" bind:value={year}>
 				<option selected value="">[Any]</option>
-				<option value="2022">2022</option>
-				<option value="2023">2023</option>
-				<option value="2024">2024</option>
-				<option value="2025">2025</option>
-				<option value="2026">2026</option>
-				<option value="2027">2027</option>
+				{#each data.years as year}
+					<option value={year}>{year}</option>
+				{/each}
 				<option value="No year">No year</option>
 			</select>
 		</label>
@@ -52,43 +53,18 @@
 			<span>Lounge</span>
 			<select class="select" title="lounge" bind:value={lounge}>
 				<option selected value="">[Any]</option>
-				<option value="lounge-1">lounge-1: Foodstuff</option>
-				<option value="lounge-51137">lounge-51137: simbeans</option>
-				<option value="lounge-6969">lounge-6969: The Edgerton Alliance</option>
-				<option value="lounge-apegangllc">lounge-apegangllc: Founding Fathers</option>
-				<option value="lounge-atp">lounge-atp: ⚡️ATP bring the energy⚡️</option>
-				<option value="lounge-b3">lounge-b3: B^3</option>
-				<option value="lounge-brainrot">lounge-brainrot: brainrot</option>
-				<option value="lounge-ecdiasporavictimsplusfriendsofec"
-					>lounge-ecdiasporavictimsplusfriendsofec: oh no the sponge is on fire</option
-				>
-				<option value="lounge-gayagend">lounge-gayagend: The Gay Agenda</option>
-				<option value="lounge-hoots">lounge-hoots: Holy Order of the Sponge</option>
-				<option value="lounge-ihtfs">lounge-ihtfs: IHTFs</option>
-				<option value="lounge-launderers">lounge-launderers: Lounge 5</option>
-				<option value="lounge-loungebrekk">lounge-loungebrekk: Brekky Haulers</option>
-				<option value="lounge-loungefab">lounge-loungefab: FAB</option>
-				<option value="lounge-mindcr4ft">lounge-mindcr4ft: mind craft</option>
-				<option value="lounge-o4tx">lounge-o4tx: Rolling Oatmeal</option>
-				<option value="lounge-paulandbensroom">lounge-paulandbensroom: Paul and Ben's Room</option>
-				<option value="lounge-penttalk">lounge-penttalk: The Penthouse</option>
-				<option value="lounge-plsbeedskmn">lounge-plsbeedskmn: Αlpha Σimmons Σimmons (ΑΣΣ)</option>
-				<option value="lounge-pnuts">lounge-pnuts: PNuts</option>
-				<option value="lounge-rpm">lounge-rpm: RPM</option>
-				<option value="lounge-ufc">lounge-ufc: Ume Fanclub</option>
-				<option value="lounge-welivein">lounge-welivein: a society</option>
-				<option value="lounge-winglng">lounge-winglng: wing lounge</option>
-				<option value="lounge-youseethatlounge"
-					>lounge-youseethatlounge: &quot;You see that lounge up there on the fourth floor, eighteen
-					windows from this side of the building? Ya see that lounge there? That's my lounge. But I
-					didn't join it.&quot;</option
-				>
+				{#each data.lounges as lounge}
+					<option value={lounge.lounge}>{lounge.lounge}: {lounge.description}</option>
+				{/each}
 			</select>
 		</label>
 		<label class="label">
 			<span>GRA</span>
 			<select class="select" title="gra" bind:value={gra}>
 				<option selected value="">[Any]</option>
+				{#each data.gras as gra}
+					<option value={gra}>{gra}</option>
+				{/each}
 				<option value="grt2w">grt2w</option>
 				<option value="grt4e">grt4e</option>
 				<option value="grt4w">grt4w</option>

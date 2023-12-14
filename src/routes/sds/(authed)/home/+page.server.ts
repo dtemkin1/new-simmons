@@ -29,7 +29,7 @@ const sql = createSqlTag({
 
 export const load: PageServerLoad = async () => {
 	const dbResult = await pool.connect(async (connection) => {
-		const residentsQuery = connection.query(sql.typeAlias('resident')`
+		const residentsQuery = connection.one(sql.typeAlias('resident')`
 	SELECT username,lastname,firstname,title,year,type,quote,favorite_category,
 		   favorite_value,homepage,home_city,home_state,home_country
 	FROM public_active_directory
@@ -38,13 +38,13 @@ export const load: PageServerLoad = async () => {
 	ORDER BY random()
 	LIMIT 1`);
 
-		const randomResident = (await residentsQuery).rows[0];
+		const randomResident = await residentsQuery;
 
 		if (randomResident.type !== 'U') {
-			const typeQuery = connection.query(
+			const typeQuery = connection.oneFirst(
 				sql.unsafe`SELECT description FROM user_types WHERE type=${randomResident.type}`
 			);
-			randomResident.type = (await typeQuery).rows[0].description;
+			randomResident.type = await typeQuery;
 		} else {
 			randomResident.type = '';
 		}
