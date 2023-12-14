@@ -16,8 +16,9 @@
 
 	let userLinks: typeof sdsLinks = [];
 	for (const linkGroup of sdsLinks) {
-		const allLinks = linkGroup.links.filter((link) =>
-			groups?.some((group) => link.groupNeeded.includes(group))
+		const allLinks = linkGroup.links.filter(
+			(link) =>
+				groups?.some((group) => link.groupNeeded.includes(group)) && link.badge !== 'Incomplete'
 		);
 		if (allLinks.length > 0) {
 			userLinks.push({
