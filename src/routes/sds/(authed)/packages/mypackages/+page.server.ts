@@ -1,0 +1,52 @@
+import { pool } from '$lib/db';
+import { createSqlTag } from 'slonik';
+import type { PageServerLoad } from './$types';
+import { z } from 'zod';
+
+const sql = createSqlTag({
+	typeAliases: {
+		id: z.object({
+			id: z.number()
+		}),
+		void: z.object({}).strict(),
+		user: z.object({
+			username: z.string(),
+			lastname: z.string(),
+			firstname: z.string()
+		}),
+		userNoUsername: z.object({
+			lastname: z.string(),
+			firstname: z.string()
+		})
+	}
+});
+
+export const load: PageServerLoad = async () => {
+	const dbResult = await pool.connect(async (connection) => {
+		const packagesQuery = connection.one(
+			sql.type(
+				z.object({
+					num_packages: z.number(),
+					earliest_sure: z.string(),
+					num_perishable: z.number()
+				})
+			)`SELECT sum(pkg_count) AS num_packages,sum(perishable_count) AS num_perishable,
+            to_char(min(latest_checkin),'FMMonth FMDDth') AS earliest_sure
+     FROM (SELECT count(*) AS pkg_count,
+           count(NULLIF(perishable,'f')) AS perishable_count,
+           max(checkin) AS latest_checkin
+           FROM packages WHERE recipient='$currentuser' AND  pickup IS NULL
+           GROUP BY bin) AS info`
+		);
+
+		const [packages] = await Promise.all([await packagesQuery]);
+
+		return {
+			num_packages: packages.num_packages,
+			num_perishable: packages.num_perishable,
+			earliest_sure: packages.earliest_sure
+		};
+	});
+
+	return dbResult;
+};

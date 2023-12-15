@@ -179,7 +179,7 @@ export const sdsLinks = [
 			{
 				href: `${dbBase}/packages/mypackages`,
 				label: 'My Packages',
-				badge: 'Work in Progress',
+				badge: '',
 				groupNeeded: ['USER']
 			},
 			{
