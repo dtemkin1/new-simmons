@@ -1,38 +1,85 @@
-# create-svelte
+![Simmons Hall Logo](https://simmons.mit.edu/img/logo.png)
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+# Simmons 2.0
 
-## Creating a project
+A new frontend for Simmons Hall at MIT, created in Svelte.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Tech Stack
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+**Client:** Svelte, SvelteKit, Skeleton UI, TailwindCSS
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+**Server:** PostgreSQL, Apache
 
-## Developing
+## Run Locally
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Clone the project
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+  git clone https://github.com/dtemkin1/new-simmons
 ```
 
-## Building
-
-To create a production version of your app:
+Go to the project directory
 
 ```bash
-npm run build
+  cd new-simmons
 ```
 
-You can preview the production build with `npm run preview`.
+Install dependencies
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+## Deployment
+
+To create the production version of the app
+
+```bash
+  npm run build
+```
+
+Preview the production build
+
+```bash
+  npm run preview
+```
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`POSTGRES_DB`
+
+`POSTGRES_USERNAME`
+
+`POSTGRESS_PASSWORD`
+
+`POSTGRES_HOST`
+
+`POSTGRES_PORT`
+
+`AUTH_SECRET`
+
+`AUTH_TRUST_HOST`
+
+`AUTH_REDIRECT_PROXY_URL`
+
+`CLIENT_ID`
+
+`CLIENT_SECRET`
+
+## Acknowledgements
+
+- `dramage`, 2002; with `bonawitz`, `dheera`, `psaindon` for the creation of the original Simmons DB
+- `advay`, 2006 for the creation of the GovTracker system
+- `simmons-tech` for all the work done on the site
+
+## Support
+
+For support, please email simmons-tech@mit.edu.
