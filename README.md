@@ -1,6 +1,6 @@
-![Simmons Hall Logo](http://simmons.mit.edu/img/logo.png)
-
 # Simmons 2.0
+
+![Simmons Hall Logo](http://simmons.mit.edu/img/logo.png)
 
 A new frontend for Simmons Hall at MIT, created in Svelte.
 
@@ -82,4 +82,4 @@ To run this project, you will need to add the following environment variables to
 
 ## Support
 
-For support, please email simmons-tech@mit.edu.
+For support, please email <simmons-tech@mit.edu>.
