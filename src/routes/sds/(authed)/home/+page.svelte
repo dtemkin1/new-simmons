@@ -1,6 +1,7 @@
 <script lang="ts">
 	import FifteenSeconds from '$lib/components/FifteenSeconds.svelte';
 	import { base } from '$app/paths';
+	import { ProgressRadial } from '@skeletonlabs/skeleton';
 
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
@@ -17,7 +18,13 @@
 				<a class="anchor" href="{base}/sds/directory">Simmons Hall Resident</a> of the Moment
 			</p>
 		</div>
-		<div><FifteenSeconds userInfo={data.randomResident} /></div>
+		<div>
+			{#await data.randomResident}
+				<div class="card p-4"><ProgressRadial /></div>
+			{:then randomResident}
+				<FifteenSeconds userInfo={randomResident} />
+			{/await}
+		</div>
 
 		<div class="space-y-4">
 			<p>

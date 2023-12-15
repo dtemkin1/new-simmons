@@ -23,8 +23,8 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async (event) => {
-	const session = await event.locals.getSession();
-	const dbResult = await pool.connect(async (connection) => {
+	const dbResult = pool.connect(async (connection) => {
+		const session = await event.locals.getSession();
 		const directory =
 			(session !== null && session.user.groups.includes('DESK')) ||
 			(session !== null && session.user.groups.includes('RAC'))

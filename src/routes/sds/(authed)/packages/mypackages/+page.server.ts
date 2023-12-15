@@ -22,7 +22,7 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = await pool.connect(async (connection) => {
+	const dbResult = pool.connect(async (connection) => {
 		const packagesQuery = connection.one(
 			sql.type(
 				z.object({

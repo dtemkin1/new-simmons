@@ -43,9 +43,11 @@
 			<span>Year</span>
 			<select class="select" title="year" bind:value={year}>
 				<option selected value="">[Any]</option>
-				{#each data.years as year}
-					<option value={year}>{year}</option>
-				{/each}
+				{#await data.years then years}
+					{#each years as year}
+						<option value={year}>{year}</option>
+					{/each}
+				{/await}
 				<option value="No year">No year</option>
 			</select>
 		</label>
@@ -53,18 +55,22 @@
 			<span>Lounge</span>
 			<select class="select" title="lounge" bind:value={lounge}>
 				<option selected value="">[Any]</option>
-				{#each data.lounges as lounge}
-					<option value={lounge.lounge}>{lounge.lounge}: {lounge.description}</option>
-				{/each}
+				{#await data.lounges then lounges}
+					{#each lounges as lounge}
+						<option value={lounge.lounge}>{lounge.lounge}: {lounge.description}</option>
+					{/each}
+				{/await}
 			</select>
 		</label>
 		<label class="label">
 			<span>GRA</span>
 			<select class="select" title="gra" bind:value={gra}>
 				<option selected value="">[Any]</option>
-				{#each data.gras as gra}
-					<option value={gra}>{gra}</option>
-				{/each}
+				{#await data.gras then gras}
+					{#each gras as gra}
+						<option value={gra}>{gra}</option>
+					{/each}
+				{/await}
 				<option value="grt2w">grt2w</option>
 				<option value="grt4e">grt4e</option>
 				<option value="grt4w">grt4w</option>

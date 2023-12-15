@@ -2,8 +2,8 @@
 	import { VERSION as svelteVersion } from 'svelte/compiler';
 	import { VERSION as svelteKitVersion } from '@sveltejs/kit';
 
-	import type { PageData } from './$types';
-	export let data: PageData;
+	import type { PageServerData } from './$types';
+	export let data: PageServerData;
 </script>
 
 <div class="flex flex-col items-center p-4">
@@ -27,29 +27,41 @@
 							>Administrators (IT Committee)</a
 						>
 						<ul class="list">
-							{#each data.admins as admin}
-								<li><span class="flex-auto">{`${admin.firstname} ${admin.lastname}`}</span></li>
-							{/each}
+							{#await data.admins}
+								<div class="placeholder" />
+							{:then admins}
+								{#each admins as admin}
+									<li><span class="flex-auto">{`${admin.firstname} ${admin.lastname}`}</span></li>
+								{/each}
+							{/await}
 						</ul>
 					</td>
 					<td>
 						<a class="anchor font-bold" href="mailto:simmons-moderators@mit.edu">Moderators</a>
 						<ul class="list">
-							{#each data.mods as mod}
-								<li><span class="flex-auto">{`${mod.firstname} ${mod.lastname}`}</span></li>
-							{/each}
+							{#await data.mods}
+								<div class="placeholder" />
+							{:then mods}
+								{#each mods as mod}
+									<li><span class="flex-auto">{`${mod.firstname} ${mod.lastname}`}</span></li>
+								{/each}
+							{/await}
 						</ul>
 					</td>
 					<td>
 						<span class="font-bold">GovTracker House Committee Editors</span>
 						<ul class="list">
-							{#each data.housecommLeadership as housecommLeadership}
-								<li>
-									<span class="flex-auto"
-										>{`${housecommLeadership.firstname} ${housecommLeadership.lastname}`}</span
-									>
-								</li>
-							{/each}
+							{#await data.housecommLeadership}
+								<div class="placeholder" />
+							{:then housecommLeadership}
+								{#each housecommLeadership as housecommLeader}
+									<li>
+										<span class="flex-auto"
+											>{`${housecommLeader.firstname} ${housecommLeader.lastname}`}</span
+										>
+									</li>
+								{/each}
+							{/await}
 						</ul>
 					</td>
 				</tr>
@@ -63,13 +75,17 @@
 					<td>
 						<span class="font-bold">GovTracker Financial Editors</span>
 						<ul class="list">
-							{#each data.financialAdmins as financialAdmin}
-								<li>
-									<span class="flex-auto"
-										>{`${financialAdmin.firstname} ${financialAdmin.lastname}`}</span
-									>
-								</li>
-							{/each}
+							{#await data.financialAdmins}
+								<div class="placeholder" />
+							{:then financialAdmins}
+								{#each financialAdmins as financialAdmin}
+									<li>
+										<span class="flex-auto"
+											>{`${financialAdmin.firstname} ${financialAdmin.lastname}`}</span
+										>
+									</li>
+								{/each}
+							{/await}
 						</ul>
 					</td>
 				</tr>
@@ -79,8 +95,12 @@
 						<ul class="list">
 							<li><code class="code flex-auto">Svelte {svelteVersion}</code></li>
 							<li><code class="code flex-auto">SvelteKit {svelteKitVersion}</code></li>
-							<li><code class="code flex-auto">{data.version}</code></li>
-							<li><code class="code flex-auto">Current Database: {data.dbName}</code></li>
+							{#await data.version then version}
+								<li><code class="code flex-auto">{version}</code></li>
+							{/await}
+							{#await data.dbName then dbName}
+								<li><code class="code flex-auto">Current Database: {dbName}</code></li>
+							{/await}
 						</ul>
 					</td>
 				</tr>

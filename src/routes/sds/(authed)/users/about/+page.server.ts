@@ -22,7 +22,7 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = await pool.connect(async (connection) => {
+	const dbResult = pool.connect(async (connection) => {
 		const versionQuery = connection.oneFirst(
 			sql.type(z.object({ split_part: z.string() }))`SELECT split_part(version(),' on ',1)`
 		);

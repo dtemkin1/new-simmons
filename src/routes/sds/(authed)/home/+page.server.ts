@@ -28,7 +28,7 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = await pool.connect(async (connection) => {
+	const dbResult = pool.connect(async (connection) => {
 		const residentsQuery = connection.one(sql.typeAlias('resident')`
 	SELECT username,lastname,firstname,title,year,type,quote,favorite_category,
 		   favorite_value,homepage,home_city,home_state,home_country
