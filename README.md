@@ -1,4 +1,4 @@
-![Simmons Hall Logo](https://simmons.mit.edu/img/logo.png)
+![Simmons Hall Logo](http://simmons.mit.edu/img/logo.png)
 
 # Simmons 2.0
 
