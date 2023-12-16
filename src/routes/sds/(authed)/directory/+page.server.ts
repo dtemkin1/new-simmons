@@ -43,18 +43,12 @@ export const load: PageServerLoad = async (event) => {
 			sql.typeAlias('gra')`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
 		);
 
-		const [years, lounges, gras] = await Promise.all([
-			await yearQuery,
-			await loungeQuery,
-			await graQuery
-		]);
-
 		return {
-			years: years,
-			lounges: lounges,
-			gras: gras
+			years: yearQuery,
+			lounges: loungeQuery,
+			gras: graQuery
 		};
 	});
 
-	return dbResult;
+	return await dbResult;
 };

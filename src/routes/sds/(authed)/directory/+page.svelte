@@ -1,47 +1,41 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
-
-	let firstname = '';
-	let lastname = '';
-	let title = '';
-	let username = '';
-	let room = '';
-	let year = '';
-	let lounge = '';
-	let gra = '';
+	import { base } from '$app/paths';
 
 	export let data: PageServerData;
-
-	let submitSearch = () => {};
-	// TODO: make search function
 </script>
 
 <div class="flex items-center justify-center h-full">
-	<div class="card p-8 flex flex-col space-y-4 m-8">
+	<form
+		class="card p-8 flex flex-col space-y-4 m-8"
+		method="POST"
+		action="{base}/sds/directory/list"
+		id="directory-search"
+	>
 		<h2 class="h2 self-center">Simmons Hall Directory</h2>
 		<label class="label">
 			<span>Firstname</span>
-			<input class="input" title="firstname" type="search" placeholder="" bind:value={firstname} />
+			<input class="input" name="firstname" type="search" placeholder="" />
 		</label>
 		<label class="label">
 			<span>Lastname</span>
-			<input class="input" title="lastname" type="search" placeholder="" bind:value={lastname} />
+			<input class="input" name="lastname" type="search" placeholder="" />
 		</label>
 		<label class="label">
 			<span>Title</span>
-			<input class="input" title="title" type="search" placeholder="" bind:value={title} />
+			<input class="input" name="title" type="search" placeholder="" />
 		</label>
 		<label class="label">
 			<span>Username</span>
-			<input class="input" title="username" type="search" placeholder="" bind:value={username} />
+			<input class="input" name="username" type="search" placeholder="" />
 		</label>
 		<label class="label">
 			<span>Room</span>
-			<input class="input" title="room" type="search" placeholder="" bind:value={room} />
+			<input class="input" name="room" type="search" placeholder="" />
 		</label>
 		<label class="label">
 			<span>Year</span>
-			<select class="select" title="year" bind:value={year}>
+			<select class="select" name="year">
 				<option selected value="">[Any]</option>
 				{#await data.years then years}
 					{#each years as year}
@@ -53,7 +47,7 @@
 		</label>
 		<label class="label">
 			<span>Lounge</span>
-			<select class="select" title="lounge" bind:value={lounge}>
+			<select class="select" name="lounge">
 				<option selected value="">[Any]</option>
 				{#await data.lounges then lounges}
 					{#each lounges as lounge}
@@ -64,29 +58,19 @@
 		</label>
 		<label class="label">
 			<span>GRA</span>
-			<select class="select" title="gra" bind:value={gra}>
+			<select class="select" name="gra">
 				<option selected value="">[Any]</option>
 				{#await data.gras then gras}
 					{#each gras as gra}
 						<option value={gra}>{gra}</option>
 					{/each}
 				{/await}
-				<option value="grt2w">grt2w</option>
-				<option value="grt4e">grt4e</option>
-				<option value="grt4w">grt4w</option>
-				<option value="grt5c">grt5c</option>
-				<option value="grt6e">grt6e</option>
-				<option value="grt6w">grt6w</option>
-				<option value="grt8c">grt8c</option>
-				<option value="grt8w">grt8e</option>
-				<option value="grt8w">grt8w</option>
-				<option value="grt9e">grt9e</option>
 			</select>
 		</label>
-		<button type="button" class="btn variant-filled-success" on:click={submitSearch}>Search</button>
+		<button class="btn variant-filled-success">Search</button>
 		<p>
 			Enter data in any or all of the above fields. <code class="code">%</code> matches anything -
 			e.g. username <code class="code">dram%</code> matches <code class="code">dramage</code>.
 		</p>
-	</div>
+	</form>
 </div>
