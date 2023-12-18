@@ -1,6 +1,6 @@
 <!-- TODO: FOR WHEN MULTIPLE RESULTS APPEAR IN DIRECTORY -->
 <script lang="ts">
-	import type { ActionData } from './$types';
+	import type { ActionData, PageServerData } from './$types';
 	export let form: ActionData;
 
 	import { goto } from '$app/navigation';
@@ -8,6 +8,9 @@
 	import { Table } from '@skeletonlabs/skeleton';
 	import type { TableSource } from '@skeletonlabs/skeleton';
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
+	import DirectorySearch from '$lib/components/DirectorySearch.svelte';
+
+	export let data: PageServerData;
 
 	let formData = form?.data.concat();
 
@@ -33,15 +36,15 @@
 	}
 
 	const tableData = tableMapperValues(formData, [
-		'firstname',
 		'lastname',
+		'firstname',
 		'title',
 		'username',
 		'room',
 		'year'
 	]);
 	const table: TableSource = {
-		head: ['First Name', 'Last Name', 'Title', 'Username', 'Room', 'Year'],
+		head: ['Last Name', 'First Name', 'Title', 'Username', 'Room', 'Year'],
 		body: tableData,
 		meta: tableData
 	};
@@ -52,10 +55,11 @@
 	}
 </script>
 
-<div class="flex items-center justify-center h-full">
+<div class="flex items-center justify-center h-full flex-col">
 	{#if form == null || form.data == null || form.data.length == 0}
-		<p>No results found.</p>
+		<p class="p-4 px-8 m-4 mb-0">No results found.</p>
 	{:else}
-		<Table interactive={true} source={table} on:selected={onTableClick} />
+		<Table class="p-4 px-8 m-4 mb-0" interactive={true} source={table} on:selected={onTableClick} />
 	{/if}
+	<DirectorySearch {data} />
 </div>

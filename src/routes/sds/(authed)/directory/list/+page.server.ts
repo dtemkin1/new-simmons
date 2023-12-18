@@ -1,4 +1,4 @@
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 import { pool } from '$lib/db';
 import { createSqlTag, sql } from 'slonik';
@@ -19,6 +19,16 @@ const sqlTagged = createSqlTag({
 			year: z.number(),
 			lounge: z.string().nullable(),
 			gra: z.string().nullable()
+		}),
+		year: z.object({
+			year: z.number()
+		}),
+		lounge: z.object({
+			lounge: z.string(),
+			description: z.string()
+		}),
+		gra: z.object({
+			gra: z.string()
 		})
 	}
 });
@@ -102,3 +112,36 @@ export const actions = {
 		return dbResult;
 	}
 } satisfies Actions;
+
+export const load: PageServerLoad = async (event) => {
+	const dbResult = pool.connect(async (connection) => {
+		const session = await event.locals.getSession();
+		const directory =
+			(session !== null && session.user.groups.includes('DESK')) ||
+			(session !== null && session.user.groups.includes('RAC'))
+				? 'active_directory'
+				: 'public_active_directory';
+
+		const yearQuery = connection.manyFirst(
+			sqlTagged.typeAlias('year')`SELECT DISTINCT year FROM ${sqlTagged.identifier([
+				directory
+			])} WHERE year != 0 AND year IS NOT NULL ORDER BY year`
+		);
+		const loungeQuery = connection.many(
+			sqlTagged.typeAlias('lounge')`SELECT lounge,description FROM active_lounges ORDER BY lounge`
+		);
+		const graQuery = connection.manyFirst(
+			sqlTagged.typeAlias(
+				'gra'
+			)`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
+		);
+
+		return {
+			years: yearQuery,
+			lounges: loungeQuery,
+			gras: graQuery
+		};
+	});
+
+	return await dbResult;
+};
