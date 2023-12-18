@@ -3,14 +3,36 @@
 	import type { ActionData } from './$types';
 	export let form: ActionData;
 
+	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 	import { Table } from '@skeletonlabs/skeleton';
 	import type { TableSource } from '@skeletonlabs/skeleton';
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
 
-	const formData = form?.data;
-	console.log(formData);
+	let formData = form?.data.concat();
 
-	const tableData = tableMapperValues(Object.assign([], formData), [
+	formData = formData?.map((item) => {
+		let { firstname, lastname, title, username, room, year, lounge, gra } = item;
+		if (title === 'null' || title === null) {
+			title = '';
+		}
+		return {
+			firstname,
+			lastname,
+			title,
+			username,
+			room,
+			year,
+			lounge,
+			gra
+		};
+	});
+
+	if (formData == undefined) {
+		formData = [];
+	}
+
+	const tableData = tableMapperValues(formData, [
 		'firstname',
 		'lastname',
 		'title',
@@ -20,14 +42,20 @@
 	]);
 	const table: TableSource = {
 		head: ['First Name', 'Last Name', 'Title', 'Username', 'Room', 'Year'],
-		body: tableData
+		body: tableData,
+		meta: tableData
 	};
+
+	function onTableClick(row: CustomEvent<string[]>) {
+		const username = row.detail[3];
+		goto(`${base}/sds/directory/entry/${username}`);
+	}
 </script>
 
-<div class="flex flex-col items-center justify-center h-full">
+<div class="flex items-center justify-center h-full">
 	{#if form == null || form.data == null || form.data.length == 0}
 		<p>No results found.</p>
 	{:else}
-		<Table source={table} />
+		<Table interactive={true} source={table} on:selected={onTableClick} />
 	{/if}
 </div>

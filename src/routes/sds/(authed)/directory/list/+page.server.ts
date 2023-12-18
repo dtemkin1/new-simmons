@@ -25,7 +25,6 @@ const sqlTagged = createSqlTag({
 
 export const actions = {
 	default: async (event) => {
-		// TODO query database for user info
 		const data = await event.request.formData();
 
 		const firstname = (data.get('firstname') as string) || '';
