@@ -5,7 +5,7 @@
 	export let data: PageServerData;
 </script>
 
-<div class="flex flex-col w-full h-full space-y-4 items-center justify-center">
+<div class="flex flex-col w-full h-full p-4 text-center items-center justify-center">
 	{#await data}
 		<ProgressRadial />
 	{:then data}
