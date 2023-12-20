@@ -7,21 +7,16 @@
 <div class="flex items-center justify-center h-full">
 	<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-8">
 		{#if $page.data.session}
-			<!-- {#if $page.data.session.user?.image}
-			<span style="background-image: url('{$page.data.session.user.image}')" class="avatar" />
-		{/if} -->
-			<span class="signedInText">
-				<p>
-					You are currently logged in as <span class="font-bold"
-						>{$page.data.session.user?.id ?? 'Guest'}</span
-					>.
-				</p>
-			</span>
+			<p class="text-center">
+				You are currently logged in as <span class="font-bold"
+					>{$page.data.session.user?.id ?? 'Guest'}</span
+				>.
+			</p>
 			<button type="button" class="btn variant-filled-error" on:click={() => signOut()}
 				>Sign out</button
 			>
 		{:else}
-			<h2 class="h2">Sign in to Simmons DB</h2>
+			<h2 class="h2 text-center">Sign in to Simmons DB</h2>
 			<label class="label">
 				<span>Username</span>
 				<input class="input" title="username" type="text" />
