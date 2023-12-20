@@ -27,10 +27,11 @@
 			</label>
 			<button
 				type="button"
-				class="btn variant-filled"
+				class="btn variant-filled pointer-events-none opacity-50"
 				on:click={() => signIn('credentials', { callbackUrl: `${base}/sds/home` })}
-				>Sign In with Credentials</button
+				>Sign In with Credentials (In Progress)</button
 			>
+			<!-- TODO: IMPLEMENT LOGGING IN WITH CREDENTIALS -->
 			<hr />
 			<button
 				type="button"

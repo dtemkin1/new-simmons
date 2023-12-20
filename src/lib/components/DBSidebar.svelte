@@ -16,9 +16,8 @@
 
 	let userLinks: typeof sdsLinks = [];
 	for (const linkGroup of sdsLinks) {
-		const allLinks = linkGroup.links.filter(
-			(link) =>
-				groups?.some((group) => link.groupNeeded.includes(group)) && link.badge !== 'Incomplete'
+		const allLinks = linkGroup.links.filter((link) =>
+			groups?.some((group) => link.groupNeeded.includes(group))
 		);
 		if (allLinks.length > 0) {
 			userLinks.push({
@@ -31,7 +30,6 @@
 		}
 	}
 
-	$: linkActive = (href: string) => (href === $page.url.pathname ? '!bg-primary-active-token' : '');
 	$: activeGroup = userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] };
 </script>
 
@@ -82,10 +80,16 @@
 									href={link.href}
 									on:keypress
 									on:click={onClickAnchor}
-									class={linkActive(link.href)}
+									class:!bg-primary-active-token={link.href === $page.url.pathname}
+									class:pointer-events-none={link.badge === 'Incomplete'}
+									class:opacity-50={link.badge === 'Incomplete'}
 								>
 									<span class="flex-auto">{@html link.label}</span>
-									{#if link.badge}<span class="badge variant-filled-secondary">{link.badge}</span
+									{#if link.badge}<span
+											class="badge variant-filled-secondary"
+											class:variant-filled-error={link.badge == 'Incomplete'}
+											class:variant-filled-warning={link.badge == 'Work in Progress'}
+											>{link.badge}</span
 										>{/if}
 								</a>
 							</li>

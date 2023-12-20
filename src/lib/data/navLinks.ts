@@ -13,7 +13,27 @@ import { Mails } from 'lucide-svelte';
 import { Bed } from 'lucide-svelte';
 import { Users } from 'lucide-svelte';
 
-export const headerLinks = [
+interface HeaderLinks {
+	name: string;
+	url: `${typeof base}/${string}`;
+}
+
+interface SDSLinks {
+	href: `${typeof dbBase}/${string}`;
+	label: string;
+	badge: 'Work in Progress' | 'Incomplete' | string;
+	groupNeeded: string[];
+}
+
+interface SDSGroups {
+	id: string;
+	name: string;
+	value: number;
+	icon: typeof Home;
+	links: SDSLinks[];
+}
+
+export const headerLinks: HeaderLinks[] = [
 	{
 		name: 'About',
 		url: `${base}/about`
@@ -32,7 +52,7 @@ export const headerLinks = [
 	}
 ];
 
-export const sdsLinks = [
+export const sdsLinks: SDSGroups[] = [
 	{
 		id: 'home',
 		name: 'Simmons DB',
@@ -65,7 +85,7 @@ export const sdsLinks = [
 				groupNeeded: ['USER']
 			},
 			{
-				href: `$${dbBase}/directory/medlinks`,
+				href: `${dbBase}/directory/medlinks`,
 				label: 'Medlinks',
 				badge: 'Incomplete',
 				groupNeeded: ['USER']
