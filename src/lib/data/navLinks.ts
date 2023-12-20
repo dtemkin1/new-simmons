@@ -59,62 +59,62 @@ export const sdsLinks: SDSGroups[] = [
 		value: 1,
 		icon: Home,
 		links: [
-			{ href: `${dbBase}/home`, label: 'Home', badge: '', groupNeeded: ['USER'] },
+			{ href: `${dbBase}/home`, label: 'Home', badge: '', groupNeeded: ['USERS'] },
 			{
 				href: `${dbBase}/directory`,
 				label: 'Directory',
 				badge: 'Work in Progress',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/directory/calendar`,
 				label: 'Events Calendar',
 				badge: '',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/directory/reservations`,
 				label: 'Reservations Calendar',
 				badge: '',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/directory/officers`,
 				label: 'Student Officers',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/directory/medlinks`,
 				label: 'Medlinks',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/directory/grt`,
 				label: 'GRAs',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/groups/view_mailing_lists`,
 				label: 'Mailing Lists',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/polls/polls`,
 				label: 'Votes and Polls',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/lotteries`,
 				label: 'Lotteries',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
-			{ href: `${dbBase}/users/about`, label: 'About the DB', badge: '', groupNeeded: ['USER'] }
+			{ href: `${dbBase}/users/about`, label: 'About the DB', badge: '', groupNeeded: ['USERS'] }
 		]
 	},
 	{
@@ -127,31 +127,31 @@ export const sdsLinks: SDSGroups[] = [
 				href: `${dbBase}/loungeexpense`,
 				label: 'Lounge Expenses',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/loungeexpense/proposals`,
 				label: 'Lounge Event Proposals',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/govtracker/fin-ledger`,
 				label: 'House Finances',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/govtracker`,
 				label: 'House Meeings',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/govtracker/submitproposal`,
 				label: 'Submit a Proposal',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/govtracker/downloadagenda`,
@@ -171,25 +171,25 @@ export const sdsLinks: SDSGroups[] = [
 				href: `${dbBase}/directory/update`,
 				label: 'My Profile',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/users/guestlist`,
 				label: 'Guest List',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/users/loungesignup`,
 				label: 'Guest List',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/users/password`,
 				label: 'Login Passowrd',
 				badge: 'Incomplete',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			}
 		]
 	},
@@ -203,7 +203,7 @@ export const sdsLinks: SDSGroups[] = [
 				href: `${dbBase}/packages/mypackages`,
 				label: 'My Packages',
 				badge: '',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/packages/checkin`,
@@ -273,9 +273,9 @@ export const sdsLinks: SDSGroups[] = [
 				href: 'http://www.librarything.com/catalog/simmons_hall',
 				label: 'Catalog',
 				badge: '',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
-			{ href: '/lib_guide.pdf', label: "User's Guide (PDF)", badge: '', groupNeeded: ['USER'] }
+			{ href: '/lib_guide.pdf', label: "User's Guide (PDF)", badge: '', groupNeeded: ['USERS'] }
 		]
 	},
 	{
@@ -332,7 +332,7 @@ export const sdsLinks: SDSGroups[] = [
 				href: `${dbBase}/desk/calendar`,
 				label: 'Desk Shift Calendar',
 				badge: '',
-				groupNeeded: ['USER']
+				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/desk/full_directory`,

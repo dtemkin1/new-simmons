@@ -93,8 +93,7 @@ const authHandle = SvelteKitAuth({
 		async session({ session, token }) {
 			if (session.user) {
 				session.user.id = (token.user as OIDCProfile).id;
-				const dbGroups = await getGroups(session.user.id);
-				session.user.groups = ['USER'].concat(dbGroups);
+				session.user.groups = await getGroups(session.user.id);
 			}
 			return session;
 		}
