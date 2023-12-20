@@ -3,18 +3,23 @@
 <script lang="ts">
 	interface UserInfo {
 		username: string;
+		room: string | null;
+		email: string;
 		lastname: string;
 		firstname: string;
-		title: string | null;
-		year: number | null;
+		title: string;
+		phone: string;
+		year: number;
 		type: string;
 		quote: string;
 		favorite_category: string;
-		favorite_value: string;
-		homepage: string;
-		home_city: string;
-		home_state: string;
-		home_country: string;
+		favorite_value: string | null;
+		cellphone: string | null;
+		homepage: string | null;
+		home_city: string | null;
+		home_state: string | null;
+		home_country: string | null;
+		gra: string | null;
 	}
 
 	import SvelteMarkdown from 'svelte-markdown';
@@ -26,33 +31,60 @@
 	function getUserInfo(user: UserInfo) {
 		let username = user.username;
 		let name = [user.title, user.firstname, user.lastname].join(' ');
+		let email = user.email;
 		let tags = [];
+		let favorites: string[] = [];
 
+		if (user.room) {
+			tags.push(['Room', user.room]);
+		}
+		if (user.gra) {
+			tags.push(['GRA Section', user.gra]);
+		}
 		if (user.year) {
 			tags.push(['Year', user.year]);
-		}
-		if (user.home_city) {
-			tags.push(['Hometown', [user.home_city, user.home_state, user.home_country].join(' ')]);
 		}
 		if (user.homepage) {
 			tags.push(['URL', user.homepage]);
 		}
-		if (user.favorite_category && user.favorite_value) {
-			tags.push([`Favorite ${user.favorite_category}`, user.favorite_value]);
+		if (user.cellphone) {
+			tags.push(['Cell', user.cellphone]);
 		}
-		return { username: username, name: name, tags: tags, quote: `${user.quote}`, type: user.type };
+		if (user.home_city) {
+			tags.push(['Hometown', [user.home_city, user.home_state, user.home_country].join(' ')]);
+		}
+
+		if (user.favorite_category && user.favorite_value) {
+			favorites = [user.favorite_category, user.favorite_value];
+		}
+		return {
+			username: username,
+			email: email,
+			name: name,
+			tags: tags,
+			quote: `${user.quote}`,
+			type: user.type,
+			favorite: favorites
+		};
 	}
 
 	let userInfoGenerated = getUserInfo(userInfo);
 </script>
 
-<div class="card">
+<div class="card p-4 px-8 m-4 mb-0">
 	<header class="card-header text-center">
-		<a href={`${base}/sds/directory/entry/${userInfoGenerated.username}`} class="anchor"
-			>{userInfoGenerated.name}</a
-		>
-		{#if userInfoGenerated.type !== ''}
-			<br /><span class="text-sm text-surface-500-400-token">{userInfoGenerated.type}</span>
+		<p>
+			<em class="italic">{userInfoGenerated.name}</em><br />
+			<a href={`mailto:${userInfoGenerated.email}`} class="anchor">{userInfoGenerated.email}</a>
+			{#if userInfoGenerated.type !== ''}
+				<br /><span class="text-sm text-surface-500-400-token">{userInfoGenerated.type}</span>
+			{/if}
+		</p>
+		{#if userInfoGenerated.favorite}
+			<br />
+			<p>
+				"My favorite {userInfoGenerated.favorite[0]} is {userInfoGenerated.favorite[1]}"
+			</p>
 		{/if}
 	</header>
 	<section class="p-4 flex items-center justify-center">
@@ -65,7 +97,13 @@
 							<a class="anchor" href={`${tag[1].includes('://') ? '' : 'http://'}${tag[1]}`}
 								>{tag[1]}</a
 							>
-						{:else}{tag[1]}
+						{:else if tag[0] == 'GRA Section' && typeof tag[1] == 'string'}
+							<form action={`${base}/sds/directory/list`} method="POST">
+								<input type="hidden" name="gra" value={tag[1]} />
+								<button class="anchor" type="submit">{tag[1]}</button>
+							</form>
+						{:else}
+							{tag[1]}
 						{/if}</span
 					>
 				</div>

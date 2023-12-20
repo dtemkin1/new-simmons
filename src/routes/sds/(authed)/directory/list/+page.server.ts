@@ -15,8 +15,8 @@ const sqlTagged = createSqlTag({
 			lastname: z.string(),
 			title: z.string().nullable(),
 			username: z.string(),
-			room: z.string(),
-			year: z.number(),
+			room: z.string().nullable(),
+			year: z.number().pipe(z.coerce.string()).nullable(),
 			lounge: z.string().nullable(),
 			gra: z.string().nullable()
 		}),

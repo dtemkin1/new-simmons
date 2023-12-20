@@ -42,7 +42,9 @@ export const load: PageServerLoad = async () => {
 
 		if (randomResident.type !== 'U') {
 			const typeQuery = connection.oneFirst(
-				sql.unsafe`SELECT description FROM user_types WHERE type=${randomResident.type}`
+				sql.type(
+					z.object({ description: z.string() })
+				)`SELECT description FROM user_types WHERE type=${randomResident.type}`
 			);
 			randomResident.type = await typeQuery;
 		} else {
