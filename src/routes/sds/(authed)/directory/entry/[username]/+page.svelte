@@ -12,5 +12,6 @@
 	{:else}
 		<DirectoryEntry userInfo={data.user} />
 	{/if}
+	<!-- TODO: ADD RAC COMMANDS -->
 	<DirectorySearch {data} />
 </div>

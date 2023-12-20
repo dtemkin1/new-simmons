@@ -71,7 +71,7 @@
 	let userInfoGenerated = getUserInfo(userInfo);
 </script>
 
-<div class="card p-4 px-8 m-4 mb-0">
+<div class="card m-4 mb-0">
 	<header class="card-header text-center">
 		<p>
 			<em class="italic">{userInfoGenerated.name}</em><br />
