@@ -55,23 +55,21 @@
 		{/if}
 	</header>
 	<section class="p-4 flex items-center justify-center">
-		<table class="table-auto self-center border-separate border-spacing-x-1">
-			<tbody>
-				{#each userInfoGenerated.tags as tag}
-					<tr>
-						<td class="text-right">{tag[0]}:</td>
-						<td class="text-left"
-							>{#if tag[0] == 'URL' && typeof tag[1] == 'string'}
-								<a class="anchor" href={`${tag[1].includes('://') ? '' : 'http://'}${tag[1]}`}
-									>{tag[1]}</a
-								>
-							{:else}{tag[1]}
-							{/if}</td
-						>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		<div class="flex flex-col self-center items-center justify-center space-y-1">
+			{#each userInfoGenerated.tags as tag}
+				<div class="flex flex-row space-x-1 justify-center items-center flex-wrap">
+					<span class="text-right">{tag[0]}:</span>
+					<span class="text-left"
+						>{#if tag[0] == 'URL' && typeof tag[1] == 'string'}
+							<a class="anchor" href={`${tag[1].includes('://') ? '' : 'http://'}${tag[1]}`}
+								>{tag[1]}</a
+							>
+						{:else}{tag[1]}
+						{/if}</span
+					>
+				</div>
+			{/each}
+		</div>
 	</section>
 
 	{#if userInfo.quote}
