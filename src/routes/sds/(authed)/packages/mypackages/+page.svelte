@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { PageServerData } from './$types';
+	import type { PageData } from './$types';
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 
-	export let data: PageServerData;
+	export let data: PageData;
 </script>
 
 <div class="flex flex-col w-full h-full p-4 text-center items-center justify-center">

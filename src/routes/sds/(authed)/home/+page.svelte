@@ -3,8 +3,8 @@
 	import { base } from '$app/paths';
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 
-	import type { PageServerData } from './$types';
-	export let data: PageServerData;
+	import type { PageData } from './$types';
+	export let data: PageData;
 </script>
 
 <div class="flex flex-col items-center p-4">

@@ -6,7 +6,6 @@
 	import HeaderDrawer from '$lib/components/HeaderDrawer.svelte';
 	import DBSidebar from '$lib/components/DBSidebar.svelte';
 
-	import type { LayoutServerLoad } from './$types';
 	import { page } from '$app/stores';
 
 	// Floating UI for Popups
@@ -43,8 +42,12 @@
 </script>
 
 <svelte:head>
-	<title>{$page.url.pathname.includes('/sds') ? 'Simmons DB' : 'Simmons Hall'}</title>
-	<meta name="description" content="" />
+	<title
+		>{$page.url.pathname.includes('/sds') ? 'Simmons DB' : 'Simmons Hall'}{$page.data.title
+			? ` | ${$page.data.title}`
+			: ''}</title
+	>
+	<meta name="description" content={$page.data.description || ''} />
 </svelte:head>
 
 <!-- Drawer -->

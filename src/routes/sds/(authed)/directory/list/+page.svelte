@@ -1,6 +1,6 @@
 <!-- TODO: FOR WHEN MULTIPLE RESULTS APPEAR IN DIRECTORY -->
 <script lang="ts">
-	import type { ActionData, PageServerData } from './$types';
+	import type { ActionData, PageData } from './$types';
 	export let form: ActionData;
 
 	import { goto } from '$app/navigation';
@@ -10,7 +10,7 @@
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
 	import DirectorySearch from '$lib/components/DirectorySearch.svelte';
 
-	export let data: PageServerData;
+	export let data: PageData;
 
 	let formData = form?.data.concat();
 
