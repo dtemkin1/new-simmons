@@ -78,7 +78,7 @@
 
 <div class="flex items-center justify-center h-full flex-col">
 	{#if form == null || form.data == null || form.data.length == 0}
-		<p class="p-4 px-8 m-4 mb-0">No results found.</p>
+		<p class="p-4 px-8 m-4 mb-0">Simmons Directory is very unhappy. No results found.</p>
 	{:else}
 		<Table
 			class="p-4 px-8 m-4 mb-0 table-compact"
