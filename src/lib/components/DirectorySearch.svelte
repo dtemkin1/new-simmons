@@ -9,7 +9,7 @@
 </script>
 
 <form
-	class="card p-8 flex flex-col space-y-4 m-8"
+	class="card p-8 flex flex-col space-y-4 m-4"
 	method="POST"
 	action="{base}/sds/directory/list"
 	id="directory-search"

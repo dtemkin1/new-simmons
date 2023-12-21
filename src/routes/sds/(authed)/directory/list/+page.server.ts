@@ -3,6 +3,8 @@ import type { Actions, PageServerLoad } from './$types';
 import { pool } from '$lib/db';
 import { createSqlTag, sql } from 'slonik';
 import { z } from 'zod';
+import { redirect } from '@sveltejs/kit';
+import { base } from '$app/paths';
 
 const sqlTagged = createSqlTag({
 	typeAliases: {
@@ -106,6 +108,10 @@ export const actions = {
 			`;
 
 			const result = await connection.any(query);
+
+			if (result.length === 1) {
+				throw redirect(303, `${base}/sds/directory/entry/${result[0].username}`);
+			}
 			return { data: result };
 		});
 

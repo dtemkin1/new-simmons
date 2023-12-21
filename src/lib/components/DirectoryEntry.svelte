@@ -12,7 +12,7 @@
 		year: number;
 		type: string;
 		quote: string;
-		favorite_category: string;
+		favorite_category: string | null;
 		favorite_value: string | null;
 		cellphone: string | null;
 		homepage: string | null;
@@ -80,7 +80,7 @@
 				<br /><span class="text-sm text-surface-500-400-token">{userInfoGenerated.type}</span>
 			{/if}
 		</p>
-		{#if userInfoGenerated.favorite}
+		{#if userInfoGenerated.favorite.length > 0}
 			<br />
 			<p>
 				"My favorite {userInfoGenerated.favorite[0]} is {userInfoGenerated.favorite[1]}"

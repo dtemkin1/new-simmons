@@ -6,6 +6,6 @@
 	export let data: PageData;
 </script>
 
-<div class="flex items-center justify-center h-full">
+<div class="flex items-center justify-center h-full pt-2">
 	<DirectorySearch {data} />
 </div>
