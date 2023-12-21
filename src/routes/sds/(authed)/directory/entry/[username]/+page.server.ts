@@ -62,21 +62,14 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		redirect(302, `${base}/sds/directory`);
 	}
 
+	const session = await locals.getSession();
+	const directory =
+		(session !== null && session.user.groups.includes('DESK')) ||
+		(session !== null && session.user.groups.includes('RAC'))
+			? 'active_directory'
+			: 'public_active_directory';
+
 	const dbResult = pool.connect(async (connection) => {
-		const session = await locals.getSession();
-		const directory =
-			(session !== null && session.user.groups.includes('DESK')) ||
-			(session !== null && session.user.groups.includes('RAC'))
-				? 'active_directory'
-				: 'public_active_directory';
-
-		const query = sqlTagged.typeAlias('user')`
-		SELECT username,room,email,lastname,firstname,title,phone,year,type,
-		quote,favorite_category,favorite_value,cellphone,
-		homepage,home_city,home_state,home_country
-		FROM ${sql.identifier([directory])}
-		WHERE username=${params.username}`;
-
 		const yearQuery = connection.manyFirst(
 			sqlTagged.typeAlias('year')`SELECT DISTINCT year FROM ${sqlTagged.identifier([
 				directory
@@ -91,34 +84,48 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			)`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
 		);
 
-		const user = await connection.maybeOne(query);
+		const userResult = connection.transaction(async (connection1) => {
+			const userQuery = sqlTagged.typeAlias('user')`
+			SELECT username,room,email,lastname,firstname,title,phone,year,type,
+			quote,favorite_category,favorite_value,cellphone,
+			homepage,home_city,home_state,home_country
+			FROM ${sql.identifier([directory])}
+			WHERE username=${params.username}`;
 
-		if (user != null && user.type !== 'U') {
-			const typeQuery = connection.oneFirst(
-				sql.type(
-					z.object({ description: z.string() })
-				)`SELECT description FROM user_types WHERE type=${user.type}`
-			);
-			user.type = await typeQuery;
-		} else if (user != null) {
-			user.type = '';
-		}
+			const user = await connection1.maybeOne(userQuery);
+			let typeGen = '';
+			let graGen = '';
 
-		if (user != null && user.room !== '') {
-			const roomQuery = connection.one(
-				sqlTagged.typeAlias('room')`SELECT * FROM rooms WHERE room=${user.room}`
-			);
-			user.gra = (await roomQuery).gra;
-		} else if (user != null) {
-			user.gra = '';
-		}
+			if (user != null && user.type !== 'U') {
+				typeGen = await connection1.oneFirst(
+					sql.type(
+						z.object({ description: z.string() })
+					)`SELECT description FROM user_types WHERE type=${user.type}`
+				);
+			} else if (user != null) {
+				typeGen = '';
+			}
 
-		return {
-			user: user,
-			years: yearQuery,
-			lounges: loungeQuery,
-			gras: graQuery
-		};
+			if (user != null && user.room !== '') {
+				graGen = (
+					await connection1.one(
+						sqlTagged.typeAlias('room')`SELECT * FROM rooms WHERE room=${user.room}`
+					)
+				).gra;
+			} else if (user != null) {
+				graGen = '';
+			}
+
+			if (user != null) {
+				user.type = typeGen;
+				user.gra = graGen;
+				return user;
+			} else {
+				return null;
+			}
+		});
+
+		return { user: userResult, years: yearQuery, lounges: loungeQuery, gras: graQuery };
 	});
 
 	return await dbResult;

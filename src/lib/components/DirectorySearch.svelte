@@ -5,7 +5,7 @@
 		years: readonly number[];
 		lounges: readonly { lounge: string; description: string }[];
 		gras: readonly string[];
-	};
+	} = { years: [], lounges: [], gras: [] };
 </script>
 
 <form

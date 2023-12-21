@@ -20,7 +20,7 @@
 		</div>
 		<div>
 			{#await data.randomResident}
-				<div class="card p-4"><ProgressRadial /></div>
+				<div class="p-4"><ProgressRadial /></div>
 			{:then randomResident}
 				<FifteenSeconds userInfo={randomResident} />
 			{/await}

@@ -11,7 +11,7 @@
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 
 	async function generateOfficerData(officerPromiseData: typeof data.officers) {
-		const officerData = (await data.officers).map((item) => {
+		const officerData = (await officerPromiseData).map((item) => {
 			let { position_text, username, name, room, phone, email } = item;
 			if (position_text == null) {
 				position_text = '';

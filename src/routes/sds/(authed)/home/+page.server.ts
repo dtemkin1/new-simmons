@@ -29,30 +29,33 @@ const sql = createSqlTag({
 
 export const load: PageServerLoad = async () => {
 	const dbResult = pool.connect(async (connection) => {
-		const residentsQuery = connection.one(sql.typeAlias('resident')`
+		return connection.transaction(async (connection1) => {
+			const residentsQuery = connection1.one(sql.typeAlias('resident')`
 	SELECT username,lastname,firstname,title,year,type,quote,favorite_category,
 		   favorite_value,homepage,home_city,home_state,home_country
 	FROM public_active_directory
-	WHERE trim(trailing ' \n\t' from quote) != '' OR
-		  (favorite_category != '' AND favorite_value != '')
+	WHERE (trim(trailing ' \n\t' from quote) != '' OR
+		  (favorite_category != '' AND favorite_value != ''))
 	ORDER BY random()
 	LIMIT 1`);
 
-		const randomResident = await residentsQuery;
+			const randomResident = await residentsQuery;
 
-		if (randomResident.type !== 'U') {
-			const typeQuery = connection.oneFirst(
-				sql.type(
-					z.object({ description: z.string() })
-				)`SELECT description FROM user_types WHERE type=${randomResident.type}`
-			);
-			randomResident.type = await typeQuery;
-		} else {
-			randomResident.type = '';
-		}
-
-		return { randomResident: randomResident };
+			connection1.transaction(async (connection2) => {
+				if (randomResident.type !== 'U') {
+					const typeQuery = connection2.oneFirst(
+						sql.type(
+							z.object({ description: z.string() })
+						)`SELECT description FROM user_types WHERE type=${randomResident.type}`
+					);
+					randomResident.type = await typeQuery;
+				} else {
+					randomResident.type = '';
+				}
+			});
+			return randomResident;
+		});
 	});
 
-	return dbResult;
+	return { randomResident: dbResult };
 };
