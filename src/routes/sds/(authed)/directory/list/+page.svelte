@@ -64,14 +64,15 @@
 		'room',
 		'year'
 	]);
+	const metaData = tableMapperValues(formData, ['username']);
 	const table: TableSource = {
 		head: ['Last Name', 'First Name', 'Title', 'Username', 'Room', 'Year'],
 		body: tableData,
-		meta: tableData
+		meta: metaData
 	};
 
 	function onTableClick(row: CustomEvent<string[]>) {
-		const username = row.detail[3];
+		const username = row.detail[0];
 		goto(`${base}/sds/directory/entry/${username}`);
 	}
 </script>
