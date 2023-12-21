@@ -5,7 +5,7 @@ import { base } from '$app/paths';
 export const load: LayoutLoad = async ({ parent }) => {
 	const { session } = await parent();
 	if (!session?.user) {
-		throw redirect(302, `${base}/sds`);
+		redirect(302, `${base}/sds`);
 	}
 	return {};
 };

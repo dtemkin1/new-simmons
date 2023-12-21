@@ -39,12 +39,13 @@ export const load: PageServerLoad = async () => {
            GROUP BY bin) AS info`
 		);
 
-		const [packages] = await Promise.all([await packagesQuery]);
+		const packages = packagesQuery;
 
 		return {
-			num_packages: packages.num_packages,
-			num_perishable: packages.num_perishable,
-			earliest_sure: packages.earliest_sure
+			packages: packages
+			// num_packages: packages.num_packages,
+			// num_perishable: packages.num_perishable,
+			// earliest_sure: packages.earliest_sure
 		};
 	});
 

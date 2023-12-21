@@ -34,5 +34,7 @@
 		{/await}
 	{/if}
 	<hr class="w-11/12" />
-	<DirectorySearch {data} />
+	{#await Promise.all([data.years, data.lounges, data.gras]) then [years, lounges, gras]}
+		<DirectorySearch data={{ years: years, lounges: lounges, gras: gras }} />
+	{/await}
 </div>

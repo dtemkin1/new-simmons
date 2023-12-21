@@ -14,31 +14,10 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	// Initalize Drawer and Modal
-	import {
-		Drawer,
-		getDrawerStore,
-		initializeStores,
-		Modal,
-		getModalStore,
-		type ModalSettings
-	} from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
+	import { Drawer, getDrawerStore, initializeStores, Modal } from '@skeletonlabs/skeleton';
 
 	initializeStores();
 	const drawerStore = getDrawerStore();
-	const modalStore = getModalStore();
-
-	const betaModal: ModalSettings = {
-		type: 'alert',
-		// Data
-		title: 'Simmons Website Beta',
-		body: 'Hello! Welcome to the beta Simmons website. Pleae report any bugs or sent any feature requests to <a class="anchor" href="mailto:dtemkin@mit.edu">Simmons Tech</a>. Happy exploring!',
-		buttonTextCancel: 'Close'
-	};
-
-	onMount(() => {
-		modalStore.trigger(betaModal);
-	});
 </script>
 
 <svelte:head>

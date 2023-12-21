@@ -50,16 +50,14 @@ export const load: PageServerLoad = async () => {
 			)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='FINANCIAL-ADMINS' ORDER BY lastname ASC`
 		);
 
-		const [version, dbName, admins, mods, housecommLeadership, financialAdmins] = await Promise.all(
-			[
-				await versionQuery,
-				await dbNameQuery,
-				await adminsQuery,
-				await modsQuery,
-				await housecommLeadershipQuery,
-				await financialAdminsQuery
-			]
-		);
+		const [version, dbName, admins, mods, housecommLeadership, financialAdmins] = [
+			versionQuery,
+			dbNameQuery,
+			adminsQuery,
+			modsQuery,
+			housecommLeadershipQuery,
+			financialAdminsQuery
+		];
 
 		return {
 			dbName: dbName,

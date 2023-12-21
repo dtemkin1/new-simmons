@@ -59,7 +59,7 @@ const sqlTagged = createSqlTag({
 // TODO: MAKE THIS PAGE TO LOAD USER DATA
 export const load: PageServerLoad = async ({ params, locals }) => {
 	if (params.username === '') {
-		throw redirect(302, `${base}/sds/directory`);
+		redirect(302, `${base}/sds/directory`);
 	}
 
 	const dbResult = pool.connect(async (connection) => {

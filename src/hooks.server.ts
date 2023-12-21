@@ -83,6 +83,7 @@ const authHandle = SvelteKitAuth({
 	redirectProxyUrl: AUTH_REDIRECT_PROXY_URL,
 	providers: [petrockProvider],
 	secret: AUTH_SECRET,
+	session: { strategy: 'jwt' },
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {
@@ -91,7 +92,7 @@ const authHandle = SvelteKitAuth({
 			return token;
 		},
 		async session({ session, token }) {
-			if (session.user) {
+			if (session.user && token) {
 				session.user.id = (token.user as OIDCProfile).id;
 				session.user.groups = await getGroups(session.user.id);
 			}

@@ -6,17 +6,16 @@
 </script>
 
 <div class="flex flex-col w-full h-full p-4 text-center items-center justify-center">
-	{#await data}
+	{#await data.packages}
 		<ProgressRadial />
-	{:then data}
-		{#if data.num_packages > 0}
+	{:then packageData}
+		{#if packageData.num_packages > 0}
 			<p>
-				You have {data.num_packages} package{data.num_packages > 1 ? 's' : ''} waiting at desk, {data.num_packages >
-				1
-					? 'some of which have'
-					: 'which has'} been there since at least {data.earliest_sure}. {#if data.num_perishable > 0}
-					{data.num_perishable}
-					of them {data.num_perishable > 1 ? 'are' : 'is'} perishable.
+				You have {packageData.num_packages} package{packageData.num_packages > 1 ? 's' : ''} waiting
+				at desk, {packageData.num_packages > 1 ? 'some of which have' : 'which has'} been there since
+				at least {packageData.earliest_sure}. {#if packageData.num_perishable > 0}
+					{packageData.num_perishable}
+					of them {packageData.num_perishable > 1 ? 'are' : 'is'} perishable.
 				{/if}
 			</p>
 		{:else}

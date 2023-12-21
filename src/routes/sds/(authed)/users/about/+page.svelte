@@ -27,6 +27,9 @@
 				<ul class="list">
 					{#await data.admins}
 						<div class="placeholder" />
+						<div class="placeholder" />
+						<div class="placeholder" />
+						<div class="placeholder" />
 					{:then admins}
 						{#each admins as admin}
 							<li><span class="flex-auto">{`${admin.firstname} ${admin.lastname}`}</span></li>
@@ -93,12 +96,14 @@
 				<ul class="list">
 					<li><code class="code flex-auto">Svelte {svelteVersion}</code></li>
 					<li><code class="code flex-auto">SvelteKit {svelteKitVersion}</code></li>
-					{#await data.version then version}
-						<li><code class="code flex-auto">{version}</code></li>
-					{/await}
-					{#await data.dbName then dbName}
-						<li><code class="code flex-auto">Current Database: {dbName}</code></li>
-					{/await}
+					<li>
+						<code class="code flex-auto">{#await data.version then version}{version}{/await}</code>
+					</li>
+					<li>
+						<code class="code flex-auto"
+							>Current Database: {#await data.dbName then dbName}{dbName}{/await}</code
+						>
+					</li>
 				</ul>
 			</div>
 		</div>

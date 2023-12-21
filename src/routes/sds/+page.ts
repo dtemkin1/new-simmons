@@ -5,8 +5,8 @@ import { base } from '$app/paths';
 export const load: PageLoad = async ({ parent }) => {
 	const { session } = await parent();
 	if (!session?.user) {
-		throw redirect(302, `${base}/sds/login/certs/login`);
+		redirect(302, `${base}/sds/login/certs/login`);
 	} else {
-		throw redirect(302, `${base}/sds/home`);
+		redirect(302, `${base}/sds/home`);
 	}
 };
