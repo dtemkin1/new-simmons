@@ -4,7 +4,8 @@ import {
 	CLIENT_ID,
 	CLIENT_SECRET,
 	AUTH_SECRET,
-	AUTH_REDIRECT_PROXY_URL
+	AUTH_REDIRECT_PROXY_URL,
+	AUTH_TRUST_HOST
 } from '$env/static/private';
 
 import { pool } from '$lib/db';
@@ -84,6 +85,7 @@ const authHandle = SvelteKitAuth({
 	providers: [petrockProvider],
 	secret: AUTH_SECRET,
 	session: { strategy: 'jwt' },
+	trustHost: AUTH_TRUST_HOST == 'true',
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {
