@@ -34,25 +34,24 @@ export const load: PageServerLoad = async () => {
 	SELECT username,lastname,firstname,title,year,type,quote,favorite_category,
 		   favorite_value,homepage,home_city,home_state,home_country
 	FROM public_active_directory
-	WHERE (trim(trailing ' \n\t' from quote) != '' OR
-		  (favorite_category != '' AND favorite_value != ''))
+	WHERE trim(trailing ' \n\t' from quote) != '' OR
+		  (favorite_category != '' AND favorite_value != '')
 	ORDER BY random()
 	LIMIT 1`);
 
 			const randomResident = await residentsQuery;
+			let typeDescription = '';
 
-			connection1.transaction(async (connection2) => {
-				if (randomResident.type !== 'U') {
-					const typeQuery = connection2.oneFirst(
-						sql.type(
-							z.object({ description: z.string() })
-						)`SELECT description FROM user_types WHERE type=${randomResident.type}`
-					);
-					randomResident.type = await typeQuery;
-				} else {
-					randomResident.type = '';
-				}
-			});
+			if (randomResident.type !== 'U') {
+				const typeQuery = connection1.oneFirst(
+					sql.type(
+						z.object({ connection1: z.string() })
+					)`SELECT description FROM user_types WHERE type=${randomResident.type}`
+				);
+				typeDescription = await typeQuery;
+			}
+
+			randomResident.type = typeDescription;
 			return randomResident;
 		});
 	});
