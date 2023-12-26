@@ -6,11 +6,12 @@
 	import HeaderDrawer from '$lib/components/HeaderDrawer.svelte';
 	import DBSidebar from '$lib/components/DBSidebar.svelte';
 
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { storePopup } from '@skeletonlabs/skeleton';
+	import { storePopup, prefersReducedMotionStore } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	// Initalize Drawer and Modal
@@ -18,6 +19,27 @@
 
 	initializeStores();
 	const drawerStore = getDrawerStore();
+
+	// Scroll heading into view
+	function scrollHeadingIntoView(): void {
+		if (!window.location.hash) return;
+		const elemTarget: HTMLElement | null = document.querySelector(window.location.hash);
+		if (elemTarget) elemTarget.scrollIntoView({ behavior: 'smooth' });
+	}
+
+	// Lifecycle
+	afterNavigate((params) => {
+		// Scroll to top
+		const isNewPage = params.from?.url.pathname !== params.to?.url.pathname;
+		const elemPage = document.querySelector('#page');
+		if (isNewPage && elemPage !== null) {
+			elemPage.scrollTop = 0;
+		}
+		// Scroll heading into view
+		scrollHeadingIntoView();
+	});
+
+	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 </script>
 
 <svelte:head>
@@ -40,7 +62,7 @@
 <Modal />
 
 <!-- App Shell -->
-<AppShell>
+<AppShell regionPage={allyPageSmoothScroll}>
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
 		<Header />
