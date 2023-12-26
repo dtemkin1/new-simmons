@@ -1,11 +1,8 @@
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/sveltekit/providers';
-import {
-	CLIENT_ID,
-	CLIENT_SECRET,
-	AUTH_SECRET,
-	AUTH_REDIRECT_PROXY_URL
-} from '$env/dynamic/private';
+import { env } from '$env/dynamic/private';
+
+const { AUTH_REDIRECT_PROXY_URL, AUTH_SECRET, CLIENT_ID, CLIENT_SECRET } = env;
 
 import { pool } from '$lib/db';
 import { createSqlTag } from 'slonik';
