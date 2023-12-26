@@ -50,7 +50,7 @@
   "dependencies": {
     "@auth/sveltekit": "^0.5.0",
     "@floating-ui/dom": "1.5.3",
-    "lucide-svelte": "^0.298.0",
+    "lucide-svelte": "^0.302.0",
     "slonik": "^37.2.0",
     "svelte-markdown": "^0.4.1"
   }
