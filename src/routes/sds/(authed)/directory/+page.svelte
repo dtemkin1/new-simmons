@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { base } from '$app/paths';
 	import DirectorySearch from '$lib/components/DirectorySearch.svelte';
 
 	export let data: PageData;
