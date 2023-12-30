@@ -53,14 +53,16 @@
 	}
 	function onTableClick(row: CustomEvent<string[]>) {
 		const username = row.detail[0];
-		goto(`${base}/sds/directory/entry/${username}`);
+		goto(`${base}/sds/directory/entry?username=${username}`);
 	}
 </script>
 
-<div class="flex items-center justify-center h-full flex-col w-full p-4">
-	{#await generateOfficerData(data.officers)}
+{#await generateOfficerData(data.officers)}
+	<div class="flex items-center justify-center h-full flex-col w-full p-4">
 		<div class="p-4"><ProgressRadial /></div>
-	{:then table}
+	</div>
+{:then table}
+	<div class="flex items-center justify-start h-full flex-col w-full p-4">
 		<h2 class="h2 text-center p-2">Student Officers</h2>
 		{#if data.session?.user.groups.includes('ADMINISTRATORS')}
 			<p class="text-center pb-2">
@@ -69,5 +71,5 @@
 			</p>
 		{/if}
 		<Table class="table-compact" interactive={true} source={table} on:selected={onTableClick} />
-	{/await}
-</div>
+	</div>
+{/await}

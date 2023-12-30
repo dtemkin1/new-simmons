@@ -110,7 +110,7 @@ export const actions = {
 			const result = await connection.any(query);
 
 			if (result.length === 1) {
-				redirect(303, `${base}/sds/directory/entry/${result[0].username}`);
+				redirect(303, `${base}/sds/directory/entry?username=${result[0].username}`);
 			}
 			return { data: result };
 		});

@@ -57,8 +57,8 @@ const sqlTagged = createSqlTag({
 });
 
 // TODO: MAKE THIS PAGE TO LOAD USER DATA
-export const load: PageServerLoad = async ({ params, locals }) => {
-	if (params.username === '') {
+export const load: PageServerLoad = async ({ locals, url }) => {
+	if (!url.searchParams.has('username') || url.searchParams.get('username') === '') {
 		redirect(302, `${base}/sds/directory`);
 	}
 
@@ -90,7 +90,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			quote,favorite_category,favorite_value,cellphone,
 			homepage,home_city,home_state,home_country
 			FROM ${sql.identifier([directory])}
-			WHERE username=${params.username}`;
+			WHERE username=${url.searchParams.get('username')}`;
 
 			const user = await connection1.maybeOne(userQuery);
 			let typeGen = '';

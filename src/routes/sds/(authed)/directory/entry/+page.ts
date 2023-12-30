@@ -1,7 +1,9 @@
-import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { base } from '$app/paths';
 
-export const load: PageLoad = async () => {
-	redirect(302, `${base}/sds/directory`);
+export const load: PageLoad = ({ data, url }) => {
+	return {
+		title: `Directory Entry: ${url.searchParams.get('username')}`,
+		description: ``,
+		...data
+	};
 };

@@ -48,7 +48,7 @@
 
 <div class="card">
 	<header class="card-header text-center">
-		<a href={`${base}/sds/directory/entry/${userInfoGenerated.username}`} class="anchor"
+		<a href={`${base}/sds/directory/entry?username=${userInfoGenerated.username}`} class="anchor"
 			>{userInfoGenerated.name}</a
 		>
 		{#if userInfoGenerated.type !== ''}
