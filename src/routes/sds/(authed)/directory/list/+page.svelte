@@ -81,12 +81,7 @@
 	{#if form?.missing || form?.noFound || form == null}
 		<p class="p-4 px-8 m-4 mb-0">Simmons Directory is very unhappy. No results found.</p>
 	{:else}
-		<Table
-			class="p-4 m-4 mb-0 table-compact"
-			interactive={true}
-			source={table}
-			on:selected={onTableClick}
-		/>
+		<Table class="p-4 table-compact" interactive={true} source={table} on:selected={onTableClick} />
 	{/if}
 	<hr class="w-11/12" />
 	{#await Promise.all([data.years, data.lounges, data.gras])}

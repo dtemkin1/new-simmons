@@ -45,48 +45,54 @@
 			>
 		{:else}
 			<h2 class="h2 text-center">Sign in to Simmons DB</h2>
-			<label class="label">
-				<span>Username</span>
-				<input
-					class="input"
-					title="username"
-					class:input-error={error == true}
-					class:input-success={error == false}
-					type="text"
-					bind:value={username}
-					on:keydown={(e) => {
-						if (e.key === 'Enter') {
-							credentialSignIn();
-						}
-					}}
-				/>
-			</label>
-			<label class="label">
-				<span>Password</span>
-				<input
-					class="input"
-					title="password"
-					class:input-error={error == true}
-					class:input-success={error == false}
-					type="password"
-					bind:value={password}
-					on:keydown={(e) => {
-						if (e.key === 'Enter') {
-							credentialSignIn();
-						}
-					}}
-				/>
-			</label>
-			<button type="button" class="btn variant-filled" on:click={credentialSignIn}
-				>Sign In with Credentials</button
-			>
+			<form class="flex flex-col gap-4 grow">
+				<label class="label">
+					<span>Username</span>
+					<input
+						class="input"
+						title="username"
+						autocomplete="username"
+						class:input-error={error == true}
+						class:input-success={error == false}
+						type="text"
+						bind:value={username}
+						on:keydown={(e) => {
+							if (e.key === 'Enter') {
+								credentialSignIn();
+							}
+						}}
+					/>
+				</label>
+				<label class="label">
+					<span>Password</span>
+					<input
+						class="input"
+						title="password"
+						autocomplete="current-password"
+						class:input-error={error == true}
+						class:input-success={error == false}
+						type="password"
+						bind:value={password}
+						on:keydown={(e) => {
+							if (e.key === 'Enter') {
+								credentialSignIn();
+							}
+						}}
+					/>
+				</label>
+				<button type="button" class="btn variant-filled" on:click={credentialSignIn}
+					>Sign In with Credentials</button
+				>
+			</form>
 			<hr />
-			<button
-				type="button"
-				class="btn variant-filled-success"
-				on:click={() => signIn('petrock', { callbackUrl: `${base}/sds/home` })}
-				>Sign In with Touchstone</button
-			>
+			<form class="flex flex-col grow">
+				<button
+					type="button"
+					class="btn variant-filled-success"
+					on:click={() => signIn('petrock', { callbackUrl: `${base}/sds/home` })}
+					>Sign In with Touchstone</button
+				>
+			</form>
 		{/if}
 	</div>
 </div>

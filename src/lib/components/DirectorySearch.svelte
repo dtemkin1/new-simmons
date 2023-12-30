@@ -17,23 +17,23 @@
 	<h2 class="h2 self-center">Simmons Hall Directory</h2>
 	<label class="label">
 		<span>Firstname</span>
-		<input class="input" name="firstname" type="search" placeholder="" />
+		<input class="input" name="firstname" type="search" autocomplete="given-name" />
 	</label>
 	<label class="label">
 		<span>Lastname</span>
-		<input class="input" name="lastname" type="search" placeholder="" />
+		<input class="input" name="lastname" type="search" autocomplete="family-name" />
 	</label>
 	<label class="label">
 		<span>Title</span>
-		<input class="input" name="title" type="search" placeholder="" />
+		<input class="input" name="title" type="search" autocomplete="honorific-prefix" />
 	</label>
 	<label class="label">
 		<span>Username</span>
-		<input class="input" name="username" type="search" placeholder="" />
+		<input class="input" name="username" type="search" autocomplete="username" />
 	</label>
 	<label class="label">
 		<span>Room</span>
-		<input class="input" name="room" type="search" placeholder="" />
+		<input class="input" name="room" type="search" />
 	</label>
 	<label class="label">
 		<span>Year</span>
