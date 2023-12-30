@@ -170,6 +170,7 @@
 <!-- svelte-ignore a11y-media-has-caption -->
 <video
 	class="h-full w-full rounded-container-token max-w-[787px] self-center"
+	preload="none"
 	controls
 	poster={i3_thumbnail}
 >
