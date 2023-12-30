@@ -3,7 +3,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { pool } from '$lib/db';
 import { createSqlTag, sql } from 'slonik';
 import { z } from 'zod';
-import { redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import { base } from '$app/paths';
 
 const sqlTagged = createSqlTag({
@@ -92,7 +92,7 @@ export const actions = {
 			}
 
 			if (queriesToUse.length === 0) {
-				return null;
+				return fail(400, { missing: true });
 			} else if (queriesToUse.length === 1) {
 				clauseToUse = queriesToUse[0];
 			} else {
@@ -109,10 +109,11 @@ export const actions = {
 
 			const result = await connection.any(query);
 
-			if (result.length === 1) {
+			if (result.length === 0) {
+				return fail(400, { noFound: true });
+			} else if (result.length === 1) {
 				redirect(303, `${base}/sds/directory/entry?username=${result[0].username}`);
-			}
-			return { data: result };
+			} else return { data: result };
 		});
 
 		return dbResult;
