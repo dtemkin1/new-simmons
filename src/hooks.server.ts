@@ -2,6 +2,9 @@ import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/sveltekit/providers';
 import { env } from '$env/dynamic/private';
 
+import type { Session } from '@auth/core/types';
+import type { JWT } from '@auth/core/jwt';
+
 const { AUTH_REDIRECT_PROXY_URL, AUTH_SECRET, CLIENT_ID, CLIENT_SECRET } = env;
 
 import { pool } from '$lib/db';
@@ -88,7 +91,8 @@ const authHandle = SvelteKitAuth({
 			}
 			return token;
 		},
-		async session({ session, token }) {
+		// @ts-expect-error: authjs bug, wait for fix
+		async session({ session, token }: { session: Session; token: JWT }) {
 			if (session.user && token) {
 				session.user.id = (token.user as OIDCProfile).id;
 				session.user.groups = await getGroups(session.user.id);
