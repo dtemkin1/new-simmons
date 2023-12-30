@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { AppBar, modeCurrent } from '@skeletonlabs/skeleton';
 
 	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png?enhanced';

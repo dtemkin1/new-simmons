@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import i3_video from '$lib/assets/i3.mp4';
 	import i3_thumbnail from '$lib/assets/i3_thumbnail.png';
 

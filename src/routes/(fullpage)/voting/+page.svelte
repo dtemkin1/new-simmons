@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import votingPic from '$lib/assets/voting.png';
 </script>
 
