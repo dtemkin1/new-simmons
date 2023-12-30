@@ -1,6 +1,8 @@
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/sveltekit/providers';
+import Credentials from '@auth/sveltekit/providers/credentials';
 import { env } from '$env/dynamic/private';
+import md5 from 'md5';
 
 import type { Session } from '@auth/core/types';
 import type { JWT } from '@auth/core/jwt';
@@ -13,7 +15,9 @@ import { z } from 'zod';
 
 const sql = createSqlTag({
 	typeAliases: {
-		groups: z.object({ groupname: z.string() })
+		groups: z.object({ groupname: z.string() }),
+		salt: z.object({ salt: z.string() }),
+		verifyPassword: z.object({ password: z.string() })
 	}
 });
 
@@ -29,6 +33,43 @@ async function getGroups(username: string) {
 	});
 
 	return dbResult;
+}
+
+async function getUser(username: string, password: string) {
+	if (password == '' || password == null) {
+		return null;
+	}
+
+	const dbResult = pool.connect(async (connection) => {
+		const saltQuery = connection.maybeOneFirst(
+			sql.typeAlias('salt')`SELECT salt FROM sds_users WHERE username=${username}`
+		);
+		const salt = await saltQuery;
+
+		if (salt === null) {
+			return null;
+		}
+
+		const combined = `${salt}${password}`;
+
+		const hash = md5(combined);
+
+		const verifyPasswordQuery = connection.maybeOneFirst(
+			sql.typeAlias('verifyPassword')`SELECT password FROM sds_users WHERE username=${username}`
+		);
+		const verifyPassword = await verifyPasswordQuery;
+
+		if (verifyPassword === null) {
+			return null;
+		}
+		if (verifyPassword !== hash) {
+			return null;
+		}
+
+		return { id: username };
+	});
+
+	return await dbResult;
 }
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
@@ -75,9 +116,25 @@ const petrockProvider: OIDCConfig<Profile> = {
 	}
 };
 
+const credentialsProvider = Credentials({
+	id: 'credentials',
+	name: 'Credentials',
+	credentials: {
+		username: { label: 'Username', type: 'text' },
+		password: { label: 'Password', type: 'password' }
+	},
+	async authorize(credentials) {
+		const { username, password } = credentials;
+
+		const user = await getUser(username as string, password as string);
+
+		return user;
+	}
+});
+
 const authHandle = SvelteKitAuth({
 	redirectProxyUrl: AUTH_REDIRECT_PROXY_URL,
-	providers: [petrockProvider],
+	providers: [credentialsProvider, petrockProvider],
 	secret: AUTH_SECRET,
 	session: { strategy: 'jwt' },
 	callbacks: {

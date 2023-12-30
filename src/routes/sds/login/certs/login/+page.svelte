@@ -1,7 +1,35 @@
 <script lang="ts">
 	import { signIn, signOut } from '@auth/sveltekit/client';
+	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
+
+	let username = '';
+	let password = '';
+	let error: boolean | null = null;
+
+	async function credentialSignIn() {
+		let signInResults = await signIn('credentials', {
+			redirect: false,
+			callbackUrl: `${base}/sds/home`,
+			username: username,
+			password: password
+		});
+
+		const response = await signInResults?.json();
+		console.log(response);
+
+		if (response.url.includes('error')) {
+			error = true;
+		} else {
+			error = false;
+			if (browser) {
+				window.location = response.url;
+			}
+		}
+	}
+
+	async function touchstoneSignIn() {}
 </script>
 
 <div class="flex items-center justify-center h-full">
@@ -19,19 +47,39 @@
 			<h2 class="h2 text-center">Sign in to Simmons DB</h2>
 			<label class="label">
 				<span>Username</span>
-				<input class="input" title="username" type="text" />
+				<input
+					class="input"
+					title="username"
+					class:input-error={error == true}
+					class:input-success={error == false}
+					type="text"
+					bind:value={username}
+					on:keydown={(e) => {
+						if (e.key === 'Enter') {
+							credentialSignIn();
+						}
+					}}
+				/>
 			</label>
 			<label class="label">
 				<span>Password</span>
-				<input class="input" title="password" type="password" />
+				<input
+					class="input"
+					title="password"
+					class:input-error={error == true}
+					class:input-success={error == false}
+					type="password"
+					bind:value={password}
+					on:keydown={(e) => {
+						if (e.key === 'Enter') {
+							credentialSignIn();
+						}
+					}}
+				/>
 			</label>
-			<button
-				type="button"
-				class="btn variant-filled pointer-events-none opacity-50"
-				on:click={() => signIn('credentials', { callbackUrl: `${base}/sds/home` })}
-				>Sign In with Credentials (In Progress)</button
+			<button type="button" class="btn variant-filled" on:click={credentialSignIn}
+				>Sign In with Credentials</button
 			>
-			<!-- TODO: IMPLEMENT LOGGING IN WITH CREDENTIALS -->
 			<hr />
 			<button
 				type="button"
