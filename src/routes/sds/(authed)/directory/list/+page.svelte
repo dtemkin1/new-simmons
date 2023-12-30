@@ -5,7 +5,7 @@
 
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { Table } from '@skeletonlabs/skeleton';
+	import { Table, ProgressRadial } from '@skeletonlabs/skeleton';
 	import type { TableSource } from '@skeletonlabs/skeleton';
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
 	import DirectorySearch from '$lib/components/DirectorySearch.svelte';
@@ -90,7 +90,7 @@
 	{/if}
 	<hr class="w-11/12" />
 	{#await Promise.all([data.years, data.lounges, data.gras])}
-		<DirectorySearch />
+		<div class="p-4"><ProgressRadial /></div>
 	{:then [years, lounges, gras]}
 		<DirectorySearch data={{ years: years, lounges: lounges, gras: gras }} />
 	{/await}

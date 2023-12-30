@@ -87,13 +87,13 @@ export const sdsLinks: SDSGroups[] = [
 			{
 				href: `${dbBase}/directory/medlinks`,
 				label: 'Medlinks',
-				badge: 'Incomplete',
+				badge: 'Work in Progress',
 				groupNeeded: ['USERS']
 			},
 			{
 				href: `${dbBase}/directory/grt`,
 				label: 'GRAs',
-				badge: 'Incomplete',
+				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
