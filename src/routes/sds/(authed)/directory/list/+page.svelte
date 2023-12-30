@@ -73,12 +73,12 @@
 
 	function onTableClick(row: CustomEvent<string[]>) {
 		const username = row.detail[0];
-		goto(`${base}/sds/directory/entry/${username}`);
+		goto(`${base}/sds/directory/entry?username=${username}`);
 	}
 </script>
 
 <div class="flex items-center justify-center h-full flex-col">
-	{#if form?.missing || form?.noFound}
+	{#if form?.missing || form?.noFound || form == null}
 		<p class="p-4 px-8 m-4 mb-0">Simmons Directory is very unhappy. No results found.</p>
 	{:else}
 		<Table

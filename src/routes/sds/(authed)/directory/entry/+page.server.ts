@@ -52,7 +52,6 @@ const sqlTagged = createSqlTag({
 	}
 });
 
-// TODO: MAKE THIS PAGE TO LOAD USER DATA
 export const load: PageServerLoad = async ({ locals, url }) => {
 	if (!url.searchParams.has('username') || url.searchParams.get('username') === '') {
 		redirect(302, `${base}/sds/directory`);
