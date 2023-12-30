@@ -20,9 +20,9 @@
 		dtemkin, 2026
 	</p>
 	<div class="flex flex-col self-center gap-4">
-		{#await Promise.all( [data.admins, data.mods, data.housecommLeadership, data.financialAdmins, data.version, data.dbName] )}
+		{#await data.dbResult}
 			<div class="p-4"><ProgressRadial /></div>
-		{:then [admins, mods, housecommLeadership, financialAdmins, version, dbName]}
+		{:then { admins, mods, housecommLeadership, financialAdmins, version, dbName }}
 			<div class="flex flex-row items-start gap-4">
 				<div class="">
 					<a class="anchor font-bold" href="mailto:simmons-tech@mit.edu"

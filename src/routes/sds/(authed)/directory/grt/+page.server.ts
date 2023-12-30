@@ -25,7 +25,7 @@ export const load: PageServerLoad = async () => {
 		WHERE active_directory.type='GRA'
 		ORDER BY gra,username`);
 
-		return graQuery;
+		return await graQuery;
 	});
 
 	return { gras: dbResult };

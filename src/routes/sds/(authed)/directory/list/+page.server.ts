@@ -140,11 +140,11 @@ export const load: PageServerLoad = async (event) => {
 		);
 
 		return {
-			years: yearQuery,
-			lounges: loungeQuery,
-			gras: graQuery
+			years: await yearQuery,
+			lounges: await loungeQuery,
+			gras: await graQuery
 		};
 	});
 
-	return await dbResult;
+	return { dbResult: dbResult };
 };

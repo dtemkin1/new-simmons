@@ -53,7 +53,9 @@ const sqlTagged = createSqlTag({
 });
 
 export const load: PageServerLoad = async ({ locals, url }) => {
-	if (!url.searchParams.has('username') || url.searchParams.get('username') === '') {
+	const username = url.searchParams.get('username');
+
+	if (username == null || username == '') {
 		redirect(302, `${base}/sds/directory`);
 	}
 
@@ -85,7 +87,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 			quote,favorite_category,favorite_value,cellphone,
 			homepage,home_city,home_state,home_country
 			FROM ${sql.identifier([directory])}
-			WHERE username=${url.searchParams.get('username')}`;
+			WHERE username=${username}`;
 
 			const user = await connection1.maybeOne(userQuery);
 			let typeGen = '';
@@ -120,8 +122,13 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 			}
 		});
 
-		return { user: userResult, years: yearQuery, lounges: loungeQuery, gras: graQuery };
+		return {
+			user: await userResult,
+			years: await yearQuery,
+			lounges: await loungeQuery,
+			gras: await graQuery
+		};
 	});
 
-	return await dbResult;
+	return { dbResult: dbResult };
 };

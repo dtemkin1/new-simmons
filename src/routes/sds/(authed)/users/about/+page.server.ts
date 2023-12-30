@@ -56,14 +56,14 @@ export const load: PageServerLoad = async () => {
 		];
 
 		return {
-			dbName: dbName,
-			version: version,
-			admins: admins,
-			mods: mods,
-			housecommLeadership: housecommLeadership,
-			financialAdmins: financialAdmins
+			dbName: await dbName,
+			version: await version,
+			admins: await admins,
+			mods: await mods,
+			housecommLeadership: await housecommLeadership,
+			financialAdmins: await financialAdmins
 		};
 	});
 
-	return dbResult;
+	return { dbResult: dbResult };
 };

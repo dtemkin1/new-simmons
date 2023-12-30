@@ -22,7 +22,7 @@ const sql = createSqlTag({
 });
 
 async function getGroups(username: string) {
-	const dbResult = await pool.connect(async (connection) => {
+	const dbResult = pool.connect(async (connection) => {
 		const groupsQuery = connection.manyFirst(
 			sql.typeAlias(
 				'groups'
@@ -32,7 +32,7 @@ async function getGroups(username: string) {
 		return groups;
 	});
 
-	return dbResult;
+	return await dbResult;
 }
 
 async function getUser(username: string, password: string) {

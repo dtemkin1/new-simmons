@@ -27,7 +27,7 @@ export const load: PageServerLoad = async () => {
         WHERE removed IS NULL
         ORDER BY ordering`);
 
-		return officersQuery;
+		return await officersQuery;
 	});
 
 	return { officers: dbResult };

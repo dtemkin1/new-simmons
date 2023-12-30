@@ -23,10 +23,8 @@ export const load: PageServerLoad = async () => {
 
 		const packages = packagesQuery;
 
-		return {
-			packages: packages
-		};
+		return await packages;
 	});
 
-	return dbResult;
+	return { packages: dbResult };
 };

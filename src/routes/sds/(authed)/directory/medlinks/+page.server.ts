@@ -26,7 +26,7 @@ export const load: PageServerLoad = async () => {
         WHERE removed IS NULL
         ORDER BY ordering`);
 
-		return medlinkQuery;
+		return await medlinkQuery;
 	});
 
 	return { medlinks: dbResult };
