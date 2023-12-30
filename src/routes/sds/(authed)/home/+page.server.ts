@@ -5,10 +5,6 @@ import type { PageServerLoad } from './$types';
 
 const sql = createSqlTag({
 	typeAliases: {
-		id: z.object({
-			id: z.number()
-		}),
-		void: z.object({}).strict(),
 		resident: z.object({
 			username: z.string(),
 			lastname: z.string(),
@@ -23,6 +19,9 @@ const sql = createSqlTag({
 			home_city: z.string(),
 			home_state: z.string(),
 			home_country: z.string()
+		}),
+		typeDescription: z.object({
+			description: z.string()
 		})
 	}
 });
@@ -44,8 +43,8 @@ export const load: PageServerLoad = async () => {
 
 			if (randomResident.type !== 'U') {
 				const typeQuery = connection1.oneFirst(
-					sql.type(
-						z.object({ connection1: z.string() })
+					sql.typeAlias(
+						'typeDescription'
 					)`SELECT description FROM user_types WHERE type=${randomResident.type}`
 				);
 				typeDescription = await typeQuery;

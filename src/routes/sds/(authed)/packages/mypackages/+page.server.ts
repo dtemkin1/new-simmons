@@ -1,25 +1,7 @@
 import { pool } from '$lib/db';
-import { createSqlTag } from 'slonik';
+import { sql } from 'slonik';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
-
-const sql = createSqlTag({
-	typeAliases: {
-		id: z.object({
-			id: z.number()
-		}),
-		void: z.object({}).strict(),
-		user: z.object({
-			username: z.string(),
-			lastname: z.string(),
-			firstname: z.string()
-		}),
-		userNoUsername: z.object({
-			lastname: z.string(),
-			firstname: z.string()
-		})
-	}
-});
 
 export const load: PageServerLoad = async () => {
 	const dbResult = pool.connect(async (connection) => {
@@ -43,9 +25,6 @@ export const load: PageServerLoad = async () => {
 
 		return {
 			packages: packages
-			// num_packages: packages.num_packages,
-			// num_perishable: packages.num_perishable,
-			// earliest_sure: packages.earliest_sure
 		};
 	});
 

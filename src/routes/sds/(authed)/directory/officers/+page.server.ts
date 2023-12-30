@@ -5,10 +5,6 @@ import type { PageServerLoad } from './$types';
 
 const sql = createSqlTag({
 	typeAliases: {
-		id: z.object({
-			id: z.number()
-		}),
-		void: z.object({}).strict(),
 		officer: z.object({
 			position_text: z.string(),
 			username: z.string(),

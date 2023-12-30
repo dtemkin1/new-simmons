@@ -5,10 +5,6 @@ import { z } from 'zod';
 
 const sql = createSqlTag({
 	typeAliases: {
-		id: z.object({
-			id: z.number()
-		}),
-		void: z.object({}).strict(),
 		user: z.object({
 			username: z.string(),
 			lastname: z.string(),

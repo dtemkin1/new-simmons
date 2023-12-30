@@ -8,10 +8,6 @@ import { base } from '$app/paths';
 
 const sqlTagged = createSqlTag({
 	typeAliases: {
-		id: z.object({
-			id: z.number()
-		}),
-		void: z.object({}).strict(),
 		user: z.object({
 			firstname: z.string(),
 			lastname: z.string(),

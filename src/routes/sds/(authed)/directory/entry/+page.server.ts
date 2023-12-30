@@ -8,10 +8,6 @@ import { z } from 'zod';
 
 const sqlTagged = createSqlTag({
 	typeAliases: {
-		id: z.object({
-			id: z.number()
-		}),
-		void: z.object({}).strict(),
 		user: z.object({
 			username: z.string(),
 			room: z.string().nullable(),
