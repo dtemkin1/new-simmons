@@ -7,22 +7,24 @@
 	export let data: PageData;
 </script>
 
-<div class="flex flex-col items-center h-full gap-4 w-full self-center p-4">
-	<div class="self-center">
-		<h1 class="h1 text-center">About the Simmons DB</h1>
+{#await data.dbResult}
+	<div class="flex flex-col items-center justify-center h-full gap-4 w-full self-center p-4">
+		<div class="p-4"><ProgressRadial /></div>
 	</div>
-	<p class="text-center">
-		<span class="font-bold italic">Original authors:</span>
-		dramage, 2002; with bonawitz, dheera, psaindon<br />
-		<span class="font-bold italic">GovTracker:</span>
-		advay, 2006<br />
-		<span class="font-bold italic">Simmons DB 2.0:</span>
-		dtemkin, 2026
-	</p>
-	<div class="flex flex-col self-center gap-4">
-		{#await data.dbResult}
-			<div class="p-4"><ProgressRadial /></div>
-		{:then { admins, mods, housecommLeadership, financialAdmins, version, dbName }}
+{:then { admins, mods, housecommLeadership, financialAdmins, version, dbName }}
+	<div class="flex flex-col items-center h-full gap-4 w-full self-center p-4">
+		<div class="self-center">
+			<h1 class="h1 text-center">About the Simmons DB</h1>
+		</div>
+		<p class="text-center">
+			<span class="font-bold italic">Original authors:</span>
+			dramage, 2002; with bonawitz, dheera, psaindon<br />
+			<span class="font-bold italic">GovTracker:</span>
+			advay, 2006<br />
+			<span class="font-bold italic">Simmons DB 2.0:</span>
+			dtemkin, 2026
+		</p>
+		<div class="flex flex-col self-center gap-4">
 			<div class="flex flex-row items-start gap-4">
 				<div class="">
 					<a class="anchor font-bold" href="mailto:simmons-tech@mit.edu"
@@ -90,6 +92,6 @@
 					</ul>
 				</div>
 			</div>
-		{/await}
+		</div>
 	</div>
-</div>
+{/await}
