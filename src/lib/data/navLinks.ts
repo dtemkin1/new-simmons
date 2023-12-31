@@ -91,6 +91,12 @@ export const sdsLinks: SDSGroups[] = [
 				groupNeeded: ['USERS']
 			},
 			{
+				href: `${dbBase}/directory/advisors`,
+				label: 'Associate Advisors',
+				badge: 'Work in Progress',
+				groupNeeded: ['USERS']
+			},
+			{
 				href: `${dbBase}/directory/grt`,
 				label: 'GRAs',
 				badge: '',
