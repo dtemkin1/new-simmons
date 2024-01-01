@@ -66,7 +66,6 @@
 <a
 	href="https://www.youtube.com/playlist?list=PLF877AC8074471EBF"
 	class="btn variant-filled-primary"
-	data-sveltekit-preload-data="hover"
 >
 	(Some Simmons i3 videos from ancient history)
 </a>

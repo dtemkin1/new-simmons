@@ -15,10 +15,6 @@
 	<source src={i3_video} type="video/mp4" />
 </video>
 
-<a
-	href="{base}/prospectives"
-	class="btn variant-filled-primary"
-	data-sveltekit-preload-data="hover"
->
+<a href="{base}/prospectives" class="btn variant-filled-primary">
 	Welcome Prospectives! (+ More videos)
 </a>

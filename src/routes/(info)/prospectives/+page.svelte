@@ -177,9 +177,7 @@
 	<source src={i3_video} type="video/mp4" />
 </video>
 
-<a href="{base}/videos" class="btn variant-filled-primary" data-sveltekit-preload-data="hover">
-	More Simmons Videos (+ Past i3s)
-</a>
+<a href="{base}/videos" class="btn variant-filled-primary">More Simmons Videos (+ Past i3s)</a>
 
 <h1 class="h1">CPW {rawData.year} Event Schedule</h1>
 {#each rawData.schedule as { date, events }}
