@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",
-    "@skeletonlabs/skeleton": "2.6.0",
+    "@skeletonlabs/skeleton": "2.6.1",
     "@skeletonlabs/tw-plugin": "0.3.0",
     "@sveltejs/adapter-auto": "^3.0.1",
     "@sveltejs/adapter-netlify": "^3.0.1",
