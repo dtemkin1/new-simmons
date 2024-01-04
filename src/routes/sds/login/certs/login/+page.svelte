@@ -9,6 +9,10 @@
 	let error: boolean | null = null;
 
 	async function credentialSignIn() {
+		if (password.length < 1 || username.length < 1) {
+			error = true;
+			return;
+		}
 		let signInResults = await signIn('credentials', {
 			redirect: false,
 			callbackUrl: `${base}/sds/home`,
