@@ -1,17 +1,19 @@
 import { base } from '$app/paths';
 
-const dbBase = `${base}/sds`;
+import {
+	Home,
+	Vote,
+	PersonStanding,
+	Package,
+	Film,
+	Library,
+	Settings,
+	Mails,
+	Bed,
+	Users
+} from 'lucide-svelte';
 
-import { Home } from 'lucide-svelte';
-import { Vote } from 'lucide-svelte';
-import { PersonStanding } from 'lucide-svelte';
-import { Package } from 'lucide-svelte';
-import { Film } from 'lucide-svelte';
-import { Library } from 'lucide-svelte';
-import { Settings } from 'lucide-svelte';
-import { Mails } from 'lucide-svelte';
-import { Bed } from 'lucide-svelte';
-import { Users } from 'lucide-svelte';
+const dbBase = `${base}/sds`;
 
 interface HeaderLinks {
 	name: string;
