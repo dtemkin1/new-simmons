@@ -6,6 +6,10 @@
 <p>Last updated February 12, 2023</p>
 
 <TableOfContents regionLead="font-bold uppercase" />
+<!-- to fix purgecss removing style :/ -->
+<div class="hidden w-0 y-0">
+	<div class="font-bold opacity-60 hover:opacity-100 text-primary-500 space-y-2"></div>
+</div>
 
 <hr />
 
