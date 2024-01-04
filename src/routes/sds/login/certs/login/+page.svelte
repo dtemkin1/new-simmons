@@ -21,7 +21,6 @@
 		});
 
 		const response = await signInResults?.json();
-		console.log(response);
 
 		if (response.url.includes('error')) {
 			error = true;
