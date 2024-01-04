@@ -9,7 +9,7 @@
 
 <hr />
 
-<div use:tocCrawler={{ mode: 'generate' }} class="space-y-4">
+<div use:tocCrawler={{ mode: 'generate', scrollTarget: '#page' }} class="space-y-4">
 	<h2 class="font-bold uppercase">Preamble</h2>
 	<p>
 		For decades at MIT, dormitory communities have been developing sophisticated systems of
