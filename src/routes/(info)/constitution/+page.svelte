@@ -6,6 +6,7 @@
 <p>Last updated February 12, 2023</p>
 
 <!-- to fix purgecss removing style :/ -->
+<!-- TODO: come up with better solution... -->
 <div class="invisible w-0 y-0">
 	<div class="font-bold opacity-60 hover:opacity-100 text-primary-500 space-y-2"></div>
 </div>
