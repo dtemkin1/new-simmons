@@ -1,4 +1,4 @@
-<ul class="list-disc mx-4 px-4 py-2">
+<ul class="list-disc list-outside ml-6 py-2">
 	<li><a href="#hughes" class="anchor">Shannon Hughes</a><br /></li>
 	<li><a href="#ribbeck" class="anchor">Katharina Ribbeck</a><br /></li>
 	<li><a href="#rosario" class="anchor">Nelly Rosario</a><br /></li>
@@ -22,7 +22,7 @@
 		Courses: 20.109<br />
 		<br />
 		Research areas:
-		<ul class="list-disc mx-4 px-4 py-2">
+		<ul class="list-disc list-outside ml-6 py-2">
 			<li>Systems Biology</li>
 		</ul>
 	</div>
@@ -68,7 +68,7 @@
 		Courses: 20.363J, 20.380, 20.463J<br />
 		<br />
 		Research areas:
-		<ul class="list-disc mx-4 px-4 py-2">
+		<ul class="list-disc list-outside ml-6 py-2">
 			<li>Biomaterials</li>
 			<li>Biophysics</li>
 			<li>Microbial Pathogenesis</li>

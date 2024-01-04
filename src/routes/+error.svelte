@@ -10,7 +10,7 @@
 				<h1 class="h1">Not found <span class="text-surface-500-400-token">:(</span></h1>
 				<p>Sorry, but the page you were trying to view does not exist.</p>
 				<p>It looks like this was the result of either:</p>
-				<ul class="list-disc mx-4 px-4 py-2">
+				<ul class="list-disc list-outside ml-6 py-2">
 					<li>a mistyped address</li>
 					<li>an out-of-date link</li>
 				</ul>
@@ -31,7 +31,7 @@
 			<h1 class="h1 text-center">Not found <span class="text-surface-500-400-token">:(</span></h1>
 			<p class="text-center">Sorry, but the page you were trying to view does not exist.</p>
 			<p class="text-center">It looks like this was the result of either:</p>
-			<ul class="list-disc mx-4 px-4 py-2">
+			<ul class="list-disc list-outside ml-6 py-2">
 				<li>a mistyped address</li>
 				<li>an out-of-date link</li>
 			</ul>

@@ -1,11 +1,11 @@
-<h2 class="h2">Lounge Bylaws</h2>
+<h1 class="h1">Lounge Bylaws</h1>
 <p>
 	Contact our Social Chairs at <a class="anchor" href="mailto:simmons-social-chair@mit.edu">
 		simmons-social-chair@mit.edu</a
 	> for more information.
 </p>
 <hr />
-<ol class="list-decimal mx-4 px-4 py-2">
+<ol class="list-decimal list-outside ml-6 py-2">
 	<li>
 		<p class="font-bold uppercase">Purpose</p>
 		<p>
@@ -16,7 +16,7 @@
 	</li>
 	<li>
 		<p class="font-bold uppercase">Lounge Setup</p>
-		<ol class="list-decimal mx-4 px-4 py-2">
+		<ol class="list-decimal list-outside ml-6 py-2">
 			<li>
 				Lounge social groups become officially recognized upon receipt of funding from the house.
 				Official recognition expires if it is not renewed by the receipt of more funds at the second
@@ -26,7 +26,7 @@
 	</li>
 	<li>
 		<p class="font-bold uppercase">The Signup Process</p>
-		<ol class="list-decimal mx-4 px-4 py-2">
+		<ol class="list-decimal list-outside ml-6 py-2">
 			<li>
 				The lounge committee chair shall be responsible for ensuring that the signup process runs
 				smoothly and is effectively publicized to the house.
@@ -41,7 +41,7 @@
 				deadline. Lounges not included in the online form that submit their information by this
 				deadline must be added to the form within four days of the deadline. New lounges must submit
 				the following to the lounge committee chair:
-				<ol class="list-decimal mx-4 px-4 py-2">
+				<ol class="list-decimal list-outside ml-6 py-2">
 					<li>Lounge social group name</li>
 					<li>Lounge representative</li>
 					<li>Lounge URL (if the group has one)</li>
@@ -63,7 +63,7 @@
 	</li>
 	<li>
 		<p class="font-bold uppercase">Membership and Funding</p>
-		<ol class="list-decimal mx-4 px-4 py-2">
+		<ol class="list-decimal list-outside ml-6 py-2">
 			<li>
 				Every resident of Simmons Hall is eligible to become a member of one lounge of his or her
 				choice during any given term. Between the membership deadline and the beginning of the next
@@ -103,7 +103,7 @@
 	</li>
 	<li>
 		<p class="font-bold uppercase">Lounge Government</p>
-		<ol class="list-decimal mx-4 px-4 py-2">
+		<ol class="list-decimal list-outside ml-6 py-2">
 			<li>
 				Each lounge must designate one representative to be in charge of requesting funding from the
 				house committee and signing receipts for submission to the house treasurer. Lounge members
@@ -130,7 +130,7 @@
 	</li>
 	<li>
 		<p class="font-bold uppercase">Use of Funds</p>
-		<ol class="list-decimal mx-4 px-4 py-2">
+		<ol class="list-decimal list-outside ml-6 py-2">
 			<li>
 				Lounge social groups may use lounge funds for events provided that all lounge members are
 				aware of this fact at least two days in advance. Additionally, the event must be approved by
@@ -173,7 +173,7 @@
 </ol>
 
 <hr />
-<ul class="list-disc mx-4 px-4 py-2">
+<ul class="list-disc list-outside ml-6 py-2">
 	<li>Approved by the House Committee 11/3/2002</li>
 	<li>Amended by the House Committee 12/8/2002</li>
 	<li>Amended by the House Committee 04/6/2003</li>

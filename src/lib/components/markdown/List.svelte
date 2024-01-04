@@ -4,7 +4,7 @@
 </script>
 
 {#if ordered}
-	<ol class="list-decimal mx-4 px-4 py-2" {start}><slot /></ol>
+	<ol class="list-decimal list-outside ml-6 py-2" {start}><slot /></ol>
 {:else}
-	<ul class="list-disc mx-4 px-4 py-2"><slot /></ul>
+	<ul class="list-disc list-outside ml-6 py-2"><slot /></ul>
 {/if}

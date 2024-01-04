@@ -92,7 +92,7 @@
 	announced to the dorm. The ranked subsections are:
 </p>
 
-<ol class="list-decimal mx-4 px-4 py-2">
+<ol class="list-decimal list-outside ml-6 py-2">
 	<li>Resident Seniors</li>
 	<li>Transferring Seniors</li>
 	<li>Resident 9th/10th Term</li>

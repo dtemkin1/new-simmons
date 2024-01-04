@@ -2,7 +2,7 @@
 	import { TableOfContents, tocCrawler } from '@skeletonlabs/skeleton';
 </script>
 
-<h2 class="h2">The Constitution of Simmons Hall</h2>
+<h1 class="h1">The Constitution of Simmons Hall</h1>
 <p>Last updated February 12, 2023</p>
 
 <!-- to fix purgecss removing style :/ -->
@@ -78,13 +78,13 @@
 
 	<hr />
 
-	<ol class="list-[upper-roman] mx-4 px-4 py-2">
+	<ol class="list-[upper-roman] list-outside ml-6 py-2">
 		<li>
 			<h2 class="font-bold uppercase">General Definitions</h2>
-			<ol class="list-decimal mx-4 px-4 py-2">
+			<ol class="list-decimal list-outside ml-6 py-2">
 				<li>
 					<h3>Constitution of Simmons Hall</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The purpose of the Constitution is: (a) to establish the overall model for governance
 							of the House; (b) to define the roles of some of the individuals and groups who are
@@ -96,7 +96,7 @@
 
 				<li>
 					<h3>The House</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The House refers to the collective residents and communities residing within the
 							Simmons Hall dormitory of the Massachusetts Institute of Technology.
@@ -106,7 +106,7 @@
 
 				<li>
 					<h3>House and Chair Policies</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							House and Chair Policies supplement the Constitution in guiding House governance, and
 							may be created and revised continually over time.
@@ -133,10 +133,10 @@
 
 		<li>
 			<h2 class="font-bold uppercase">The House</h2>
-			<ol class="list-decimal mx-4 px-4 py-2">
+			<ol class="list-decimal list-outside ml-6 py-2">
 				<li>
 					<h3>Introduction</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The House makes many decisions that impact all its residents. It raises funds to use
 							towards House-shared resources and events. The governance of Simmons Hall is
@@ -148,7 +148,7 @@
 
 				<li>
 					<h3>House Membership</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							Every official resident of Simmons Hall is a member of the House. Each member may cast
 							one vote in any House decision.
@@ -158,7 +158,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the House</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The House, by collective action, makes all major house-wide decisions and expresses
 							the official opinion of Simmons Hall on any matter of interest to the residents of
@@ -177,7 +177,7 @@
 
 				<li>
 					<h3>House Procedures</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							All official business of the House is discussed at meetings that are open and
 							announced to all members of the House and occur at least once within every two-week
@@ -290,7 +290,7 @@
 
 				<li>
 					<h3>House Executive Positions</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The House elects one individual to serve as Chair of the House, one individual to
 							serve as Secretary, one individual to serve as Treasurer, and one individual to serve
@@ -370,10 +370,10 @@
 
 		<li>
 			<h2 class="font-bold uppercase">Committee Chairs of the House</h2>
-			<ol class="list-decimal mx-4 px-4 py-2">
+			<ol class="list-decimal list-outside ml-6 py-2">
 				<li>
 					<h3>Committee Definitions and Membership</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							A committee is a group of House members who collectively focus on particular sets of
 							issues of importance to Simmons Hall. Committees may be established on a Standing or
@@ -427,7 +427,7 @@
 
 				<li>
 					<h3>Committee Procedures</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							All business of each committee is discussed at meetings that are open and announced to
 							all members of the committee, and preferably announced to all Members of the House.
@@ -451,7 +451,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Social Chairs</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							At each election, the House will elect two individuals to serve as Social Chairs for
 							one-year terms. The House shall constantly have two Social Chair positions. Should the
@@ -481,7 +481,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Technology Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Technology Chair leads the Technology Committee that maintains the computing
 							resources managed by the House.
@@ -510,7 +510,7 @@
 						Role and Responsibilities of the Facilities, Inventory, and Sustainability Chair
 						(FISCHair, pronounced Fish Chair)
 					</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The FISCHair leads the Facilities Committee comprised of the Electrical Engineering
 							Lab Chair, the Library Chair, the Entertainment Chair, the Reservations Chair, the
@@ -550,7 +550,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Electrical Engineering Lab Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Electrical Engineering Lab Chair is part of the Facilities Committee and maintains
 							the lab facility on the seventh floor. The Electrical Engineering Lab Chair is
@@ -563,7 +563,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Library Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Library Chair is part of the Facilities Committee and supervises the library on
 							the second floor. The Library Chair is responsible for (a) creating and maintaining a
@@ -576,7 +576,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Entertainment Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Entertainment Chair is part of the Facilities Committee and maintains the Simmons
 							Hall movie, video game, and board game collection.
@@ -596,7 +596,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Reservations Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Reservations Chair is part of the Facilities Committee and oversees the
 							reservation process of all Simmons public spaces according to the Policies of the
@@ -608,7 +608,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Workshop Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Workshop Chair is part of the Facilities Committee and maintains the workshop
 							facility in the basement. The Workshop Chair must communicate with the administrators
@@ -626,7 +626,7 @@
 
 				<li>
 					<h3>Roles and Responsibilities of the Rooming Chairs</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Rooming Chairs manage room assignments for new and continuing residents according
 							to the Rooming Policies.
@@ -652,7 +652,7 @@
 						Role and Responsibilities of the Freshmen Recruitment Organizers for Simmons Hall
 						(FROSH) Chairs
 					</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							At each election, the House will elect two individuals to serve as FROSH Chairs for
 							one-year terms.
@@ -694,7 +694,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Athletics Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Athletics Chair heads the Athletic Committee made up of the Simmons' Intramural
 							team captains. The Athletics Chair shall be responsible for (a) organizing and
@@ -725,7 +725,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of Publicity Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Publicity Chair is tasked with the promotion and publicity of the dorm and its
 							events through the use of media content including, but not limited to, posters,
@@ -740,7 +740,7 @@
 
 				<li>
 					<h3>Role and Responsibilities of the Historian</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Historian is tasked with the high-level goal of preserving a record of Simmons
 							history for future students and alumni. The Historian is responsible for (a) ensuring
@@ -758,7 +758,7 @@
 
 				<li>
 					<h3>Roles and Responsibilities of the Kitchen Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Kitchen Chair is part of the Facilities Committee and maintains the kitchen
 							facilities in Simmons.
@@ -773,7 +773,7 @@
 
 				<li>
 					<h3>Roles and Responsibilities of the Gym Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Gym Chair is part of the Facilities Committee and maintains the gym in Simmons.
 						</li>
@@ -787,7 +787,7 @@
 
 				<li>
 					<h3>Roles and Responsibilities of the Craft Room Chair</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							"The Craft Room Chair is part of the Facilities Committee and supervises the Craft
 							Room on the second floor. The Craft Room Chair is responsible for (a) keeping the
@@ -804,10 +804,10 @@
 
 		<li>
 			<h2 class="font-bold uppercase">Officer Provisions</h2>
-			<ol class="list-decimal mx-4 px-4 py-2">
+			<ol class="list-decimal list-outside ml-6 py-2">
 				<li>
 					<h3>Elections</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							Only undergraduate members of the House are eligible to serve as officers. No
 							individual may hold more than one office simultaneously, except in cases where an
@@ -892,7 +892,7 @@
 
 				<li>
 					<h3>Recall Elections</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							Any member or group of members of the House may propose a Recall Election for a
 							specific Office, if that member or group feels that: (a) the current holder of the
@@ -926,7 +926,7 @@
 
 				<li>
 					<h3>Impeachment</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							Any member or group of members of the House may propose an Article of Impeachment
 							against an officer, if that member or group feels that: (a) the officer is neglecting
@@ -972,10 +972,10 @@
 
 		<li>
 			<h2 class="font-bold uppercase">The House Support Team</h2>
-			<ol class="list-decimal mx-4 px-4 py-2">
+			<ol class="list-decimal list-outside ml-6 py-2">
 				<li>
 					<h3>Live-In House Support Positions</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							MIT specially selects individuals to live in Simmons Hall in order to ensure the
 							health, safety and well-being of residents and to promote a vibrant and diverse social
@@ -1002,7 +1002,7 @@
 
 				<li>
 					<h3>The Head of House Role</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							The Simmons Hall Head of House team consists of the Heads of House and Associate Heads
 							of House, who are faculty members living with their families in Simmons Hall. The
@@ -1028,7 +1028,7 @@
 
 				<li>
 					<h3>The Graduate Resident Advisor Role</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							Graduate Resident Advisors are MIT graduate students hired by the Office of the Dean
 							for Student Life to live in Simmons Hall, sometimes along with partners or families.
@@ -1061,7 +1061,7 @@
 
 				<li>
 					<h3>Other Special Live-In Positions</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							Other individuals who are selected to live in Simmons Hall may include Visiting
 							Scholars and their families, Residential Life Associates, or possibly others to be
@@ -1080,7 +1080,7 @@
 
 				<li>
 					<h3>Non-Live-In House Support Positions</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							Individuals who play significant support roles within the Simmons Hall community but
 							are not residents of Simmons Hall may include the House Manager, staff serving under
@@ -1098,10 +1098,10 @@
 
 		<li>
 			<h2 class="font-bold uppercase">Use of House Resources</h2>
-			<ol class="list-decimal mx-4 px-4 py-2">
+			<ol class="list-decimal list-outside ml-6 py-2">
 				<li>
 					<h3>Use of House Funds</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>Every House resident has an equal opportunity to benefit from House funds.</li>
 						<li>
 							All proposals made to the House should have an explicit time-frame built in. This is
@@ -1128,10 +1128,10 @@
 
 		<li>
 			<h2 class="font-bold uppercase">Constitutional Validity</h2>
-			<ol class="list-decimal mx-4 px-4 py-2">
+			<ol class="list-decimal list-outside ml-6 py-2">
 				<li>
 					<h3>Constitution Ratification</h3>
-					<ol class="list-decimal mx-4 px-4 py-2">
+					<ol class="list-decimal list-outside ml-6 py-2">
 						<li>
 							This Constitution is offered by the Governance Subcommittee of the Simmons Hall
 							Founders Group to the residents of Simmons Hall. The residents of Simmons Hall have
@@ -1148,7 +1148,7 @@
 
 <hr />
 
-<ol class="list-decimal mx-4 px-4 py-2">
+<ol class="list-decimal list-outside ml-6 py-2">
 	<li id="f1">
 		Housemasters (HM) are now called Heads of House (HOH) <a
 			href="#link-to-f1"
