@@ -60,13 +60,13 @@
 {:then table}
 	<div class="flex items-center justify-start h-full flex-col w-full p-4">
 		<h2 class="h2 text-center p-2">Medlinks</h2>
-		<p>
+		<p class="text-center">
 			Medlinks serve as liaisons between undergraduate students and MIT Medical. They can answer
 			questions about MIT Medical's policies and services and can help you figure out when and how
 			to connect with other MIT resources. They can also provide single doses of common
 			over-the-counter medications, first-aid materials, and safer-sex supplies.
 		</p>
-		<p>
+		<p class="text-center">
 			To reach out to all Simmons Medlinks, email <a
 				class="anchor"
 				href="mailto:simmons-medlinks@mit.edu">simmons-medlinks@mit.edu</a

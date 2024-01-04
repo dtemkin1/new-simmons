@@ -60,7 +60,7 @@
 {:then table}
 	<div class="flex items-center justify-start h-full flex-col w-full p-4">
 		<h2 class="h2 text-center p-2">Advisors</h2>
-		<p>
+		<p class="text-center">
 			Associate Advisors are student representatives of the UAAP whose job is to help freshmen
 			adjust to MIT. If you're a freshmen and have questions about anything, ranging from student
 			life to academics, feel free to reach out to us!
