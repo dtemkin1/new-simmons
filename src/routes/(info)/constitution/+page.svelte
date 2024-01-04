@@ -297,9 +297,9 @@
 						Moderatahs").
 					</li>
 					<li>
-						The President is the chief diplomat of Simmons Hall and the administrator of the House’s
+						The President is the chief diplomat of Simmons Hall and the administrator of the House's
 						external affairs. The President is responsible for: (a) being the primary representative
-						of the House to any outside groups, including, but not limited to, the Simmons’ caterer,
+						of the House to any outside groups, including, but not limited to, the Simmons' caterer,
 						other dormitories and living groups, student governments, other student groups, MIT
 						administration, MIT faculty, and groups outside MIT; (b) presenting the official opinion
 						of the House, as determined by the House, to the aforementioned groups; (c) advocating
@@ -336,7 +336,7 @@
 						individuals for House-related expenses approved by the House; (d) reporting at every
 						meeting of the House, presenting the balances of all House bank accounts and an itemized
 						report of all account activity, and making its reports available for viewing by all
-						House Members; (e) Treasurer’s report should include: current balances, anticipated
+						House Members; (e) Treasurer's report should include: current balances, anticipated
 						budgets, and effects of current proposals on the budget.
 					</li>
 					<li>
@@ -372,7 +372,7 @@
 					</li>
 					<li>
 						There are fifteen Committee Chairs leading the Standing Committees. They are: (a) the
-						Social Chairs; (b) the Technology Chair; (c) the Facilities, Inventory, and
+						Social Chairs; (b) the Technology Chair; (c) &nbsp;the Facilities, Inventory, and
 						Sustainability Chair (FISCHair, pronounced Fish Chair); (d) the Electrical Engineering
 						Lab Chair; (e) the Library Chair; (f) the Entertainment Chair; (g) the Reservations
 						Chair; (h) the Workshop Chair; (i) the Rooming Chairs; (j) the FROSH Chairs; (k) the
@@ -440,10 +440,11 @@
 						accordance with the replacement protocol outlined in Article IV, Section 1, Paragraph 9.
 					</li>
 					<li>
-						The Social Chairs lead the Social Committee comprised of all lounge representatives.
+						The Social Chairs leads the Social Committee. Any interested resident of the dorm may be
+						a member of the Social Committee.
 					</li>
 					<li>
-						The Social Chairs are responsible for regularly reporting to the House Chair and the
+						The Social Chairs is responsible for regularly reporting to the House Chair and the
 						House.
 					</li>
 					<li>
@@ -508,16 +509,16 @@
 						basis, in order to ensure Simmons property is well-accounted for.
 					</li>
 					<li>
-						The Facilities Committee is responsible for creating, recommending, and overseeing the
-						implementation of policies regarding the use of House-owned equipment and spaces.
-					</li>
-					<li>
 						The sustainability report consists of changes in relevant metrics, graphs of said
 						metrics over time, a resident-to-resident comparison to other dorms, updates on the
 						impact of any recent sustainability initiatives, and a list of any current initiatives.
 						Relevant metrics may include, but are not limited to, MTC02e (Metric Tons of CO2), waste
 						created, energy usage and water usage. These reports ensure residents have a better
 						understanding of their impact on the environment and what they can do to improve it.
+					</li>
+					<li>
+						The Facilities Committee is responsible for creating, recommending, and overseeing the
+						implementation of policies regarding the use of House-owned equipment and spaces.
 					</li>
 				</ol>
 			</li>
@@ -666,21 +667,21 @@
 				Role and Responsibilities of the Athletics Chair
 				<ol class="list-decimal mx-4 px-4 py-2">
 					<li>
-						The Athletics Chair heads the Athletic Committee made up of the Simmons’ Intramural team
+						The Athletics Chair heads the Athletic Committee made up of the Simmons' Intramural team
 						captains. The Athletics Chair shall be responsible for (a) organizing and coordinating
 						House participation in external athletic programs, especially the MIT Intramural Sports
 						Program (b) reporting to the President; (c) reporting regularly to the House.
 					</li>
 					<li>
 						The Athletics Chair should communicate with the administrators of the MIT Intramural
-						Sports Program and take steps to coordinate Simmons’ involvement including, but not
+						Sports Program and take steps to coordinate Simmons' involvement including, but not
 						limited to, surveying interest in participating in a given sport, and helping to recruit
 						members for intramural teams. The Athletics Chair should report regularly to the House
-						regarding the status of the House’s participation in Intramural Sports.
+						regarding the status of the House's participation in Intramural Sports.
 					</li>
 					<li>
 						The Athletics Chair should be responsible for bringing forth all proposals to the House
-						regarding dues for team participation and proposals for equipment for Simmons’
+						regarding dues for team participation and proposals for equipment for Simmons'
 						Intramural teams.
 					</li>
 					<li>
@@ -753,6 +754,20 @@
 					</li>
 				</ol>
 			</li>
+
+			<li>
+				Roles and Responsibilities of the Craft Room Chair
+				<ol class="list-decimal mx-4 px-4 py-2">
+					<li>
+						"The Craft Room Chair is part of the Facilities Committee and supervises the Craft Room
+						on the second floor. The Craft Room Chair is responsible for (a) keeping the Craft Room
+						well-organized and clean; (b) keeping inventory of the materials in the Craft Room and
+						restocking existing supplies as necessary; (c) communicating with residents regarding
+						desired new materials to add and stocking the Craft Room accordingly; (d) reporting to
+						the Facilities Chair; (e) reporting regularly to the House."
+					</li>
+				</ol>
+			</li>
 		</ol>
 	</li>
 
@@ -813,7 +828,7 @@
 					<li>
 						An office becomes vacant when the individual holding that office resigns or is no longer
 						an official resident of Simmons Hall. An Officer may resign by informing the Chair of
-						the House of one’s resignation, or the Chair of the House may assume that an officer has
+						the House of one's resignation, or the Chair of the House may assume that an officer has
 						resigned if that officer fails to communicate with the House or otherwise fails to
 						undertake the responsibilities of that office.
 					</li>
@@ -1085,7 +1100,7 @@
 					<li>
 						This Constitution is offered by the Governance Subcommittee of the Simmons Hall Founders
 						Group to the residents of Simmons Hall. The residents of Simmons Hall have made certain
-						changes to reflect the first year of Simmons’ existence. The residents have also chosen
+						changes to reflect the first year of Simmons' existence. The residents have also chosen
 						to ratify this Constitution with a two-thirds vote, following a consensus from the House
 						that the voting method is appropriate.
 					</li>
