@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { TableOfContents, tocCrawler } from '@skeletonlabs/skeleton';
+	import { ArrowUp } from 'lucide-svelte';
 </script>
 
 <h1 class="h1">The Constitution of Simmons Hall</h1>
@@ -1150,7 +1151,7 @@
 			id="f1"
 			class="anchor"
 		>
-			<i class="fa-solid fa-arrow-up"></i>
+			<ArrowUp class="inline" />
 		</a>
 	</li>
 	<li>
@@ -1159,13 +1160,13 @@
 			id="f2"
 			class="anchor"
 		>
-			<i class="fa-solid fa-arrow-up"></i>
+			<ArrowUp class="inline" />
 		</a>
 	</li>
 	<li>
 		Residential Life Area Directors (RLADs) are now called Assistant Director / Area Director
 		(AD/AD) <a href="#link-to-f3" id="f3" class="anchor">
-			<i class="fa-solid fa-arrow-up"></i>
+			<ArrowUp class="inline" />
 		</a>
 	</li>
 </ol>
