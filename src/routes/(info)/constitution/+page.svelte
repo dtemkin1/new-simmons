@@ -1139,33 +1139,33 @@
 			</ol>
 		</li>
 	</ol>
-
-	<hr />
-
-	<ol class="list-decimal list-outside ml-6 py-2">
-		<li id="f1">
-			Housemasters (HM) are now called Heads of House (HOH) <a
-				href="#link-to-f1"
-				id="f1"
-				class="anchor"
-			>
-				<i class="fa-solid fa-arrow-up"></i>
-			</a>
-		</li>
-		<li>
-			Graduate Residence Tutors (GRTs) are now called Graduate Residence Advisors (GRAs) <a
-				href="#link-to-f2"
-				id="f2"
-				class="anchor"
-			>
-				<i class="fa-solid fa-arrow-up"></i>
-			</a>
-		</li>
-		<li>
-			Residential Life Area Directors (RLADs) are now called Assistant Director / Area Director
-			(AD/AD) <a href="#link-to-f3" id="f3" class="anchor">
-				<i class="fa-solid fa-arrow-up"></i>
-			</a>
-		</li>
-	</ol>
 </div>
+
+<hr />
+
+<ol class="list-decimal list-outside ml-6 py-2">
+	<li id="f1">
+		Housemasters (HM) are now called Heads of House (HOH) <a
+			href="#link-to-f1"
+			id="f1"
+			class="anchor"
+		>
+			<i class="fa-solid fa-arrow-up"></i>
+		</a>
+	</li>
+	<li>
+		Graduate Residence Tutors (GRTs) are now called Graduate Residence Advisors (GRAs) <a
+			href="#link-to-f2"
+			id="f2"
+			class="anchor"
+		>
+			<i class="fa-solid fa-arrow-up"></i>
+		</a>
+	</li>
+	<li>
+		Residential Life Area Directors (RLADs) are now called Assistant Director / Area Director
+		(AD/AD) <a href="#link-to-f3" id="f3" class="anchor">
+			<i class="fa-solid fa-arrow-up"></i>
+		</a>
+	</li>
+</ol>
