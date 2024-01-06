@@ -21,7 +21,10 @@ const sql = createSqlTag({
 	}
 });
 
-async function getGroups(username: string) {
+async function getGroups(username?: string) {
+	if (username == '' || username == null) {
+		return [];
+	}
 	const dbResult = pool.connect(async (connection) => {
 		const groupsQuery = connection.manyFirst(
 			sql.typeAlias(
@@ -35,8 +38,8 @@ async function getGroups(username: string) {
 	return await dbResult;
 }
 
-async function getUser(username: string, password: string) {
-	if (password == '' || password == null) {
+async function getUser(username?: string, password?: string) {
+	if (password == '' || password == null || username == '' || username == null) {
 		return null;
 	}
 
@@ -75,21 +78,12 @@ async function getUser(username: string, password: string) {
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
 interface Profile extends Record<string, string> {
-	sub: string;
+	id: string;
 	email: string;
 	affiliation: 'student' | 'faculty' | 'staff' | 'affiliate';
 	name: string;
 	given_name: string;
 	family_name: string;
-}
-
-interface OIDCProfile extends Record<string, string> {
-	id: string;
-	email: string;
-	affiliation: 'student' | 'faculty' | 'staff' | 'affiliate';
-	name: string;
-	givenFamily: string;
-	familyName: string;
 }
 
 const petrockProvider: OIDCConfig<Profile> = {
@@ -110,8 +104,8 @@ const petrockProvider: OIDCConfig<Profile> = {
 			email: profile.email,
 			affiliation: profile.affiliation,
 			name: profile.name,
-			givenName: profile.given_name,
-			familyName: profile.family_name
+			given_name: profile.given_name,
+			family_name: profile.family_name
 		};
 	}
 };
@@ -140,14 +134,14 @@ const authHandle = SvelteKitAuth({
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {
-				token.user = user;
+				token.sub = user.id;
 			}
 			return token;
 		},
 		// @ts-expect-error: authjs bug, wait for fix
 		async session({ session, token }: { session: Session; token: JWT }) {
 			if (session.user && token) {
-				session.user.id = (token.user as OIDCProfile).id;
+				session.user.id = token.sub;
 				session.user.groups = await getGroups(session.user.id);
 			}
 			return session;
