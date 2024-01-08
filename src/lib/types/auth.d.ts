@@ -1,9 +1,10 @@
-import type { User } from '@auth/sveltekit/types';
+import '@auth/sveltekit';
 
-declare module '@auth/core/types' {
-	interface Session {
-		user: {
-			groups?: readonly string[];
-		} & User;
+declare module '@auth/sveltekit' {
+	interface User {
+		/** ID of User */
+		id?: string;
+		/** Groups the user is a part of */
+		groups?: readonly string[];
 	}
 }
