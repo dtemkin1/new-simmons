@@ -70,7 +70,7 @@
 
 	<svelte:fragment slot="sidebarLeft">
 		{#if $page.url.pathname.includes('/sds')}
-			<DBSidebar groups={$page.data.session?.user.groups} />
+			<DBSidebar groups={$page.data.session?.user?.groups} />
 		{/if}
 	</svelte:fragment>
 

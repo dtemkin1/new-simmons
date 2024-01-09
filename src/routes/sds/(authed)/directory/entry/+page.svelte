@@ -16,7 +16,7 @@
 			<p class="p-4 px-8 m-4 mb-0">Entry not found.</p>
 		{:else}
 			<DirectoryEntry userInfo={user} />
-			{#if data.session?.user?.groups.includes('RAC') || data.session?.user?.groups.includes('ADMINISTRATORS')}
+			{#if data.session?.user?.groups?.includes('RAC') || data.session?.user?.groups?.includes('ADMINISTRATORS')}
 				<div class="card p-4 m-4">
 					<h2 class="h2 text-center">RAC Commands</h2>
 					<p class="text-center">

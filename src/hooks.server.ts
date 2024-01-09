@@ -140,7 +140,7 @@ const authHandle = SvelteKitAuth({
 		},
 		// @ts-expect-error: authjs bug, wait for fix
 		async session({ session, token }: { session: Session; token: JWT }) {
-			if (session.user && token) {
+			if (session.user) {
 				session.user.id = token.sub;
 				session.user.groups = await getGroups(session.user.id);
 			}

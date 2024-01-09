@@ -61,8 +61,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
 	const session = await locals.getSession();
 	const directory =
-		(session !== null && session.user.groups.includes('DESK')) ||
-		(session !== null && session.user.groups.includes('RAC'))
+		session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
 			? 'active_directory'
 			: 'public_active_directory';
 
