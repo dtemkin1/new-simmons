@@ -9,45 +9,44 @@ import { z } from 'zod';
 const sqlTagged = createSqlTag({
 	typeAliases: {
 		user: z.object({
-			username: z.string(),
+			cellphone: z.string().nullable(),
+			email: z.string().nullable(),
+			favorite_category: z.string().nullable(),
+			favorite_value: z.string().nullable(),
+			firstname: z.string().nullable(),
+			home_city: z.string().nullable(),
+			home_country: z.string().nullable(),
+			home_state: z.string().nullable(),
+			homepage: z.string().nullable(),
+			lastname: z.string().nullable(),
+			phone: z.string().nullable(),
+			quote: z.string().nullable(),
 			room: z.string().nullable(),
-			email: z.string().email(),
-			lastname: z.string(),
-			firstname: z.string(),
-			title: z.string(),
-			phone: z.string(),
-			year: z.number(),
-			type: z.string(),
-			quote: z.string(),
-			favorite_category: z.string(),
-			favorite_value: z.string(),
-			cellphone: z.string(),
-			homepage: z.string(),
-			home_city: z.string(),
-			home_state: z.string(),
-			home_country: z.string(),
-			gra: z.string().nullable()
+			title: z.string().nullable(),
+			type: z.string().nullable(),
+			username: z.string().nullable(),
+			year: z.number().nullable()
 		}),
 		room: z.object({
+			floor: z.number().nullable(),
+			frosh: z.boolean().nullable(),
+			gra: z.string().nullable(),
+			handicapped: z.boolean().nullable(),
+			phone1: z.string().nullable(),
+			phone2: z.string().nullable(),
 			room: z.string(),
-			floor: z.number(),
-			type: z.string(),
-			size: z.number(),
-			phone1: z.string(),
-			phone2: z.string(),
-			gra: z.string(),
-			frosh: z.boolean(),
-			handicap: z.boolean().nullable()
+			size: z.number().nullable(),
+			type: z.string()
 		}),
 		year: z.object({
-			year: z.number()
+			year: z.number().nullable()
 		}),
 		lounge: z.object({
-			lounge: z.string(),
-			description: z.string()
+			lounge: z.string().nullable(),
+			description: z.string().nullable()
 		}),
 		gra: z.object({
-			gra: z.string()
+			gra: z.string().nullable()
 		})
 	}
 });
@@ -89,33 +88,28 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 			WHERE username=${username}`;
 
 			const user = await connection1.maybeOne(userQuery);
-			let typeGen = '';
-			let graGen = '';
+			const typeGen =
+				user?.type && user.type !== 'U'
+					? (await connection1.oneFirst(
+							sql.type(
+								z.object({ description: z.string().nullable() })
+							)`SELECT description FROM user_types WHERE type=${user.type}`
+						)) ?? ''
+					: '';
 
-			if (user != null && user.type !== 'U') {
-				typeGen = await connection1.oneFirst(
-					sql.type(
-						z.object({ description: z.string() })
-					)`SELECT description FROM user_types WHERE type=${user.type}`
-				);
-			} else if (user != null) {
-				typeGen = '';
-			}
-
-			if (user != null && user.room !== '') {
-				graGen = (
-					await connection1.one(
-						sqlTagged.typeAlias('room')`SELECT * FROM rooms WHERE room=${user.room}`
-					)
-				).gra;
-			} else if (user != null) {
-				graGen = '';
-			}
+			const graGen =
+				user?.room && user.room !== ''
+					? (
+							await connection1.one(
+								sqlTagged.typeAlias('room')`SELECT * FROM rooms WHERE room=${user.room}`
+							)
+						).gra ?? ''
+					: '';
 
 			if (user != null) {
 				user.type = typeGen;
-				user.gra = graGen;
-				return user;
+				const userWithGra = { gra: graGen, ...user };
+				return userWithGra;
 			} else {
 				return null;
 			}

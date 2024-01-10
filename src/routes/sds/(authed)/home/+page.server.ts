@@ -6,22 +6,22 @@ import type { PageServerLoad } from './$types';
 const sql = createSqlTag({
 	typeAliases: {
 		resident: z.object({
-			username: z.string(),
-			lastname: z.string(),
-			firstname: z.string(),
+			favorite_category: z.string().nullable(),
+			favorite_value: z.string().nullable(),
+			firstname: z.string().nullable(),
+			home_city: z.string().nullable(),
+			home_country: z.string().nullable(),
+			home_state: z.string().nullable(),
+			homepage: z.string().nullable(),
+			lastname: z.string().nullable(),
+			quote: z.string().nullable(),
 			title: z.string().nullable(),
-			year: z.number().nullable(),
-			type: z.string(),
-			quote: z.string(),
-			favorite_category: z.string(),
-			favorite_value: z.string(),
-			homepage: z.string(),
-			home_city: z.string(),
-			home_state: z.string(),
-			home_country: z.string()
+			type: z.string().nullable(),
+			username: z.string().nullable(),
+			year: z.number().nullable()
 		}),
 		typeDescription: z.object({
-			description: z.string()
+			description: z.string().nullable()
 		})
 	}
 });
@@ -47,7 +47,7 @@ export const load: PageServerLoad = async () => {
 						'typeDescription'
 					)`SELECT description FROM user_types WHERE type=${randomResident.type}`
 				);
-				typeDescription = await typeQuery;
+				typeDescription = (await typeQuery) ?? '';
 			}
 
 			randomResident.type = typeDescription;

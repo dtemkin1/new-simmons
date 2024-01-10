@@ -2,19 +2,19 @@
 
 <script lang="ts">
 	interface UserInfo {
-		username: string;
-		lastname: string;
-		firstname: string;
+		favorite_category: string | null;
+		favorite_value: string | null;
+		firstname: string | null;
+		home_city: string | null;
+		home_country: string | null;
+		home_state: string | null;
+		homepage: string | null;
+		lastname: string | null;
+		quote: string | null;
 		title: string | null;
+		type: string | null;
+		username: string | null;
 		year: number | null;
-		type: string;
-		quote: string;
-		favorite_category: string;
-		favorite_value: string;
-		homepage: string;
-		home_city: string;
-		home_state: string;
-		home_country: string;
 	}
 
 	import SvelteMarkdown from 'svelte-markdown';

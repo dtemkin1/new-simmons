@@ -16,8 +16,8 @@ import { z } from 'zod';
 const sql = createSqlTag({
 	typeAliases: {
 		groups: z.object({ groupname: z.string() }),
-		salt: z.object({ salt: z.string() }),
-		verifyPassword: z.object({ password: z.string() })
+		salt: z.object({ salt: z.string().nullable() }),
+		verifyPassword: z.object({ password: z.string().nullable() })
 	}
 });
 

@@ -2,23 +2,23 @@
 
 <script lang="ts">
 	interface UserInfo {
-		username: string;
-		room: string | null;
-		email: string;
-		lastname: string;
-		firstname: string;
-		title: string;
-		phone: string;
-		year: number;
-		type: string;
-		quote: string;
+		cellphone: string | null;
+		email: string | null;
 		favorite_category: string | null;
 		favorite_value: string | null;
-		cellphone: string | null;
-		homepage: string | null;
+		firstname: string | null;
 		home_city: string | null;
-		home_state: string | null;
 		home_country: string | null;
+		home_state: string | null;
+		homepage: string | null;
+		lastname: string | null;
+		phone: string | null;
+		quote: string | null;
+		room: string | null;
+		title: string | null;
+		type: string | null;
+		username: string | null;
+		year: number | null;
 		gra: string | null;
 	}
 

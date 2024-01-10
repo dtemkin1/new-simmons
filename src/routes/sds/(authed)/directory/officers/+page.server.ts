@@ -6,12 +6,12 @@ import type { PageServerLoad } from './$types';
 const sql = createSqlTag({
 	typeAliases: {
 		officer: z.object({
-			position_text: z.string(),
-			username: z.string(),
-			name: z.string(),
-			room: z.string().nullable(),
+			email: z.string(),
+			name: z.string().nullable(),
 			phone: z.string().nullable(),
-			email: z.string().nullable()
+			position_text: z.string().nullable(),
+			room: z.string().nullable(),
+			username: z.string()
 		})
 	}
 });

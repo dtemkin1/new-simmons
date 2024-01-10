@@ -2,9 +2,9 @@
 	import { base } from '$app/paths';
 
 	export let data: {
-		years: readonly number[];
-		lounges: readonly { lounge: string; description: string }[];
-		gras: readonly string[];
+		years: readonly (number | null)[];
+		lounges: readonly { lounge: string | null; description: string | null }[];
+		gras: readonly (string | null)[];
 	} = { years: [], lounges: [], gras: [] };
 </script>
 

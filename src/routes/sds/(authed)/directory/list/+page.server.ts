@@ -9,24 +9,25 @@ import { base } from '$app/paths';
 const sqlTagged = createSqlTag({
 	typeAliases: {
 		user: z.object({
-			firstname: z.string(),
-			lastname: z.string(),
-			title: z.string().nullable(),
-			username: z.string(),
+			firstname: z.string().nullable(),
+			lastname: z.string().nullable(),
 			room: z.string().nullable(),
-			year: z.number().pipe(z.coerce.string()).nullable(),
-			lounge: z.string().nullable(),
-			gra: z.string().nullable()
+			title: z.string().nullable(),
+			username: z.string().nullable(),
+			year: z
+				.number()
+				.transform((x) => String(x))
+				.nullable()
 		}),
 		year: z.object({
-			year: z.number()
+			year: z.number().nullable()
 		}),
 		lounge: z.object({
-			lounge: z.string(),
-			description: z.string()
+			lounge: z.string().nullable(),
+			description: z.string().nullable()
 		}),
 		gra: z.object({
-			gra: z.string()
+			gra: z.string().nullable()
 		})
 	}
 });

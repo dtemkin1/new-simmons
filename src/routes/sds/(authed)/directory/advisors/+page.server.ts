@@ -7,10 +7,10 @@ const sql = createSqlTag({
 	typeAliases: {
 		advisors: z.object({
 			username: z.string(),
-			name: z.string(),
+			name: z.string().nullable(),
 			room: z.string().nullable(),
 			phone: z.string().nullable(),
-			email: z.string().nullable()
+			email: z.string()
 		})
 	}
 });

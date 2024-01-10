@@ -6,14 +6,14 @@ import { z } from 'zod';
 const sql = createSqlTag({
 	typeAliases: {
 		year: z.object({
-			year: z.number()
+			year: z.number().nullable()
 		}),
 		lounge: z.object({
-			lounge: z.string(),
-			description: z.string()
+			lounge: z.string().nullable(),
+			description: z.string().nullable()
 		}),
 		gra: z.object({
-			gra: z.string()
+			gra: z.string().nullable()
 		})
 	}
 });

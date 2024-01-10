@@ -15,7 +15,7 @@
 	let formData = form?.data?.concat();
 
 	formData = formData?.map((item) => {
-		let { firstname, lastname, title, username, room, year, lounge, gra } = item;
+		let { firstname, lastname, title, username, room, year } = item;
 		if (firstname == null) {
 			firstname = '';
 		}
@@ -34,21 +34,13 @@
 		if (year == null) {
 			year = '';
 		}
-		if (lounge == null) {
-			lounge = '';
-		}
-		if (gra == null) {
-			gra = '';
-		}
 		return {
 			firstname,
 			lastname,
 			title,
 			username,
 			room,
-			year,
-			lounge,
-			gra
+			year
 		};
 	});
 

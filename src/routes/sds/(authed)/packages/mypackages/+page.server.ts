@@ -8,9 +8,15 @@ export const load: PageServerLoad = async () => {
 		const packagesQuery = connection.one(
 			sql.type(
 				z.object({
-					num_packages: z.number(),
-					earliest_sure: z.string(),
-					num_perishable: z.number()
+					earliest_sure: z.string().nullable(),
+					num_packages: z
+						.string()
+						.transform((x) => Number(x))
+						.nullable(),
+					num_perishable: z
+						.string()
+						.transform((x) => Number(x))
+						.nullable()
 				})
 			)`SELECT sum(pkg_count) AS num_packages,sum(perishable_count) AS num_perishable,
             to_char(min(latest_checkin),'FMMonth FMDDth') AS earliest_sure
