@@ -13,6 +13,12 @@ const sql = createSqlTag({
 		userNoUsername: z.object({
 			lastname: z.string(),
 			firstname: z.string()
+		}),
+		version: z.object({
+			split_part: z.string()
+		}),
+		current_database: z.object({
+			current_database: z.string()
 		})
 	}
 });
@@ -20,10 +26,10 @@ const sql = createSqlTag({
 export const load: PageServerLoad = async () => {
 	const dbResult = pool.connect(async (connection) => {
 		const versionQuery = connection.oneFirst(
-			sql.type(z.object({ split_part: z.string() }))`SELECT split_part(version(),' on ',1)`
+			sql.typeAlias('version')`SELECT split_part(version(),' on ',1)`
 		);
 		const dbNameQuery = connection.oneFirst(
-			sql.type(z.object({ current_database: z.string() }))`SELECT current_database()`
+			sql.typeAlias('current_database')`SELECT current_database()`
 		);
 		const adminsQuery = connection.any(
 			sql.typeAlias(

@@ -3,10 +3,10 @@ import { base } from '$app/paths';
 import type { PageServerLoad } from './$types';
 
 import { pool } from '$lib/db';
-import { createSqlTag, sql } from 'slonik';
+import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 
-const sqlTagged = createSqlTag({
+const sql = createSqlTag({
 	typeAliases: {
 		user: z.object({
 			cellphone: z.string().nullable(),
@@ -47,6 +47,9 @@ const sqlTagged = createSqlTag({
 		}),
 		gra: z.object({
 			gra: z.string().nullable()
+		}),
+		userType: z.object({
+			description: z.string().nullable()
 		})
 	}
 });
@@ -66,21 +69,19 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
 	const dbResult = pool.connect(async (connection) => {
 		const yearQuery = connection.manyFirst(
-			sqlTagged.typeAlias('year')`SELECT DISTINCT year FROM ${sqlTagged.identifier([
+			sql.typeAlias('year')`SELECT DISTINCT year FROM ${sql.identifier([
 				directory
 			])} WHERE year != 0 AND year IS NOT NULL ORDER BY year`
 		);
 		const loungeQuery = connection.many(
-			sqlTagged.typeAlias('lounge')`SELECT lounge,description FROM active_lounges ORDER BY lounge`
+			sql.typeAlias('lounge')`SELECT lounge,description FROM active_lounges ORDER BY lounge`
 		);
 		const graQuery = connection.manyFirst(
-			sqlTagged.typeAlias(
-				'gra'
-			)`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
+			sql.typeAlias('gra')`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
 		);
 
 		const userResult = connection.transaction(async (connection1) => {
-			const userQuery = sqlTagged.typeAlias('user')`
+			const userQuery = sql.typeAlias('user')`
 			SELECT username,room,email,lastname,firstname,title,phone,year,type,
 			quote,favorite_category,favorite_value,cellphone,
 			homepage,home_city,home_state,home_country
@@ -91,9 +92,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 			const typeGen =
 				user?.type && user.type !== 'U'
 					? (await connection1.oneFirst(
-							sql.type(
-								z.object({ description: z.string().nullable() })
-							)`SELECT description FROM user_types WHERE type=${user.type}`
+							sql.typeAlias('userType')`SELECT description FROM user_types WHERE type=${user.type}`
 						)) ?? ''
 					: '';
 
@@ -101,7 +100,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 				user?.room && user.room !== ''
 					? (
 							await connection1.one(
-								sqlTagged.typeAlias('room')`SELECT * FROM rooms WHERE room=${user.room}`
+								sql.typeAlias('room')`SELECT * FROM rooms WHERE room=${user.room}`
 							)
 						).gra ?? ''
 					: '';

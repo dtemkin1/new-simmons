@@ -1,23 +1,29 @@
 import { pool } from '$lib/db';
-import { sql } from 'slonik';
+import { createSqlTag } from 'slonik';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
+
+const sql = createSqlTag({
+	typeAliases: {
+		packages: z.object({
+			earliest_sure: z.string().nullable(),
+			num_packages: z
+				.string()
+				.transform((x) => Number(x))
+				.nullable(),
+			num_perishable: z
+				.string()
+				.transform((x) => Number(x))
+				.nullable()
+		})
+	}
+});
 
 export const load: PageServerLoad = async () => {
 	const dbResult = pool.connect(async (connection) => {
 		const packagesQuery = connection.one(
-			sql.type(
-				z.object({
-					earliest_sure: z.string().nullable(),
-					num_packages: z
-						.string()
-						.transform((x) => Number(x))
-						.nullable(),
-					num_perishable: z
-						.string()
-						.transform((x) => Number(x))
-						.nullable()
-				})
+			sql.typeAlias(
+				'packages'
 			)`SELECT sum(pkg_count) AS num_packages,sum(perishable_count) AS num_perishable,
             to_char(min(latest_checkin),'FMMonth FMDDth') AS earliest_sure
      FROM (SELECT count(*) AS pkg_count,

@@ -84,5 +84,7 @@
 </p>
 <p>
 	The Residential Scholars program at Simmons Hall is managed by Prof. Steven Hall, the Simmons Hall
-	Associate Housemaster, who can be contacted at <a class="anchor" href="mailto:srhall@mit.edu">srhall@mit.edu</a>.
+	Associate Housemaster, who can be contacted at <a class="anchor" href="mailto:srhall@mit.edu"
+		>srhall@mit.edu</a
+	>.
 </p>

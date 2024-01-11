@@ -8,7 +8,7 @@ module.exports = {
 		'prettier'
 	],
 	parser: '@typescript-eslint/parser',
-	plugins: ['@typescript-eslint'],
+	plugins: ['@typescript-eslint', 'sql'],
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020,
@@ -27,5 +27,21 @@ module.exports = {
 				parser: '@typescript-eslint/parser'
 			}
 		}
-	]
+	],
+	rules: {
+		'sql/format': [
+			2,
+			{
+				ignoreExpressions: false,
+				ignoreInline: true,
+				ignoreTagless: true
+			}
+		],
+		'sql/no-unsafe-query': [
+			2,
+			{
+				allowLiteral: false
+			}
+		]
+	}
 };
