@@ -19,12 +19,18 @@ const sql = createSqlTag({
 		}),
 		current_database: z.object({
 			current_database: z.string()
+		}),
+		itchair: z.object({
+			value_string: z.string().nullable()
 		})
 	}
 });
 
 export const load: PageServerLoad = async () => {
 	const dbResult = pool.connect(async (connection) => {
+		const itChairQuery = connection.oneFirst(
+			sql.typeAlias('itchair')`SELECT value_string FROM options WHERE name='itchair'`
+		);
 		const versionQuery = connection.oneFirst(
 			sql.typeAlias('version')`SELECT split_part(version(),' on ',1)`
 		);
@@ -52,22 +58,24 @@ export const load: PageServerLoad = async () => {
 			)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='FINANCIAL-ADMINS' ORDER BY lastname ASC`
 		);
 
-		const [version, dbName, admins, mods, housecommLeadership, financialAdmins] = [
-			versionQuery,
-			dbNameQuery,
-			adminsQuery,
-			modsQuery,
-			housecommLeadershipQuery,
-			financialAdminsQuery
+		const [version, dbName, admins, mods, housecommLeadership, financialAdmins, itChair] = [
+			await versionQuery,
+			await dbNameQuery,
+			await adminsQuery,
+			await modsQuery,
+			await housecommLeadershipQuery,
+			await financialAdminsQuery,
+			await itChairQuery
 		];
 
 		return {
-			dbName: await dbName,
-			version: await version,
-			admins: await admins,
-			mods: await mods,
-			housecommLeadership: await housecommLeadership,
-			financialAdmins: await financialAdmins
+			dbName: dbName,
+			version: version,
+			admins: admins,
+			mods: mods,
+			housecommLeadership: housecommLeadership,
+			financialAdmins: financialAdmins,
+			itChair: itChair
 		};
 	});
 

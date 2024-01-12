@@ -11,7 +11,7 @@
 	<div class="flex flex-col items-center justify-center h-full gap-4 w-full self-center p-4">
 		<div class="p-4"><ProgressRadial /></div>
 	</div>
-{:then { admins, mods, housecommLeadership, financialAdmins, version, dbName }}
+{:then { admins, mods, housecommLeadership, financialAdmins, version, dbName, itChair }}
 	<div class="flex flex-col items-center h-full gap-4 w-full self-center p-4">
 		<div class="self-center">
 			<h1 class="h1 text-center">About the Simmons DB</h1>
@@ -32,7 +32,13 @@
 					>
 					<ul class="list">
 						{#each admins as admin}
-							<li><span class="flex-auto">{`${admin.firstname} ${admin.lastname}`}</span></li>
+							<li>
+								<span class="flex-auto"
+									>{`${admin.firstname} ${admin.lastname}${
+										admin.username == itChair ? ' (Committee Chair)' : ''
+									}`}</span
+								>
+							</li>
 						{/each}
 					</ul>
 				</div>
