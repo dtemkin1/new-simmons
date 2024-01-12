@@ -9,9 +9,9 @@
 </script>
 
 <div class="flex items-center justify-center h-full flex-col w-full">
-	{#await data.dbResult}
+	{#await Promise.all([data.user, data.years, data.lounges, data.gras])}
 		<div class="p-4"><ProgressRadial /></div>
-	{:then { user, years, lounges, gras }}
+	{:then [user, years, lounges, gras]}
 		{#if user == null}
 			<p class="p-4 px-8 m-4 mb-0">Entry not found.</p>
 		{:else}

@@ -25,17 +25,14 @@ async function getGroups(username?: string) {
 	if (username == '' || username == null) {
 		return [];
 	}
-	const dbResult = pool.connect(async (connection) => {
-		const groupsQuery = connection.manyFirst(
-			sql.typeAlias(
-				'groups'
-			)`SELECT groupname FROM sds_group_membership_cache WHERE username=${username}`
-		);
-		const groups = await groupsQuery;
-		return groups;
-	});
+	const groupsQuery = pool.manyFirst(
+		sql.typeAlias(
+			'groups'
+		)`SELECT groupname FROM sds_group_membership_cache WHERE username=${username}`
+	);
+	const groups = await groupsQuery;
 
-	return await dbResult;
+	return await groups;
 }
 
 async function getUser(username?: string, password?: string) {
@@ -43,36 +40,32 @@ async function getUser(username?: string, password?: string) {
 		return null;
 	}
 
-	const dbResult = pool.connect(async (connection) => {
-		const saltQuery = connection.maybeOneFirst(
-			sql.typeAlias('salt')`SELECT salt FROM sds_users WHERE username=${username}`
-		);
-		const salt = await saltQuery;
+	const saltQuery = pool.maybeOneFirst(
+		sql.typeAlias('salt')`SELECT salt FROM sds_users WHERE username=${username}`
+	);
+	const salt = await saltQuery;
 
-		if (salt === null) {
-			return null;
-		}
+	if (salt === null) {
+		return null;
+	}
 
-		const combined = `${salt}${password}`;
+	const combined = `${salt}${password}`;
 
-		const hash = md5(combined);
+	const hash = md5(combined);
 
-		const verifyPasswordQuery = connection.maybeOneFirst(
-			sql.typeAlias('verifyPassword')`SELECT password FROM sds_users WHERE username=${username}`
-		);
-		const verifyPassword = await verifyPasswordQuery;
+	const verifyPasswordQuery = pool.maybeOneFirst(
+		sql.typeAlias('verifyPassword')`SELECT password FROM sds_users WHERE username=${username}`
+	);
+	const verifyPassword = await verifyPasswordQuery;
 
-		if (verifyPassword === null) {
-			return null;
-		}
-		if (verifyPassword !== hash) {
-			return null;
-		}
+	if (verifyPassword === null) {
+		return null;
+	}
+	if (verifyPassword !== hash) {
+		return null;
+	}
 
-		return { id: username };
-	});
-
-	return await dbResult;
+	return { id: username };
 }
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';

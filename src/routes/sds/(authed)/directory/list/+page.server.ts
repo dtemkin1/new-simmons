@@ -1,12 +1,12 @@
 import type { Actions, PageServerLoad } from './$types';
 
 import { pool } from '$lib/db';
-import { createSqlTag, sql } from 'slonik';
+import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 import { redirect, fail } from '@sveltejs/kit';
 import { base } from '$app/paths';
 
-const sqlTagged = createSqlTag({
+const sql = createSqlTag({
 	typeAliases: {
 		user: z.object({
 			firstname: z.string().nullable(),
@@ -45,57 +45,56 @@ export const actions = {
 		const lounge = (data.get('lounge') as string) || '';
 		const gra = (data.get('gra') as string) || '';
 
-		const dbResult = pool.connect(async (connection) => {
-			const session = await event.locals.getSession();
-			const directory =
-				session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
-					? 'active_directory'
-					: 'public_active_directory';
+		const session = await event.locals.getSession();
+		const directory =
+			session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
+				? 'active_directory'
+				: 'public_active_directory';
 
-			const roomsFragment =
-				gra !== '' && gra !== '[Any]' ? sql.fragment`JOIN rooms USING (room)` : sql.fragment``;
+		const roomsFragment =
+			gra !== '' && gra !== '[Any]' ? sql.fragment`JOIN rooms USING (room)` : sql.fragment``;
 
-			const queriesToUse = [];
-			let clauseToUse = sql.fragment``;
+		const queriesToUse = [];
+		let clauseToUse = sql.fragment``;
 
-			if (username !== '') {
-				queriesToUse.push(sql.fragment`username ILIKE ${username}`);
-			}
-			if (title !== '') {
-				queriesToUse.push(sql.fragment`title ILIKE ${title}`);
-			}
-			if (firstname !== '') {
-				queriesToUse.push(sql.fragment`firstname ILIKE ${firstname}`);
-			}
-			if (lastname !== '') {
-				queriesToUse.push(sql.fragment`lastname ILIKE ${lastname}`);
-			}
-			if (room !== '') {
-				queriesToUse.push(sql.fragment`room ILIKE ${room}`);
-			}
-			if (lounge !== '' && lounge !== '[Any]') {
-				queriesToUse.push(sql.fragment`lounge = ${lounge}`);
-			}
-			if (gra !== '' && gra !== '[Any]') {
-				queriesToUse.push(sql.fragment`rooms.gra = ${gra}`);
-			}
-			if (year !== '' && year !== '[Any]') {
-				if (year !== 'No year') {
-					queriesToUse.push(sql.fragment`year = ${year}`);
-				} else {
-					queriesToUse.push(sql.fragment`year IS NULL`);
-				}
-			}
-
-			if (queriesToUse.length === 0) {
-				return fail(400, { missing: true });
-			} else if (queriesToUse.length === 1) {
-				clauseToUse = queriesToUse[0];
+		if (username !== '') {
+			queriesToUse.push(sql.fragment`username ILIKE ${username}`);
+		}
+		if (title !== '') {
+			queriesToUse.push(sql.fragment`title ILIKE ${title}`);
+		}
+		if (firstname !== '') {
+			queriesToUse.push(sql.fragment`firstname ILIKE ${firstname}`);
+		}
+		if (lastname !== '') {
+			queriesToUse.push(sql.fragment`lastname ILIKE ${lastname}`);
+		}
+		if (room !== '') {
+			queriesToUse.push(sql.fragment`room ILIKE ${room}`);
+		}
+		if (lounge !== '' && lounge !== '[Any]') {
+			queriesToUse.push(sql.fragment`lounge = ${lounge}`);
+		}
+		if (gra !== '' && gra !== '[Any]') {
+			queriesToUse.push(sql.fragment`rooms.gra = ${gra}`);
+		}
+		if (year !== '' && year !== '[Any]') {
+			if (year !== 'No year') {
+				queriesToUse.push(sql.fragment`year = ${year}`);
 			} else {
-				clauseToUse = sql.fragment`(${sql.join(queriesToUse, sql.fragment` AND `)})`;
+				queriesToUse.push(sql.fragment`year IS NULL`);
 			}
+		}
 
-			const query = sqlTagged.typeAlias('user')`
+		if (queriesToUse.length === 0) {
+			return fail(400, { missing: true });
+		} else if (queriesToUse.length === 1) {
+			clauseToUse = queriesToUse[0];
+		} else {
+			clauseToUse = sql.fragment`(${sql.join(queriesToUse, sql.fragment` AND `)})`;
+		}
+
+		const query = sql.typeAlias('user')`
 				SELECT username,lastname,firstname,title,room,year
 				FROM ${sql.identifier([directory])}
 				${roomsFragment}
@@ -103,47 +102,38 @@ export const actions = {
 				ORDER BY lastname
 			`;
 
-			const result = await connection.any(query);
+		const result = await pool.any(query);
 
-			if (result.length === 0) {
-				return fail(400, { noFound: true });
-			} else if (result.length === 1) {
-				redirect(303, `${base}/sds/directory/entry?username=${result[0].username}`);
-			} else return { data: result };
-		});
-
-		return dbResult;
+		if (result.length === 0) {
+			return fail(400, { noFound: true });
+		} else if (result.length === 1) {
+			redirect(303, `${base}/sds/directory/entry?username=${result[0].username}`);
+		} else return { data: result };
 	}
 } satisfies Actions;
 
 export const load: PageServerLoad = async (event) => {
-	const dbResult = pool.connect(async (connection) => {
-		const session = await event.locals.getSession();
-		const directory =
-			session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
-				? 'active_directory'
-				: 'public_active_directory';
+	const { session } = await event.parent();
+	const directory =
+		session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
+			? 'active_directory'
+			: 'public_active_directory';
 
-		const yearQuery = connection.manyFirst(
-			sqlTagged.typeAlias('year')`SELECT DISTINCT year FROM ${sqlTagged.identifier([
-				directory
-			])} WHERE year != 0 AND year IS NOT NULL ORDER BY year`
-		);
-		const loungeQuery = connection.many(
-			sqlTagged.typeAlias('lounge')`SELECT lounge,description FROM active_lounges ORDER BY lounge`
-		);
-		const graQuery = connection.manyFirst(
-			sqlTagged.typeAlias(
-				'gra'
-			)`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
-		);
+	const yearQuery = pool.manyFirst(
+		sql.typeAlias('year')`SELECT DISTINCT year FROM ${sql.identifier([
+			directory
+		])} WHERE year != 0 AND year IS NOT NULL ORDER BY year`
+	);
+	const loungeQuery = pool.many(
+		sql.typeAlias('lounge')`SELECT lounge,description FROM active_lounges ORDER BY lounge`
+	);
+	const graQuery = pool.manyFirst(
+		sql.typeAlias('gra')`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
+	);
 
-		return {
-			years: await yearQuery,
-			lounges: await loungeQuery,
-			gras: await graQuery
-		};
-	});
-
-	return { dbResult: dbResult };
+	return {
+		years: yearQuery,
+		lounges: loungeQuery,
+		gras: graQuery
+	};
 };

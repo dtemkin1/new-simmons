@@ -27,9 +27,8 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = pool.connect(async (connection) => {
-		return connection.transaction(async (connection1) => {
-			const residentsQuery = connection1.one(sql.typeAlias('resident')`
+	const randomResident = pool.transaction(async (connection) => {
+		const residentsQuery = connection.one(sql.typeAlias('resident')`
 	SELECT username,lastname,firstname,title,year,type,quote,favorite_category,
 		   favorite_value,homepage,home_city,home_state,home_country
 	FROM public_active_directory
@@ -38,22 +37,19 @@ export const load: PageServerLoad = async () => {
 	ORDER BY random()
 	LIMIT 1`);
 
-			const randomResident = await residentsQuery;
-			let typeDescription = '';
+		const randomResident = await residentsQuery;
+		let typeDescription =
+			randomResident.type != null && randomResident.type !== 'U'
+				? (await connection.oneFirst(
+						sql.typeAlias(
+							'typeDescription'
+						)`SELECT description FROM user_types WHERE type=${randomResident.type}`
+					)) ?? ''
+				: '';
 
-			if (randomResident.type !== 'U') {
-				const typeQuery = connection1.oneFirst(
-					sql.typeAlias(
-						'typeDescription'
-					)`SELECT description FROM user_types WHERE type=${randomResident.type}`
-				);
-				typeDescription = (await typeQuery) ?? '';
-			}
-
-			randomResident.type = typeDescription;
-			return randomResident;
-		});
+		randomResident.type = typeDescription;
+		return randomResident;
 	});
 
-	return { randomResident: dbResult };
+	return { randomResident: randomResident };
 };

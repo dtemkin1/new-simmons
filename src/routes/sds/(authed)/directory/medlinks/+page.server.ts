@@ -16,8 +16,7 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = pool.connect(async (connection) => {
-		const medlinkQuery = connection.many(sql.typeAlias('medlink')`
+	const medlinks = pool.any(sql.typeAlias('medlink')`
         SELECT username,
        COALESCE(COALESCE(title||' ','')||firstname||' '||lastname,
             username) AS name,
@@ -26,8 +25,5 @@ export const load: PageServerLoad = async () => {
         WHERE removed IS NULL
         ORDER BY ordering`);
 
-		return await medlinkQuery;
-	});
-
-	return { medlinks: dbResult };
+	return { medlinks: medlinks };
 };

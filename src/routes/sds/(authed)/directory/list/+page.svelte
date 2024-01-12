@@ -76,9 +76,9 @@
 		<Table class="p-4 table-compact" interactive={true} source={table} on:selected={onTableClick} />
 	{/if}
 	<hr class="w-11/12" />
-	{#await data.dbResult}
+	{#await Promise.all([data.years, data.lounges, data.gras])}
 		<div class="p-4"><ProgressRadial /></div>
-	{:then { years, lounges, gras }}
+	{:then [years, lounges, gras]}
 		<DirectorySearch data={{ years: years, lounges: lounges, gras: gras }} />
 	{/await}
 </div>

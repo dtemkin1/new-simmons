@@ -27,57 +27,40 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = pool.connect(async (connection) => {
-		const itChairQuery = connection.oneFirst(
-			sql.typeAlias('itchair')`SELECT value_string FROM options WHERE name='itchair'`
-		);
-		const versionQuery = connection.oneFirst(
-			sql.typeAlias('version')`SELECT split_part(version(),' on ',1)`
-		);
-		const dbNameQuery = connection.oneFirst(
-			sql.typeAlias('current_database')`SELECT current_database()`
-		);
-		const adminsQuery = connection.any(
-			sql.typeAlias(
-				'user'
-			)`SELECT username,lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='ADMINISTRATORS' ORDER BY lastname ASC`
-		);
-		const modsQuery = connection.any(
-			sql.typeAlias(
-				'userNoUsername'
-			)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='MODERATORS' ORDER BY lastname ASC`
-		);
-		const housecommLeadershipQuery = connection.any(
-			sql.typeAlias(
-				'userNoUsername'
-			)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='HOUSE-COMM-LEADERSHIP' ORDER BY lastname ASC`
-		);
-		const financialAdminsQuery = connection.any(
-			sql.typeAlias(
-				'userNoUsername'
-			)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='FINANCIAL-ADMINS' ORDER BY lastname ASC`
-		);
+	const itChair = pool.oneFirst(
+		sql.typeAlias('itchair')`SELECT value_string FROM options WHERE name='itchair'`
+	);
+	const version = pool.oneFirst(sql.typeAlias('version')`SELECT split_part(version(),' on ',1)`);
 
-		const [version, dbName, admins, mods, housecommLeadership, financialAdmins, itChair] = [
-			await versionQuery,
-			await dbNameQuery,
-			await adminsQuery,
-			await modsQuery,
-			await housecommLeadershipQuery,
-			await financialAdminsQuery,
-			await itChairQuery
-		];
+	const dbName = pool.oneFirst(sql.typeAlias('current_database')`SELECT current_database()`);
+	const admins = pool.any(
+		sql.typeAlias(
+			'user'
+		)`SELECT username,lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='ADMINISTRATORS' ORDER BY lastname ASC`
+	);
+	const mods = pool.any(
+		sql.typeAlias(
+			'userNoUsername'
+		)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='MODERATORS' ORDER BY lastname ASC`
+	);
+	const housecommLeadership = pool.any(
+		sql.typeAlias(
+			'userNoUsername'
+		)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='HOUSE-COMM-LEADERSHIP' ORDER BY lastname ASC`
+	);
+	const financialAdmins = pool.any(
+		sql.typeAlias(
+			'userNoUsername'
+		)`SELECT lastname,firstname FROM sds_group_membership_cache JOIN directory USING (username) WHERE groupname='FINANCIAL-ADMINS' ORDER BY lastname ASC`
+	);
 
-		return {
-			dbName: dbName,
-			version: version,
-			admins: admins,
-			mods: mods,
-			housecommLeadership: housecommLeadership,
-			financialAdmins: financialAdmins,
-			itChair: itChair
-		};
-	});
-
-	return { dbResult: dbResult };
+	return {
+		dbName: dbName,
+		version: version,
+		admins: admins,
+		mods: mods,
+		housecommLeadership: housecommLeadership,
+		financialAdmins: financialAdmins,
+		itChair: itChair
+	};
 };

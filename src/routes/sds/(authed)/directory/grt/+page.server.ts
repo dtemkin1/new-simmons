@@ -17,16 +17,12 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = pool.connect(async (connection) => {
-		const graQuery = connection.many(sql.typeAlias('gra')`
+	const gras = pool.any(sql.typeAlias('gra')`
         SELECT username,COALESCE(title||' ','')||firstname||' '||lastname AS name,
 			room,phone,email,gra
 		FROM active_directory JOIN rooms USING (room)
 		WHERE active_directory.type='GRA'
 		ORDER BY gra,username`);
 
-		return await graQuery;
-	});
-
-	return { gras: dbResult };
+	return { gras: gras };
 };

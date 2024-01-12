@@ -16,8 +16,7 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = pool.connect(async (connection) => {
-		const advisorsQuery = connection.many(sql.typeAlias('advisors')`
+	const advisors = pool.any(sql.typeAlias('advisors')`
         SELECT username,
 			COALESCE(COALESCE(title||' ','')||firstname||' '||lastname,
 						username) AS name,
@@ -26,8 +25,5 @@ export const load: PageServerLoad = async () => {
 		WHERE removed IS NULL
 		ORDER BY ordering`);
 
-		return await advisorsQuery;
-	});
-
-	return { advisors: dbResult };
+	return { advisors: advisors };
 };

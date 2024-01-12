@@ -17,18 +17,14 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const dbResult = pool.connect(async (connection) => {
-		const officersQuery = connection.many(sql.typeAlias('officer')`
-        SELECT position_text,username,
-            COALESCE(COALESCE(title||' ','')||firstname||' '||lastname,
-                    username) AS name,
-            room,phone,email
-        FROM officers LEFT JOIN directory USING (username)
-        WHERE removed IS NULL
-        ORDER BY ordering`);
+	const officers = pool.any(sql.typeAlias('officer')`
+	SELECT position_text,username,
+		COALESCE(COALESCE(title||' ','')||firstname||' '||lastname,
+				username) AS name,
+		room,phone,email
+	FROM officers LEFT JOIN directory USING (username)
+	WHERE removed IS NULL
+	ORDER BY ordering`);
 
-		return await officersQuery;
-	});
-
-	return { officers: dbResult };
+	return { officers: officers };
 };

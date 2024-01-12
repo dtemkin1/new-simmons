@@ -7,11 +7,11 @@
 	export let data: PageData;
 </script>
 
-{#await data.dbResult}
+{#await Promise.all( [data.dbName, data.version, data.itChair, data.admins, data.mods, data.housecommLeadership, data.financialAdmins] )}
 	<div class="flex flex-col items-center justify-center h-full gap-4 w-full self-center p-4">
 		<div class="p-4"><ProgressRadial /></div>
 	</div>
-{:then { admins, mods, housecommLeadership, financialAdmins, version, dbName, itChair }}
+{:then [dbName, version, itChair, admins, mods, housecommLeadership, financialAdmins]}
 	<div class="flex flex-col items-center h-full gap-4 w-full self-center p-4">
 		<div class="self-center">
 			<h1 class="h1 text-center">About the Simmons DB</h1>
