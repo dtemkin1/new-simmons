@@ -195,8 +195,8 @@ export const sdsLinks: SDSGroups[] = [
 			},
 			{
 				href: `${dbBase}/users/password`,
-				label: 'Login Passowrd',
-				badge: 'Incomplete',
+				label: 'Login Password',
+				badge: 'Work in Progress',
 				groupNeeded: ['USERS']
 			}
 		]

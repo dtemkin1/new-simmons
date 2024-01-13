@@ -3,6 +3,8 @@ import { createSqlTag } from 'slonik';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
 
+import { sdsGetStrOption } from '$lib/dbUtils';
+
 const sql = createSqlTag({
 	typeAliases: {
 		user: z.object({
@@ -27,9 +29,7 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async () => {
-	const itChair = pool.oneFirst(
-		sql.typeAlias('itchair')`SELECT value_string FROM options WHERE name='itchair'`
-	);
+	const itChair = sdsGetStrOption('itchair');
 	const version = pool.oneFirst(sql.typeAlias('version')`SELECT split_part(version(),' on ',1)`);
 
 	const dbName = pool.oneFirst(sql.typeAlias('current_database')`SELECT current_database()`);

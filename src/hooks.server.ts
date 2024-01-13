@@ -2,71 +2,12 @@ import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/sveltekit/providers';
 import Credentials from '@auth/sveltekit/providers/credentials';
 import { env } from '$env/dynamic/private';
-import md5 from 'md5';
 
 import type { Session } from '@auth/core/types';
 import type { JWT } from '@auth/core/jwt';
 
 const { AUTH_REDIRECT_PROXY_URL, AUTH_SECRET, CLIENT_ID, CLIENT_SECRET } = env;
-
-import { pool } from '$lib/db';
-import { createSqlTag } from 'slonik';
-import { z } from 'zod';
-
-const sql = createSqlTag({
-	typeAliases: {
-		groups: z.object({ groupname: z.string() }),
-		salt: z.object({ salt: z.string().nullable() }),
-		verifyPassword: z.object({ password: z.string().nullable() })
-	}
-});
-
-async function getGroups(username?: string) {
-	if (username == '' || username == null) {
-		return [];
-	}
-	const groupsQuery = pool.manyFirst(
-		sql.typeAlias(
-			'groups'
-		)`SELECT groupname FROM sds_group_membership_cache WHERE username=${username}`
-	);
-	const groups = await groupsQuery;
-
-	return await groups;
-}
-
-async function getUser(username?: string, password?: string) {
-	if (password == '' || password == null || username == '' || username == null) {
-		return null;
-	}
-
-	const saltQuery = pool.maybeOneFirst(
-		sql.typeAlias('salt')`SELECT salt FROM sds_users WHERE username=${username}`
-	);
-	const salt = await saltQuery;
-
-	if (salt === null) {
-		return null;
-	}
-
-	const combined = `${salt}${password}`;
-
-	const hash = md5(combined);
-
-	const verifyPasswordQuery = pool.maybeOneFirst(
-		sql.typeAlias('verifyPassword')`SELECT password FROM sds_users WHERE username=${username}`
-	);
-	const verifyPassword = await verifyPasswordQuery;
-
-	if (verifyPassword === null) {
-		return null;
-	}
-	if (verifyPassword !== hash) {
-		return null;
-	}
-
-	return { id: username };
-}
+import { getGroups, getUser } from '$lib/dbUtils';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 

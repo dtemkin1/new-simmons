@@ -15,7 +15,7 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	// Initalize Drawer and Modal
-	import { Drawer, getDrawerStore, initializeStores, Modal } from '@skeletonlabs/skeleton';
+	import { Drawer, Modal, Toast, getDrawerStore, initializeStores } from '@skeletonlabs/skeleton';
 
 	initializeStores();
 	const drawerStore = getDrawerStore();
@@ -60,6 +60,9 @@
 
 <!-- Modal -->
 <Modal />
+
+<!-- Toasts -->
+<Toast />
 
 <!-- App Shell -->
 <AppShell regionPage={allyPageSmoothScroll}>
