@@ -82,7 +82,7 @@
 			</p>
 
 			<p>
-				To disable password-access to your Simmons DB account, <u>leave blank</u>
+				To disable password-access to your Simmons DB account, <em class="italic">leave blank</em>
 				both "New password" and "Re-type password."
 			</p>
 
