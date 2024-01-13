@@ -43,7 +43,9 @@
 						}}
 					>
 						{#if checkOldPassword == null}
-							<div>Current Password: <code class="code">[ none defined ]</code></div>
+							<div class="text-center">
+								Current Password: <code class="code">[ none defined ]</code>
+							</div>
 							<hr />
 						{:else}
 							<label class="label">
