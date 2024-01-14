@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
 
 	import type { PageData, ActionData } from './$types';
 	export let data: PageData;
@@ -14,8 +15,11 @@
 
 <div class="flex flex-col items-center p-4">
 	<div class="flex flex-col items-center h-full gap-4 container self-center">
+		<div class="self-center">
+			<h1 class="h1 text-center">Password for {$page.data.session?.user?.id}</h1>
+		</div>
 		<div>
-			<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-8">
+			<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-2">
 				{#await data.checkOldPassword}
 					<div class="p-4"><ProgressRadial /></div>
 				{:then checkOldPassword}
@@ -27,12 +31,14 @@
 							return async ({ result, update }) => {
 								update();
 								if (result.type == 'success') {
+									/** @type {ToastSettings} */
 									const toastSuccess = {
 										message: `${result.data?.message}` || '',
 										background: 'variant-filled-success'
 									};
 									toastStore.trigger(toastSuccess);
 								} else if (result.type == 'failure') {
+									/** @type {ToastSettings} */
 									const toastError = {
 										message: `${result.data?.message}` || '',
 										background: 'variant-filled-error'
