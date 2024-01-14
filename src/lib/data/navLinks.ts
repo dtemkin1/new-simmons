@@ -189,7 +189,7 @@ export const sdsLinks: SDSGroups[] = [
 			},
 			{
 				href: `${dbBase}/users/loungesignup`,
-				label: 'Guest List',
+				label: 'Lounge Membership',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},

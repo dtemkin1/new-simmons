@@ -6,11 +6,35 @@
 	import type { PageData, ActionData } from './$types';
 	export let data: PageData;
 	// export let form: ActionData;
+	import type { ActionResult } from '@sveltejs/kit';
 
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import type { ToastSettings } from '@skeletonlabs/skeleton';
 
 	const toastStore = getToastStore();
+
+	function toastHandler(result: ActionResult) {
+		let resultToast: ToastSettings;
+
+		if (result.type == 'success') {
+			resultToast = {
+				message: `${result.data?.message}` || '',
+				background: 'variant-filled-success'
+			};
+		} else if (result.type == 'failure') {
+			resultToast = {
+				message: `${result.data?.message}` || '',
+				background: 'variant-filled-error'
+			};
+		} else {
+			resultToast = {
+				message: 'Unknown form result',
+				background: 'variant-filled'
+			};
+		}
+
+		toastStore.trigger(resultToast);
+	}
 </script>
 
 <div class="flex flex-col items-center p-4">
@@ -30,21 +54,7 @@
 						use:enhance={({ formElement, formData, action, cancel, submitter }) => {
 							return async ({ result, update }) => {
 								update();
-								if (result.type == 'success') {
-									/** @type {ToastSettings} */
-									const toastSuccess = {
-										message: `${result.data?.message}` || '',
-										background: 'variant-filled-success'
-									};
-									toastStore.trigger(toastSuccess);
-								} else if (result.type == 'failure') {
-									/** @type {ToastSettings} */
-									const toastError = {
-										message: `${result.data?.message}` || '',
-										background: 'variant-filled-error'
-									};
-									toastStore.trigger(toastError);
-								}
+								toastHandler(result);
 							};
 						}}
 					>

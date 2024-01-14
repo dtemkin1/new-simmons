@@ -10,9 +10,13 @@
 	import { sdsLinks } from '$lib/data/navLinks';
 	export let currentTile: number = 0;
 
-	function onClickAnchor(): void {
-		currentTile = 0;
-	}
+	import { onNavigate } from '$app/navigation';
+
+	onNavigate((params) => {
+		if (params.to?.url.pathname.includes('/sds')) {
+			currentTile = 0;
+		}
+	});
 
 	let userLinks: typeof sdsLinks = [];
 	for (const linkGroup of sdsLinks) {
@@ -46,7 +50,7 @@
 							title={tileLinks.id}
 							on:click={() => {
 								if (currentTile == tileLinks.value) {
-									onClickAnchor();
+									currentTile = 0;
 								}
 							}}
 						>
@@ -61,14 +65,14 @@
 				{/each}
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
-				<AppRailAnchor href="{base}/sds/login/certs/login" title="Account" on:click={onClickAnchor}
+				<AppRailAnchor href="{base}/sds/login/certs/login" title="Account"
 					><svelte:fragment slot="lead">
 						<CircleUser size={'1.5rem'} />
 					</svelte:fragment>{$page.data.session.user?.id ?? 'Guest'}</AppRailAnchor
 				>
 			</svelte:fragment>
 		</AppRail>
-		{#if currentTile !== 0 && sdsLinks[currentTile - 1].links.length > 0}
+		{#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}
 			<section
 				class="p-4 pb-20 space-y-4 md:w-72 w-screen overflow-y-auto bg-surface-100-800-token"
 			>
@@ -79,10 +83,11 @@
 								<a
 									href={link.href}
 									on:keypress
-									on:click={onClickAnchor}
+									class="whitespace-normal text-left btn"
 									class:!bg-primary-active-token={link.href === $page.url.pathname}
 									class:pointer-events-none={link.badge === 'Incomplete'}
 									class:opacity-50={link.badge === 'Incomplete'}
+									aria-disabled={link.badge === 'Incomplete'}
 								>
 									<span class="flex-auto">{@html link.label}</span>
 									{#if link.badge}<span
