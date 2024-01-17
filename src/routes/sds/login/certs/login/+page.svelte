@@ -3,6 +3,10 @@
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
+	import type { PageData } from './$types';
+	import { onMount } from 'svelte';
+
+	export let data: PageData;
 
 	let username = '';
 	let password = '';
@@ -32,7 +36,15 @@
 		}
 	}
 
-	async function touchstoneSignIn() {}
+	function touchstoneSignIn() {
+		signIn('petrock', { callbackUrl: `${base}/sds/home` });
+	}
+
+	onMount(() => {
+		if (data.auto) {
+			touchstoneSignIn();
+		}
+	});
 </script>
 
 <div class="flex items-center justify-center h-full">
@@ -89,10 +101,7 @@
 			</form>
 			<hr />
 			<form class="flex flex-col grow">
-				<button
-					type="button"
-					class="btn variant-filled-success"
-					on:click={() => signIn('petrock', { callbackUrl: `${base}/sds/home` })}
+				<button type="button" class="btn variant-filled-success" on:click={touchstoneSignIn}
 					>Sign In with Touchstone</button
 				>
 			</form>

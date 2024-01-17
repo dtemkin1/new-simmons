@@ -1,4 +1,4 @@
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 import md5 from 'md5';
@@ -14,18 +14,21 @@ const sql = createSqlTag({
 		value: z.object({
 			value: z.number()
 		}),
-		void: z.object({}).strict()
+		void: z.object({}).strict(),
+		fullname: z.object({
+			fullname: z.string().nullable()
+		})
 	}
 });
 
-export function sdsGetStrOption(optionName: string) {
-	return pool.maybeOneFirst(
+export async function sdsGetStrOption(optionName: string) {
+	return await pool.maybeOneFirst(
 		sql.typeAlias('value_string')`SELECT value_string FROM options WHERE name=${optionName}`
 	);
 }
 
-export function sdsGetIntOption(optionName: string) {
-	return pool.maybeOneFirst(
+export async function sdsGetIntOption(optionName: string) {
+	return await pool.maybeOneFirst(
 		sql.typeAlias('value')`SELECT value FROM options WHERE name=${optionName}`
 	);
 }
@@ -128,4 +131,18 @@ export async function setPassword(username: string, password: string | null) {
 		}
 		return true;
 	}
+}
+
+export async function sdsGetFullName(username: string) {
+	const fullname = await pool.maybeOneFirst(
+		sql.typeAlias(
+			'fullname'
+		)`SELECT COALESCE(title||' ','')||firstname || ' ' || lastname AS fullname FROM directory WHERE username = ${username}`
+	);
+
+	if (fullname == null) {
+		return username;
+	}
+
+	return fullname;
 }

@@ -13,7 +13,7 @@ import {
 	Users
 } from 'lucide-svelte';
 
-const dbBase = `${base}/sds`;
+import { SDS_BASE } from '$lib/config';
 
 interface HeaderLinks {
 	name: string;
@@ -21,7 +21,7 @@ interface HeaderLinks {
 }
 
 interface SDSLinks {
-	href: `${typeof dbBase}/${string}`;
+	href: `${typeof SDS_BASE}/${string}`;
 	label: string;
 	badge: 'Work in Progress' | 'Incomplete' | string;
 	groupNeeded: string[];
@@ -61,68 +61,68 @@ export const sdsLinks: SDSGroups[] = [
 		value: 1,
 		icon: Home,
 		links: [
-			{ href: `${dbBase}/home`, label: 'Home', badge: '', groupNeeded: ['USERS'] },
+			{ href: `${SDS_BASE}/home`, label: 'Home', badge: '', groupNeeded: ['USERS'] },
 			{
-				href: `${dbBase}/directory`,
+				href: `${SDS_BASE}/directory`,
 				label: 'Directory',
 				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/directory/calendar`,
+				href: `${SDS_BASE}/directory/calendar`,
 				label: 'Events Calendar',
 				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/directory/reservations`,
+				href: `${SDS_BASE}/directory/reservations`,
 				label: 'Reservations Calendar',
 				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/directory/officers`,
+				href: `${SDS_BASE}/directory/officers`,
 				label: 'Student Officers',
 				badge: 'Work in Progress',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/directory/medlinks`,
+				href: `${SDS_BASE}/directory/medlinks`,
 				label: 'Medlinks',
 				badge: 'Work in Progress',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/directory/advisors`,
+				href: `${SDS_BASE}/directory/advisors`,
 				label: 'Associate Advisors',
 				badge: 'Work in Progress',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/directory/grt`,
+				href: `${SDS_BASE}/directory/grt`,
 				label: 'GRAs',
 				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/groups/view_mailing_lists`,
+				href: `${SDS_BASE}/groups/view_mailing_lists`,
 				label: 'Mailing Lists',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/polls/polls`,
+				href: `${SDS_BASE}/polls/polls`,
 				label: 'Votes and Polls',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/lotteries`,
+				href: `${SDS_BASE}/lotteries`,
 				label: 'Lotteries',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
-			{ href: `${dbBase}/users/about`, label: 'About the DB', badge: '', groupNeeded: ['USERS'] }
+			{ href: `${SDS_BASE}/users/about`, label: 'About the DB', badge: '', groupNeeded: ['USERS'] }
 		]
 	},
 	{
@@ -132,37 +132,37 @@ export const sdsLinks: SDSGroups[] = [
 		icon: Vote,
 		links: [
 			{
-				href: `${dbBase}/loungeexpense`,
+				href: `${SDS_BASE}/loungeexpense`,
 				label: 'Lounge Expenses',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/loungeexpense/proposals`,
+				href: `${SDS_BASE}/loungeexpense/proposals`,
 				label: 'Lounge Event Proposals',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/govtracker/fin-ledger`,
+				href: `${SDS_BASE}/govtracker/fin-ledger`,
 				label: 'House Finances',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/govtracker`,
+				href: `${SDS_BASE}/govtracker`,
 				label: 'House Meeings',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/govtracker/submitproposal`,
+				href: `${SDS_BASE}/govtracker/submitproposal`,
 				label: 'Submit a Proposal',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/govtracker/downloadagenda`,
+				href: `${SDS_BASE}/govtracker/downloadagenda`,
 				label: 'Meeting Presentation',
 				badge: 'Incomplete',
 				groupNeeded: ['HOUSE-COMM-LEADERSHIP']
@@ -176,25 +176,25 @@ export const sdsLinks: SDSGroups[] = [
 		icon: PersonStanding,
 		links: [
 			{
-				href: `${dbBase}/directory/update`,
+				href: `${SDS_BASE}/directory/update`,
 				label: 'My Profile',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/users/guestlist`,
+				href: `${SDS_BASE}/users/guestlist`,
 				label: 'Guest List',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/users/loungesignup`,
+				href: `${SDS_BASE}/users/loungesignup`,
 				label: 'Lounge Membership',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/users/password`,
+				href: `${SDS_BASE}/users/password`,
 				label: 'Login Password',
 				badge: 'Work in Progress',
 				groupNeeded: ['USERS']
@@ -208,25 +208,25 @@ export const sdsLinks: SDSGroups[] = [
 		icon: Package,
 		links: [
 			{
-				href: `${dbBase}/packages/mypackages`,
+				href: `${SDS_BASE}/packages/mypackages`,
 				label: 'My Packages',
 				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/packages/checkin`,
+				href: `${SDS_BASE}/packages/checkin`,
 				label: 'Package Registration',
 				badge: 'Incomplete',
 				groupNeeded: ['DESK']
 			},
 			{
-				href: `${dbBase}/packages/pickup`,
+				href: `${SDS_BASE}/packages/pickup`,
 				label: 'Package Pickup',
 				badge: 'Incomplete',
 				groupNeeded: ['DESK']
 			},
 			{
-				href: `${dbBase}/packages/viewpackages`,
+				href: `${SDS_BASE}/packages/viewpackages`,
 				label: 'All Waiting Packages',
 				badge: 'Incomplete',
 				groupNeeded: ['DESK']
@@ -240,31 +240,31 @@ export const sdsLinks: SDSGroups[] = [
 		icon: Film,
 		links: [
 			{
-				href: `${dbBase}/simmovies/list.php`,
+				href: `${SDS_BASE}/simmovies/list.php`,
 				label: 'List Desk Movies',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS', 'DESK']
 			},
 			{
-				href: `${dbBase}/simmovies/myloans.php`,
+				href: `${SDS_BASE}/simmovies/myloans.php`,
 				label: 'My Loans',
 				badge: 'Incomplete',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/simmovies/checkin.php`,
+				href: `${SDS_BASE}/simmovies/checkin.php`,
 				label: 'Movie Check In',
 				badge: 'Incomplete',
 				groupNeeded: ['DESK', 'MOVIEADMINS']
 			},
 			{
-				href: `${dbBase}/simmovies/allloans.php`,
+				href: `${SDS_BASE}/simmovies/allloans.php`,
 				label: 'Current Loans',
 				badge: 'Incomplete',
 				groupNeeded: ['MOVIEADMINS']
 			},
 			{
-				href: `${dbBase}/simmovies/list.php`,
+				href: `${SDS_BASE}/simmovies/list.php`,
 				label: 'Manage Movies',
 				badge: 'Incomplete',
 				groupNeeded: ['MOVIEADMINS']
@@ -293,31 +293,31 @@ export const sdsLinks: SDSGroups[] = [
 		icon: Settings,
 		links: [
 			{
-				href: `${dbBase}/administrators`,
+				href: `${SDS_BASE}/administrators`,
 				label: 'ACL Control Panel',
 				badge: 'Incomplete',
 				groupNeeded: ['ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/administrators/sudo`,
+				href: `${SDS_BASE}/administrators/sudo`,
 				label: 'Be Another User',
 				badge: 'Incomplete',
 				groupNeeded: ['ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/administrators/options`,
+				href: `${SDS_BASE}/administrators/options`,
 				label: 'Simmons DB Options',
 				badge: 'Incomplete',
 				groupNeeded: ['ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/sds/updateGroupMembershipCache`,
+				href: `${SDS_BASE}/sds/updateGroupMembershipCache`,
 				label: 'Refresh Group Cache',
 				badge: 'Incomplete',
 				groupNeeded: ['ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/groups/refresh_mailing_lists.php`,
+				href: `${SDS_BASE}/groups/refresh_mailing_lists.php`,
 				label: 'Refresh Mailing Lists',
 				badge: 'Incomplete',
 				groupNeeded: ['ADMINISTRATORS']
@@ -337,25 +337,25 @@ export const sdsLinks: SDSGroups[] = [
 		icon: Mails,
 		links: [
 			{
-				href: `${dbBase}/desk/calendar`,
+				href: `${SDS_BASE}/desk/calendar`,
 				label: 'Desk Shift Calendar',
 				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
-				href: `${dbBase}/desk/full_directory`,
+				href: `${SDS_BASE}/desk/full_directory`,
 				label: 'Full Directory Listing',
 				badge: 'Incomplete',
 				groupNeeded: ['DESK']
 			},
 			{
-				href: `${dbBase}/desk/full_directory`,
+				href: `${SDS_BASE}/desk/full_directory`,
 				label: 'Search Guest List',
 				badge: 'Incomplete',
 				groupNeeded: ['DESK']
 			},
 			{
-				href: `${dbBase}/desk/guestlisthistory`,
+				href: `${SDS_BASE}/desk/guestlisthistory`,
 				label: 'Guest List History',
 				badge: 'Incomplete',
 				groupNeeded: ['DESK-CAPTAINS']
@@ -369,49 +369,49 @@ export const sdsLinks: SDSGroups[] = [
 		icon: Bed,
 		links: [
 			{
-				href: `${dbBase}/rac/add`,
+				href: `${SDS_BASE}/rac/add`,
 				label: 'Add Directory Entry',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/rac/use_directory`,
+				href: `${SDS_BASE}/rac/use_directory`,
 				label: 'Modify/Remove Entry',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/rac/csv`,
+				href: `${SDS_BASE}/rac/csv`,
 				label: 'Download Directory (csv)',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/rac/batchupdate`,
+				href: `${SDS_BASE}/rac/batchupdate`,
 				label: 'Batch Update (csv)',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/rac/clearrooms`,
+				href: `${SDS_BASE}/rac/clearrooms`,
 				label: 'Clear Rooms',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/rac/lottery`,
+				href: `${SDS_BASE}/rac/lottery`,
 				label: 'Rooming Lottery',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/rac/roomstatus`,
+				href: `${SDS_BASE}/rac/roomstatus`,
 				label: 'Room Status Summary',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
-				href: `${dbBase}/rac/roomhistory`,
+				href: `${SDS_BASE}/rac/roomhistory`,
 				label: 'Room History',
 				badge: 'Incomplete',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
@@ -425,19 +425,19 @@ export const sdsLinks: SDSGroups[] = [
 		icon: Users,
 		links: [
 			{
-				href: `${dbBase}/lounges`,
+				href: `${SDS_BASE}/lounges`,
 				label: 'Lounge Management',
 				badge: 'Incomplete',
 				groupNeeded: ['LOUNGE-CHAIRS']
 			},
 			{
-				href: `${dbBase}/lounges/showmembership`,
+				href: `${SDS_BASE}/lounges/showmembership`,
 				label: 'Lounge Membership',
 				badge: 'Incomplete',
 				groupNeeded: ['LOUNGE-CHAIRS']
 			},
 			{
-				href: `${dbBase}/lounges/editallocations`,
+				href: `${SDS_BASE}/lounges/editallocations`,
 				label: 'Lounge Allocations',
 				badge: 'Incomplete',
 				groupNeeded: ['FINANCIAL-ADMINS']

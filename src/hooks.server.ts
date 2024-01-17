@@ -2,12 +2,13 @@ import { SvelteKitAuth } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/sveltekit/providers';
 import Credentials from '@auth/sveltekit/providers/credentials';
 import { env } from '$env/dynamic/private';
+import { sequence } from '@sveltejs/kit/hooks';
 
 import type { Session } from '@auth/core/types';
 import type { JWT } from '@auth/core/jwt';
 
 const { AUTH_REDIRECT_PROXY_URL, AUTH_SECRET, CLIENT_ID, CLIENT_SECRET } = env;
-import { getGroups, getUser } from '$lib/dbUtils';
+import { getGroups, getUser } from '$lib/server/dbUtils';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
@@ -84,4 +85,4 @@ const authHandle = SvelteKitAuth({
 	debug: process.argv.includes('dev')
 });
 
-export const handle = authHandle;
+export const handle = sequence(authHandle);

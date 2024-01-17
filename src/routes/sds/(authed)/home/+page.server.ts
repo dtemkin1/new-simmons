@@ -1,7 +1,8 @@
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 import type { PageServerLoad } from './$types';
+import { requireGroups } from '$lib/utils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -26,7 +27,10 @@ const sql = createSqlTag({
 	}
 });
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ parent }) => {
+	const { session } = await parent();
+	requireGroups(session, 'EVERYONE');
+
 	const randomResident = pool.transaction(async (connection) => {
 		const residentsQuery = connection.one(sql.typeAlias('resident')`
 	SELECT username,lastname,firstname,title,year,type,quote,favorite_category,

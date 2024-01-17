@@ -1,7 +1,8 @@
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
+import { requireGroups } from '$lib/utils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -19,7 +20,10 @@ const sql = createSqlTag({
 	}
 });
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ parent }) => {
+	const { session } = await parent();
+	requireGroups(session, 'USERS');
+
 	const packages = pool.one(
 		sql.typeAlias(
 			'packages'

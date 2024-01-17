@@ -1,10 +1,11 @@
 import type { Actions, PageServerLoad } from './$types';
 
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 import { redirect, fail } from '@sveltejs/kit';
 import { base } from '$app/paths';
+import { requireGroups } from '$lib/utils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -33,8 +34,8 @@ const sql = createSqlTag({
 });
 
 export const actions = {
-	default: async (event) => {
-		const data = await event.request.formData();
+	default: async ({ request, locals }) => {
+		const data = await request.formData();
 
 		const firstname = (data.get('firstname') as string) || '';
 		const lastname = (data.get('lastname') as string) || '';
@@ -45,7 +46,7 @@ export const actions = {
 		const lounge = (data.get('lounge') as string) || '';
 		const gra = (data.get('gra') as string) || '';
 
-		const session = await event.locals.getSession();
+		const session = await locals.getSession();
 		const directory =
 			session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
 				? 'active_directory'
@@ -112,8 +113,10 @@ export const actions = {
 	}
 } satisfies Actions;
 
-export const load: PageServerLoad = async (event) => {
-	const { session } = await event.parent();
+export const load: PageServerLoad = async ({ parent }) => {
+	const { session } = await parent();
+	requireGroups(session, 'EVERYONE');
+
 	const directory =
 		session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
 			? 'active_directory'

@@ -43,10 +43,10 @@
 			<h1 class="h1 text-center">Password for {$page.data.session?.user?.id}</h1>
 		</div>
 		<div>
-			<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-2">
-				{#await data.checkOldPassword}
-					<div class="p-4"><ProgressRadial /></div>
-				{:then checkOldPassword}
+			{#await data.checkOldPassword}
+				<div class="p-4"><ProgressRadial /></div>
+			{:then checkOldPassword}
+				<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-2">
 					<form
 						class="flex flex-col gap-4 grow"
 						method="POST"
@@ -80,8 +80,8 @@
 						</label>
 						<button type="submit" class="btn variant-filled-primary">Update Password</button>
 					</form>
-				{/await}
-			</div>
+				</div>
+			{/await}
 		</div>
 
 		<div class="space-y-4">

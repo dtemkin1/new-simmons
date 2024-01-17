@@ -2,9 +2,10 @@ import { redirect } from '@sveltejs/kit';
 import { base } from '$app/paths';
 import type { PageServerLoad } from './$types';
 
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
+import { requireGroups } from '$lib/utils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -62,6 +63,8 @@ export const load: PageServerLoad = async ({ parent, url }) => {
 	}
 
 	const { session } = await parent();
+	requireGroups(session, 'EVERYONE');
+
 	const directory =
 		session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
 			? 'active_directory'

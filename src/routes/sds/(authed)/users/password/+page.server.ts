@@ -1,11 +1,12 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect, fail } from '@sveltejs/kit';
-import { base } from '$app/paths';
 
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
-import { setPassword, verifyPasswordUnhashed } from '$lib/dbUtils';
+import { setPassword, verifyPasswordUnhashed } from '$lib/server/dbUtils';
+import { SDS_LOGIN_URL } from '$lib/config';
+import { requireGroups } from '$lib/utils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -22,8 +23,8 @@ const sql = createSqlTag({
 });
 
 export const actions = {
-	default: async (event) => {
-		const data = await event.request.formData();
+	default: async ({ request, locals }) => {
+		const data = await request.formData();
 
 		const oldPassword = (data.get('oldPassword') as string | null) ?? '';
 		const newPassword = (data.get('newPassword') as string | null) ?? '';
@@ -36,11 +37,11 @@ export const actions = {
 			});
 		}
 
-		const session = await event.locals.getSession();
+		const session = await locals.getSession();
 		const username = session?.user?.id;
 
 		if (username == null || username == '') {
-			redirect(302, `${base}/sds/login/certs/login`);
+			redirect(302, SDS_LOGIN_URL);
 		}
 
 		const checkOldPasswordQuery = sql.typeAlias(
@@ -82,13 +83,14 @@ export const actions = {
 	}
 } satisfies Actions;
 
-export const load: PageServerLoad = async (event) => {
-	const { session } = await event.parent();
+export const load: PageServerLoad = async ({ parent }) => {
+	const { session } = await parent();
+	requireGroups(session, 'USERS');
 
 	const username = session?.user?.id;
 
 	if (username == null || username == '') {
-		redirect(302, `${base}/sds/login/certs/login`);
+		redirect(302, SDS_LOGIN_URL);
 	}
 
 	const checkOldPasswordQuery = sql.typeAlias(

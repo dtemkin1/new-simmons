@@ -1,7 +1,8 @@
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 import type { PageServerLoad } from './$types';
+import { requireGroups } from '$lib/utils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -16,7 +17,10 @@ const sql = createSqlTag({
 	}
 });
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ parent }) => {
+	const { session } = await parent();
+	requireGroups(session, 'USERS');
+
 	const gras = pool.any(sql.typeAlias('gra')`
         SELECT username,COALESCE(title||' ','')||firstname||' '||lastname AS name,
 			room,phone,email,gra

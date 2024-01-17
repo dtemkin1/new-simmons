@@ -1,7 +1,8 @@
-import { pool } from '$lib/db';
+import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
+import { requireGroups } from '$lib/utils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -18,8 +19,10 @@ const sql = createSqlTag({
 	}
 });
 
-export const load: PageServerLoad = async (event) => {
-	const { session } = await event.parent();
+export const load: PageServerLoad = async ({ parent }) => {
+	const { session } = await parent();
+	requireGroups(session, 'EVERYONE');
+
 	const directory =
 		session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
 			? 'active_directory'

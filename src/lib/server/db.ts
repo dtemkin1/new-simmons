@@ -6,18 +6,13 @@ import {
 	SchemaValidationError
 } from 'slonik';
 
-import {
-	POSTGRES_DB,
-	POSTGRES_USERNAME,
-	POSTGRESS_PASSWORD,
-	POSTGRES_HOST,
-	POSTGRES_PORT
-} from '$env/static/private';
+import { env } from '$env/dynamic/private';
+const { POSTGRES_DB, POSTGRES_USERNAME, POSTGRESS_PASSWORD, POSTGRES_HOST, POSTGRES_PORT } = env;
 
 const createResultParserInterceptor = (): Interceptor => {
 	return {
 		transformRow: (executionContext, actualQuery, row) => {
-			const { log, resultParser } = executionContext;
+			const { resultParser } = executionContext;
 
 			if (!resultParser) {
 				return row;
