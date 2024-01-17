@@ -75,12 +75,8 @@
 
 	{#if userInfo.quote}
 		<footer class="card-footer">
-			<blockquote class="blockquote">
-				<SvelteMarkdown
-					options={{ breaks: true }}
-					renderers={renderer}
-					source={userInfoGenerated.quote}
-				/>
+			<blockquote class="blockquote prose dark:prose-invert">
+				<SvelteMarkdown options={{ breaks: true }} source={userInfoGenerated.quote} />
 			</blockquote>
 		</footer>
 	{/if}
