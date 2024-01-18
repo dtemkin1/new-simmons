@@ -2,7 +2,17 @@
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
 
+	import { goto } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
+
 	let inDB = $page.url.pathname.includes(`${base}/sds`);
+
+	let url = $page.url.pathname;
+	let errorCode = $page.status;
+
+	if (url.includes('.php') && errorCode === 404) {
+		redirect(302, url.replace('.php', ''));
+	}
 </script>
 
 {#if !inDB}
