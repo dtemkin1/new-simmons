@@ -37,7 +37,7 @@ export const actions = {
 			});
 		}
 
-		const session = await locals.getSession();
+		const session = await locals.auth();
 		const username = session?.user?.id;
 
 		if (username == null || username == '') {
