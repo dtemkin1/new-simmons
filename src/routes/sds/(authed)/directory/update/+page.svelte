@@ -125,9 +125,16 @@
 						type="text"
 						name="favorite_category"
 						value={result.favorite_category}
+						placeholder="Color"
 					/>
 					<div class="input-group-shim">is</div>
-					<input class="input" type="text" name="favorite_value" value={result.favorite_value} />
+					<input
+						class="input"
+						type="text"
+						name="favorite_value"
+						value={result.favorite_value}
+						placeholder="Blue"
+					/>
 				</div>
 			</label>
 			<label>
