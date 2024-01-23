@@ -169,14 +169,14 @@
 			</label>
 			<label>
 				<span>Reminders</span>
-				<div class="input-group input-group-divider grid-cols-[5fr_2fr_5fr]">
-					<div class="input-group-shim">When I have reminders, I want to</div>
-					<select class="select" name="showreminders">
+				<p>
+					When I have reminders, I want to
+					<select class="select w-fit" name="showreminders">
 						<option value={true} selected={result.showreminders}>show</option>
 						<option value={false} selected={!result.showreminders}>hide</option>
 					</select>
-					<div class="input-group-shim">the yellow reminders box.</div>
-				</div>
+					the yellow reminders box.
+				</p>
 			</label>
 			<div class="grid grid-cols-[1fr_1fr] gap-4">
 				<input type="submit" class="btn variant-filled-success" value="Save it away, boss!" />
