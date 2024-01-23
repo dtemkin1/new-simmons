@@ -78,7 +78,11 @@ const authHandle = SvelteKitAuth(async () => {
 			},
 			async session({ session, token }: { session: Session; user?: User; token?: JWT }) {
 				// session.user = await SessionBuilder.initialize('', token?.sub ?? 'GUEST', false, event);
-				session.user = { id: token?.sub, groups: await getGroups(token?.sub) };
+				session.user = <User>{
+					id: token?.sub,
+					groups: await getGroups(token?.sub),
+					data: { reminders: {} }
+				};
 				return session;
 			}
 		}

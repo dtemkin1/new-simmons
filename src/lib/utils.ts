@@ -25,3 +25,27 @@ export function requireGroups(session: Session | null, ...groups: string[]) {
 
 	return true;
 }
+
+export function sdsSetReminder(
+	session: Session | null,
+	reminderName: string,
+	reminderMessage: string
+) {
+	session!.user!.data!.reminders[reminderName] = reminderMessage;
+}
+
+export function sdsClearReminder(session: Session | null, reminderName: string) {
+	delete session!.user!.data!.reminders[reminderName];
+}
+
+export function sdsClearReminders(session: Session | null) {
+	session!.user!.data!.reminders = {};
+}
+
+export function sdsGetReminders(session: Session | null) {
+	return session!.user!.data!.reminders;
+}
+
+export function sdsGetReminder(session: Session | null, reminderName: string) {
+	return session!.user!.data!.reminders[reminderName];
+}

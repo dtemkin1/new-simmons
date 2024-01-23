@@ -9,6 +9,7 @@ import rand from 'locutus/php/math/rand';
 import mt_rand from 'locutus/php/math/mt_rand';
 import chr from 'locutus/php/strings/chr';
 import serialize from 'locutus/php/var/serialize';
+import type { Session } from '@auth/sveltekit';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -34,6 +35,9 @@ const sql = createSqlTag({
 		}),
 		data: z.object({
 			data: z.string().nullable()
+		}),
+		reminders: z.object({
+			reminders: z.boolean()
 		})
 	}
 });
@@ -162,4 +166,46 @@ export async function sdsGetFullName(username: string) {
 	}
 
 	return fullname;
+}
+
+export async function sdsShowReminders(session: Session | null) {
+	const query = sql.typeAlias(
+		'void'
+	)`UPDATE directory SET showreminders=TRUE WHERE username=${session!.user!.id ?? ''}`;
+
+	const result = await pool.query(query);
+
+	if (result.rowCount == 0) {
+		return null;
+	}
+
+	return result.rowCount == 1;
+}
+
+export async function sdsHideReminders(session: Session | null) {
+	const query = sql.typeAlias(
+		'void'
+	)`UPDATE directory SET showreminders=FALSE WHERE username=${session!.user!.id ?? ''}`;
+
+	const result = await pool.query(query);
+
+	if (result.rowCount == 0) {
+		return null;
+	}
+
+	return result.rowCount == 1;
+}
+
+export async function sdsIsShowingReminders(session: Session | null) {
+	const query = sql.typeAlias(
+		'reminders'
+	)`SELECT showreminders FROM directory WHERE username=${session!.user!.id ?? ''}`;
+
+	const result = await pool.maybeOneFirst(query);
+
+	if (result == null) {
+		return true;
+	}
+
+	return result;
 }
