@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
 
-	import { goto } from '$app/navigation';
 	import { redirect } from '@sveltejs/kit';
 
 	let inDB = $page.url.pathname.includes(`${base}/sds`);
@@ -56,6 +55,11 @@
 				<li>a mistyped address</li>
 				<li>an out-of-date link</li>
 			</ul>
+		{:else if $page.status === 403}
+			<p>
+				You do not have the proper privileges to access this page. If you believe this is an error,
+				you can try to log in again.
+			</p>
 		{/if}
 		<p class="text-center">
 			Please <a class="anchor" href="mailto:simmons-tech@mit.edu">contact the Tech Chairs</a> to

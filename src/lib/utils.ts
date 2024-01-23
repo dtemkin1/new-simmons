@@ -1,6 +1,5 @@
 import type { Session } from '@auth/sveltekit';
-import { SDS_LOGIN_URL } from './config';
-import { redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 export function checkInGroup(groupName: string) {
 	return (session: Session | null) => {
@@ -20,9 +19,8 @@ export function requireGroups(session: Session | null, ...groups: string[]) {
 			allow = true;
 		}
 	}
-
 	if (!allow && !session?.user?.groups?.includes('ADMINISTRATORS')) {
-		redirect(302, SDS_LOGIN_URL);
+		error(403, 'Forbidden');
 	}
 
 	return true;
