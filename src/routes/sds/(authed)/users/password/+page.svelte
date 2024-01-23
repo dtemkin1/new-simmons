@@ -40,7 +40,7 @@
 <div class="flex flex-col items-center p-4">
 	<div class="flex flex-col items-center h-full gap-4 container self-center">
 		<div class="self-center">
-			<h1 class="h1 text-center">Password for {$page.data.session?.user?.id}</h1>
+			<h1 class="h1 text-center">Password for {$page.data.session?.user?.username}</h1>
 		</div>
 		<div>
 			{#await data.checkOldPassword}

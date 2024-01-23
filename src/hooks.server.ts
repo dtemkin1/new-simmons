@@ -1,4 +1,4 @@
-import { SvelteKitAuth } from '@auth/sveltekit';
+import { SvelteKitAuth, type SvelteKitAuthConfig, type User } from '@auth/sveltekit';
 import type { OIDCConfig } from '@auth/sveltekit/providers';
 import Credentials from '@auth/sveltekit/providers/credentials';
 import { env } from '$env/dynamic/private';
@@ -9,6 +9,8 @@ import type { JWT } from '@auth/core/jwt';
 
 const { AUTH_REDIRECT_PROXY_URL, AUTH_SECRET, CLIENT_ID, CLIENT_SECRET } = env;
 import { getGroups, getUser } from '$lib/server/dbUtils';
+import type { Handle } from '@sveltejs/kit';
+// import { Session as SessionBuilder } from '$lib/server/dbUtils';
 
 const AUTHORITY_URI = 'https://petrock.mit.edu';
 
@@ -61,28 +63,27 @@ const credentialsProvider = Credentials({
 	}
 });
 
-const authHandle = SvelteKitAuth({
-	redirectProxyUrl: AUTH_REDIRECT_PROXY_URL,
-	providers: [credentialsProvider, petrockProvider],
-	secret: AUTH_SECRET,
-	session: { strategy: 'jwt' },
-	callbacks: {
-		async jwt({ token, user }) {
-			if (user) {
-				token.sub = user.id;
+const authHandle = SvelteKitAuth(async () => {
+	const authOptions: SvelteKitAuthConfig = {
+		redirectProxyUrl: AUTH_REDIRECT_PROXY_URL,
+		providers: [credentialsProvider, petrockProvider],
+		secret: AUTH_SECRET,
+		session: { strategy: 'jwt' },
+		callbacks: {
+			async jwt({ token, user }) {
+				if (user) {
+					token.sub = user.id;
+				}
+				return token;
+			},
+			async session({ session, token }: { session: Session; user?: User; token?: JWT }) {
+				// session.user = await SessionBuilder.initialize('', token?.sub ?? 'GUEST', false, event);
+				session.user = { username: token?.sub, groups: await getGroups(token?.sub) };
+				return session;
 			}
-			return token;
-		},
-		// @ts-expect-error: authjs bug, wait for fix
-		async session({ session, token }: { session: Session; token: JWT }) {
-			if (session.user) {
-				session.user.id = token.sub;
-				session.user.groups = await getGroups(session.user.id);
-			}
-			return session;
 		}
-	},
-	debug: process.argv.includes('dev')
-});
+	};
+	return authOptions;
+}) satisfies Handle;
 
 export const handle = sequence(authHandle);

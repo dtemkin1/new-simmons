@@ -38,7 +38,7 @@ export const actions = {
 		}
 
 		const session = await locals.auth();
-		const username = session?.user?.id;
+		const username = session?.user?.username;
 
 		if (username == null || username == '') {
 			redirect(302, SDS_LOGIN_URL);
@@ -87,7 +87,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 	const { session } = await parent();
 	requireGroups(session, 'USERS');
 
-	const username = session?.user?.id;
+	const username = session?.user?.username;
 
 	if (username == null || username == '') {
 		redirect(302, SDS_LOGIN_URL);

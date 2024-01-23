@@ -2,6 +2,13 @@ import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 import md5 from 'md5';
+import { error, type RequestEvent } from '@sveltejs/kit';
+import unserialize from 'locutus/php/var/unserialize';
+import uniqid from 'locutus/php/misc/uniqid';
+import rand from 'locutus/php/math/rand';
+import mt_rand from 'locutus/php/math/mt_rand';
+import chr from 'locutus/php/strings/chr';
+import serialize from 'locutus/php/var/serialize';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -17,6 +24,16 @@ const sql = createSqlTag({
 		void: z.object({}).strict(),
 		fullname: z.object({
 			fullname: z.string().nullable()
+		}),
+		username: z.object({
+			username: z.string()
+		}),
+		username_remote_addr: z.object({
+			username: z.string().nullable(),
+			remote_addr: z.string().nullable()
+		}),
+		data: z.object({
+			data: z.string().nullable()
 		})
 	}
 });
@@ -118,7 +135,7 @@ export async function setPassword(username: string, password: string | null) {
 	} else {
 		let salt = '';
 		for (let i = 0; i < 8; i++) {
-			salt += String.fromCharCode(Math.floor(Math.random() * (126 - 32 + 1)) + 32);
+			salt += chr(mt_rand(32, 126));
 		}
 		const combined = `${salt}${password}`;
 		const hash = md5(combined);
@@ -145,4 +162,117 @@ export async function sdsGetFullName(username: string) {
 	}
 
 	return fullname;
+}
+
+export async function loadData(sid: string) {
+	const data = await pool.maybeOneFirst(
+		sql.typeAlias('data')`SELECT data FROM sds_sessions WHERE sid=${sid}`
+	);
+
+	if (data == null) {
+		return {};
+	}
+
+	return (await unserialize(data)) as object;
+}
+
+export async function saveData(sid: string, data: object) {
+	const dataToSave = serialize(data);
+
+	const query = sql.typeAlias(
+		'void'
+	)`UPDATE sds_sessions SET data = ${dataToSave} WHERE sid=${sid}`;
+
+	const result = await pool.query(query);
+
+	if (result.rowCount != 1) {
+		error(500, 'Failed to save session data');
+	}
+}
+
+export class Session {
+	sessionId: string;
+	id: string;
+	remoteAddress: string;
+	data: object;
+	groups: readonly string[];
+
+	private constructor(
+		sid: string,
+		username: string,
+		remoteAddress: string,
+		data: object,
+		groups: readonly string[]
+	) {
+		this.sessionId = sid;
+		this.id = username;
+		this.remoteAddress = remoteAddress;
+		this.data = data;
+		this.groups = groups;
+	}
+
+	static async initialize(sid = '', username = 'GUEST', persistent = false, event: RequestEvent) {
+		const remoteAddressToSave = event.getClientAddress();
+		let usernameToSave: string;
+		let sidToSave: string;
+
+		if (sid === '') {
+			usernameToSave = username;
+
+			const usernameFromDB = await pool.maybeOneFirst(
+				sql.typeAlias('username')`SELECT username FROM sds_users WHERE username=${username}`
+			);
+
+			if (usernameFromDB != null) {
+				sidToSave = uniqid(rand(100, 10000));
+
+				const sessionQuery = await pool.query(
+					sql.typeAlias(
+						'void'
+					)`INSERT INTO sds_sessions (sid, username, remote_addr) VALUES (${sidToSave},${usernameToSave},${remoteAddressToSave})`
+				);
+
+				if (sessionQuery.rowCount != 1) {
+					error(500, 'Failed to create session');
+				}
+			} else {
+				error(401, 'Invalid username');
+			}
+		} else {
+			sidToSave = sid;
+
+			const sidDbResult = await pool.maybeOne(
+				sql.typeAlias(
+					'username_remote_addr'
+				)`SELECT username, remote_addr FROM sds_sessions WHERE sid=${sidToSave}`
+			);
+
+			if (sidDbResult == null) {
+				error(401, 'Invalid session');
+			} else {
+				const data = sidDbResult;
+				usernameToSave = data.username ?? '';
+				const remoteAddressFromDB = data.remote_addr;
+
+				if (remoteAddressFromDB != remoteAddressToSave) {
+					error(401, 'Invalid session');
+				}
+			}
+		}
+
+		const expirationQuery = await pool.query(
+			sql.typeAlias(
+				'void'
+			)`UPDATE sds_sessions SET expires = now() + INTERVAL '60 minutes' WHERE sid = ${sidToSave}`
+		);
+
+		if (expirationQuery.rowCount != 1) {
+			error(500, 'Could not update session');
+		}
+
+		const groups = await getGroups(usernameToSave);
+		const data = await loadData(sidToSave);
+
+		return new Session(sidToSave, usernameToSave, remoteAddressToSave, data, groups);
+	}
 }
