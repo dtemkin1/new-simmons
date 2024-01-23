@@ -52,7 +52,7 @@
 		{#if $page.data.session}
 			<p class="text-center">
 				You are currently logged in as <span class="font-bold"
-					>{$page.data.session.user?.username ?? 'Guest'}</span
+					>{$page.data.session.user?.id ?? 'Guest'}</span
 				>.
 			</p>
 			<button type="button" class="btn variant-filled-error" on:click={() => signOut()}

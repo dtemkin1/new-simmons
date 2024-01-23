@@ -2,9 +2,7 @@ import '@auth/sveltekit';
 
 declare module '@auth/sveltekit' {
 	interface User {
-		sessionId?: string;
-		username?: string;
-		remoteAddress?: string;
+		id?: string;
 		data?: object;
 		groups?: readonly string[];
 	}
