@@ -1,8 +1,16 @@
 <script lang="ts">
-	import { ProgressRadial, getToastStore, type ToastSettings } from '@skeletonlabs/skeleton';
+	import {
+		ProgressRadial,
+		getToastStore,
+		popup,
+		type ToastSettings,
+		type PopupSettings
+	} from '@skeletonlabs/skeleton';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 	import type { ActionResult } from '@sveltejs/kit';
+
+	import { invalidateAll } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -30,6 +38,12 @@
 
 		toastStore.trigger(resultToast);
 	}
+
+	const quotePopup: PopupSettings = {
+		event: 'focus-blur',
+		target: 'quotePopup',
+		placement: 'bottom'
+	};
 </script>
 
 <div
@@ -115,7 +129,23 @@
 			</label>
 			<label>
 				<span>Quote</span>
-				<textarea class="textarea font-mono" name="quote" rows="4" value={result.quote} />
+				<div class="card p-4 variant-filled max-w-xl" data-popup="quotePopup">
+					<p>
+						Quotes now support markdown, which means you can add rich text and images/gifs in your
+						quotes. Goto <a class="anchor" href="https://stackedit.io/editor"
+							>https://stackedit.io/editor</a
+						> to format your quote and then paste the markdown text (the code on the left column on that
+						website) here in the quote box.
+					</p>
+					<div class="arrow variant-filled" />
+				</div>
+				<textarea
+					class="textarea font-mono"
+					name="quote"
+					rows="4"
+					value={result.quote}
+					use:popup={quotePopup}
+				/>
 			</label>
 			<label>
 				<span>My favorite...</span>
@@ -139,7 +169,7 @@
 			</label>
 			<label>
 				<span>Reminders</span>
-				<div class="input-group input-group-divider grid-cols-[auto_auto_1fr]">
+				<div class="input-group input-group-divider grid-cols-[5fr_2fr_5fr]">
 					<div class="input-group-shim">When I have reminders, I want to</div>
 					<select class="select" name="showreminders">
 						<option value={true} selected={result.showreminders}>show</option>
@@ -150,7 +180,13 @@
 			</label>
 			<div class="grid grid-cols-[1fr_1fr] gap-4">
 				<input type="submit" class="btn variant-filled-success" value="Save it away, boss!" />
-				<input type="reset" class="btn variant-filled-error" value="Undo changes" />
+				<!-- svelte bug, cant use type="reset" (https://github.com/sveltejs/svelte/issues/8220) -->
+				<input
+					type="button"
+					class="btn variant-filled-error"
+					value="Undo changes"
+					on:click={invalidateAll}
+				/>
 			</div>
 		</form>
 
