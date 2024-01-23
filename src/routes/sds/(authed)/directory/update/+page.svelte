@@ -32,7 +32,10 @@
 	}
 </script>
 
-<div class="h-full w-full p-4">
+<div
+	class="h-full w-full p-4
+"
+>
 	{#await data.result}
 		<div class="flex items-center justify-center h-full flex-col w-full p-4">
 			<ProgressRadial />
@@ -45,6 +48,7 @@
 				Your Profile
 			{/if}
 		</h1>
+		<h2 class="h2 text-center p-2">Public Directory Entry</h2>
 		<form
 			class="space-y-4"
 			method="post"
@@ -142,5 +146,18 @@
 				<input type="reset" class="btn variant-filled-error" value="Undo changes" />
 			</div>
 		</form>
+
+		<h2 class="h2 text-center p-2">Automatic Reminders</h2>
+		<div class="flex items-center justify-center flex-col">
+			{#if Object.keys(data.reminders).length > 0}
+				<ul class="list-disc list-outside ml-6 py-2">
+					{#each data.reminders.value as reminder}<li>{reminder}</li>{/each}
+				</ul>
+			{:else}
+				<strong class="font-bold">
+					<em class="italic">You do not currently have any reminders.</em>
+				</strong>
+			{/if}
+		</div>
 	{/await}
 </div>

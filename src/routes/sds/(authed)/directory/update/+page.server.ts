@@ -1,7 +1,7 @@
 import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
-import { requireGroups, sdsGetReminder } from '$lib/utils';
+import { requireGroups, sdsGetReminder, sdsGetReminders } from '$lib/utils';
 import type { Actions, PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 
@@ -99,6 +99,8 @@ export const load: PageServerLoad = async ({ parent }) => {
 		sudo = true;
 	}
 
+	const reminders = sdsGetReminders(session);
+
 	const query = sql.typeAlias(
 		'active_directory'
 	)`SELECT * FROM active_directory WHERE username=${session?.user?.id ?? ''}`;
@@ -113,5 +115,5 @@ export const load: PageServerLoad = async ({ parent }) => {
 		return { ...resident, ...phones };
 	});
 
-	return { isSudo: sudo, result: result };
+	return { isSudo: sudo, result: result, reminders: reminders };
 };
