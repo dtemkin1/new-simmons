@@ -178,7 +178,7 @@ export const sdsLinks: SDSGroups[] = [
 			{
 				href: `${SDS_BASE}/directory/update`,
 				label: 'My Profile',
-				badge: 'Work in Progress',
+				badge: '',
 				groupNeeded: ['USERS']
 			},
 			{
