@@ -138,14 +138,25 @@
 	>.
 </p>
 <h2 class="h2">Heads Of House</h2>
-<p>
-	The Head of House team consists of <a class="anchor" href="mailto:jessig@mit.edu"
-		>John Essigmann</a
-	>, Professor of Chemistry and Biological Engineering;
-	<a class="anchor" href="mailto:emessig@mit.edu">Dr. Ellen Essigmann</a>; and
-	<a class="anchor" href="mailto:srhall@mit.edu">Steven Hall</a>, Professor of Aeronautics and
-	Astronautics.
-</p>
+<p>The Head of House team consists of:</p>
+<ul class="list-disc list-outside ml-6 py-2">
+	<li>
+		<a class="anchor" href="mailto:djperrea@mit.edu">David Perreault</a>, Joseph F. and Nancy P.
+		Keithley Professor in Electrical Engineering & Computer Science
+	</li>
+	<li>
+		<a class="anchor" href="mailto:hhn@mit.edu">Heidi Nakajima</a>, associate professor in
+		Otolaryngology-Head and Neck Surgery at Harvard Medical School
+	</li>
+	<li>
+		<a class="anchor" href="mailto:bryand@mit.edu">Bryan Bryson</a>, Assistant Professor of
+		Biological Engineering
+	</li>
+	<li>
+		<a class="anchor" href="mailto:leibyk@mit.edu">Kevin Leiby</a>, a management consultant focused
+		on economic development.
+	</li>
+</ul>
 
 <p>
 	The Head of House manage and maintain engagement to connect students, GRAs, MIT faculty, and other
@@ -179,21 +190,23 @@ old_desc
 
 <h2 class="h2">Area Director (AD)</h2>
 <p>
-	<a class="anchor" href="mailto:knshann@mit.edu">Kristen Shannon</a> is the AD assigned to Simmons Hall.
+	<a class="anchor" href="mailto:apputnam@mit.edu">Amanda Putnam</a> is the AD assigned to Simmons Hall.
 	She is responsible for providing educational programming, facilitating event planning, and working
 	with the Simmons Government to promote leadership.
 </p>
 
 <h2 class="h2">House Manager</h2>
 <p>
-	<a class="anchor" href="mailto:nikah@mit.edu.edu">Nika Hollingsworth</a> is the Simmons House Manager.
-	The house manager is responsible for the operational aspects of the building. She oversees front desk
-	operations as well as custodial and maintenance staff. Her goal is to make Simmons a safe, secure,
-	and pleasant place to live.
+	<a class="anchor" href="mailto:dasilvaj@mit.edu.edu">João "Bosco" Da Silva </a> is the Simmons House
+	Manager. The house manager is responsible for the operational aspects of the building. She oversees
+	front desk operations as well as custodial and maintenance staff. Her goal is to make Simmons a safe,
+	secure, and pleasant place to live.
 </p>
 <p>
-	Nika loves to see and meet students! Her office is in the mailbox lounge, and is almost always
-	open. <br /> Her hours are Monday-Friday, 8:30 am – 4:30 pm.
+	Bosco loves to see and meet students! His office is in the mailbox lounge, and is almost always
+	open.
+	<!-- <br />
+	His hours are Monday-Friday, 8:30 am – 4:30 pm. -->
 </p>
 
 <h2 class="h2">Residential Scholars Program</h2>
@@ -208,7 +221,7 @@ old_desc
 <p>
 	The Residential Scholars program is meant to enrich MIT with new ideas and perspectives from
 	people from elsewhere who are eager to share their wealth of life experiences. The program is
-	composed of faculty members on sabbatical leave from other institutions,international scholars,
+	composed of faculty members on sabbatical leave from other institutions, international scholars,
 	artists, industry professionals, and a limited number of MIT faculty members who have shown, by a
 	history of contributions to the community, a reason to participate in this program.
 </p>
@@ -217,9 +230,9 @@ old_desc
 	The program is based in Simmons Hall but services the entire community. The Scholars, working with
 	the permanent House Team, typically run programs on Friday evenings. Since its inception in 2003,
 	the financial resources to support the program primarily have been provided by the scholarly
-	allowance associated with the William and Betsy Leitch Professorship, which is held by John
-	Essigmann, one of the Heads of House of Simmons Hall. The community is indebted to the Leitchs for
-	their generous support of this program.
+	allowance associated with the William and Betsy Leitch Professorship<!--, which is held by John
+	Essigmann, one of the Heads of House of Simmons Hall-->.
+	The community is indebted to the Leitchs for their generous support of this program.
 </p>
 
 <!-- <p>To enquire about eligibility for the Residential Scholars Program, please contact srhall@mit.edu.  The application form is  <a href="Residential_Scholar_Application_2013-2.doc" download> here </a>. </p>
@@ -236,7 +249,7 @@ old_desc
 	and task forces in addition to their regular duties.
 </p>
 
-<h2 class="h2">Additional Information</h2>
+<!-- <h2 class="h2">Additional Information</h2>
 <ul class="list">
 	<li>
 		<span>
@@ -256,4 +269,4 @@ old_desc
 			</a>
 		</span>
 	</li>
-</ul>
+</ul> -->

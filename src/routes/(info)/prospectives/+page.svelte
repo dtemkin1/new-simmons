@@ -1,17 +1,29 @@
 <script lang="ts">
 	import i3_video from '$lib/assets/i3.mp4';
-	import i3_thumbnail from '$lib/assets/i3_thumbnail.png';
+	// import i3_captions from '$lib/assets/i3_captions.srt';
+	import i3_thumbnail from '$lib/assets/i3_thumbnail.avif';
 
 	import { base } from '$app/paths';
 
 	import { Table } from '@skeletonlabs/skeleton';
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
 
-	const rawData = {
+	interface eventType {
+		time: string;
+		event: string;
+		location: string;
+	}
+
+	interface scheduleType {
+		date: Date;
+		events: eventType[];
+	}
+
+	const rawData: { year: Number; schedule: scheduleType[] } = {
 		year: 2019,
 		schedule: [
 			{
-				date: 'Thursday, April 11',
+				date: new Date('April 11, 2019'),
 				events: [
 					{
 						time: '2:30PM-4:00PM',
@@ -46,7 +58,7 @@
 				]
 			},
 			{
-				date: 'Friday, April 12',
+				date: new Date('April 12, 2019'),
 				events: [
 					{
 						time: '8:00AM-8:30AM',
@@ -86,7 +98,7 @@
 				]
 			},
 			{
-				date: 'Saturday, April 13',
+				date: new Date('April 13, 2019'),
 				events: [
 					{
 						time: '8:30AM-11:00AM',
@@ -146,7 +158,7 @@
 				]
 			},
 			{
-				date: 'Sunday, April 14',
+				date: new Date('April 14, 2019'),
 				events: [
 					{
 						time: '8:30AM-11:00AM',
@@ -157,6 +169,12 @@
 			}
 		]
 	};
+
+	const dateMaker = new Intl.DateTimeFormat('en-US', {
+		weekday: 'long',
+		month: 'long',
+		day: 'numeric'
+	});
 </script>
 
 <h1 class="h1">Welcome, Prospectives (and freshmen)!</h1>
@@ -169,19 +187,22 @@
 
 <!-- svelte-ignore a11y-media-has-caption -->
 <video
-	class="h-full w-full rounded-container-token max-w-[787px] self-center"
+	class="h-full w-full rounded-container-token max-w-[720px]"
 	preload="none"
 	controls
 	poster={i3_thumbnail}
 >
 	<source src={i3_video} type="video/mp4" />
+	<!-- <track kind="captions" src={i3_captions} srclang="en" label="English" /> -->
 </video>
 
 <a href="{base}/videos" class="btn variant-filled-primary">More Simmons Videos (+ Past i3s)</a>
 
 <h1 class="h1">CPW {rawData.year} Event Schedule</h1>
 {#each rawData.schedule as { date, events }}
-	<h2 class="h2">{date}</h2>
+	<h2 class="h2">
+		{dateMaker.format(date)}
+	</h2>
 	<Table
 		regionCell="!whitespace-normal"
 		source={{

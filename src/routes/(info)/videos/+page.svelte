@@ -1,5 +1,32 @@
 <script lang="ts">
-	const vidData = [
+	interface vidDataType {
+		title: string;
+		link: string;
+		beforeDescription?: string;
+		afterDescription?: string;
+	}
+
+	const vidData: vidDataType[] = [
+		{
+			title: '2023 i3',
+			link: 'https://player.vimeo.com/video/829417327'
+		},
+		{
+			title: '2022 i3',
+			link: 'https://player.vimeo.com/video/714495748'
+		},
+		{
+			title: '2021 i3',
+			link: 'https://player.vimeo.com/video/553018352'
+		},
+		{
+			title: '2020 i3',
+			link: 'https://player.vimeo.com/video/417371001'
+		},
+		{
+			title: '2019 i3',
+			link: 'https://player.vimeo.com/video/333337451'
+		},
 		{
 			title: '2018 i3',
 			link: 'https://youtube.com/embed/zF6hUza_sEs',

@@ -1,18 +1,22 @@
+<script context="module" src="https://player.vimeo.com/api/player.js"></script>
+
 <script lang="ts">
 	import i3_video from '$lib/assets/i3.mp4';
-	import i3_thumbnail from '$lib/assets/i3_thumbnail.png';
+	// import i3_captions from '$lib/assets/i3_captions.vtt';
+	import i3_thumbnail from '$lib/assets/i3_thumbnail.avif';
 
 	import { base } from '$app/paths';
 </script>
 
 <!-- svelte-ignore a11y-media-has-caption -->
 <video
-	class="h-full w-full rounded-container-token max-w-[787px]"
+	class="h-full w-full rounded-container-token max-w-[720px]"
 	preload="none"
 	controls
 	poster={i3_thumbnail}
 >
 	<source src={i3_video} type="video/mp4" />
+	<!-- <track kind="captions" src={i3_captions} srclang="en" label="English" /> -->
 </video>
 
 <a href="{base}/prospectives" class="btn variant-filled-primary">

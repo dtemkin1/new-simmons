@@ -8,12 +8,15 @@
 	<a
 		class="anchor"
 		href="https://docs.google.com/document/d/1fiCCqdlvVLdkg3OoSvqt8rNFp6M5j_LHvOuHLZjqGBI/edit?usp=sharing"
-		>Fall 2021 Information</a
+		>Fall 2023 Information</a
 	>
 </h2>
 <p>Check here for important information and FAQs about the fall semester.</p>
 
-<h2 class="h2"><a class="anchor" href="{base}/sds">Simmons DB</a></h2>
+<h2 class="h2">
+	<a class="anchor" href="{base}/sds">Simmons DB</a>
+	<span class="badge variant-filled-warning">Work in Progress</span>
+</h2>
 <p>
 	This is the Simmons DB, a student-created database of our dorm life. Check this out for a
 	directory, your current packages, and the current house government proposals.
@@ -23,7 +26,10 @@
 	with the DB.
 </p>
 
-<h2 class="h2"><a class="anchor" href="{base}/officers">Simmons Government</a></h2>
+<h2 class="h2">
+	<a class="anchor" href="{base}/officers">Simmons Government</a>
+	<span class="badge variant-filled-warning">Work in Progress</span>
+</h2>
 <p>
 	Simmons has its own unique government structure. From our student led initiatives to our unique
 	social "lounge" structure to our open house meetings and proposals, we have so much to get
@@ -66,6 +72,7 @@
 
 <h2 class="h2">
 	<a class="anchor" href="https://simmons-hall.scripts.mit.edu:444/rooming/">Rooming Lottery/Map</a>
+	<span class="badge variant-filled-primary">Certs Required</span>
 </h2>
 <p>
 	View rooming lottery pick order, times, and results, or simply check out rooms in Simmons and see
@@ -146,10 +153,10 @@
 </p>
 
 <h2 class="h2"><a class="anchor" href="{base}/procard">Procard Form</a></h2>
-<p>Ask RLAD Kristen Shannon to pay for things with her procurement card.</p>
+<p>Ask Area Director Amanda Putnam to pay for things with her procurement card.</p>
 <p>
 	Contact <a class="anchor" href="mailto:simmons-treasurer@mit.edu">simmons-treasurer@mit.edu</a>
 	and
-	<a class="anchor" href="mailto:knshann@mit.edu">knshann@mit.edu</a> if you have any questions or need
-	any further assistance.
+	<a class="anchor" href="mailto:apputnam@mit.edu">apputnam@mit.edu</a> if you have any questions or
+	need any further assistance.
 </p>

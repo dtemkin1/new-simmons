@@ -38,9 +38,9 @@
 <h2 class="h2">Reserving the Multipurpose Room</h2>
 <p>
 	For non-Simmons groups who wish to reserve the Multipurpose Room and do not have a current
-	resident to act as a point of contact, please contact House Manager Nika Hollingsworth (<a
+	resident to act as a point of contact, please contact House Manager João "Bosco" Da Silva (<a
 		class="anchor"
-		href="mailto:nika_h@mit.edu">nika_h@mit.edu</a
+		href="mailto:dasilvaj@mit.edu">dasilvaj@mit.edu</a
 	>) to register the event and the Reservations Chair (<a
 		class="anchor"
 		href="mailto:simmmons-reservations@mit.edu">simmons-reservations@mit.edu</a
