@@ -14,7 +14,7 @@
 	action="{base}/sds/directory/list"
 	id="directory-search"
 >
-	<h2 class="h2 self-center">Simmons Hall Directory</h2>
+	<h2 class="h2 self-center text-center">Simmons Hall Directory</h2>
 	<label class="label">
 		<span>Firstname</span>
 		<input class="input" name="firstname" type="search" autocomplete="given-name" />

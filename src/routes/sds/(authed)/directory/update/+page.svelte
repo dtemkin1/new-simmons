@@ -46,25 +46,21 @@
 	};
 </script>
 
-<div
-	class="h-full w-full p-4
-"
->
-	{#await data.result}
-		<div class="flex items-center justify-center h-full flex-col w-full p-4">
-			<ProgressRadial />
-		</div>
-	{:then result}
-		<h1 class="h1 text-center p-2">
-			{#if data.isSudo}
-				Your <em class="italic">Impersonated</em> Profile
-			{:else}
-				Your Profile
-			{/if}
-		</h1>
-		<h2 class="h2 text-center p-2">Public Directory Entry</h2>
+{#await data.result}
+	<div class="flex items-center justify-center h-full w-full">
+		<ProgressRadial />
+	</div>
+{:then result}
+	<h1 class="h1 self-center text-center pt-4">
+		{#if data.isSudo}
+			Your <em class="italic">Impersonated</em> Profile
+		{:else}
+			Your Profile
+		{/if}
+	</h1>
+	<div class="p-2">
 		<form
-			class="space-y-4"
+			class="card p-8 flex flex-col space-y-4 m-4"
 			method="post"
 			use:enhance={({ formElement, formData, action, cancel, submitter }) => {
 				return async ({ result, update }) => {
@@ -73,6 +69,7 @@
 				};
 			}}
 		>
+			<h2 class="h2 self-center text-center">Public Directory Entry</h2>
 			<label class="label">
 				<span>Title</span>
 				<input class="input" type="text" name="title" disabled value={result.title} />
@@ -189,18 +186,18 @@
 				/>
 			</div>
 		</form>
+	</div>
 
+	<div class="flex items-center justify-center flex-col pb-4">
 		<h2 class="h2 text-center p-2">Automatic Reminders</h2>
-		<div class="flex items-center justify-center flex-col">
-			{#if Object.keys(data.reminders).length > 0}
-				<ul class="list-disc list-outside ml-6 py-2">
-					{#each data.reminders.value as reminder}<li>{reminder}</li>{/each}
-				</ul>
-			{:else}
-				<strong class="font-bold">
-					<em class="italic">You do not currently have any reminders.</em>
-				</strong>
-			{/if}
-		</div>
-	{/await}
-</div>
+		{#if Object.keys(data.reminders).length > 0}
+			<ul class="list-disc list-outside ml-6 py-2">
+				{#each data.reminders.value as reminder}<li>{reminder}</li>{/each}
+			</ul>
+		{:else}
+			<strong class="font-bold">
+				<em class="italic">You do not currently have any reminders.</em>
+			</strong>
+		{/if}
+	</div>
+{/await}

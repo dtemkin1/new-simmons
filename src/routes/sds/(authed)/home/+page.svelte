@@ -7,8 +7,12 @@
 	export let data: PageData;
 </script>
 
-<div class="flex flex-col items-center p-4">
-	<div class="flex flex-col items-center h-full gap-4 container self-center">
+{#await data.randomResident}
+	<div class="flex items-center justify-center h-full w-full">
+		<ProgressRadial />
+	</div>
+{:then randomResident}
+	<div class="flex flex-col items-center p-4 h-full gap-4">
 		<div class="self-center">
 			<h1 class="h1 text-center">Welcome to the Simmons DB</h1>
 		</div>
@@ -19,11 +23,7 @@
 			</p>
 		</div>
 		<div>
-			{#await data.randomResident}
-				<div class="p-4"><ProgressRadial /></div>
-			{:then randomResident}
-				<FifteenSeconds userInfo={randomResident} />
-			{/await}
+			<FifteenSeconds userInfo={randomResident} />
 		</div>
 
 		<div class="space-y-4">
@@ -66,4 +66,4 @@
 			</p> -->
 		</div>
 	</div>
-</div>
+{/await}

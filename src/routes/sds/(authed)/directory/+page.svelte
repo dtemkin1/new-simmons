@@ -6,10 +6,12 @@
 	export let data: PageData;
 </script>
 
-<div class="flex items-center justify-center h-full pt-2">
-	{#await Promise.all([data.years, data.lounges, data.gras])}
-		<div class="p-4"><ProgressRadial /></div>
-	{:then [years, lounges, gras]}
+{#await Promise.all([data.years, data.lounges, data.gras])}
+	<div class="flex items-center justify-center h-full w-full">
+		<ProgressRadial />
+	</div>
+{:then [years, lounges, gras]}
+	<div class="p-2">
 		<DirectorySearch data={{ years: years, lounges: lounges, gras: gras }} />
-	{/await}
-</div>
+	</div>
+{/await}
