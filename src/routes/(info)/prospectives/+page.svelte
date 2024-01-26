@@ -185,16 +185,18 @@
 	Institute, and we can't wait to show you why.
 </p>
 
-<!-- svelte-ignore a11y-media-has-caption -->
-<video
-	class="h-full w-full rounded-container-token max-w-[720px]"
-	preload="none"
-	controls
-	poster={i3_thumbnail}
->
-	<source src={i3_video} type="video/mp4" />
-	<!-- <track kind="captions" src={i3_captions} srclang="en" label="English" /> -->
-</video>
+<div class="flex items-center justify-center flex-col space-y-4">
+	<!-- svelte-ignore a11y-media-has-caption -->
+	<video
+		class="h-full w-full rounded-container-token max-w-[720px]"
+		preload="none"
+		controls
+		poster={i3_thumbnail}
+	>
+		<source src={i3_video} type="video/mp4" />
+		<!-- <track kind="captions" src={i3_captions} srclang="en" label="English" /> -->
+	</video>
+</div>
 
 <a href="{base}/videos" class="btn variant-filled-primary">More Simmons Videos (+ Past i3s)</a>
 
