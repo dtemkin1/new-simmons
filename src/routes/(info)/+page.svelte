@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import i3_video from '$lib/assets/i3.mp4';
-	// import i3_captions from '$lib/assets/i3_captions.vtt';
+	import i3_captions from '$lib/assets/i3_captions.vtt';
 	import i3_thumbnail from '$lib/assets/i3_thumbnail.avif';
 
 	import { base } from '$app/paths';
@@ -16,7 +16,7 @@
 	poster={i3_thumbnail}
 >
 	<source src={i3_video} type="video/mp4" />
-	<!-- <track kind="captions" src={i3_captions} srclang="en" label="English" /> -->
+	<track default kind="captions" src={i3_captions} srclang="en" label="English" />
 </video>
 
 <a href="{base}/prospectives" class="btn variant-filled-primary">
