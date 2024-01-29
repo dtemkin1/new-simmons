@@ -14,6 +14,8 @@ import { type RequestEvent } from '@sveltejs/kit';
 import serialize from 'locutus/php/var/serialize';
 import { dev } from '$app/environment';
 import { env } from '$env/dynamic/private';
+import { SDS_HOME_URL } from '$lib/config';
+
 const { CLIENT_SECRET } = env;
 
 const sql = createSqlTag({
@@ -70,7 +72,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		return new Response(null, {
 			status: 302,
 			headers: {
-				Location: '/'
+				Location: `${SDS_HOME_URL}`
 			}
 		});
 	} catch (e) {
