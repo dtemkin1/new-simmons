@@ -17,8 +17,8 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'USERS');
+	const { groups } = await parent();
+	requireGroups(groups, 'USERS');
 
 	const advisors = pool.any(sql.typeAlias('advisors')`
         SELECT username,

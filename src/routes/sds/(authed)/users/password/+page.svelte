@@ -3,7 +3,7 @@
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 
-	import type { PageData, ActionData } from './$types';
+	import type { PageData } from './$types';
 	export let data: PageData;
 	// export let form: ActionData;
 	import type { ActionResult } from '@sveltejs/kit';

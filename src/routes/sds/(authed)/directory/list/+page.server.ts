@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { redirect, fail } from '@sveltejs/kit';
 import { base } from '$app/paths';
 import { requireGroups } from '$lib/utils';
+import { getGroups } from '$lib/server/dbUtils';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -46,9 +47,9 @@ export const actions = {
 		const lounge = (data.get('lounge') as string) || '';
 		const gra = (data.get('gra') as string) || '';
 
-		const session = await locals.auth();
+		const groups = await getGroups(locals.user?.username);
 		const directory =
-			session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
+			groups.includes('DESK') || groups.includes('RAC')
 				? 'active_directory'
 				: 'public_active_directory';
 
@@ -114,11 +115,11 @@ export const actions = {
 } satisfies Actions;
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'EVERYONE');
+	const { groups } = await parent();
+	requireGroups(groups, 'EVERYONE');
 
 	const directory =
-		session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
+		groups.includes('DESK') || groups.includes('RAC')
 			? 'active_directory'
 			: 'public_active_directory';
 

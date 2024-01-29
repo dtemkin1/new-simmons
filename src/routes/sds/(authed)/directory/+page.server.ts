@@ -20,11 +20,11 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'EVERYONE');
+	const { groups } = await parent();
+	requireGroups(groups, 'EVERYONE');
 
 	const directory =
-		session?.user?.groups?.includes('DESK') || session?.user?.groups?.includes('RAC')
+		groups.includes('DESK') || groups.includes('RAC')
 			? 'active_directory'
 			: 'public_active_directory';
 

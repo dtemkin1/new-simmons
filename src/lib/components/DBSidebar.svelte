@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { AppRail, AppRailAnchor, AppRailTile } from '@skeletonlabs/skeleton';
 
-	export let session: Session | null | undefined;
+	export let username: string | null = null;
+	export let groups: readonly string[] = [];
 	import { page } from '$app/stores';
 	import { CircleUser } from 'lucide-svelte';
 	import { sdsLinks } from '$lib/data/navLinks';
@@ -10,7 +11,6 @@
 
 	import { onNavigate } from '$app/navigation';
 	import { SDS_LOGIN_URL } from '$lib/config';
-	import type { Session } from '@auth/sveltekit';
 
 	onNavigate((params) => {
 		if (params.to?.url.pathname.includes('/sds')) {
@@ -21,7 +21,7 @@
 	let userLinks: typeof sdsLinks = [];
 	for (const linkGroup of sdsLinks) {
 		const allLinks = linkGroup.links.filter((link) =>
-			session?.user?.groups?.some((group) => link.groupNeeded.includes(group))
+			groups.some((group) => link.groupNeeded.includes(group))
 		);
 		if (allLinks.length > 0) {
 			userLinks.push({
@@ -33,12 +33,11 @@
 			});
 		}
 	}
-
 	$: activeGroup = userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] };
 </script>
 
 <div class="h-full flex flex-row">
-	{#if $page.data.session?.user}
+	{#if $page.data.username}
 		<AppRail>
 			<svelte:fragment slot="lead">
 				{#each userLinks as tileLinks}
@@ -68,7 +67,7 @@
 				<AppRailAnchor href={SDS_LOGIN_URL} title="Account"
 					><svelte:fragment slot="lead">
 						<CircleUser size={'1.5rem'} />
-					</svelte:fragment>{$page.data.session.user?.id ?? 'Guest'}</AppRailAnchor
+					</svelte:fragment>{username ?? 'Guest'}</AppRailAnchor
 				>
 			</svelte:fragment>
 		</AppRail>

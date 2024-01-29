@@ -4,6 +4,7 @@ import { redirect, fail } from '@sveltejs/kit';
 import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
+
 import { setPassword, verifyPasswordUnhashed } from '$lib/server/dbUtils';
 import { SDS_LOGIN_URL } from '$lib/config';
 import { requireGroups } from '$lib/utils';
@@ -37,8 +38,7 @@ export const actions = {
 			});
 		}
 
-		const session = await locals.auth();
-		const username = session?.user?.id;
+		const username = locals.user?.username;
 
 		if (username == null || username == '') {
 			redirect(302, SDS_LOGIN_URL);
@@ -84,10 +84,8 @@ export const actions = {
 } satisfies Actions;
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'USERS');
-
-	const username = session?.user?.id;
+	const { username, groups } = await parent();
+	requireGroups(groups, 'USERS');
 
 	if (username == null || username == '') {
 		redirect(302, SDS_LOGIN_URL);

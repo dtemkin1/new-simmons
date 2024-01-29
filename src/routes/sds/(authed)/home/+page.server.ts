@@ -28,8 +28,8 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'EVERYONE');
+	const { groups } = await parent();
+	requireGroups(groups, 'EVERYONE');
 
 	const randomResident = pool.transaction(async (connection) => {
 		const residentsQuery = connection.one(sql.typeAlias('resident')`

@@ -72,7 +72,7 @@
 				href="mailto:simmons-medlinks@mit.edu">simmons-medlinks@mit.edu</a
 			>.
 		</p>
-		{#if data.session?.user?.groups?.includes('ADMINISTRATORS')}
+		{#if data.groups.includes('ADMINISTRATORS')}
 			<p class="text-center pb-2">
 				<a class="anchor" href="{base}/sds/directory/medlink_setup">Edit List</a>
 				<!-- TODO: MAKE MEDLINK SETUP PAGE -->

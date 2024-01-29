@@ -30,8 +30,8 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'USERS');
+	const { groups } = await parent();
+	requireGroups(groups, 'USERS');
 
 	const itChair = sdsGetStrOption('itchair');
 	const version = pool.oneFirst(sql.typeAlias('version')`SELECT split_part(version(),' on ',1)`);

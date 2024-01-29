@@ -1,10 +1,10 @@
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ parent, data }) => {
-	const { session } = await parent();
+	const { username } = await parent();
 
 	return {
-		title: `Password for ${session?.user?.id}`,
+		title: `Password for ${username}`,
 		description: ``,
 		...data
 	};

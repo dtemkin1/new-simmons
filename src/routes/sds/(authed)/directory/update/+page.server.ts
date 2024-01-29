@@ -41,8 +41,8 @@ const sql = createSqlTag({
 
 export const actions = {
 	default: async ({ request, locals }) => {
-		const session = await locals.auth();
 		const data = await request.formData();
+		const username = locals.user?.username;
 
 		const homepage = (data.get('homepage') as string | null) ?? '';
 		const phone = (data.get('phone') as string | null) ?? '';
@@ -79,7 +79,7 @@ export const actions = {
         quote=${quote},
         favorite_category=${favorite_category},
         favorite_value=${favorite_value}
-        WHERE username=${session?.user?.id ?? ''}`);
+        WHERE username=${username ?? ''}`);
 
 		if (updateQuery.rowCount == 0) {
 			fail(500, { message: 'Directory update failed' });
@@ -89,21 +89,21 @@ export const actions = {
 	}
 } satisfies Actions;
 
-export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'USERS');
+export const load: PageServerLoad = async ({ parent, locals }) => {
+	const { groups, username } = await parent();
+	requireGroups(groups, 'USERS');
 
 	let sudo = false;
 
-	if (sdsGetReminder(session, 'sudo')) {
+	if (sdsGetReminder(locals.session, 'sudo')) {
 		sudo = true;
 	}
 
-	const reminders = sdsGetReminders(session);
+	const reminders = sdsGetReminders(locals.session);
 
 	const query = sql.typeAlias(
 		'active_directory'
-	)`SELECT * FROM active_directory WHERE username=${session?.user?.id ?? ''}`;
+	)`SELECT * FROM active_directory WHERE username=${username ?? ''}`;
 
 	const result = pool.transaction(async (connection) => {
 		const resident = await connection.one(query);

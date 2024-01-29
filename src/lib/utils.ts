@@ -1,9 +1,9 @@
-import type { Session } from '@auth/sveltekit';
 import { error } from '@sveltejs/kit';
+import type { Session } from 'lucia';
 
 export function checkInGroup(groupName: string) {
-	return (session: Session | null) => {
-		if (session?.user?.groups?.includes(groupName)) {
+	return (userGroups: readonly string[]) => {
+		if (userGroups.includes(groupName)) {
 			return true;
 		} else {
 			return false;
@@ -11,15 +11,15 @@ export function checkInGroup(groupName: string) {
 	};
 }
 
-export function requireGroups(session: Session | null, ...groups: string[]) {
+export function requireGroups(userGroups: readonly string[], ...groups: string[]) {
 	let allow = false;
 
 	for (const group of groups) {
-		if (checkInGroup(group)(session)) {
+		if (checkInGroup(group)(userGroups)) {
 			allow = true;
 		}
 	}
-	if (!allow && !session?.user?.groups?.includes('ADMINISTRATORS')) {
+	if (!allow && groups.includes('ADMINISTRATORS')) {
 		error(403, 'Forbidden');
 	}
 
@@ -31,21 +31,45 @@ export function sdsSetReminder(
 	reminderName: string,
 	reminderMessage: string
 ) {
-	session!.user!.data!.reminders[reminderName] = reminderMessage;
+	if (!session?.data.reminders) {
+		session!.data.reminders = {};
+	}
+	session!.data.reminders[reminderName] = reminderMessage;
 }
 
 export function sdsClearReminder(session: Session | null, reminderName: string) {
-	delete session!.user!.data!.reminders[reminderName];
+	if (!session) {
+		error(400, 'No session');
+	}
+	if (!session.data.reminders) {
+		session.data.reminders = {};
+	}
+	delete session.data.reminders[reminderName];
 }
 
 export function sdsClearReminders(session: Session | null) {
-	session!.user!.data!.reminders = {};
+	if (!session) {
+		error(400, 'No session');
+	}
+	session.data.reminders = {};
 }
 
 export function sdsGetReminders(session: Session | null) {
-	return session!.user!.data!.reminders;
+	if (!session) {
+		error(400, 'No session');
+	}
+	if (!session.data.reminders) {
+		session.data.reminders = {};
+	}
+	return session.data.reminders;
 }
 
 export function sdsGetReminder(session: Session | null, reminderName: string) {
-	return session!.user!.data!.reminders[reminderName];
+	if (!session) {
+		error(400, 'No session');
+	}
+	if (!session.data.reminders) {
+		session.data.reminders = {};
+	}
+	return session.data.reminders[reminderName];
 }

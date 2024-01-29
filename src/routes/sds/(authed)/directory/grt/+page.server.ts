@@ -18,8 +18,8 @@ const sql = createSqlTag({
 });
 
 export const load: PageServerLoad = async ({ parent }) => {
-	const { session } = await parent();
-	requireGroups(session, 'USERS');
+	const { groups } = await parent();
+	requireGroups(groups, 'USERS');
 
 	const gras = pool.any(sql.typeAlias('gra')`
         SELECT username,COALESCE(title||' ','')||firstname||' '||lastname AS name,

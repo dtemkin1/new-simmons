@@ -2,14 +2,8 @@ import { pool } from '$lib/server/db';
 import { createSqlTag } from 'slonik';
 import { z } from 'zod';
 import md5 from 'md5';
-import { error, type RequestEvent } from '@sveltejs/kit';
-import unserialize from 'locutus/php/var/unserialize';
-import uniqid from 'locutus/php/misc/uniqid';
-import rand from 'locutus/php/math/rand';
 import mt_rand from 'locutus/php/math/mt_rand';
 import chr from 'locutus/php/strings/chr';
-import serialize from 'locutus/php/var/serialize';
-import type { Session } from '@auth/sveltekit';
 
 const sql = createSqlTag({
 	typeAliases: {
@@ -168,10 +162,10 @@ export async function sdsGetFullName(username: string) {
 	return fullname;
 }
 
-export async function sdsShowReminders(session: Session | null) {
+export async function sdsShowReminders(username: string) {
 	const query = sql.typeAlias(
 		'void'
-	)`UPDATE directory SET showreminders=TRUE WHERE username=${session!.user!.id ?? ''}`;
+	)`UPDATE directory SET showreminders=TRUE WHERE username=${username ?? ''}`;
 
 	const result = await pool.query(query);
 
@@ -182,10 +176,10 @@ export async function sdsShowReminders(session: Session | null) {
 	return result.rowCount == 1;
 }
 
-export async function sdsHideReminders(session: Session | null) {
+export async function sdsHideReminders(username: string) {
 	const query = sql.typeAlias(
 		'void'
-	)`UPDATE directory SET showreminders=FALSE WHERE username=${session!.user!.id ?? ''}`;
+	)`UPDATE directory SET showreminders=FALSE WHERE username=${username ?? ''}`;
 
 	const result = await pool.query(query);
 
@@ -196,10 +190,10 @@ export async function sdsHideReminders(session: Session | null) {
 	return result.rowCount == 1;
 }
 
-export async function sdsIsShowingReminders(session: Session | null) {
+export async function sdsIsShowingReminders(username: string) {
 	const query = sql.typeAlias(
 		'reminders'
-	)`SELECT showreminders FROM directory WHERE username=${session!.user!.id ?? ''}`;
+	)`SELECT showreminders FROM directory WHERE username=${username ?? ''}`;
 
 	const result = await pool.maybeOneFirst(query);
 

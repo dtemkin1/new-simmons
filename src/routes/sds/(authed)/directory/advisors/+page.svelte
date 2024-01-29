@@ -66,7 +66,7 @@
 			life to academics, feel free to reach out to us!
 		</p>
 
-		{#if data.session?.user?.groups?.includes('ADMINISTRATORS')}
+		{#if data.groups.includes('ADMINISTRATORS')}
 			<p class="text-center pb-2">
 				<a class="anchor" href="{base}/sds/directory/advisor_setup">Edit List</a>
 				<!-- TODO: MAKE ADVISOR SETUP PAGE -->
