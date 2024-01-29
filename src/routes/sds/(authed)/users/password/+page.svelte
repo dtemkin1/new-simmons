@@ -43,7 +43,7 @@
 	</div>
 {:then checkOldPassword}
 	<div class="flex flex-col items-center gap-4 self-center p-4">
-		<h1 class="h1 text-center self-center">Password for {$page.data.session?.user?.id}</h1>
+		<h1 class="h1 text-center self-center">Password for {data.username}</h1>
 		<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-2">
 			<form
 				class="flex flex-col gap-4 grow"

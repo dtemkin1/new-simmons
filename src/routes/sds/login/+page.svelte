@@ -67,11 +67,9 @@
 
 <div class="flex items-center justify-center h-full">
 	<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-8">
-		{#if $page.data.session}
+		{#if data.session}
 			<p class="text-center">
-				You are currently logged in as <span class="font-bold"
-					>{$page.data.username ?? 'Guest'}</span
-				>.
+				You are currently logged in as <span class="font-bold">{data.username ?? 'Guest'}</span>.
 			</p>
 			<form method="post" use:enhance action="?/logout" class="flex flex-col gap-4 grow">
 				<button type="submit" class="btn variant-filled-error">Sign out</button>
