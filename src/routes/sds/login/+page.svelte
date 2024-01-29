@@ -12,7 +12,7 @@
 
 	onMount(() => {
 		if (data.auto) {
-			redirect(302, '/api/auth/signin/petrock');
+			redirect(302, `${base}/sds/login/petrock`);
 		}
 	});
 
@@ -116,7 +116,7 @@
 			</form>
 			<hr />
 			<form class="flex flex-col grow">
-				<a href="{base}/auth/signin/petrock" type="button" class="btn variant-filled-success"
+				<a href="{base}/sds/login/petrock" type="button" class="btn variant-filled-success"
 					>Sign In with Touchstone</a
 				>
 			</form>
