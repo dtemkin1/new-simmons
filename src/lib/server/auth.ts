@@ -63,7 +63,6 @@ import { OAuth2Client, generateCodeVerifier } from 'oslo/oauth2';
 import unserialize from 'locutus/php/var/unserialize';
 
 import { env } from '$env/dynamic/private';
-import { base } from '$app/paths';
 const { CLIENT_ID } = env;
 
 const baseURI = 'https://petrock.mit.edu';
@@ -77,7 +76,7 @@ export const scopes = ['openid', 'email', 'profile'];
 
 export const client = new OAuth2Client(CLIENT_ID, authorizeEndpoint, tokenEndpoint, {
 	// TODO: CHANGE WHEN PERMANENT URL FOUND
-	redirectURI: `http://new-simmons-mit.netlify.app:3000/${base}/sds/login/callback/petrock`
+	redirectURI: `https://new-simmons-mit.netlify.app/auth/callback/petrock`
 });
 
 export const codeVerifier = generateCodeVerifier();
