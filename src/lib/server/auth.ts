@@ -5,8 +5,6 @@ import { dev } from '$app/environment';
 import { pool } from './db';
 
 const adapter = new SlonikAdapter(pool, {
-	user_view: 'new_sds_user',
-	session_view: 'new_sds_sessions',
 	user_table: 'sds_users_all',
 	session_table: 'sds_sessions'
 });
@@ -21,11 +19,6 @@ export const lucia = new Lucia(adapter, {
 		}
 	},
 	sessionExpiresIn: new TimeSpan(7, 'd'),
-	getUserAttributes: (attributes: DatabaseUserAttributes) => {
-		return {
-			username: attributes.username
-		};
-	},
 	getSessionAttributes: (attributes: DatabaseSessionAttributes) => {
 		let data: Partial<Record<DataKeys, Record<string, string>>> = {};
 		if (attributes.data) {
@@ -46,7 +39,6 @@ declare module 'lucia' {
 }
 
 interface DatabaseUserAttributes {
-	username: string;
 	password: string | null;
 	salt: string | null;
 	active: boolean;

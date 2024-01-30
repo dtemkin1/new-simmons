@@ -83,8 +83,8 @@ export const actions = {
 export const load: PageServerLoad = async ({ locals }) => {
 	return {
 		session: locals.session,
-		username: locals.user?.username,
-		groups: await getGroups(locals.user?.username),
+		username: locals.user?.id,
+		groups: await getGroups(locals.user?.id),
 		data: locals.session?.data
 	};
 };

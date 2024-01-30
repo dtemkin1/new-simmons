@@ -13,7 +13,6 @@ type ObjectEntries<BaseType> = Array<[keyof BaseType, BaseType[keyof BaseType]]>
 
 interface UserSchema extends RegisteredDatabaseUserAttributes {
 	id: string;
-	username: string;
 	password: string | null;
 	salt: string | null;
 	active: boolean;
@@ -33,14 +32,13 @@ const sql = createSqlTag({
 	typeAliases: {
 		void: z.object({}).strict(),
 		session: z.object({
-			id: z.string(),
-			user_id: z.string(),
-			expires_at: z.coerce.date(),
+			sid: z.string(),
+			username: z.string(),
+			expires: z.coerce.date(),
 			remote_addr: z.string(),
 			data: z.string().nullable()
 		}),
 		user: z.object({
-			id: z.string(),
 			username: z.string(),
 			password: z.string().nullable(),
 			salt: z.string().nullable(),
@@ -52,16 +50,12 @@ const sql = createSqlTag({
 });
 
 export class SlonikAdapter implements Adapter {
-	private userView: string;
-	private sessionView: string;
 	private userTable: string;
 	private sessionTable: string;
 	private connection: DatabaseConnection;
 
 	constructor(connection: DatabaseConnection, tableNames: TableNames) {
 		this.connection = connection;
-		this.userView = tableNames.user_view;
-		this.sessionView = tableNames.session_view;
 		this.userTable = tableNames.user_table;
 		this.sessionTable = tableNames.session_table;
 	}
@@ -118,7 +112,14 @@ export class SlonikAdapter implements Adapter {
 		);
 
 		return result.map((val) => {
-			return transformIntoDatabaseSession(val);
+			const val_to_use = {
+				id: val.sid,
+				user_id: val.username,
+				expires_at: val.expires,
+				remote_addr: val.remote_addr,
+				data: val.data
+			};
+			return transformIntoDatabaseSession(val_to_use);
 		});
 	}
 	/**
@@ -174,26 +175,43 @@ export class SlonikAdapter implements Adapter {
 		const result = await this.connection.any(
 			sql.typeAlias(
 				'session'
-			)`SELECT * FROM ${sql.identifier([this.sessionView])} WHERE id = ${sessionId}`
+			)`SELECT * FROM ${sql.identifier([this.sessionTable])} WHERE sid = ${sessionId}`
 		);
 		if (!result) return null;
-		return transformIntoDatabaseSession(result[0]);
+
+		const result_to_use = {
+			id: result[0].sid,
+			user_id: result[0].username,
+			expires_at: result[0].expires,
+			remote_addr: result[0].remote_addr,
+			data: result[0].data
+		};
+
+		return transformIntoDatabaseSession(result_to_use);
 	}
 
 	private async getUserFromSessionId(sessionId: string): Promise<DatabaseUser | null> {
 		const result = await this.connection.any(
 			sql.typeAlias(
 				'user'
-			)`SELECT ${sql.identifier([this.userView])}.* FROM ${sql.identifier([this.sessionView])} INNER JOIN ${sql.identifier([this.userView])} ON ${sql.identifier([this.userView])}.id = ${sql.identifier([this.sessionView])}.user_id WHERE ${sql.identifier([this.sessionView])}.id = ${sessionId}`
+			)`SELECT ${sql.identifier([this.userTable])}.* FROM ${sql.identifier([this.sessionTable])} INNER JOIN ${sql.identifier([this.userTable])} ON ${sql.identifier([this.userTable])}.username = ${sql.identifier([this.sessionTable])}.username WHERE ${sql.identifier([this.sessionTable])}.sid = ${sessionId}`
 		);
 		if (!result) return null;
-		return transformIntoDatabaseUser(result[0]);
+
+		const result_to_use = {
+			id: result[0].username,
+			password: result[0].password,
+			salt: result[0].salt,
+			active: result[0].active,
+			hosts_allow: result[0].hosts_allow,
+			immortal: result[0].immortal
+		};
+
+		return transformIntoDatabaseUser(result_to_use);
 	}
 }
 
 export interface TableNames {
-	user_view: string;
-	session_view: string;
 	user_table: string;
 	session_table: string;
 }
