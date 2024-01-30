@@ -47,7 +47,7 @@ export const actions = {
 		const lounge = (data.get('lounge') as string) || '';
 		const gra = (data.get('gra') as string) || '';
 
-		const groups = await getGroups(locals.user?.username);
+		const groups = await getGroups(locals.user?.id);
 		const directory =
 			groups.includes('DESK') || groups.includes('RAC')
 				? 'active_directory'

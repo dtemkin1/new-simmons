@@ -19,18 +19,21 @@
 	});
 
 	let userLinks: typeof sdsLinks = [];
-	for (const linkGroup of sdsLinks) {
-		const allLinks = linkGroup.links.filter((link) =>
-			groups.some((group) => link.groupNeeded.includes(group))
-		);
-		if (allLinks.length > 0) {
-			userLinks.push({
-				id: linkGroup.id,
-				name: linkGroup.name,
-				value: linkGroup.value,
-				icon: linkGroup.icon,
-				links: allLinks
-			});
+	$: {
+		userLinks = [];
+		for (const linkGroup of sdsLinks) {
+			const allLinks = linkGroup.links.filter((link) =>
+				groups.some((group) => link.groupNeeded.includes(group))
+			);
+			if (allLinks.length > 0) {
+				userLinks.push({
+					id: linkGroup.id,
+					name: linkGroup.name,
+					value: linkGroup.value,
+					icon: linkGroup.icon,
+					links: allLinks
+				});
+			}
 		}
 	}
 	$: activeGroup = userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] };

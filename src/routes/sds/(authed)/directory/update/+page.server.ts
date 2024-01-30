@@ -42,7 +42,7 @@ const sql = createSqlTag({
 export const actions = {
 	default: async ({ request, locals }) => {
 		const data = await request.formData();
-		const username = locals.user?.username;
+		const username = locals.user?.id;
 
 		const homepage = (data.get('homepage') as string | null) ?? '';
 		const phone = (data.get('phone') as string | null) ?? '';
