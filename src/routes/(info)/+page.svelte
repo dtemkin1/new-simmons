@@ -8,7 +8,6 @@
 	import { base } from '$app/paths';
 </script>
 
-<!-- svelte-ignore a11y-media-has-caption -->
 <video
 	class="h-full w-full rounded-container-token max-w-[720px]"
 	preload="none"
@@ -19,6 +18,8 @@
 	<track default kind="captions" src={i3_captions} srclang="en" label="English" />
 </video>
 
-<a href="{base}/prospectives" class="btn variant-filled-primary">
-	Welcome Prospectives! (+ More videos)
-</a>
+<div class="flex flex-col justify-center">
+	<a href="{base}/prospectives" class="btn variant-filled-primary">
+		Welcome Prospectives! (+ More videos)
+	</a>
+</div>

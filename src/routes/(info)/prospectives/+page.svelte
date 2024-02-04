@@ -186,7 +186,6 @@
 </p>
 
 <div class="flex items-center justify-center flex-col space-y-4">
-	<!-- svelte-ignore a11y-media-has-caption -->
 	<video
 		class="h-full w-full rounded-container-token max-w-[720px]"
 		preload="none"
@@ -198,7 +197,9 @@
 	</video>
 </div>
 
-<a href="{base}/videos" class="btn variant-filled-primary">More Simmons Videos (+ Past i3s)</a>
+<div class="flex flex-col justify-center">
+	<a href="{base}/videos" class="btn variant-filled-primary">More Simmons Videos (+ Past i3s)</a>
+</div>
 
 <h1 class="h1">CPW {rawData.year} Event Schedule</h1>
 {#each rawData.schedule as { date, events }}
