@@ -48,7 +48,7 @@
 			? ` | ${$page.data.title}`
 			: ''}</title
 	>
-	<meta name="description" content={$page.data.description || ''} />
+	<meta name="description" content={$page.data.description || 'Welcome to the Sponge!'} />
 </svelte:head>
 
 <!-- Drawer -->
