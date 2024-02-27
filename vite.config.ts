@@ -4,7 +4,6 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-	assetsInclude: ['**/*.vtt'],
 	plugins: [
 		enhancedImages(),
 		sveltekit(),
