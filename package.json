@@ -55,7 +55,7 @@
 		"@floating-ui/dom": "1.6.3",
 		"locutus": "^2.0.16",
 		"lucia": "^3.0.1",
-		"lucide-svelte": "^0.307.0",
+		"lucide-svelte": "^0.356.0",
 		"md5": "^2.3.0",
 		"oslo": "^1.1.2",
 		"slonik": "^37.2.0",
