@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TabGroup, TabAnchor, Tab } from '@skeletonlabs/skeleton';
+	import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
 
 	export let username: string | null = null;
 	export let groups: readonly string[] = [];

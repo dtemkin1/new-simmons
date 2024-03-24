@@ -139,9 +139,6 @@ devDependencies:
   vitest:
     specifier: ^1.4.0
     version: 1.4.0(@types/node@20.11.29)
-  zod:
-    specifier: ^3.22.4
-    version: 3.22.4
 
 packages:
 
