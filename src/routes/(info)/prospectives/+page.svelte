@@ -45,7 +45,7 @@
 		{date}
 	</h2>
 	<div class="table-container">
-		<table class="table table-hover">
+		<table class="table table-compact table-hover">
 			<thead>
 				<tr>
 					<th>Time</th>
@@ -56,9 +56,11 @@
 			<tbody>
 				{#each events as row}
 					<tr>
-						<td>{`${timeMaker.format(row.start)} – ${timeMaker.format(row.end)}`}</td>
-						<td>{row.name}</td>
-						<td>{row.location}</td>
+						<td class="!whitespace-normal"
+							>{`${timeMaker.format(row.start)} – ${timeMaker.format(row.end)}`}</td
+						>
+						<td class="!whitespace-normal">{row.name}</td>
+						<td class="!whitespace-normal">{row.location}</td>
 					</tr>
 				{/each}
 			</tbody>
