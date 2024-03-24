@@ -5,6 +5,7 @@
 	import Header from '$lib/components/Header.svelte';
 	import HeaderDrawer from '$lib/components/HeaderDrawer.svelte';
 	import DBSidebar from '$lib/components/DBSidebar.svelte';
+	import DBFooter from '$lib/components/DBFooter.svelte';
 
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -39,6 +40,8 @@
 		scrollHeadingIntoView();
 	});
 
+	let innerWidth = 0;
+
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 </script>
 
@@ -50,6 +53,8 @@
 	>
 	<meta name="description" content={$page.data.description || 'Welcome to the Sponge!'} />
 </svelte:head>
+
+<svelte:window bind:innerWidth />
 
 <!-- Drawer -->
 <Drawer>
@@ -72,7 +77,7 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="sidebarLeft">
-		{#if $page.url.pathname.includes('/sds')}
+		{#if $page.url.pathname.includes('/sds') && innerWidth > 640}
 			<DBSidebar username={$page.data.username} groups={$page.data.groups} />
 		{/if}
 	</svelte:fragment>
@@ -89,6 +94,9 @@
 
 	<svelte:fragment slot="footer">
 		{#if $page.url.pathname.includes('/sds')}
+			{#if innerWidth <= 640}
+				<DBFooter username={$page.data.username} groups={$page.data.groups} />
+			{/if}
 			<Footer />
 		{/if}
 	</svelte:fragment>
