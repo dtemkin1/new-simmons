@@ -8,173 +8,11 @@
 	import { Table } from '@skeletonlabs/skeleton';
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
 
-	interface eventType {
-		time: string;
-		event: string;
-		location: string;
-	}
+	import type { PageData } from './$types';
+	import { process_raw_data, timeMaker } from './rex_process';
+	export let data: PageData;
 
-	interface scheduleType {
-		date: Date;
-		events: eventType[];
-	}
-
-	const rawData: { year: Number; schedule: scheduleType[] } = {
-		year: 2019,
-		schedule: [
-			{
-				date: new Date('April 11, 2019'),
-				events: [
-					{
-						time: '2:30PM-4:00PM',
-						event: 'Cinammon Roll Making + Tea Party',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '5:00PM-8:00PM',
-						event: 'Escape the Room',
-						location: 'Mailbox Lounge'
-					},
-					{
-						time: '5:00PM-8:30PM',
-						event: 'Giant Stuff, mini food',
-						location: 'Mailbox Lounge'
-					},
-					{
-						time: '6:00PM-7:00PM',
-						event: 'Dumpling Party',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '10:00PM-1:00AM',
-						event: 'Late Night Nugs + Smash Bros',
-						location: 'Party Room'
-					},
-					{
-						time: '11:00PM-12:00AM',
-						event: 'Cheesecake & Sporcle',
-						location: 'Multi Purpose Room'
-					}
-				]
-			},
-			{
-				date: new Date('April 12, 2019'),
-				events: [
-					{
-						time: '8:00AM-8:30AM',
-						event: 'Early Morning Run',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '8:30AM-10:00AM',
-						event: 'Pancake Breakfast I',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '12:00PM-2:00PM',
-						event: 'Grill Fill Chill + T-Shirt and Stencils',
-						location: 'Simmons Front Lawn'
-					},
-					{
-						time: '3:30PM-5:00PM',
-						event: 'Birthday Fest',
-						location: 'Party Room'
-					},
-					{
-						time: '3:30PM-5:30PM',
-						event: 'Capture the Sardines',
-						location: 'Mailbox Lounge'
-					},
-					{
-						time: '6:00PM-7:30PM',
-						event: 'Pretzels and Puppies',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '10:00PM-1:AM',
-						event: 'Board Games and Ice Cream',
-						location: 'Simmons Sleepover Soiree'
-					}
-				]
-			},
-			{
-				date: new Date('April 13, 2019'),
-				events: [
-					{
-						time: '8:30AM-11:00AM',
-						event: 'Rainbow Breakfast',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '11:00AM-12:00PM',
-						event: 'Head of House Study Break',
-						location: 'Head of House Apartment'
-					},
-					{
-						time: '12:00PM-2:00PM',
-						event: 'Pokemon Cookies and Chill',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '12:00PM-2:00PM',
-						event: 'Scavenger Hunt',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '3:00PM-4:30PM',
-						event: 'Scootah Hockey',
-						location: 'Simmons Dining'
-					},
-					{
-						time: '4:30PM-6:00PM',
-						event: 'Murder Mystery',
-						location: 'Mailbox Lounge'
-					},
-					{
-						time: '7:30PM-8:30PM',
-						event: 'Mac & Cheese vs. Ramen',
-						location: 'Late Night Cafe'
-					},
-					{
-						time: '8:30PM-10:30PM',
-						event: 'Lounge Exploration',
-						location: 'Simmons Lounges'
-					},
-					{
-						time: '9:00PM-10:00PM',
-						event: 'Swing Dancing',
-						location: 'Multi Purpose Room'
-					},
-					{
-						time: '9:00PM-1:00AM',
-						event: 'Puzzle Hunt',
-						location: 'Simmons Dining'
-					},
-					{
-						time: '12:00AM-1:00AM',
-						event: 'Queer Talk',
-						location: 'TV Lounge'
-					}
-				]
-			},
-			{
-				date: new Date('April 14, 2019'),
-				events: [
-					{
-						time: '8:30AM-11:00AM',
-						event: 'Pancake Breakfast: A New Batch of Freshmen',
-						location: 'Late Night Cafe'
-					}
-				]
-			}
-		]
-	};
-
-	const dateMaker = new Intl.DateTimeFormat('en-US', {
-		weekday: 'long',
-		month: 'long',
-		day: 'numeric'
-	});
+	const rexData = process_raw_data(data.rexData);
 </script>
 
 <h1 class="h1">Welcome, Prospectives (and freshmen)!</h1>
@@ -201,18 +39,31 @@
 	<a href="{base}/videos" class="btn variant-filled-primary">More Simmons Videos (+ Past i3s)</a>
 </div>
 
-<h1 class="h1">CPW {rawData.year} Event Schedule</h1>
-{#each rawData.schedule as { date, events }}
+<h1 class="h1">Simmons {data.rexData.name} Schedule</h1>
+{#each Object.entries(rexData) as [date, events]}
 	<h2 class="h2">
-		{dateMaker.format(date)}
+		{date}
 	</h2>
-	<Table
-		regionCell="!whitespace-normal"
-		source={{
-			head: ['Time', 'Event', 'Location'],
-			body: tableMapperValues(events, ['time', 'event', 'location'])
-		}}
-	/>
+	<div class="table-container">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Time</th>
+					<th>Event</th>
+					<th>Location</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each events as row}
+					<tr>
+						<td>{`${timeMaker.format(row.start)} – ${timeMaker.format(row.end)}`}</td>
+						<td>{row.name}</td>
+						<td>{row.location}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
 {/each}
 
 <h1 class="h1">A Taste of Simmons</h1>
