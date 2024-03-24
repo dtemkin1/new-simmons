@@ -104,7 +104,7 @@
 							<svelte:component this={tileLinks.icon} size={'1.5rem'}></svelte:component>
 						</div>
 					</svelte:fragment>
-					<span>{tileLinks.name}</span>
+					<span class="font-bold text-xs">{tileLinks.name}</span>
 				</TabAnchor>
 			{/if}
 		{/each}
@@ -114,7 +114,7 @@
 				<div class="flex justify-center items-center">
 					<CircleUser size={'1.5rem'} />
 				</div>
-			</svelte:fragment>{username ?? 'Guest'}</TabAnchor
+			</svelte:fragment><span class="font-bold text-xs">{username ?? 'Guest'}</span></TabAnchor
 		>
 	</TabGroup>
 {/if}
