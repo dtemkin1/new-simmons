@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 	const { groups } = await parent();
 	requireGroups(groups, 'USERS');
 
-	const officersQuery = await db
+	const officersQuery = db
 		.select({
 			position_text: officers.position_text,
 			username: officers.username,

@@ -8,10 +8,12 @@ export const load: PageServerLoad = async ({ parent }) => {
 	const { groups } = await parent();
 	requireGroups(groups, 'USERS');
 
-	const gras = await db
+	const gras = db
 		.select({
 			username: active_directory.username,
-			name: sql`COALESCE(${active_directory.title}||' ','')||${active_directory.firstname}||' '||${active_directory.lastname}`,
+			name: sql<
+				string | null
+			>`COALESCE(${active_directory.title}||' ','')||${active_directory.firstname}||' '||${active_directory.lastname}`,
 			room: active_directory.room,
 			phone: active_directory.phone,
 			email: active_directory.email,

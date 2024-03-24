@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 	const { groups } = await parent();
 	requireGroups(groups, 'USERS');
 
-	const advisorsQuery = await db
+	const advisorsQuery = db
 		.select({
 			username: advisors.username,
 			name: sql<
