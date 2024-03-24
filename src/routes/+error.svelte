@@ -18,7 +18,7 @@
 	<div class="container h-full mx-auto flex justify-center items-center">
 		<div class="card p-8 flex flex-col space-y-2 max-w-5xl m-8 bg-surface-50-900-token">
 			<h1 class="h1">
-				{$page.status} Error: {$page.error?.message}
+				{$page.status}: {$page.error?.message}
 				<span class="text-surface-500-400-token">😔</span>
 			</h1>
 			{#if $page.status === 404}
@@ -45,7 +45,7 @@
 		class="bg-surface-50-900-token flex flex-col items-center p-4 justify-center h-full align-center gap-2"
 	>
 		<h1 class="h1 text-center">
-			{$page.status} Error: {$page.error?.message}
+			{$page.status}: {$page.error?.message}
 			<span class="text-surface-500-400-token">😔</span>
 		</h1>
 		{#if $page.status === 404}
