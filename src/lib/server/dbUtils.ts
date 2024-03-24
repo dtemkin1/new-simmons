@@ -8,8 +8,6 @@ import {
 } from '$lib/server/schema';
 import { eq, sql } from 'drizzle-orm';
 import md5 from 'md5';
-import mt_rand from 'locutus/php/math/mt_rand';
-import chr from 'locutus/php/strings/chr';
 
 export async function sdsGetStrOption(optionName: string) {
 	return (
@@ -115,6 +113,12 @@ export async function getUser(username?: string, password?: string) {
 	return { id: username };
 }
 
+function getRandomInt(min: number, max: number) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 export async function setPassword(username: string, password: string | null) {
 	if (username == '' || username == null) {
 		return null;
@@ -137,7 +141,8 @@ export async function setPassword(username: string, password: string | null) {
 	} else {
 		let salt = '';
 		for (let i = 0; i < 8; i++) {
-			salt += chr(mt_rand(32, 126));
+			// salt += chr(mt_rand(32, 126));
+			salt += String.fromCharCode(getRandomInt(32, 126));
 		}
 		const combined = `${salt}${password}`;
 		const hash = md5(combined);
