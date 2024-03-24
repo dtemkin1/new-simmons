@@ -1,43 +1,9 @@
-import { pool } from '$lib/server/db';
-import { createSqlTag } from 'slonik';
-import { z } from 'zod';
+import { db } from '$lib/server';
+import { active_directory, directory, rooms } from '$lib/server/schema';
 import { requireGroups, sdsGetReminder, sdsGetReminders } from '$lib/utils';
+import { eq, sql } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
-
-const sql = createSqlTag({
-	typeAliases: {
-		active_directory: z.object({
-			username: z.string().nullable(),
-			firstname: z.string().nullable(),
-			lastname: z.string().nullable(),
-			room: z.string().nullable(),
-			phone: z.string().nullable(),
-			year: z.number().nullable(),
-			cellphone: z.string().nullable(),
-			homepage: z.string().nullable(),
-			home_city: z.string().nullable(),
-			home_state: z.string().nullable(),
-			home_country: z.string().nullable(),
-			quote: z.string().nullable(),
-			favorite_category: z.string().nullable(),
-			favorite_value: z.string().nullable(),
-			private: z.boolean().nullable(),
-			type: z.string().nullable(),
-			email: z.string().nullable(),
-			lounge: z.string().nullable(),
-			title: z.string().nullable(),
-			loungevalue: z.number().nullable(),
-			showreminders: z.boolean().nullable(),
-			guest_list_expiration: z.string().nullable()
-		}),
-		phones: z.object({
-			phone1: z.string().nullable(),
-			phone2: z.string().nullable()
-		}),
-		void: z.object({}).strict()
-	}
-});
 
 export const actions = {
 	default: async ({ request, locals }) => {
@@ -53,7 +19,7 @@ export const actions = {
 		const quote = (data.get('quote') as string | null) ?? '';
 		const favorite_category = (data.get('favorite_category') as string | null) ?? '';
 		const favorite_value = (data.get('favorite_value') as string | null) ?? '';
-		const showreminders = (data.get('showreminders') as boolean | null) ?? '';
+		const showreminders = (data.get('showreminders') as boolean | null) ?? false;
 
 		const fields = {
 			homepage,
@@ -68,20 +34,25 @@ export const actions = {
 			showreminders
 		};
 
-		const updateQuery = await pool.query(sql.typeAlias('void')`UPDATE directory SET 
-        showreminders=${showreminders},
-        homepage=${homepage},
-        phone=${phone},
-        cellphone=${cellphone},
-        home_city=${home_city},
-        home_state=${home_state},
-        home_country=${home_country},
-        quote=${quote},
-        favorite_category=${favorite_category},
-        favorite_value=${favorite_value}
-        WHERE username=${username ?? ''}`);
+		const updateQuery = await db
+			.update(directory)
+			.set({ ...fields })
+			.where(eq(directory.username, username ?? ''))
+			.returning({ updatedId: directory.username });
+		// const updateQuery = await pool.query(sql.typeAlias('void')`UPDATE directory SET
+		// showreminders=${showreminders},
+		// homepage=${homepage},
+		// phone=${phone},
+		// cellphone=${cellphone},
+		// home_city=${home_city},
+		// home_state=${home_state},
+		// home_country=${home_country},
+		// quote=${quote},
+		// favorite_category=${favorite_category},
+		// favorite_value=${favorite_value}
+		// WHERE username=${username ?? ''}`);
 
-		if (updateQuery.rowCount == 0) {
+		if (updateQuery.length == 0) {
 			fail(500, { message: 'Directory update failed' });
 		}
 
@@ -101,19 +72,37 @@ export const load: PageServerLoad = async ({ parent, locals }) => {
 
 	const reminders = sdsGetReminders(locals.session);
 
-	const query = sql.typeAlias(
-		'active_directory'
-	)`SELECT * FROM active_directory WHERE username=${username ?? ''}`;
+	// const query = sql.typeAlias(
+	// 	'active_directory'
+	// )`SELECT * FROM active_directory WHERE username=${username ?? ''}`;
 
-	const result = pool.transaction(async (connection) => {
-		const resident = await connection.one(query);
+	const result = db.transaction(async (tsx) => {
+		const resident = (
+			await tsx
+				.select()
+				.from(active_directory)
+				.where(eq(active_directory.username, username ?? ''))
+		)[0];
 
-		const phones = await connection.one(
-			sql.typeAlias('phones')`SELECT phone1,phone2 FROM rooms WHERE room=${resident.room}`
-		);
+		const phones = (
+			await tsx
+				.select({ phone1: rooms.phone1, phone2: rooms.phone2 })
+				.from(rooms)
+				.where(eq(rooms.room, sql`${resident.room}`))
+		)[0];
 
 		return { ...resident, ...phones };
 	});
+
+	// const result = pool.transaction(async (connection) => {
+	// 	const resident = await connection.one(query);
+
+	// 	const phones = await connection.one(
+	// 		sql.typeAlias('phones')`SELECT phone1,phone2 FROM rooms WHERE room=${resident.room}`
+	// 	);
+
+	// 	return { ...resident, ...phones };
+	// });
 
 	return { isSudo: sudo, result: result, reminders: reminders };
 };

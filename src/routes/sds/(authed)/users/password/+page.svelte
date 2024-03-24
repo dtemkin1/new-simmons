@@ -37,11 +37,11 @@
 	}
 </script>
 
-{#await data.checkOldPassword}
+{#await data.hasPassword}
 	<div class="flex items-center justify-center h-full w-full">
 		<ProgressRadial />
 	</div>
-{:then checkOldPassword}
+{:then hasPassword}
 	<div class="flex flex-col items-center gap-4 self-center p-4">
 		<h1 class="h1 text-center self-center">Password for {data.username}</h1>
 		<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-2">
@@ -56,7 +56,7 @@
 					};
 				}}
 			>
-				{#if checkOldPassword == null}
+				{#if !hasPassword}
 					<div class="text-center">
 						Current Password: <code class="code">[ none defined ]</code>
 					</div>

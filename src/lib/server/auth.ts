@@ -1,13 +1,35 @@
 import { Lucia, TimeSpan } from 'lucia';
-import { SlonikAdapter } from './SlonikLuciaAdapter';
 import { dev } from '$app/environment';
+import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
+import { OAuth2Client, generateCodeVerifier } from 'oslo/oauth2';
+import unserialize from 'locutus/php/var/unserialize';
 
-import { pool } from './db';
+import { env } from '$env/dynamic/private';
+import { boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
-const adapter = new SlonikAdapter(pool, {
-	user_table: 'sds_users_all',
-	session_table: 'sds_sessions'
+import { db } from '.';
+import { sql } from 'drizzle-orm';
+
+export const sds_users_all_for_lucia = pgTable('sds_users_all', {
+	id: text('username').notNull().primaryKey(),
+	password: text('password'),
+	salt: text('salt'),
+	active: boolean('active').notNull().default(true),
+	hosts_allow: text('hosts_allow').default(sql`'%'::text`),
+	immortal: boolean('immortal').notNull().default(false)
 });
+
+export const sds_sessions_for_lucia = pgTable('sds_sessions', {
+	id: text('sid').notNull().primaryKey(),
+	userId: text('username')
+		.notNull()
+		.references(() => sds_users_all_for_lucia.id),
+	expiresAt: timestamp('expires', { withTimezone: false }).notNull(),
+	remote_addr: text('remote_addr').notNull(),
+	data: text('data')
+});
+
+const adapter = new DrizzlePostgreSQLAdapter(db, sds_sessions_for_lucia, sds_users_all_for_lucia);
 
 type DataKeys = 'reminders';
 
@@ -51,10 +73,6 @@ interface DatabaseSessionAttributes {
 	data: string | null;
 }
 
-import { OAuth2Client, generateCodeVerifier } from 'oslo/oauth2';
-import unserialize from 'locutus/php/var/unserialize';
-
-import { env } from '$env/dynamic/private';
 const { CLIENT_ID } = env;
 
 const baseURI = 'https://petrock.mit.edu';
@@ -66,7 +84,7 @@ export const publicKeyEndpoint = `${baseURI}/oidc/jwks`;
 
 export const scopes = ['openid', 'email', 'profile'];
 
-export const client = new OAuth2Client(CLIENT_ID, authorizeEndpoint, tokenEndpoint, {
+export const client = new OAuth2Client(CLIENT_ID ?? '', authorizeEndpoint, tokenEndpoint, {
 	// TODO: CHANGE WHEN PERMANENT URL FOUND
 	redirectURI: `https://new-simmons-mit.netlify.app/auth/callback/petrock`
 });

@@ -4,18 +4,12 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { dev } from '$app/environment';
 
-import { pool } from '$lib/server/db';
-import { createSqlTag } from 'slonik';
-import { z } from 'zod';
+import { db } from '$lib/server';
+import { sds_users } from '$lib/server/schema';
 import { getGroups, verifyPasswordUnhashed } from '$lib/server/dbUtils';
 import { SDS_HOME_URL, SDS_LOGIN_URL } from '$lib/config';
 import serialize from 'locutus/php/var/serialize';
-
-const sql = createSqlTag({
-	typeAliases: {
-		checkUser: z.object({ '?column?': z.number() })
-	}
-});
+import { eq } from 'drizzle-orm';
 
 export const actions = {
 	login: async (event) => {
@@ -35,13 +29,15 @@ export const actions = {
 			});
 		}
 
-		const existingUser = await pool.maybeOneFirst(
-			sql.typeAlias('checkUser')`SELECT 1 FROM sds_users WHERE username=${username}`
-		);
+		const existingUser = await db.select().from(sds_users).where(eq(sds_users.username, username));
 
-		if (!existingUser) {
+		// const existingUser = await pool.maybeOneFirst(
+		// 	sql.typeAlias('checkUser')`SELECT 1 FROM sds_users WHERE username=${username}`
+		// );
+
+		if (existingUser.length == 0) {
 			return fail(400, {
-				message: 'Incorrect username or password'
+				message: 'No user found.'
 			});
 		}
 

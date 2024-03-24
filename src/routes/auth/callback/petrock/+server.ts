@@ -6,23 +6,17 @@ import {
 } from '$lib/server/auth';
 import { OAuth2RequestError } from 'oslo/oauth2';
 
-import { pool } from '$lib/server/db';
-import { createSqlTag } from 'slonik';
-import { z } from 'zod';
+import { db } from '$lib/server';
 
 import { type RequestEvent } from '@sveltejs/kit';
 import serialize from 'locutus/php/var/serialize';
 import { dev } from '$app/environment';
 import { env } from '$env/dynamic/private';
 import { SDS_HOME_URL } from '$lib/config';
+import { eq } from 'drizzle-orm';
+import { sds_users } from '$lib/server/schema';
 
 const { CLIENT_SECRET } = env;
-
-const sql = createSqlTag({
-	typeAliases: {
-		checkUser: z.object({ '?column?': z.number() })
-	}
-});
 
 export async function GET(event: RequestEvent): Promise<Response> {
 	const code = event.url.searchParams.get('code');
@@ -49,11 +43,12 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		const petrockUser: PetrockUser = await petrockUserResponse.json();
 
 		const username = petrockUser.sub.split('@')[0];
-		const existingUser = await pool.maybeOneFirst(
-			sql.typeAlias('checkUser')`SELECT 1 FROM sds_users WHERE username=${username}`
-		);
+		const existingUser = await db.select().from(sds_users).where(eq(sds_users.username, username));
+		// const existingUser = await pool.maybeOneFirst(
+		// 	sql.typeAlias('checkUser')`SELECT 1 FROM sds_users WHERE username=${username}`
+		// );
 
-		if (existingUser) {
+		if (existingUser.length > 0) {
 			const ipAddress = dev ? '127.0.0.1' : event.getClientAddress();
 			const session = await lucia.createSession(username, {
 				remote_addr: ipAddress,

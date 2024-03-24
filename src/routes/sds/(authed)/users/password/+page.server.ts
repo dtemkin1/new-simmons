@@ -1,27 +1,13 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect, fail } from '@sveltejs/kit';
 
-import { pool } from '$lib/server/db';
-import { createSqlTag } from 'slonik';
-import { z } from 'zod';
+import { db } from '$lib/server';
 
 import { setPassword, verifyPasswordUnhashed } from '$lib/server/dbUtils';
 import { SDS_LOGIN_URL } from '$lib/config';
 import { requireGroups } from '$lib/utils';
-
-const sql = createSqlTag({
-	typeAliases: {
-		checkForOldpasswd: z.object({ '?column?': z.number() }),
-		oldpasswd: z.object({
-			active: z.boolean().nullable(),
-			hosts_allow: z.string().nullable(),
-			immortal: z.boolean().nullable(),
-			password: z.string().nullable(),
-			salt: z.string().nullable(),
-			username: z.string().nullable()
-		})
-	}
-});
+import { sds_users } from '$lib/server/schema';
+import { and, eq, isNotNull } from 'drizzle-orm';
 
 export const actions = {
 	default: async ({ request, locals }) => {
@@ -44,11 +30,15 @@ export const actions = {
 			redirect(302, SDS_LOGIN_URL);
 		}
 
-		const checkOldPasswordQuery = sql.typeAlias(
-			'checkForOldpasswd'
-		)`SELECT 1 FROM sds_users WHERE password IS NOT NULL AND username=${username}`;
+		// const checkOldPasswordQuery = sql.typeAlias(
+		// 	'checkForOldpasswd'
+		// )`SELECT 1 FROM sds_users WHERE password IS NOT NULL AND username=${username}`;
+		const checkOldPasswordQuery = db
+			.select({ password: sds_users.password })
+			.from(sds_users)
+			.where(and(isNotNull(sds_users.password), eq(sds_users.username, username)));
 
-		const hasPassword = (await pool.maybeOneFirst(checkOldPasswordQuery)) == 1;
+		const hasPassword = (await checkOldPasswordQuery).length == 1;
 		if (hasPassword) {
 			const passwordCorrect = await verifyPasswordUnhashed(username, oldPassword);
 			if (!passwordCorrect) {
@@ -91,11 +81,16 @@ export const load: PageServerLoad = async ({ parent }) => {
 		redirect(302, SDS_LOGIN_URL);
 	}
 
-	const checkOldPasswordQuery = sql.typeAlias(
-		'checkForOldpasswd'
-	)`SELECT 1 FROM sds_users WHERE password IS NOT NULL AND username=${username}`;
+	// const checkOldPasswordQuery = sql.typeAlias(
+	// 	'checkForOldpasswd'
+	// )`SELECT 1 FROM sds_users WHERE password IS NOT NULL AND username=${username}`;
 
-	const checkOldPassword = pool.maybeOneFirst(checkOldPasswordQuery);
+	const checkOldPasswordQuery = db
+		.select({ password: sds_users.password })
+		.from(sds_users)
+		.where(and(isNotNull(sds_users.password), eq(sds_users.username, username)));
 
-	return { checkOldPassword: checkOldPassword };
+	const hasPassword = (await checkOldPasswordQuery).length == 1;
+
+	return { hasPassword: hasPassword };
 };

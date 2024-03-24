@@ -3,19 +3,29 @@
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 
 	export let data: PageData;
+
+	const dateFormatter = new Intl.DateTimeFormat('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	});
 </script>
 
 <div class="flex flex-col w-full h-full p-4 text-center items-center justify-center">
 	{#await data.packages}
 		<ProgressRadial />
 	{:then packageData}
-		{#if packageData.num_packages && packageData.num_packages > 0}
+		{#if packageData.num_packages && parseInt(packageData.num_packages) > 0}
 			<p>
-				You have {packageData.num_packages} package{packageData.num_packages > 1 ? 's' : ''} waiting
-				at desk, {packageData.num_packages > 1 ? 'some of which have' : 'which has'} been there since
-				at least {packageData.earliest_sure}. {#if packageData.num_perishable && packageData.num_perishable > 0}
+				You have {packageData.num_packages} package{parseInt(packageData.num_packages) > 1
+					? 's'
+					: ''} waiting at desk, {parseInt(packageData.num_packages) > 1
+					? 'some of which have'
+					: 'which has'}
+				been there since at least {packageData.earliest_sure &&
+					dateFormatter.format(new Date(packageData.earliest_sure))}. {#if packageData.num_perishable && parseInt(packageData.num_perishable) > 0}
 					{packageData.num_perishable}
-					of them {packageData.num_perishable > 1 ? 'are' : 'is'} perishable.
+					of them {parseInt(packageData.num_perishable) > 1 ? 'are' : 'is'} perishable.
 				{/if}
 			</p>
 		{:else}
