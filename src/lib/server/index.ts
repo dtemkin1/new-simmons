@@ -15,4 +15,4 @@ export const pool = new pg.Pool({
 	idle_in_transaction_session_timeout: 0
 });
 
-export const db = drizzle(pool, { schema, logger: true });
+export const db = drizzle(pool, { schema, logger: dev });

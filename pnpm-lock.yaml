@@ -11,6 +11,9 @@ dependencies:
   '@lucia-auth/adapter-drizzle':
     specifier: ^1.0.7
     version: 1.0.7(lucia@3.1.1)
+  css-tree:
+    specifier: ^2.3.1
+    version: 2.3.1
   drizzle-orm:
     specifier: ^0.30.4
     version: 0.30.4(@types/pg@8.11.2)(pg@8.11.3)
