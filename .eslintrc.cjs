@@ -5,10 +5,11 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:svelte/recommended',
+		'plugin:drizzle/recommended',
 		'prettier'
 	],
 	parser: '@typescript-eslint/parser',
-	plugins: ['@typescript-eslint', 'sql'],
+	plugins: ['@typescript-eslint', 'drizzle'],
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 2020,
@@ -28,20 +29,5 @@ module.exports = {
 			}
 		}
 	],
-	rules: {
-		'sql/format': [
-			2,
-			{
-				ignoreExpressions: false,
-				ignoreInline: true,
-				ignoreTagless: true
-			}
-		],
-		'sql/no-unsafe-query': [
-			2,
-			{
-				allowLiteral: false
-			}
-		]
-	}
+	rules: {}
 };
