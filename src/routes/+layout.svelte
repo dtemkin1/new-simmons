@@ -77,7 +77,7 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="sidebarLeft">
-		{#if $page.url.pathname.includes('/sds') && innerWidth > 640}
+		{#if $page.url.pathname.includes('/sds') && innerWidth >= 640}
 			<DBSidebar username={$page.data.username} groups={$page.data.groups} />
 		{/if}
 	</svelte:fragment>
@@ -94,7 +94,7 @@
 
 	<svelte:fragment slot="footer">
 		{#if $page.url.pathname.includes('/sds')}
-			{#if innerWidth <= 640}
+			{#if innerWidth < 640}
 				<DBFooter username={$page.data.username} groups={$page.data.groups} />
 			{/if}
 			<Footer />

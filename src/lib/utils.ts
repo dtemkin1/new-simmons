@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import type { Session } from 'lucia';
 
 export function checkInGroup(groupName: string) {
-	return (userGroups: readonly string[]) => {
+	return (userGroups: string[]) => {
 		if (userGroups.includes(groupName)) {
 			return true;
 		} else {
@@ -11,7 +11,7 @@ export function checkInGroup(groupName: string) {
 	};
 }
 
-export function requireGroups(userGroups: readonly string[], ...groups: string[]) {
+export function requireGroups(userGroups: string[], ...groups: string[]) {
 	let allow = false;
 
 	for (const group of groups) {
