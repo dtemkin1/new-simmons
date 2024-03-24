@@ -46,7 +46,7 @@
 		<tbody>
 			{#each $rows as row}
 				<tr>
-					{#each row as cell, key}
+					{#each row as cell}
 						<td>
 							{cell}
 						</td>

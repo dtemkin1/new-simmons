@@ -26,7 +26,7 @@
 	export let userInfo: UserInfo;
 
 	import { base } from '$app/paths';
-	import { renderer } from '$lib/components/markdown';
+	// import { renderer } from '$lib/components/markdown';
 
 	function getUserInfo(user: UserInfo) {
 		let username = user.username;

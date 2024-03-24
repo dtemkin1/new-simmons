@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
 	import { enhance } from '$app/forms';
@@ -79,7 +78,7 @@
 			<form
 				method="post"
 				class="flex flex-col gap-4 grow"
-				use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+				use:enhance={() => {
 					return async ({ result, update }) => {
 						error = result.type == 'failure' || result.type == 'error';
 						update();

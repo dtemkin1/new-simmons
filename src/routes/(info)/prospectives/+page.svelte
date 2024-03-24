@@ -5,8 +5,8 @@
 
 	import { base } from '$app/paths';
 
-	import { Table } from '@skeletonlabs/skeleton';
-	import { tableMapperValues } from '@skeletonlabs/skeleton';
+	// import { Table } from '@skeletonlabs/skeleton';
+	// import { tableMapperValues } from '@skeletonlabs/skeleton';
 
 	import type { PageData } from './$types';
 	import { process_raw_data, timeMaker } from './rex_process';

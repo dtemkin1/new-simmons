@@ -91,7 +91,7 @@
 									class:opacity-50={link.badge === 'Incomplete'}
 									aria-disabled={link.badge === 'Incomplete'}
 								>
-									<span class="flex-auto">{@html link.label}</span>
+									<span class="flex-auto">{link.label}</span>
 									{#if link.badge}<span
 											class="badge variant-filled-secondary"
 											class:variant-filled-error={link.badge == 'Incomplete'}

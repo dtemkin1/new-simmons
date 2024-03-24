@@ -80,14 +80,14 @@
 
 {#each vidData as vid}
 	<h2 class="h2">{vid.title}</h2>
-	{#if vid.beforeDescription}<p class="italic">{@html vid.beforeDescription}</p>{/if}
+	{#if vid.beforeDescription}<p class="italic">{vid.beforeDescription}</p>{/if}
 	<iframe
 		class="aspect-video w-full border-none rounded-container-token"
 		src={vid.link}
 		allowfullscreen
 		title={vid.title}
 	></iframe>
-	{#if vid.afterDescription}<p class="italic">{@html vid.afterDescription}</p>{/if}
+	{#if vid.afterDescription}<p class="italic">{vid.afterDescription}</p>{/if}
 {/each}
 
 <a

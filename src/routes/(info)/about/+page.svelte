@@ -112,7 +112,7 @@
 			<div class="snap-center rounded-container-token relative flex shrink-0 w-fit">
 				<img class="w-full" src={image.image} alt={image.title} />
 				<div class="absolute bottom-0 px-4 py-3 bg-surface-backdrop-token w-full">
-					<p class="text-sm font-bold text-on-surface-token">{@html image.title}</p>
+					<p class="text-sm font-bold text-on-surface-token">{image.title}</p>
 					<p class="text-sm text-on-surface-token">{@html image.description}</p>
 				</div>
 			</div>

@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 	import { enhance } from '$app/forms';
-	import { page } from '$app/stores';
 
 	import type { PageData } from './$types';
 	export let data: PageData;
-	// export let form: ActionData;
 	import type { ActionResult } from '@sveltejs/kit';
 
 	import { getToastStore } from '@skeletonlabs/skeleton';
@@ -49,7 +47,7 @@
 				class="flex flex-col gap-4 grow"
 				method="POST"
 				id="password-change"
-				use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+				use:enhance={() => {
 					return async ({ result, update }) => {
 						update();
 						toastHandler(result);

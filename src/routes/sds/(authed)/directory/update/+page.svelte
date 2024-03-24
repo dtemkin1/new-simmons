@@ -62,7 +62,7 @@
 		<form
 			class="card p-8 flex flex-col space-y-4 m-4"
 			method="post"
-			use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+			use:enhance={() => {
 				return async ({ result, update }) => {
 					update();
 					toastHandler(result);
