@@ -8,11 +8,11 @@
 	export let data: PageData;
 </script>
 
-<div class="flex items-center justify-center h-full flex-col w-full">
+<div class="flex items-center justify-center h-full flex-col w-full p-4 space-y-4">
 	{#await Promise.all([data.user, data.years, data.lounges, data.gras])}
 		<div class="p-4"><ProgressRadial /></div>
 	{:then [user, years, lounges, gras]}
-		{#if user == null}
+		{#if !user}
 			<p class="p-4 px-8 m-4 mb-0">Entry not found.</p>
 		{:else}
 			<DirectoryEntry userInfo={user} />
@@ -32,7 +32,6 @@
 				</div>
 			{/if}
 		{/if}
-		<hr class="w-11/12" />
 		<DirectorySearch data={{ years: years, lounges: lounges, gras: gras }} />
 	{/await}
 </div>

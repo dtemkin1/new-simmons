@@ -40,7 +40,7 @@
 		scrollHeadingIntoView();
 	});
 
-	let innerWidth = 0;
+	let innerWidth: number;
 
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 </script>

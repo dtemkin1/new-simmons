@@ -11,7 +11,7 @@
 		<ProgressRadial />
 	</div>
 {:then [years, lounges, gras]}
-	<div class="p-2">
+	<div class="p-4">
 		<DirectorySearch data={{ years: years, lounges: lounges, gras: gras }} />
 	</div>
 {/await}

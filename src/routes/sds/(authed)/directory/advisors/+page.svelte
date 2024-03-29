@@ -4,60 +4,15 @@
 
 	export let data: PageData;
 
-	import { Table } from '@skeletonlabs/skeleton';
-	import type { TableSource } from '@skeletonlabs/skeleton';
-	import { tableMapperValues } from '@skeletonlabs/skeleton';
-	import { goto } from '$app/navigation';
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
-
-	async function generateOfficerData(advisorPromiseData: typeof data.advisors) {
-		const advisorData = (await advisorPromiseData).map((item) => {
-			let { username, name, room, phone, email } = item;
-			if (username == null) {
-				username = '';
-			}
-			if (name == null) {
-				name = '';
-			}
-			if (room == null) {
-				room = '';
-			}
-			if (phone == null) {
-				phone = '';
-			}
-			if (email == null) {
-				email = '';
-			}
-
-			return {
-				username,
-				name,
-				room,
-				phone,
-				email
-			};
-		});
-
-		const tableData = tableMapperValues(advisorData, ['name', 'room', 'email']);
-		const metaData = tableMapperValues(advisorData, ['username']);
-
-		return {
-			head: ['Name', 'Room', 'Email'],
-			body: tableData,
-			meta: metaData
-		} satisfies TableSource;
-	}
-	function onTableClick(row: CustomEvent<string[]>) {
-		const username = row.detail[0];
-		goto(`${base}/sds/directory/entry?username=${username}`);
-	}
+	import NameRoomEmailTable from '$lib/components/NameRoomEmailTable.svelte';
 </script>
 
-{#await generateOfficerData(data.advisors)}
+{#await data.advisors}
 	<div class="flex items-center justify-center h-full flex-col w-full p-4">
 		<div class="p-4"><ProgressRadial /></div>
 	</div>
-{:then table}
+{:then advisors}
 	<div class="flex items-center justify-start h-full flex-col w-full p-4">
 		<h2 class="h2 text-center p-2">Advisors</h2>
 		<p class="text-center">
@@ -72,6 +27,6 @@
 				<!-- TODO: MAKE ADVISOR SETUP PAGE -->
 			</p>
 		{/if}
-		<Table class="table-compact" interactive={true} source={table} on:selected={onTableClick} />
+		<NameRoomEmailTable data={advisors} />
 	</div>
 {/await}

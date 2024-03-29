@@ -7,7 +7,7 @@ import {
 	active_lounges,
 	rooms
 } from '$lib/server/schema';
-import { SQL, and, isNotNull, ne, sql } from 'drizzle-orm';
+import { SQL, and, isNotNull, ne, sql, eq } from 'drizzle-orm';
 import { redirect, fail } from '@sveltejs/kit';
 import { base } from '$app/paths';
 import { requireGroups } from '$lib/utils';
@@ -17,14 +17,14 @@ export const actions = {
 	default: async ({ request, locals }) => {
 		const data = await request.formData();
 
-		const firstname = (data.get('firstname') as string) || '';
-		const lastname = (data.get('lastname') as string) || '';
-		const title = (data.get('title') as string) || '';
-		const username = (data.get('username') as string) || '';
-		const room = (data.get('room') as string) || '';
-		const year = (data.get('year') as string) || '';
-		const lounge = (data.get('lounge') as string) || '';
-		const gra = (data.get('gra') as string) || '';
+		const firstname = (data.get('firstname') as string | null) ?? '';
+		const lastname = (data.get('lastname') as string | null) ?? '';
+		const title = (data.get('title') as string | null) ?? '';
+		const username = (data.get('username') as string | null) ?? '';
+		const room = (data.get('room') as string | null) ?? '';
+		const year = (data.get('year') as string | null) ?? '';
+		const lounge = (data.get('lounge') as string | null) ?? '';
+		const gra = (data.get('gra') as string | null) ?? '';
 
 		const groups = await getGroups(locals.user?.id);
 		const directory =
@@ -32,7 +32,8 @@ export const actions = {
 				? active_directory
 				: public_active_directory;
 
-		const roomsFragment = gra !== '' && gra !== '[Any]' ? sql`JOIN rooms USING (room)` : sql``;
+		// const roomsFragment = gra !== '' && gra !== '[Any]' ? sql`JOIN rooms USING (room)` : sql``;
+		const useRooms = gra !== '' && gra !== '[Any]';
 
 		const queriesToUse: SQL[] = [];
 		let clauseToUse = sql``;
@@ -56,7 +57,7 @@ export const actions = {
 			queriesToUse.push(sql`lounge = ${lounge}`);
 		}
 		if (gra !== '' && gra !== '[Any]') {
-			queriesToUse.push(sql`rooms.gra = ${gra}`);
+			queriesToUse.push(sql`gra = ${gra}`);
 		}
 		if (year !== '' && year !== '[Any]') {
 			if (year !== 'No year') {
@@ -74,14 +75,36 @@ export const actions = {
 			clauseToUse = sql.join(queriesToUse, sql` AND `);
 		}
 
-		const query = sql<{
-			username: string;
-			lastname: string;
-			firstname: string;
-			title: string;
-			room: string;
-			year: number;
-		}>`SELECT username,lastname,firstname,title,room,year from ${directory} ${roomsFragment} WHERE ${clauseToUse} ORDER BY lastname`;
+		let query;
+
+		if (useRooms) {
+			query = db
+				.select({
+					username: directory.username,
+					lastname: directory.lastname,
+					firstname: directory.firstname,
+					title: directory.title,
+					room: directory.room,
+					year: directory.year
+				})
+				.from(directory)
+				.where(clauseToUse)
+				.orderBy(directory.lastname);
+		} else {
+			query = db
+				.select({
+					username: directory.username,
+					lastname: directory.lastname,
+					firstname: directory.firstname,
+					title: directory.title,
+					room: directory.room,
+					year: directory.year
+				})
+				.from(directory)
+				.innerJoin(rooms, eq(directory.room, rooms.room))
+				.where(clauseToUse)
+				.orderBy(directory.lastname);
+		}
 
 		// const query = sql.typeAlias('user')`
 		// 		SELECT username,lastname,firstname,title,room,year
@@ -91,13 +114,13 @@ export const actions = {
 		// 		ORDER BY lastname
 		// 	`;
 
-		const result = await db.execute(query);
+		const result = await query;
 
-		if (result.rowCount === 0) {
+		if (result.length === 0) {
 			return fail(400, { noFound: true });
-		} else if (result.rowCount === 1) {
-			redirect(303, `${base}/sds/directory/entry?username=${result.rows[0].username}`);
-		} else return { data: result.rows };
+		} else if (result.length === 1) {
+			redirect(303, `${base}/sds/directory/entry?username=${result[0].username}`);
+		} else return { data: result };
 	}
 } satisfies Actions;
 

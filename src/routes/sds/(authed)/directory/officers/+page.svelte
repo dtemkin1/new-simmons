@@ -4,64 +4,15 @@
 
 	export let data: PageData;
 
-	import { Table } from '@skeletonlabs/skeleton';
-	import type { TableSource } from '@skeletonlabs/skeleton';
-	import { tableMapperValues } from '@skeletonlabs/skeleton';
-	import { goto } from '$app/navigation';
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
-
-	async function generateOfficerData(officerPromiseData: typeof data.officers) {
-		const officerData = (await officerPromiseData).map((item) => {
-			let { position_text, username, name, room, phone, email } = item;
-			if (position_text == null) {
-				position_text = '';
-			}
-			if (username == null) {
-				username = '';
-			}
-			if (name == null) {
-				name = '';
-			}
-			if (room == null) {
-				room = '';
-			}
-			if (phone == null) {
-				phone = '';
-			}
-			if (email == null) {
-				email = '';
-			}
-
-			return {
-				position_text,
-				username,
-				name,
-				room,
-				phone,
-				email
-			};
-		});
-
-		const tableData = tableMapperValues(officerData, ['position_text', 'name', 'room', 'email']);
-		const metaData = tableMapperValues(officerData, ['username']);
-
-		return {
-			head: ['Position Text', 'Name', 'Room', 'Email'],
-			body: tableData,
-			meta: metaData
-		} satisfies TableSource;
-	}
-	function onTableClick(row: CustomEvent<string[]>) {
-		const username = row.detail[0];
-		goto(`${base}/sds/directory/entry?username=${username}`);
-	}
+	import NameRoomEmailTable from '$lib/components/NameRoomEmailTable.svelte';
 </script>
 
-{#await generateOfficerData(data.officers)}
+{#await data.officers}
 	<div class="flex items-center justify-center h-full flex-col w-full p-4">
 		<div class="p-4"><ProgressRadial /></div>
 	</div>
-{:then table}
+{:then officers}
 	<div class="flex items-center justify-start h-full flex-col w-full p-4">
 		<h2 class="h2 text-center p-2">Student Officers</h2>
 		{#if data.groups?.includes('ADMINISTRATORS')}
@@ -70,6 +21,6 @@
 				<!-- TODO: MAKE OFFICER SETUP PAGE -->
 			</p>
 		{/if}
-		<Table class="table-compact" interactive={true} source={table} on:selected={onTableClick} />
+		<NameRoomEmailTable data={officers} />
 	</div>
 {/await}
