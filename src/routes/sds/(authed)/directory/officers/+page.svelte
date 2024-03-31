@@ -5,7 +5,7 @@
 	export let data: PageData;
 
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
-	import NameRoomEmailTable from '$lib/components/NameRoomEmailTable.svelte';
+	import PeopleTable from '$lib/components/PeopleTable.svelte';
 </script>
 
 {#await data.officers}
@@ -21,6 +21,6 @@
 				<!-- TODO: MAKE OFFICER SETUP PAGE -->
 			</p>
 		{/if}
-		<NameRoomEmailTable data={officers} />
+		<PeopleTable userData={officers} headers={{ name: 'Name', room: 'Room', email: 'Email' }} />
 	</div>
 {/await}

@@ -7,7 +7,7 @@ import {
 	active_lounges,
 	rooms
 } from '$lib/server/schema';
-import { SQL, and, isNotNull, ne, sql, eq } from 'drizzle-orm';
+import { SQL, and, isNotNull, ne, sql, eq, ilike, isNull } from 'drizzle-orm';
 import { redirect, fail } from '@sveltejs/kit';
 import { base } from '$app/paths';
 import { requireGroups } from '$lib/utils';
@@ -39,31 +39,31 @@ export const actions = {
 		let clauseToUse = sql``;
 
 		if (username !== '') {
-			queriesToUse.push(sql`username ILIKE ${username}`);
+			queriesToUse.push(ilike(directory.username, username));
 		}
 		if (title !== '') {
-			queriesToUse.push(sql`title ILIKE ${title}`);
+			queriesToUse.push(ilike(directory.title, title));
 		}
 		if (firstname !== '') {
-			queriesToUse.push(sql`firstname ILIKE ${firstname}`);
+			queriesToUse.push(ilike(directory.firstname, firstname));
 		}
 		if (lastname !== '') {
-			queriesToUse.push(sql`lastname ILIKE ${lastname}`);
+			queriesToUse.push(ilike(directory.lastname, lastname));
 		}
 		if (room !== '') {
-			queriesToUse.push(sql`room ILIKE ${room}`);
+			queriesToUse.push(ilike(directory.room, room));
 		}
 		if (lounge !== '' && lounge !== '[Any]') {
-			queriesToUse.push(sql`lounge = ${lounge}`);
+			queriesToUse.push(eq(directory.lounge, lounge));
 		}
 		if (gra !== '' && gra !== '[Any]') {
-			queriesToUse.push(sql`gra = ${gra}`);
+			queriesToUse.push(eq(rooms.gra, gra));
 		}
 		if (year !== '' && year !== '[Any]') {
 			if (year !== 'No year') {
-				queriesToUse.push(sql`year = ${year}`);
+				queriesToUse.push(eq(directory.year, Number(year)));
 			} else {
-				queriesToUse.push(sql`year IS NULL`);
+				queriesToUse.push(isNull(directory.year));
 			}
 		}
 
@@ -72,7 +72,7 @@ export const actions = {
 		} else if (queriesToUse.length === 1) {
 			clauseToUse = queriesToUse[0];
 		} else {
-			clauseToUse = sql.join(queriesToUse, sql` AND `);
+			clauseToUse = sql.join(queriesToUse, sql`and`);
 		}
 
 		let query;
@@ -88,6 +88,7 @@ export const actions = {
 					year: directory.year
 				})
 				.from(directory)
+				.innerJoin(rooms, eq(directory.room, rooms.room))
 				.where(clauseToUse)
 				.orderBy(directory.lastname);
 		} else {
@@ -101,7 +102,6 @@ export const actions = {
 					year: directory.year
 				})
 				.from(directory)
-				.innerJoin(rooms, eq(directory.room, rooms.room))
 				.where(clauseToUse)
 				.orderBy(directory.lastname);
 		}

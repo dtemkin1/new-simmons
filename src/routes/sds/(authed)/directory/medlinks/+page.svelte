@@ -5,7 +5,7 @@
 	export let data: PageData;
 
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
-	import NameRoomEmailTable from '$lib/components/NameRoomEmailTable.svelte';
+	import PeopleTable from '$lib/components/PeopleTable.svelte';
 </script>
 
 {#await data.medlinks}
@@ -33,6 +33,6 @@
 				<!-- TODO: MAKE MEDLINK SETUP PAGE -->
 			</p>
 		{/if}
-		<NameRoomEmailTable data={medlinks} />
+		<PeopleTable userData={medlinks} headers={{ name: 'Name', room: 'Room', email: 'Email' }} />
 	</div>
 {/await}
