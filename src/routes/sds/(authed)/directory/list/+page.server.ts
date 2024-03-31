@@ -33,10 +33,9 @@ export const actions = {
 				: public_active_directory;
 
 		// const roomsFragment = gra !== '' && gra !== '[Any]' ? sql`JOIN rooms USING (room)` : sql``;
-		const useRooms = gra !== '' && gra !== '[Any]';
+		let useRooms = false;
 
-		const queriesToUse: SQL[] = [];
-		let clauseToUse = sql``;
+		const queriesToUse: SQL<unknown>[] = [];
 
 		if (username !== '') {
 			queriesToUse.push(ilike(directory.username, username));
@@ -58,6 +57,7 @@ export const actions = {
 		}
 		if (gra !== '' && gra !== '[Any]') {
 			queriesToUse.push(eq(rooms.gra, gra));
+			useRooms = true;
 		}
 		if (year !== '' && year !== '[Any]') {
 			if (year !== 'No year') {
@@ -69,42 +69,36 @@ export const actions = {
 
 		if (queriesToUse.length === 0) {
 			return fail(400, { missing: true });
-		} else if (queriesToUse.length === 1) {
-			clauseToUse = queriesToUse[0];
-		} else {
-			clauseToUse = sql.join(queriesToUse, sql`and`);
 		}
 
-		let query;
+		const clauseToUse = sql.join(queriesToUse, sql`and`);
 
-		if (useRooms) {
-			query = db
-				.select({
-					username: directory.username,
-					lastname: directory.lastname,
-					firstname: directory.firstname,
-					title: directory.title,
-					room: directory.room,
-					year: directory.year
-				})
-				.from(directory)
-				.innerJoin(rooms, eq(directory.room, rooms.room))
-				.where(clauseToUse)
-				.orderBy(directory.lastname);
-		} else {
-			query = db
-				.select({
-					username: directory.username,
-					lastname: directory.lastname,
-					firstname: directory.firstname,
-					title: directory.title,
-					room: directory.room,
-					year: directory.year
-				})
-				.from(directory)
-				.where(clauseToUse)
-				.orderBy(directory.lastname);
-		}
+		const query = useRooms
+			? db
+					.select({
+						username: directory.username,
+						lastname: directory.lastname,
+						firstname: directory.firstname,
+						title: directory.title,
+						room: directory.room,
+						year: directory.year
+					})
+					.from(directory)
+					.innerJoin(rooms, eq(directory.room, rooms.room))
+					.where(clauseToUse)
+					.orderBy(directory.lastname)
+			: db
+					.select({
+						username: directory.username,
+						lastname: directory.lastname,
+						firstname: directory.firstname,
+						title: directory.title,
+						room: directory.room,
+						year: directory.year
+					})
+					.from(directory)
+					.where(clauseToUse)
+					.orderBy(directory.lastname);
 
 		// const query = sql.typeAlias('user')`
 		// 		SELECT username,lastname,firstname,title,room,year
