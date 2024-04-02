@@ -133,8 +133,8 @@
 </p>
 
 <p>
-	Contact the Simmons officers at <a class="anchor" href="mailto:officers@simmons.mit.edu"
-		>officers@simmons.mit.edu</a
+	Contact the Simmons officers at <a class="anchor" href="mailto:simmons-officers@mit.edu"
+		>simmons-officers@mit.edu</a
 	>.
 </p>
 <h2 class="h2">Heads Of House</h2>
