@@ -152,11 +152,11 @@
 	you have any questions or need any further assistance.
 </p>
 
-<h2 class="h2"><a class="anchor" href="{base}/procard">Procard Form</a></h2>
+<!-- <h2 class="h2"><a class="anchor" href="{base}/procard">Procard Form</a></h2>
 <p>Ask Area Director Amanda Putnam to pay for things with her procurement card.</p>
 <p>
 	Contact <a class="anchor" href="mailto:simmons-treasurer@mit.edu">simmons-treasurer@mit.edu</a>
 	and
 	<a class="anchor" href="mailto:apputnam@mit.edu">apputnam@mit.edu</a> if you have any questions or
 	need any further assistance.
-</p>
+</p> -->

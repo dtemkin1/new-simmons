@@ -26,7 +26,7 @@
 			image: imagesGlob['/src/lib/assets/carousel/image3.jpg'],
 			title: 'Dining',
 			description:
-				'There are 5 dining halls on the MIT campus. Simmons Hall has the best, open 7 days a week for breakfast and dinner. We have a smaller dining facility with personable staff that we love.'
+				'There are 6 dining halls on the MIT campus. Simmons Hall has the best, open 7 days a week for breakfast (brunch on weekends) and dinner. We have a smaller dining facility with personable staff that we love.'
 		},
 		{
 			image: imagesGlob['/src/lib/assets/carousel/image4.jpg'],
@@ -56,7 +56,7 @@
 			image: imagesGlob['/src/lib/assets/carousel/image8.jpg'],
 			title: 'Rooms',
 			description:
-				"Simmons Hall consists of doubles and singles located throughout the building's ten floors and three towers. Three residents generally share a bathroom."
+				"Simmons Hall consists of triples, doubles, and singles located throughout the building's ten floors and three towers. Three residents generally share a bathroom."
 		},
 		{
 			image: imagesGlob['/src/lib/assets/carousel/image9.jpg'],
@@ -197,9 +197,9 @@ old_desc
 
 <h2 class="h2">House Manager</h2>
 <p>
-	<a class="anchor" href="mailto:dasilvaj@mit.edu.edu">João "Bosco" Da Silva </a> is the Simmons House
+	<a class="anchor" href="mailto:dasilvaj@mit.edu.edu">João "Bosco" Da Silva</a> is the Simmons House
 	Manager. The house manager is responsible for the operational aspects of the building. She oversees
-	front desk operations as well as custodial and maintenance staff. Her goal is to make Simmons a safe,
+	front desk operations as well as custodial and maintenance staff. His goal is to make Simmons a safe,
 	secure, and pleasant place to live.
 </p>
 <p>

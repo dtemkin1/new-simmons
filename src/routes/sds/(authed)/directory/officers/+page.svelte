@@ -21,6 +21,9 @@
 				<!-- TODO: MAKE OFFICER SETUP PAGE -->
 			</p>
 		{/if}
-		<PeopleTable userData={officers} headers={{ name: 'Name', room: 'Room', email: 'Email' }} />
+		<PeopleTable
+			userData={officers}
+			headers={{ position_text: 'Position', name: 'Name', room: 'Room', email: 'Email' }}
+		/>
 	</div>
 {/await}
