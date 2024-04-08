@@ -4,7 +4,7 @@
 </script>
 
 <h1 class="h1">The Constitution of Simmons Hall</h1>
-<p>Last updated February 12, 2023</p>
+<p>Last updated February 18th, 2024</p>
 
 <TableOfContents regionLead="font-bold uppercase" />
 
@@ -338,7 +338,8 @@
 							the House and presenting those records at every house meeting; (e) running full forum
 							votes by publicly posting a description of the measure(s) being voted on, then issuing
 							a ballot on said measures to be concluded before the next house meeting; (f) serving
-							in lieu of the Chair of the House if the Chair is temporarily unable to serve.
+							in lieu of the Chair of the House if the Chair is temporarily unable to serve; (g)
+							updating the Constitution with all approved Constitutional Amendments.
 						</li>
 						<li>
 							The Treasurer manages the finances of the House and implements the financial decisions
