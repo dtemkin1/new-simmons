@@ -219,7 +219,185 @@ export const people = {
 		full_name: 'Elizabeth Wright',
 		year: '2026',
 		room: '537',
+		email: 'elwright@mit.edu',
 		photo: 'elwright.jpg'
+	},
+
+	// not yet filled out the google form, data from simmons db...
+	ggirard: {
+		name: 'Gabbie',
+		full_name: 'Gabbie Girard',
+		photo: 'photo.jpg'
+	},
+	mariojsm: {
+		name: 'Mario',
+		full_name: 'Mario Sánchez Méndez',
+		photo: 'photo.jpg'
+	},
+	smoulder: {
+		name: 'Summer',
+		full_name: 'Summer Moulder',
+		photo: 'photo.jpg'
+	},
+	eitanc27: {
+		name: 'Eitan',
+		full_name: 'Eitan Camacho',
+		photo: 'photo.jpg'
+	},
+	deeptag: {
+		name: 'Deepta',
+		full_name: 'Deepta Gupta',
+		photo: 'photo.jpg'
+	},
+	jenna49: {
+		name: 'Jenna',
+		full_name: 'Jenna Blair',
+		photo: 'photo.jpg'
+	},
+	beap: {
+		name: 'Bella',
+		full_name: 'Bella Aparicio',
+		photo: 'photo.jpg'
+	},
+	tuviedo: {
+		name: 'Tessa',
+		full_name: 'Tessa Uviedo',
+		photo: 'photo.jpg'
+	},
+	mlstagg: {
+		name: 'Mateo',
+		full_name: 'Mateo Stagg',
+		photo: 'photo.jpg'
+	},
+	ijuarez: {
+		name: 'Isa',
+		full_name: 'Isa Juarez',
+		photo: 'photo.jpg'
+	},
+	htejada: {
+		name: 'Hannah',
+		full_name: 'Hannah Tejada',
+		photo: 'photo.jpg'
+	},
+	amiyares: {
+		name: 'Amanda',
+		full_name: 'Amanda Miayres',
+		photo: 'photo.jpg'
+	},
+	nic26: {
+		name: 'Nicole',
+		full_name: 'Nicole Schmidt',
+		photo: 'photo.jpg'
+	},
+	alpeng: {
+		name: 'Amber',
+		full_name: 'Amber Peng',
+		photo: 'photo.jpg'
+	},
+	maguiar: {
+		name: 'Maria',
+		full_name: 'Maria Aguiar',
+		photo: 'photo.jpg'
+	},
+	nbuono: {
+		name: 'Nicolaniello',
+		full_name: 'Nicolaniello Buono',
+		photo: 'photo.jpg'
+	},
+	tylon: {
+		name: 'Tyler',
+		full_name: 'Tyler Nguyen',
+		photo: 'photo.jpg'
+	},
+	kanotung: {
+		name: 'Kanokwan',
+		full_name: 'Kanokwan Tungkitkancharoen',
+		photo: 'photo.jpg'
+	},
+	avalos10: {
+		name: 'Servando',
+		full_name: 'Servando Avalos',
+		photo: 'photo.jpg'
+	},
+	kkummel: {
+		name: 'Koko',
+		full_name: 'Koko Kummel',
+		photo: 'photo.jpg'
+	},
+	fdma2405: {
+		name: 'David',
+		full_name: 'David Mora Armendariz',
+		photo: 'photo.jpg'
+	},
+	faris: {
+		name: 'Faris',
+		full_name: 'Faris Elnager',
+		photo: 'photo.jpg'
+	},
+	kelton: {
+		name: 'Kelton',
+		full_name: 'Kelton Aldridge',
+		photo: 'photo.jpg'
+	},
+	jayna: {
+		name: 'Jayna',
+		full_name: 'Jayna Ekelmann',
+		photo: 'photo.jpg'
+	},
+	huafang: {
+		name: 'Hua',
+		full_name: 'Hua Fang',
+		photo: 'photo.jpg'
+	},
+	audrey16: {
+		name: 'Audrey',
+		full_name: 'Audrey Lee',
+		photo: 'photo.jpg'
+	},
+	ezraeyre: {
+		name: 'Ezra',
+		full_name: 'Ezra Eyre',
+		photo: 'photo.jpg'
+	},
+	longale: {
+		name: 'Isabella',
+		full_name: 'Isabella Longale',
+		photo: 'photo.jpg'
+	},
+	froit: {
+		name: 'Fiona',
+		full_name: 'Fiona Lu',
+		photo: 'photo.jpg'
+	},
+	djperrea: {
+		name: 'David',
+		full_name: 'David Perreault',
+		photo: 'photo.jpg'
+	},
+	hhn: {
+		name: 'Heidi',
+		full_name: 'Heidi Nakajima',
+		photo: 'photo.jpg'
+	},
+	bryand: {
+		name: 'Bryan',
+		full_name: 'Bryan Bryson',
+		photo: 'photo.jpg'
+	},
+	leibyk: {
+		name: 'Kevin',
+		full_name: 'Kevin Leiby',
+		photo: 'photo.jpg'
+	},
+	dasilvaj: {
+		name: 'Bosco',
+		full_name: 'João "Bosco" Da Silva',
+		photo: 'photo.jpg'
+	},
+	apputnam: {
+		name: 'Amanda',
+		full_name: 'Amanda Putnam',
+		photo: 'photo.jpg'
 	},
 	vacant: {
 		name: '-',
@@ -231,36 +409,36 @@ export const people = {
 // Maps offices to people by kerberos.
 export const incumbents: Record<keyof typeof offices, (keyof typeof people)[]> = {
 	// OFFICERS
-	president: [],
-	house_chair: [],
-	treasurer: [],
+	president: ['ggirard'],
+	house_chair: ['mariojsm', 'smoulder'],
+	treasurer: ['eitanc27'],
 	secretary: ['ejrice'],
 
-	rooming_chair: [],
-	social_chair: [],
-	frosh_chair: [],
+	rooming_chair: ['deeptag', 'jenna49', 'beap'],
+	social_chair: ['ijuarez', 'htejada'],
+	frosh_chair: ['tuviedo', 'mlstagg'],
 	technology_chair: ['dtemkin'],
 
-	publicity_chair: ['mtala'],
+	publicity_chair: ['amiyares', 'nic26', 'mtala'],
 	historian: ['elwright'],
-	fisch_chair: [],
-	athletics_chair: [],
-	ee_lab_chair: [],
-	library_chair: [],
-	entertainment_chair: [],
+	fisch_chair: ['maguiar'],
+	athletics_chair: ['alpeng'],
+	ee_lab_chair: ['nbuono', 'tylon'],
+	library_chair: ['kelton'],
+	entertainment_chair: ['kkummel'],
 	reservations_chair: ['ashhong'],
-	workshop_chair: [],
-	kitchen_chair: [],
-	gym_chair: [],
-	craft_room_chair: [],
-	dining_chair: [],
+	workshop_chair: ['kanotung', 'avalos10'],
+	kitchen_chair: ['jayna', 'huafang'],
+	gym_chair: ['fdma2405', 'faris'],
+	craft_room_chair: ['ezraeyre', 'longale'],
+	dining_chair: ['froit'],
 
 	// HOUSE TEAM
-	hoh: [],
-	associate_hoh: [],
-	area_director: [],
+	hoh: ['djperrea', 'hhn'],
+	associate_hoh: ['bryand', 'leibyk'],
+	area_director: ['apputnam'],
 
 	// OTHER
-	house_manager: [],
-	desk_captain: []
+	house_manager: ['dasilvaj'],
+	desk_captain: ['ggirard', 'audrey16']
 };
