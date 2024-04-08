@@ -1,3 +1,19 @@
+interface office {
+	title: string;
+	full_title: string;
+	description: string;
+}
+
+interface person {
+	name: string;
+	full_name: string;
+	year?: string;
+	room?: string;
+	email?: string;
+	photo: string;
+	phone?: string;
+}
+
 // Contains details for offices.
 export const offices = {
 	president: {
@@ -159,7 +175,7 @@ export const offices = {
 		full_title: 'Desk Captain',
 		description: 'The Desk Captain oversees desk workers.'
 	}
-};
+} as const satisfies Record<string, office>;
 
 // Contains personal details for people by kerberos.
 export const people = {
@@ -449,10 +465,10 @@ export const people = {
 		full_name: 'Vacant',
 		photo: 'photo.jpg'
 	}
-};
+} as const satisfies Record<string, person>;
 
 // Maps offices to people by kerberos.
-export const incumbents = {
+export const incumbents: Record<keyof typeof offices, (keyof typeof people)[]> = {
 	// OFFICERS
 	president: ['sendaoc'],
 	house_chair: ['ambick'],
