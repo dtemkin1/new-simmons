@@ -222,6 +222,22 @@ export const people = {
 		email: 'elwright@mit.edu',
 		photo: 'elwright.jpg'
 	},
+	beap: {
+		name: 'Bella',
+		full_name: 'Bella Aparicio',
+		photo: 'photo.jpg',
+		year: '2026',
+		email: 'beap@mit.edu'
+	},
+	djperrea: {
+		name: 'David',
+		full_name: 'David Perreault',
+		photo: 'djperrea-hhn.jpeg',
+		year: '1997',
+		email: 'djperrea@mit.edu',
+		phone: '617-312-5966',
+		room: '365'
+	},
 
 	// not yet filled out the google form, data from simmons db...
 	ggirard: {
@@ -252,11 +268,6 @@ export const people = {
 	jenna49: {
 		name: 'Jenna',
 		full_name: 'Jenna Blair',
-		photo: 'photo.jpg'
-	},
-	beap: {
-		name: 'Bella',
-		full_name: 'Bella Aparicio',
 		photo: 'photo.jpg'
 	},
 	tuviedo: {
@@ -367,11 +378,6 @@ export const people = {
 	froit: {
 		name: 'Fiona',
 		full_name: 'Fiona Lu',
-		photo: 'photo.jpg'
-	},
-	djperrea: {
-		name: 'David',
-		full_name: 'David Perreault',
 		photo: 'photo.jpg'
 	},
 	hhn: {
