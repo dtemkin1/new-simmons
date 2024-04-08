@@ -141,7 +141,7 @@ export const offices = {
 		title: 'Dining',
 		full_title: 'Dining Chair',
 		description:
-			'<p>The Dining Chair is responsible for </p><ol type="a"><li>communicating with the Simmons dining manager as needed; </li><li>encouraging use of feedback forms for dining; </li><li>listening to student opinions on dining and advocating on behalf of Simmons residents; </li><li></li>attending DormCon dining meetings.</ol>'
+			'<p>The Dining Chair is responsible for </p><ol type="a"><li>communicating with the Simmons dining manager as needed; </li><li>encouraging use of feedback forms for dining; </li><li>listening to student opinions on dining and advocating on behalf of Simmons residents; </li><li>Dattending DormCon dining meetings.</li></ol>'
 	},
 
 	// HOUSE TEAM
