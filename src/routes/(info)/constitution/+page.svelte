@@ -796,6 +796,18 @@
 						</li>
 					</ol>
 				</li>
+
+				<li>
+					<h3>Roles and Responsibilities of the Dining Chair</h3>
+					<ol class="list-decimal list-outside ml-6 py-2">
+						<li>
+							The Dining Chair is responsible for (a) communicating with the Simmons dining manager
+							as needed; (b) encouraging use of feedback forms for dining; (c) listening to student
+							opinions on dining and advocating on behalf of Simmons residents; (d) attending
+							dormcon dining meetings
+						</li>
+					</ol>
+				</li>
 			</ol>
 		</li>
 
