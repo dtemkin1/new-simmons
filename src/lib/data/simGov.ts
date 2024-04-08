@@ -9,9 +9,10 @@ interface person {
 	full_name: string;
 	year?: string;
 	room?: string;
-	email?: string;
-	photo: string;
 	phone?: string;
+	email?: string;
+	facebook?: string;
+	photo: string;
 }
 
 // Contains details for offices.
