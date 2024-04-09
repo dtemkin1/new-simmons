@@ -33,8 +33,8 @@
 		<div />
 		<PeopleTile office="athletics_chair" />
 		<PeopleTile office="frosh_chair" />
-		<PeopleTile office="frosh_chair" />
 		<PeopleTile office="publicity_chair" />
+		<div />
 		<div />
 		<div />
 		<PeopleTile office="fisch_chair" />
