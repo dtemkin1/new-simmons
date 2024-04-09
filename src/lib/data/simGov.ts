@@ -1,10 +1,10 @@
-interface office {
+export interface Office {
 	title: string;
 	full_title: string;
 	description: string;
 }
 
-interface person {
+export interface Person {
 	name: string;
 	full_name: string;
 	year?: string;
@@ -176,7 +176,7 @@ export const offices = {
 		full_title: 'Desk Captain',
 		description: 'The Desk Captain oversees desk workers.'
 	}
-} as const satisfies Record<string, office>;
+} as const satisfies Record<string, Office>;
 
 // Contains personal details for people by kerberos.
 export const people = {
@@ -220,7 +220,7 @@ export const people = {
 		year: '2026',
 		room: '537',
 		email: 'elwright@mit.edu',
-		photo: 'elwright.jpg'
+		photo: 'elwright.png'
 	},
 	beap: {
 		name: 'Bella',
@@ -410,10 +410,10 @@ export const people = {
 		full_name: 'Vacant',
 		photo: 'photo.jpg'
 	}
-} as const satisfies Record<string, person>;
+} as const satisfies Record<string, Person>;
 
 // Maps offices to people by kerberos.
-export const incumbents: Record<keyof typeof offices, (keyof typeof people)[]> = {
+export const incumbents = {
 	// OFFICERS
 	president: ['ggirard'],
 	house_chair: ['mariojsm', 'smoulder'],
@@ -447,4 +447,4 @@ export const incumbents: Record<keyof typeof offices, (keyof typeof people)[]> =
 	// OTHER
 	house_manager: ['dasilvaj'],
 	desk_captain: ['ggirard', 'audrey16']
-};
+} as const satisfies Record<keyof typeof offices, (keyof typeof people)[]>;
