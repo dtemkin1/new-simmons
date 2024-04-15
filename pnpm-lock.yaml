@@ -65,8 +65,8 @@ devDependencies:
     specifier: 0.5.7
     version: 0.5.7(tailwindcss@3.4.1)
   '@tailwindcss/typography':
-    specifier: 0.5.10
-    version: 0.5.10(tailwindcss@3.4.1)
+    specifier: 0.5.12
+    version: 0.5.12(tailwindcss@3.4.1)
   '@types/locutus':
     specifier: ^0.0.8
     version: 0.0.8
@@ -2001,8 +2001,8 @@ packages:
       tailwindcss: 3.4.1
     dev: true
 
-  /@tailwindcss/typography@0.5.10(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
+  /@tailwindcss/typography@0.5.12(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-CNwpBpconcP7ppxmuq3qvaCxiRWnbhANpY/ruH4L5qs2GCiVDJXde/pjj2HWPV1+Q4G9+V/etrwUYopdcjAlyg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
@@ -4225,7 +4225,7 @@ packages:
       postcss: ^8.2.14
     dependencies:
       postcss: 8.4.35
-      postcss-selector-parser: 6.0.15
+      postcss-selector-parser: 6.0.16
     dev: true
 
   /postcss-safe-parser@6.0.0(postcss@8.4.38):
@@ -4377,7 +4377,7 @@ packages:
       commander: 10.0.1
       glob: 8.1.0
       postcss: 8.4.38
-      postcss-selector-parser: 6.0.15
+      postcss-selector-parser: 6.0.16
     dev: true
 
   /queue-microtask@1.2.3:
