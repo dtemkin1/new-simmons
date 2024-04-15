@@ -238,6 +238,37 @@ export const people = {
 		phone: '617-312-5966',
 		room: '365'
 	},
+	kelton: {
+		name: 'Kelton',
+		full_name: 'Kelton Aldridge',
+		photo: 'kelton.png',
+		year: '2027',
+		email: 'kelton@mit.edu'
+	},
+	apputnam: {
+		name: 'Amanda',
+		full_name: 'Amanda Putnam',
+		photo: 'apputnam.jpeg',
+		room: '580',
+		email: 'apputnam@mit.edu',
+		phone: '6177191866'
+	},
+	kanotung: {
+		name: 'Kano',
+		full_name: 'Kanokwan Tungkitkancharoen',
+		photo: 'avalos10-kanotung.jpeg',
+		year: '2025',
+		room: '478',
+		email: 'kanotung@mit.edu',
+		phone: '223-241-5365'
+		// facebook: 'kanokwantung'
+	},
+	avalos10: {
+		name: 'Servando',
+		full_name: 'Servando Avalos',
+		photo: 'avalos10-kanotung.jpeg',
+		year: '2026'
+	},
 
 	// not yet filled out the google form, data from simmons db...
 	ggirard: {
@@ -320,16 +351,6 @@ export const people = {
 		full_name: 'Tyler Nguyen',
 		photo: 'photo.jpg'
 	},
-	kanotung: {
-		name: 'Kanokwan',
-		full_name: 'Kanokwan Tungkitkancharoen',
-		photo: 'photo.jpg'
-	},
-	avalos10: {
-		name: 'Servando',
-		full_name: 'Servando Avalos',
-		photo: 'photo.jpg'
-	},
 	kkummel: {
 		name: 'Koko',
 		full_name: 'Koko Kummel',
@@ -343,11 +364,6 @@ export const people = {
 	faris: {
 		name: 'Faris',
 		full_name: 'Faris Elnager',
-		photo: 'photo.jpg'
-	},
-	kelton: {
-		name: 'Kelton',
-		full_name: 'Kelton Aldridge',
 		photo: 'photo.jpg'
 	},
 	jayna: {
@@ -398,11 +414,6 @@ export const people = {
 	dasilvaj: {
 		name: 'Bosco',
 		full_name: 'João "Bosco" Da Silva',
-		photo: 'photo.jpg'
-	},
-	apputnam: {
-		name: 'Amanda',
-		full_name: 'Amanda Putnam',
 		photo: 'photo.jpg'
 	},
 	vacant: {
