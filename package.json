@@ -16,7 +16,7 @@
 		"preinstall": "npx only-allow pnpm"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.42.1",
+		"@playwright/test": "^1.43.1",
 		"@skeletonlabs/skeleton": "^2.9.1",
 		"@skeletonlabs/tw-plugin": "0.4.0",
 		"@sveltejs/adapter-netlify": "^4.1.0",
