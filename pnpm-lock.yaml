@@ -18,8 +18,8 @@ dependencies:
     specifier: ^0.30.8
     version: 0.30.8(@types/pg@8.11.4)(pg@8.11.4)
   locutus:
-    specifier: ^2.0.16
-    version: 2.0.16
+    specifier: ^2.0.32
+    version: 2.0.32
   lucia:
     specifier: ^3.1.1
     version: 3.1.1
@@ -3647,9 +3647,9 @@ packages:
       p-locate: 5.0.0
     dev: true
 
-  /locutus@2.0.16:
-    resolution: {integrity: sha512-pGfl6Hb/1mXLzrX5kl5lH7gz25ey0vwQssZp8Qo2CEF59di6KrAgdFm+0pW8ghLnvNzzJGj5tlWhhv2QbK3jeQ==}
-    engines: {node: '>= 10'}
+  /locutus@2.0.32:
+    resolution: {integrity: sha512-fr7OCpbE4xeefhHqfh6hM2/l9ZB3XvClHgtgFnQNImrM/nqL950o6FO98vmUH8GysfQRCcyBYtZ4C8GcY52Edw==}
+    engines: {node: '>= 10', yarn: '>= 1'}
     dev: false
 
   /lodash.castarray@4.4.0:
