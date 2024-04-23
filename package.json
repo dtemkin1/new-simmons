@@ -56,7 +56,7 @@
 		"@lucia-auth/adapter-drizzle": "^1.0.7",
 		"css-tree": "^2.3.1",
 		"drizzle-orm": "^0.30.8",
-		"locutus": "^2.0.16",
+		"locutus": "^2.0.32",
 		"lucia": "^3.1.1",
 		"lucide-svelte": "^0.368.0",
 		"md5": "^2.3.0",
