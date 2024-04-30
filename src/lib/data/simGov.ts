@@ -225,7 +225,7 @@ export const people = {
 	beap: {
 		name: 'Bella',
 		full_name: 'Bella Aparicio',
-		photo: 'photo.jpg',
+		photo: 'beap-jenna49.jpg',
 		year: '2026',
 		email: 'beap@mit.edu'
 	},
@@ -269,13 +269,33 @@ export const people = {
 		photo: 'avalos10-kanotung.jpeg',
 		year: '2026'
 	},
-
-	// not yet filled out the google form, data from simmons db...
 	ggirard: {
 		name: 'Gabbie',
-		full_name: 'Gabbie Girard',
-		photo: 'photo.jpg'
+		full_name: 'Gabrielle Girard',
+		photo: 'ggirard.png',
+		year: '2025',
+		room: '424A',
+		email: 'ggirard@mit.edu'
 	},
+	eitanc27: {
+		name: 'Eitan',
+		full_name: 'Eitan Camacho',
+		photo: 'eitan27.jpg',
+		year: '2027',
+		room: '922C',
+		email: 'eitanc27@mit.edu',
+		phone: '5106045199'
+	},
+	tylon: {
+		name: 'Tom',
+		full_name: 'Tom Nguyen',
+		photo: 'tylon.jpg',
+		year: '2026',
+		email: 'tylon@mit.edu',
+		phone: '4076019929'
+	},
+
+	// not yet filled out the google form, data from simmons db...
 	mariojsm: {
 		name: 'Mario',
 		full_name: 'Mario Sánchez Méndez',
@@ -284,11 +304,6 @@ export const people = {
 	smoulder: {
 		name: 'Summer',
 		full_name: 'Summer Moulder',
-		photo: 'photo.jpg'
-	},
-	eitanc27: {
-		name: 'Eitan',
-		full_name: 'Eitan Camacho',
 		photo: 'photo.jpg'
 	},
 	deeptag: {
@@ -344,11 +359,6 @@ export const people = {
 	nbuono: {
 		name: 'Nicolaniello',
 		full_name: 'Nicolaniello Buono',
-		photo: 'photo.jpg'
-	},
-	tylon: {
-		name: 'Tyler',
-		full_name: 'Tyler Nguyen',
 		photo: 'photo.jpg'
 	},
 	kkummel: {
@@ -431,7 +441,7 @@ export const incumbents = {
 	treasurer: ['eitanc27'],
 	secretary: ['ejrice'],
 
-	rooming_chair: ['deeptag', 'jenna49', 'beap'],
+	rooming_chair: ['beap', 'jenna49', 'deeptag'],
 	social_chair: ['ijuarez', 'htejada'],
 	frosh_chair: ['tuviedo', 'mlstagg'],
 	technology_chair: ['dtemkin'],
