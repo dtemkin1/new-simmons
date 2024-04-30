@@ -2,7 +2,7 @@
 	import type { Office, Person } from '$lib/data/simGov';
 
 	export let office: Office;
-	export let people: Person[];
+	// export let people: Person[];
 </script>
 
 <div class="bg-surface-50-900-token p-8">
