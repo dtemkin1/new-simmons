@@ -74,6 +74,10 @@ To run this project, you will need to add the following environment variables to
 
 `CLIENT_SECRET`
 
+`PEOPLE_API_ID`
+
+`PEOPLE_API_SECRET`
+
 ## Acknowledgements
 
 - `dramage`, 2002; with `bonawitz`, `dheera`, `psaindon` for the creation of the original Simmons DB
