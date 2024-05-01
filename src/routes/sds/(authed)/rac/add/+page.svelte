@@ -4,16 +4,16 @@
 	import type { ActionData } from './$types';
 	import { invalidateAll } from '$app/navigation';
 
-	let usertype: string;
+	let usertype: string | undefined;
 	let username: string | undefined;
-	let title: string;
-	let first_name: string;
-	let last_name: string;
-	let room: string;
-	let class_year: number;
+	let title: string | undefined;
+	let first_name: string | undefined;
+	let last_name: string | undefined;
+	let room: string | undefined;
+	let class_year: number | undefined;
 
-	let immortal: boolean;
-	let hidden: boolean;
+	let immortal: boolean | undefined;
+	let hidden: boolean | undefined;
 
 	let submit_button: HTMLButtonElement;
 	let fetch_button: HTMLButtonElement;
@@ -24,9 +24,9 @@
 	const sixMonthsAhead = new Date();
 	sixMonthsAhead.setMonth(sixMonthsAhead.getMonth() + 6);
 
-	$: locked_usertype = !(usertype?.length > 0);
+	$: locked_usertype = usertype == undefined || !(usertype?.length > 0);
 	$: locked_username = username == undefined || !(username?.length > 0);
-	$: fetch_userdetails = !['OTHER', 'temp'].includes(usertype);
+	$: fetch_userdetails = usertype ? !['OTHER', 'temp'].includes(usertype) : false;
 	$: generated_class_year =
 		form?.userData?.item.affiliations[0].type == 'student' &&
 		form?.userData?.item.affiliations[0].classYear &&
@@ -49,7 +49,16 @@
 	}): void {
 		console.log('event:complete', e);
 		submit_button.click();
+		usertype = undefined;
 		username = undefined;
+		title = undefined;
+		first_name = undefined;
+		last_name = undefined;
+		room = undefined;
+		class_year = undefined;
+		immortal = undefined;
+		hidden = undefined;
+		times_submitted++;
 	}
 
 	import { getToastStore } from '@skeletonlabs/skeleton';
@@ -252,7 +261,6 @@
 			return async ({ result, update }) => {
 				update();
 				toastHandler(result);
-				times_submitted++;
 			};
 		}}
 	>
