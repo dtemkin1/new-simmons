@@ -16,6 +16,7 @@
 	let hidden: boolean;
 
 	let submit_button: HTMLButtonElement;
+	let fetch_button: HTMLButtonElement;
 
 	export let form: ActionData;
 	// export let data: PageData;
@@ -28,7 +29,8 @@
 	$: fetch_userdetails = !['OTHER', 'temp'].includes(usertype);
 	$: generated_class_year =
 		form?.userData?.item.affiliations[0].type == 'student' &&
-		form?.userData?.item.affiliations[0].classYear
+		form?.userData?.item.affiliations[0].classYear &&
+		!Number.isNaN(Number(form?.userData?.item.affiliations[0].classYear))
 			? sixMonthsAhead.getFullYear() + Number(form?.userData?.item.affiliations[0].classYear)
 			: null;
 	$: locked_userdetails = fetch_userdetails ? !form?.fetchSuccess && !form?.fetchError : false;
@@ -37,6 +39,9 @@
 		detail: { state: { current: number; total: number }; step: number };
 	}): void {
 		console.log('event:step', e);
+		if (e.detail.state.current == 2 && fetch_userdetails) {
+			fetch_button.click();
+		}
 	}
 
 	function onCompleteHandler(e: {
@@ -109,26 +114,6 @@
 			</Step>
 			<Step locked={locked_userdetails}>
 				<svelte:fragment slot="header">User Details</svelte:fragment>
-				{#if fetch_userdetails}
-					<form
-						method="POST"
-						action="?/fetch"
-						use:enhance={() => {
-							return async ({ result, update }) => {
-								update();
-								toastHandler(result);
-							};
-						}}
-					>
-						<input
-							type="hidden"
-							name="kerberosId"
-							value={username}
-							on:change={() => invalidateAll()}
-						/>
-						<button class="btn variant-filled-primary" type="submit">Click to Fetch Details</button>
-					</form>
-				{/if}
 
 				<label class="label">
 					<span>Title</span>
@@ -245,6 +230,21 @@
 </div>
 
 <div class="hidden">
+	<form
+		method="POST"
+		action="?/fetch"
+		use:enhance={() => {
+			return async ({ result, update }) => {
+				update();
+				toastHandler(result);
+			};
+		}}
+	>
+		<input type="hidden" name="kerberosId" value={username} on:change={() => invalidateAll()} />
+		<button class="btn variant-filled-primary" type="submit" bind:this={fetch_button}
+			>Click to Fetch Details</button
+		>
+	</form>
 	<form
 		method="POST"
 		action="?/addUser"
