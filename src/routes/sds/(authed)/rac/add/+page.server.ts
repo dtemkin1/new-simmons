@@ -5,7 +5,7 @@ import { fail } from '@sveltejs/kit';
 import { db } from '$lib/server';
 import { rooms, user_types } from '$lib/server/schema';
 import { eq } from 'drizzle-orm';
-import { addUser } from '$lib/server/userAdminUtils';
+import { addUser, enableUser } from '$lib/server/userAdminUtils';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const { groups } = await parent();
@@ -32,6 +32,19 @@ export const actions = {
 			fetchSuccess: true,
 			message: 'Data fetched successfully!'
 		};
+	},
+	reenable: async ({ request }) => {
+		const data = await request.formData();
+
+		const username = (data.get('username') as string | null) ?? '';
+
+		const userEnabled = await enableUser(username);
+
+		if (userEnabled) {
+			return { success: true, message: 'User re-enabled successfully!' };
+		} else {
+			return fail(400, { error: true, message: 'Error re-enabling user' });
+		}
 	},
 	addUser: async ({ request }) => {
 		const data = await request.formData();

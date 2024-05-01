@@ -17,6 +17,7 @@
 
 	let submit_button: HTMLButtonElement;
 	let fetch_button: HTMLButtonElement;
+	let reenable_button: HTMLButtonElement;
 
 	export let form: ActionData;
 	// export let data: PageData;
@@ -90,6 +91,27 @@
 		toastStore.trigger(resultToast);
 	}
 
+	let reenableUser: string | undefined = undefined;
+
+	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+	const modalStore = getModalStore();
+	const oldUserModal: ModalSettings = {
+		type: 'prompt',
+		// Data
+		title: 'Reenable an old user',
+		body: 'Enter the username below.',
+		// Populates the input value and attributes
+		value: '',
+		valueAttr: { type: 'text', minlength: 0, required: true },
+		// Returns the updated response value
+		response: (r: string) => {
+			reenableUser = r;
+			if (reenableUser?.length > 0) {
+				reenable_button.click();
+			}
+		}
+	};
+
 	let times_submitted = 0;
 </script>
 
@@ -110,6 +132,11 @@
 					<option value="U" selected>U (Undergraduate)</option>
 					<option value="VS">VS (Visiting Scholar)</option>
 				</select>
+				<svelte:fragment slot="navigation">
+					<button class="btn variant-ghost-error" on:click={() => modalStore.trigger(oldUserModal)}
+						>Reenable User</button
+					>
+				</svelte:fragment>
 			</Step>
 			<Step locked={locked_username}>
 				<svelte:fragment slot="header">Username</svelte:fragment>
@@ -265,6 +292,21 @@
 		<input type="hidden" name="immortal" value={immortal ?? false ?? ''} />
 		<input type="hidden" name="hidden" value={hidden ?? false ?? ''} />
 		<button type="submit" bind:this={submit_button}>Submit</button>
+	</form>
+	<form
+		method="POST"
+		action="?/reenable"
+		use:enhance={() => {
+			return async ({ result, update }) => {
+				update();
+				toastHandler(result);
+			};
+		}}
+	>
+		<input type="hidden" name="username" bind:value={reenableUser} />
+		<button class="btn variant-filled-primary" type="submit" bind:this={reenable_button}
+			>Reenable User</button
+		>
 	</form>
 </div>
 

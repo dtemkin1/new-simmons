@@ -43,3 +43,11 @@ export const addUser = async ({
 		hidden
 	});
 };
+
+export const enableUser = async (username: string) => {
+	console.log('Enabling user with the following data: ', {
+		username
+	});
+
+	return true;
+};
