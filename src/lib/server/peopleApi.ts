@@ -2,41 +2,44 @@ import { env } from '$env/dynamic/private';
 
 const { PEOPLE_API_ID, PEOPLE_API_SECRET } = env;
 
-type PeopleSuccess = {
-	kerberosId: string;
-	givenName: string;
-	familyName: string;
-	middleName: string;
-	displayName: string;
-	email: string;
-	phoneNumber: string;
-	website: string;
-	mitDirectorySuppressed: boolean;
-	affiliations:
-		| {
-				type: 'student';
-				classYear: string;
-				departments: { code: string; name: string }[];
-				courses: {
-					code: string;
-					courseOption: string;
-					name: string;
-					primary: boolean;
-					degreeStatus: string;
-				}[];
-		  }
-		| {
-				type: 'staff';
-				office: string;
-				title: string;
-				departments: { code: string; name: string }[];
-		  }
-		| { type: 'affiliate' }[];
+export type PeopleSuccess = {
+	item: {
+		kerberosId: string;
+		givenName: string;
+		familyName: string;
+		middleName: string;
+		displayName: string;
+		email: string;
+		phoneNumber: string;
+		website: string;
+		mitDirectorySuppressed: boolean;
+		affiliations: (
+			| {
+					type: 'student';
+					classYear: string;
+					departments: { code: string; name: string }[];
+					courses: {
+						code: string;
+						courseOption: string;
+						name: string;
+						primary: boolean;
+						degreeStatus: string;
+					}[];
+			  }
+			| {
+					type: 'staff';
+					office: string;
+					title: string;
+					departments: { code: string; name: string }[];
+			  }
+			| { type: 'affiliate' }
+		)[];
+	};
 };
 
 type PeopleErrorCodes = 400 | 401 | 403 | 404 | 405 | 406 | 429;
 
-type PeopleError = {
+export type PeopleError = {
 	errorCode: PeopleErrorCodes;
 	errorMessage: string;
 	errorDetails: { message: string }[];
@@ -60,8 +63,8 @@ export const kerbRequest = async (kerberosId: string) => {
 	const data = await response.json();
 
 	if (response.status == 200) {
-		return data as PeopleSuccess;
+		return { status: 'success' as const, data: data as PeopleSuccess };
 	} else {
-		return data as PeopleError;
+		return { status: 'error' as const, data: data as PeopleError };
 	}
 };

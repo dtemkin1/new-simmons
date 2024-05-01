@@ -371,7 +371,7 @@ export const sdsLinks: SDSGroups[] = [
 			{
 				href: `${SDS_BASE}/rac/add`,
 				label: 'Add Directory Entry',
-				badge: 'Incomplete',
+				badge: 'Work in Progress',
 				groupNeeded: ['RAC', 'ADMINISTRATORS']
 			},
 			{
