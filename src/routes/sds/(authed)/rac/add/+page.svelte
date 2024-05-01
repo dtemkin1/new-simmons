@@ -31,7 +31,7 @@
 		form?.userData?.item.affiliations[0].type == 'student' &&
 		form?.userData?.item.affiliations[0].classYear &&
 		!Number.isNaN(Number(form?.userData?.item.affiliations[0].classYear))
-			? sixMonthsAhead.getFullYear() + Number(form?.userData?.item.affiliations[0].classYear)
+			? sixMonthsAhead.getFullYear() + 4 - Number(form?.userData?.item.affiliations[0].classYear)
 			: null;
 	$: locked_userdetails = fetch_userdetails ? !form?.fetchSuccess && !form?.fetchError : false;
 
@@ -118,6 +118,7 @@
 					title="Username"
 					type="text"
 					placeholder="Input {fetch_userdetails ? 'Kerberos ID' : 'username'}"
+					maxlength={fetch_userdetails ? 8 : null}
 					bind:value={username}
 				/>
 			</Step>
@@ -143,13 +144,7 @@
 				{:else}
 					<label class="label">
 						<span>First Name</span>
-						<input
-							class="input"
-							title="First Name"
-							disabled={fetch_userdetails && !form?.fetchError}
-							bind:value={first_name}
-							type="text"
-						/>
+						<input class="input" title="First Name" bind:value={first_name} type="text" />
 					</label>
 				{/if}
 
@@ -167,13 +162,7 @@
 				{:else}
 					<label class="label">
 						<span>Last Name</span>
-						<input
-							class="input"
-							title="Last Name"
-							disabled={fetch_userdetails && !form?.fetchError}
-							bind:value={last_name}
-							type="text"
-						/>
+						<input class="input" title="Last Name" bind:value={last_name} type="text" />
 					</label>
 				{/if}
 
@@ -182,7 +171,7 @@
 					<input class="input" title="Room" bind:value={room} type="text" />
 				</label>
 
-				{#if form?.userData?.item.affiliations[0].type == 'student' && form?.userData?.item.affiliations[0].classYear}
+				{#if form?.userData?.item.affiliations[0].type == 'student' && form?.userData?.item.affiliations[0].classYear && generated_class_year}
 					<label class="label">
 						<span>Year</span>
 						<input
@@ -196,13 +185,7 @@
 				{:else}
 					<label class="label">
 						<span>Year</span>
-						<input
-							class="input"
-							title="Year"
-							disabled={fetch_userdetails && !form?.fetchError}
-							bind:value={class_year}
-							type="text"
-						/>
+						<input class="input" title="Year" bind:value={class_year} type="text" />
 					</label>
 				{/if}
 
