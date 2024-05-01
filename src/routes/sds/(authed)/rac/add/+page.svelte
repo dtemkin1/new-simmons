@@ -171,7 +171,7 @@
 					<input class="input" title="Room" bind:value={room} type="text" />
 				</label>
 
-				{#if form?.userData?.item.affiliations[0].type == 'student' && form?.userData?.item.affiliations[0].classYear && generated_class_year}
+				{#if generated_class_year}
 					<label class="label">
 						<span>Year</span>
 						<input
