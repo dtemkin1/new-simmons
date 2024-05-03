@@ -75,9 +75,7 @@
 			</svelte:fragment>
 		</AppRail>
 		{#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}
-			<section
-				class="p-4 pb-20 space-y-4 md:w-72 w-screen overflow-y-auto bg-surface-100-800-token"
-			>
+			<section class="p-4 space-y-4 md:w-72 w-screen bg-surface-100-800-token">
 				<nav class="list-nav md:pr-0 pr-20">
 					<ul>
 						{#each activeGroup.links as link}
