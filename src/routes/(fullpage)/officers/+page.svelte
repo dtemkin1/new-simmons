@@ -2,7 +2,7 @@
 	import PeopleTile from '$lib/components/PeopleTile.svelte';
 </script>
 
-<div class="bg-surface-50-900-token h-full w-full overflow-auto">
+<div class="h-full w-full overflow-auto">
 	<div
 		class="md:grid-cols-10 max-md:grid-rows-10 max-md:grid-flow-col grid gap-x-4 gap-y-12 p-4 w-full h-full"
 	>
