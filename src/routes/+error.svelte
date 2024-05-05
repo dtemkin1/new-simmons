@@ -14,33 +14,33 @@
 </script>
 
 {#if !inDB}
-<div id="background" class="h-full w-full">
-	<div class="container h-full mx-auto flex justify-center items-center">
-		<div class="card p-8 flex flex-col space-y-2 max-w-5xl m-8 bg-surface-50-900-token">
-			<h1 class="h1">
-				{$page.status}: {$page.error?.message}
-				<span class="text-surface-500-400-token">😔</span>
-			</h1>
-			{#if $page.status === 404}
-				<p>Sorry, but the page you were trying to view does not exist.</p>
-				<p>It looks like this was the result of either:</p>
-				<ul class="list-disc list-outside ml-6 py-2">
-					<li>a mistyped address</li>
-					<li>an out-of-date link</li>
-				</ul>
-			{/if}
-			<p>
-				Please <a class="anchor" href="mailto:simmons-tech@mit.edu">contact the Tech Chairs</a> to report
-				this incident.
-			</p>
-			<img
-				src="https://http.cat/{$page.status}"
-				alt="Cat Error {$page.status} Picture"
-				class="max-w-lg"
-			/>
+	<div class="h-full w-full img-bg">
+		<div class="container h-full mx-auto flex justify-center items-center">
+			<div class="card p-8 flex flex-col space-y-2 max-w-5xl m-8 bg-surface-50-900-token">
+				<h1 class="h1">
+					{$page.status}: {$page.error?.message}
+					<span class="text-surface-500-400-token">😔</span>
+				</h1>
+				{#if $page.status === 404}
+					<p>Sorry, but the page you were trying to view does not exist.</p>
+					<p>It looks like this was the result of either:</p>
+					<ul class="list-disc list-outside ml-6 py-2">
+						<li>a mistyped address</li>
+						<li>an out-of-date link</li>
+					</ul>
+				{/if}
+				<p>
+					Please <a class="anchor" href="mailto:simmons-tech@mit.edu">contact the Tech Chairs</a> to
+					report this incident.
+				</p>
+				<img
+					src="https://http.cat/{$page.status}"
+					alt="Cat Error {$page.status} Picture"
+					class="max-w-lg"
+				/>
+			</div>
 		</div>
 	</div>
-</div>
 {:else}
 	<div
 		class="bg-surface-50-900-token flex flex-col items-center p-4 justify-center h-full align-center gap-2"
