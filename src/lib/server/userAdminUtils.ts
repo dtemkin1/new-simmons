@@ -1,4 +1,6 @@
-// import { db } from '.';
+import { and, eq, not } from 'drizzle-orm';
+import { db } from '.';
+import { sds_users_all } from './schema';
 
 export const addUser = async ({
 	username,
@@ -23,8 +25,8 @@ export const addUser = async ({
 	immortal: boolean;
 	hidden: boolean;
 }) => {
-	// let private = hidden ? 'true' : 'false';
-	// let immortal_esc = immortal ? 'true' : 'false';
+	// const private = hidden ? 'true' : 'false';
+	// const immortal_esc = immortal ? 'true' : 'false';
 	// if (title && title == '') {
 	// 	title = null;
 	// }
@@ -42,12 +44,30 @@ export const addUser = async ({
 		immortal,
 		hidden
 	});
+
+	// if (room) {
+	// 	const checkPhone = await db
+	// 		.select({ phone: active_directory.phone })
+	// 		.from(active_directory)
+	// 		.where(eq(active_directory.room, room));
+	// }
 };
 
 export const enableUser = async (username: string) => {
-	console.log('Enabling user with the following data: ', {
-		username
-	});
+	const findUser = await db
+		.select()
+		.from(sds_users_all)
+		.where(and(eq(sds_users_all.username, username), not(sds_users_all.active)));
 
-	return true;
+	if (findUser.length != 1) {
+		return false;
+	} else {
+		await db
+			.update(sds_users_all)
+			.set({
+				active: true
+			})
+			.where(eq(sds_users_all.username, username));
+		return true;
+	}
 };
