@@ -17,7 +17,8 @@
 			drawerStore.close();
 		}}
 	>
-		<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png" />
+		<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png"
+		></enhanced:img>
 		<strong class="text-xl uppercase">Simmons Hall</strong>
 	</a>
 	<!-- <div class="grow" /> -->
@@ -35,6 +36,6 @@
 			{page.name}
 		</a>
 	{/each}
-	<div class="grow" />
+	<div class="grow"></div>
 	<LightSwitch class="self-center mb-12" />
 </div>

@@ -134,7 +134,7 @@
 						> to format your quote and then paste the markdown text (the code on the left column on that
 						website) here in the quote box.
 					</p>
-					<div class="arrow variant-filled" />
+					<div class="arrow variant-filled"></div>
 				</div>
 				<textarea
 					class="textarea font-mono"
@@ -142,7 +142,7 @@
 					rows="4"
 					value={result.quote}
 					use:popup={quotePopup}
-				/>
+				></textarea>
 			</label>
 			<label>
 				<span>My favorite...</span>

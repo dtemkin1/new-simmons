@@ -10,7 +10,7 @@
 <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 	<svelte:fragment slot="lead">
 		<a href="https://web.mit.edu/">
-			<enhanced:img class="max-h-12 w-auto" alt="MIT Logo" src={mit_logo} />
+			<enhanced:img class="max-h-12 w-auto" alt="MIT Logo" src={mit_logo}></enhanced:img>
 		</a>
 	</svelte:fragment>
 	<address class="text-center text-sm">

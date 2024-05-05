@@ -81,9 +81,10 @@
 				class="w-full h-full rounded-full"
 				src="../assets/officers/photo.jpg"
 				alt="office"
-			/>
+			></enhanced:img>
 		{:then userImg}
-			<enhanced:img class="w-full h-full rounded-full" src={userImg.default} alt="office" />
+			<enhanced:img class="w-full h-full rounded-full" src={userImg.default} alt="office"
+			></enhanced:img>
 		{/await}
 	</header>
 	<section class="p-4 font-bold">
