@@ -9,6 +9,7 @@
 
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	let { children } = $props();
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -40,9 +41,8 @@
 		scrollHeadingIntoView();
 	});
 
-	let innerWidth: number;
-
-	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
+	let innerWidth: number | undefined = $state();
+	let allyPageSmoothScroll = $derived(!$prefersReducedMotionStore ? 'scroll-smooth' : '');
 </script>
 
 <svelte:head>
@@ -77,13 +77,13 @@
 	</svelte:fragment>
 
 	<svelte:fragment slot="sidebarLeft">
-		{#if $page.url.pathname.includes('/sds') && innerWidth >= 640}
+		{#if $page.url.pathname.includes('/sds') && innerWidth && innerWidth >= 640}
 			<DBSidebar username={$page.data.username} groups={$page.data.groups} />
 		{/if}
 	</svelte:fragment>
 
 	<!-- Page Route Content -->
-	<slot />
+	{@render children()}
 
 	<!-- Page Footer -->
 	<svelte:fragment slot="pageFooter">
@@ -94,7 +94,7 @@
 
 	<svelte:fragment slot="footer">
 		{#if $page.url.pathname.includes('/sds')}
-			{#if innerWidth < 640}
+			{#if innerWidth && innerWidth < 640}
 				<DBFooter username={$page.data.username} groups={$page.data.groups} />
 			{/if}
 			<Footer />

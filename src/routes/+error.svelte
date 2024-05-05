@@ -4,10 +4,9 @@
 
 	import { redirect } from '@sveltejs/kit';
 
-	let inDB = $page.url.pathname.includes(`${base}/sds`);
-
-	let url = $page.url.pathname;
-	let errorCode = $page.status;
+	let inDB = $state($page.url.pathname.includes(`${base}/sds`));
+	let url = $state($page.url.pathname);
+	let errorCode = $state($page.status);
 
 	if (url.includes('.php') && errorCode === 404) {
 		redirect(302, url.replace('.php', ''));
@@ -15,6 +14,7 @@
 </script>
 
 {#if !inDB}
+<div id="background" class="h-full w-full">
 	<div class="container h-full mx-auto flex justify-center items-center">
 		<div class="card p-8 flex flex-col space-y-2 max-w-5xl m-8 bg-surface-50-900-token">
 			<h1 class="h1">
@@ -40,6 +40,7 @@
 			/>
 		</div>
 	</div>
+</div>
 {:else}
 	<div
 		class="bg-surface-50-900-token flex flex-col items-center p-4 justify-center h-full align-center gap-2"
@@ -73,3 +74,13 @@
 		/>
 	</div>
 {/if}
+
+<style>
+	#background {
+		background-image: url('$lib/assets/bg.jpg');
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+</style>

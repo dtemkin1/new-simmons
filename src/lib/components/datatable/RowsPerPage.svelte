@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { DataHandler } from '@vincjo/datatables';
-	export let handler: DataHandler;
+	let {handler}: {handler: DataHandler} = $props();
 	const rowsPerPage = handler.getRowsPerPage();
 	const options = [5, 10, 20, 50, 100];
 </script>

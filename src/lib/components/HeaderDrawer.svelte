@@ -6,14 +6,14 @@
 
 	const drawerStore = getDrawerStore();
 
-	$: current_page = $page.url.pathname;
+	let current_page = $derived($page.url.pathname);
 </script>
 
 <div class="flex flex-col gap-2 min-h-full items-center">
 	<a
 		href="{base}/"
 		class="inline-flex items-center gap-4 mt-12 mb-4 self-center"
-		on:click={() => {
+		onclick={() => {
 			drawerStore.close();
 		}}
 	>
@@ -24,7 +24,7 @@
 	<!-- <div class="grow" /> -->
 	{#each headerLinks as page}
 		<a
-			on:click={() => {
+			onclick={() => {
 				drawerStore.close();
 			}}
 			class="btn w-min"

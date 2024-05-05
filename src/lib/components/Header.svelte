@@ -7,7 +7,7 @@
 
 	import { headerLinks } from '$lib/data/navLinks';
 
-	$: current_page = $page.url.pathname;
+	let current_page = $derived($page.url.pathname);
 
 	const drawerStore = getDrawerStore();
 	const navDrawer: DrawerSettings = { id: 'nav' };
@@ -38,7 +38,7 @@
 		</div>
 		<div class="md:hidden">
 			<button
-				on:click={() => {
+				onclick={() => {
 					drawerStore.open(navDrawer);
 				}}
 				type="button"

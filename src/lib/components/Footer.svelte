@@ -4,7 +4,7 @@
 	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png?enhanced';
 	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png?enhanced';
 
-	$: mit_logo = $modeCurrent ? mit_logo_dark : mit_logo_light;
+	let mit_logo = $derived($modeCurrent ? mit_logo_dark : mit_logo_light);
 </script>
 
 <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">

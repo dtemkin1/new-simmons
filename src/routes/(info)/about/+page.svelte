@@ -2,7 +2,7 @@
 	import { ArrowLeft } from 'lucide-svelte';
 	import { ArrowRight } from 'lucide-svelte';
 
-	let elemCarousel: HTMLDivElement;
+	let elemCarousel: HTMLDivElement | undefined = $state();
 
 	const imagesGlob: Record<string, string> = import.meta.glob('$lib/assets/carousel/image*.jpg', {
 		import: 'default',
@@ -67,19 +67,24 @@
 	];
 
 	function carouselLeft(): void {
-		const x =
-			elemCarousel.scrollLeft === 0
-				? elemCarousel.clientWidth * elemCarousel.childElementCount // loop
-				: elemCarousel.scrollLeft - elemCarousel.clientWidth; // step left
-		elemCarousel.scroll(x, 0);
+		if (elemCarousel) {
+			const x =
+				elemCarousel.scrollLeft === 0
+					? elemCarousel.clientWidth * elemCarousel.childElementCount // loop
+					: elemCarousel.scrollLeft - elemCarousel.clientWidth; // step left
+
+			elemCarousel.scroll(x, 0);
+		}
 	}
 
 	function carouselRight(): void {
-		const x =
-			elemCarousel.scrollLeft === elemCarousel.scrollWidth - elemCarousel.clientWidth
-				? 0 // loop
-				: elemCarousel.scrollLeft + elemCarousel.clientWidth; // step right
-		elemCarousel.scroll(x, 0);
+		if (elemCarousel) {
+			const x =
+				elemCarousel.scrollLeft === elemCarousel.scrollWidth - elemCarousel.clientWidth
+					? 0 // loop
+					: elemCarousel.scrollLeft + elemCarousel.clientWidth; // step right
+			elemCarousel.scroll(x, 0);
+		}
 	}
 
 	import { onMount } from 'svelte';
@@ -98,7 +103,7 @@
 	class="p-4 grid grid-cols-[auto_1fr_auto] gap-0 md:gap-4 items-center content-center self-center"
 >
 	<!-- Button: Left -->
-	<button type="button" class="btn-icon variant-filled hidden md:block" on:click={carouselLeft}>
+	<button type="button" class="btn-icon variant-filled hidden md:block" onclick={carouselLeft}>
 		<div class="flex justify-center items-center">
 			<ArrowLeft />
 		</div>
@@ -119,7 +124,7 @@
 		{/each}
 	</div>
 	<!-- Button: Right -->
-	<button type="button" class="btn-icon variant-filled hidden md:block" on:click={carouselRight}>
+	<button type="button" class="btn-icon variant-filled hidden md:block" onclick={carouselRight}>
 		<div class="flex justify-center items-center">
 			<ArrowRight />
 		</div>

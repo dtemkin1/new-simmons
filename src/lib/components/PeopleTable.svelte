@@ -2,12 +2,13 @@
 	import { goto, preloadCode, preloadData } from '$app/navigation';
 	import { SDS_BASE } from '$lib/config';
 
-	export let userData: {
-		username?: string | null;
-		[x: string]: string | number | null | undefined;
-	}[];
-
-	export let headers: Record<keyof (typeof userData)[0], string>;
+	let {userData, headers}: {
+		userData: {
+			username?: string | null;
+			[x: string]: string | number | null | undefined;
+		}[],
+		headers: Record<keyof (typeof userData)[0], string>;
+	} = $props();
 
 	let preloadUserEntry = (username: string) => {
 		preloadData(`${SDS_BASE}/directory/entry?username=${username}`);
@@ -28,9 +29,9 @@
 		<tbody>
 			{#each userData as row}
 				<tr
-					on:click={() => goto(`${SDS_BASE}/directory/entry?username=${row.username ?? ''}`)}
-					on:mouseenter={() => preloadUserEntry(row.username ?? '')}
-					on:touchstart={() => preloadUserEntry(row.username ?? '')}
+					onclick={() => goto(`${SDS_BASE}/directory/entry?username=${row.username ?? ''}`)}
+					onmouseenter={() => preloadUserEntry(row.username ?? '')}
+					ontouchstart={() => preloadUserEntry(row.username ?? '')}
 				>
 					{#each dataToUse as [key, _value]}
 						<td>{row[key] ?? ''}</td>

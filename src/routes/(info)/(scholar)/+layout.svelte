@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
+	let { children } = $props();
 
-	$: current_page = $page.url.pathname;
+	let current_page = $derived($page.url.pathname);
 
 	const pages = [
 		{
@@ -48,4 +49,4 @@
 	{/each}
 </div>
 
-<slot />
+{@render children()}

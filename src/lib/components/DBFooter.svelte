@@ -1,14 +1,11 @@
 <script lang="ts">
 	import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
+	
+	let {username = null, groups = []}: {username: string | null, groups: readonly string[]} = $props();
 
-	export let username: string | null = null;
-	export let groups: readonly string[] = [];
 	import { page } from '$app/stores';
 	import { CircleUser } from 'lucide-svelte';
 	import { sdsLinks } from '$lib/data/navLinks';
-
-	export let currentTile: number = 0;
-
 	import { onNavigate } from '$app/navigation';
 	import { SDS_LOGIN_URL } from '$lib/config';
 
@@ -17,26 +14,25 @@
 			currentTile = 0;
 		}
 	});
-
-	let userLinks: typeof sdsLinks = [];
-	$: {
-		userLinks = [];
-		for (const linkGroup of sdsLinks) {
-			const allLinks = linkGroup.links.filter((link) =>
-				groups.some((group) => link.groupNeeded.includes(group))
-			);
-			if (allLinks.length > 0) {
-				userLinks.push({
-					id: linkGroup.id,
-					name: linkGroup.name,
-					value: linkGroup.value,
-					icon: linkGroup.icon,
-					links: allLinks
-				});
-			}
+	
+	let currentTile = $state(0);
+	let userLinks: typeof sdsLinks = $derived(sdsLinks.reduce((acc, linkGroup) => {
+		const allLinks = linkGroup.links.filter((link) =>
+			groups.some((group) => link.groupNeeded.includes(group))
+		);
+		if (allLinks.length > 0) {
+			acc.push({
+				id: linkGroup.id,
+				name: linkGroup.name,
+				value: linkGroup.value,
+				icon: linkGroup.icon,
+				links: allLinks
+			});
 		}
-	}
-	$: activeGroup = userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] };
+		return acc;
+	}, [] as typeof sdsLinks));
+	
+	let activeGroup = $derived(userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] });
 </script>
 
 {#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}
@@ -50,7 +46,6 @@
 						<li>
 							<a
 								href={link.href}
-								on:keypress
 								class="whitespace-normal text-left btn"
 								class:!bg-primary-active-token={link.href === $page.url.pathname}
 								class:pointer-events-none={link.badge === 'Incomplete'}
@@ -91,7 +86,7 @@
 					name={tileLinks.id}
 					value={tileLinks.value}
 					title={tileLinks.id}
-					on:click={() => {
+					onclick={() => {
 						if (currentTile == tileLinks.value) {
 							currentTile = 0;
 						} else {

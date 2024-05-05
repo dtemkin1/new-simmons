@@ -1,15 +1,14 @@
 <script lang="ts">
 	import type { DataHandler } from '@vincjo/datatables';
-
-	export let handler: DataHandler;
-	export let orderBy: string;
+	import type { Snippet } from 'svelte';
+	let {handler, orderBy, children}: {handler: DataHandler, orderBy: string, children: Snippet} = $props();
 
 	const sorted = handler.getSort();
 </script>
 
-<th on:click={() => handler.sort(orderBy)} class="cursor-pointer select-none">
+<th onclick={() => handler.sort(orderBy)} class="cursor-pointer select-none">
 	<div class="flex h-full items-center justify-start gap-x-2">
-		<slot />
+		{@render children()}
 		{#if $sorted.identifier === orderBy}
 			{#if $sorted.direction === 'asc'}
 				🡡

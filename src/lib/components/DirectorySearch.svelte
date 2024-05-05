@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 
-	export let data: {
+	let {data = { years: [], lounges: [], gras: [] }}: {data: {
 		years: readonly (number | null)[];
 		lounges: readonly { lounge: string | null; description: string | null }[];
 		gras: readonly (string | null)[];
-	} = { years: [], lounges: [], gras: [] };
+	}} = $props();
 </script>
 
 <form

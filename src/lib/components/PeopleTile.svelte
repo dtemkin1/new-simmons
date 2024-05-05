@@ -6,7 +6,8 @@
 
 	const modalStore = getModalStore();
 
-	export let office: keyof typeof offices;
+	// export let office: keyof typeof offices;
+	let {office}: {office: keyof typeof offices} = $props();
 
 	const officerColor = {
 		//house team
@@ -46,20 +47,21 @@
 		desk_captain: 'variant-filled'
 	};
 
-	let relevantIncumbents = incumbents[office].map((incumbent) => {
+	const relevantIncumbents = incumbents[office].map((incumbent) => {
 		return people[incumbent];
 	});
 
-	let image = import(`../assets/officers/photo.jpg?enhanced`);
-	let [imageName, imageExtension] = [...relevantIncumbents[0].photo.split('.')];
-
-	if (imageExtension == 'png') {
-		image = import(`../assets/officers/${imageName}.png?enhanced`);
-	} else if (imageExtension == 'jpg') {
-		image = import(`../assets/officers/${imageName}.jpg?enhanced`);
-	} else if (imageExtension == 'jpeg') {
-		image = import(`../assets/officers/${imageName}.jpeg?enhanced`);
-	}
+	
+	const [imageName, imageExtension] = [...relevantIncumbents[0].photo.split('.')];
+	const image = imageExtension == 'png' 
+		? import(`../assets/officers/${imageName}.png?enhanced`)
+	 	: (imageExtension == 'jpg'
+			? import(`../assets/officers/${imageName}.jpg?enhanced`)
+			: (imageExtension == 'jpeg'
+				? import(`../assets/officers/${imageName}.jpeg?enhanced`)
+				: import(`../assets/officers/photo.jpg?enhanced`)
+			)
+		);
 
 	const modalComponent: ModalComponent = {
 		ref: PeopleModal,
@@ -73,7 +75,7 @@
 
 <button
 	class="block card card-hover {officerColor[office]}"
-	on:click={() => modalStore.trigger(modal)}
+	onclick={() => modalStore.trigger(modal)}
 >
 	<header class="card-header">
 		{#await image}
