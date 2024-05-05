@@ -2,11 +2,14 @@
 	import { goto, preloadCode, preloadData } from '$app/navigation';
 	import { SDS_BASE } from '$lib/config';
 
-	let {userData, headers}: {
+	let {
+		userData,
+		headers
+	}: {
 		userData: {
 			username?: string | null;
 			[x: string]: string | number | null | undefined;
-		}[],
+		}[];
 		headers: Record<keyof (typeof userData)[0], string>;
 	} = $props();
 

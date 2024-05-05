@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 
-	let {data = { years: [], lounges: [], gras: [] }}: {data: {
-		years: readonly (number | null)[];
-		lounges: readonly { lounge: string | null; description: string | null }[];
-		gras: readonly (string | null)[];
-	}} = $props();
+	let {
+		data = { years: [], lounges: [], gras: [] }
+	}: {
+		data: {
+			years: readonly (number | null)[];
+			lounges: readonly { lounge: string | null; description: string | null }[];
+			gras: readonly (string | null)[];
+		};
+	} = $props();
 </script>
 
 <form

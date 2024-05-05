@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { DataHandler } from '@vincjo/datatables';
 	import type { Snippet } from 'svelte';
-	let {handler, orderBy, children}: {handler: DataHandler, orderBy: string, children: Snippet} = $props();
+	let { handler, orderBy, children }: { handler: DataHandler; orderBy: string; children: Snippet } =
+		$props();
 
 	const sorted = handler.getSort();
 </script>

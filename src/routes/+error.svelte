@@ -4,13 +4,15 @@
 
 	import { redirect } from '@sveltejs/kit';
 
-	let inDB = $state($page.url.pathname.includes(`${base}/sds`));
-	let url = $state($page.url.pathname);
-	let errorCode = $state($page.status);
+	let inDB = $derived($page.url.pathname.includes(`${base}/sds`));
+	let url = $derived($page.url.pathname);
+	let errorCode = $derived($page.status);
 
-	if (url.includes('.php') && errorCode === 404) {
-		redirect(302, url.replace('.php', ''));
-	}
+	$effect(() => {
+		if (url.includes('.php') && errorCode === 404) {
+			redirect(302, url.replace('.php', ''));
+		}
+	});
 </script>
 
 {#if !inDB}
@@ -74,13 +76,3 @@
 		/>
 	</div>
 {/if}
-
-<style>
-	#background {
-		background-image: url('$lib/assets/bg.jpg');
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-</style>

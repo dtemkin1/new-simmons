@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
-	
-	let {username = null, groups = []}: {username: string | null, groups: readonly string[]} = $props();
+
+	let { username = null, groups = [] }: { username: string | null; groups: readonly string[] } =
+		$props();
 
 	import { page } from '$app/stores';
 	import { CircleUser } from 'lucide-svelte';
@@ -14,25 +15,32 @@
 			currentTile = 0;
 		}
 	});
-	
+
 	let currentTile = $state(0);
-	let userLinks: typeof sdsLinks = $derived(sdsLinks.reduce((acc, linkGroup) => {
-		const allLinks = linkGroup.links.filter((link) =>
-			groups.some((group) => link.groupNeeded.includes(group))
-		);
-		if (allLinks.length > 0) {
-			acc.push({
-				id: linkGroup.id,
-				name: linkGroup.name,
-				value: linkGroup.value,
-				icon: linkGroup.icon,
-				links: allLinks
-			});
-		}
-		return acc;
-	}, [] as typeof sdsLinks));
-	
-	let activeGroup = $derived(userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] });
+	let userLinks: typeof sdsLinks = $derived(
+		sdsLinks.reduce(
+			(acc, linkGroup) => {
+				const allLinks = linkGroup.links.filter((link) =>
+					groups.some((group) => link.groupNeeded.includes(group))
+				);
+				if (allLinks.length > 0) {
+					acc.push({
+						id: linkGroup.id,
+						name: linkGroup.name,
+						value: linkGroup.value,
+						icon: linkGroup.icon,
+						links: allLinks
+					});
+				}
+				return acc;
+			},
+			[] as typeof sdsLinks
+		)
+	);
+
+	let activeGroup = $derived(
+		userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] }
+	);
 </script>
 
 {#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}

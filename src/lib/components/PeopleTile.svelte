@@ -7,7 +7,7 @@
 	const modalStore = getModalStore();
 
 	// export let office: keyof typeof offices;
-	let {office}: {office: keyof typeof offices} = $props();
+	let { office }: { office: keyof typeof offices } = $props();
 
 	const officerColor = {
 		//house team
@@ -51,17 +51,15 @@
 		return people[incumbent];
 	});
 
-	
 	const [imageName, imageExtension] = [...relevantIncumbents[0].photo.split('.')];
-	const image = imageExtension == 'png' 
-		? import(`../assets/officers/${imageName}.png?enhanced`)
-	 	: (imageExtension == 'jpg'
-			? import(`../assets/officers/${imageName}.jpg?enhanced`)
-			: (imageExtension == 'jpeg'
-				? import(`../assets/officers/${imageName}.jpeg?enhanced`)
-				: import(`../assets/officers/photo.jpg?enhanced`)
-			)
-		);
+	const image =
+		imageExtension == 'png'
+			? import(`../assets/officers/${imageName}.png?enhanced`)
+			: imageExtension == 'jpg'
+				? import(`../assets/officers/${imageName}.jpg?enhanced`)
+				: imageExtension == 'jpeg'
+					? import(`../assets/officers/${imageName}.jpeg?enhanced`)
+					: import(`../assets/officers/photo.jpg?enhanced`);
 
 	const modalComponent: ModalComponent = {
 		ref: PeopleModal,

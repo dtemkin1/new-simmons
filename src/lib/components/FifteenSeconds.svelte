@@ -18,7 +18,7 @@
 	}
 
 	import SvelteMarkdown from 'svelte-markdown';
-	let {userInfo}: {userInfo: UserInfo} = $props();
+	let { userInfo }: { userInfo: UserInfo } = $props();
 
 	import { base } from '$app/paths';
 	// import { renderer } from '$lib/components/markdown';
