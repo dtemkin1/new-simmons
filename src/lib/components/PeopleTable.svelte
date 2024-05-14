@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto, preloadCode, preloadData } from '$app/navigation';
+	import { goto, preloadData } from '$app/navigation';
 	import { SDS_BASE } from '$lib/config';
 
 	let {

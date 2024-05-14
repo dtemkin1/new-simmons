@@ -63,7 +63,7 @@
 
 	const modalComponent: ModalComponent = {
 		ref: PeopleModal,
-		props: { office: offices[office], people: relevantIncumbents }
+		props: { office: offices[office], people: relevantIncumbents, img: image }
 	};
 	const modal: ModalSettings = {
 		type: 'component',
