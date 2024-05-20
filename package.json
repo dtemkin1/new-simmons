@@ -30,7 +30,7 @@
 		"@types/node": "20.12.11",
 		"@types/pg": "^8.11.6",
 		"@typescript-eslint/eslint-plugin": "^7.9.0",
-		"@typescript-eslint/parser": "^7.9.0",
+		"@typescript-eslint/parser": "^7.10.0",
 		"@vincjo/datatables": "^1.14.5",
 		"autoprefixer": "^10.4.19",
 		"drizzle-kit": "^0.21.1",
