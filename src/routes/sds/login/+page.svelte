@@ -70,7 +70,17 @@
 			<p class="text-center">
 				You are currently logged in as <span class="font-bold">{data.username ?? 'Guest'}</span>.
 			</p>
-			<form method="post" use:enhance action="?/logout" class="flex flex-col gap-4 grow">
+			<form
+				method="post"
+				use:enhance={() => {
+					return async ({ result, update }) => {
+						update({ invalidateAll: true });
+						toastHandler(result);
+					};
+				}}
+				action="?/logout"
+				class="flex flex-col gap-4 grow"
+			>
 				<button type="submit" class="btn variant-filled-error">Sign out</button>
 			</form>
 		{:else}
@@ -80,7 +90,6 @@
 				class="flex flex-col gap-4 grow"
 				use:enhance={() => {
 					return async ({ result, update }) => {
-						error = result.type == 'failure' || result.type == 'error';
 						update();
 						toastHandler(result);
 					};
