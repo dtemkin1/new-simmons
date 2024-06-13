@@ -35,9 +35,7 @@
 			<source src={i3_video} type="video/mp4" />
 			<!-- <track default kind="captions" src={i3_captions} srclang="en" label="English" /> -->
 		</video>
-		<a href="{base}/videos" class="btn variant-filled-primary w-full"
-			>More Simmons Videos (+ Past i3s)</a
-		>
+		<a href="{base}/videos" class="btn variant-filled-primary w-full">Watch more Simmons videos!</a>
 	</div>
 </div>
 
