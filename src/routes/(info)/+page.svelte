@@ -20,7 +20,5 @@
 </video>
 
 <div class="flex flex-col justify-center">
-	<a href="{base}/prospectives" class="btn variant-filled-primary">
-		Welcome Prospectives! (+ More videos)
-	</a>
+	<a href="{base}/prospectives" class="btn variant-filled-primary"> Welcome Prospectives! </a>
 </div>

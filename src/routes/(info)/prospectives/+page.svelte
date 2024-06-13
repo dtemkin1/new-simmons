@@ -23,21 +23,22 @@
 	Institute, and we can't wait to show you why.
 </p>
 
-<div class="flex items-center justify-center flex-col space-y-4">
-	<!-- svelte-ignore a11y_media_has_caption -->
-	<video
-		class="h-full w-full rounded-container-token max-w-[720px]"
-		preload="none"
-		poster={i3_thumbnail}
-		controls
-	>
-		<source src={i3_video} type="video/mp4" />
-		<!-- <track default kind="captions" src={i3_captions} srclang="en" label="English" /> -->
-	</video>
-</div>
-
-<div class="flex flex-col justify-center">
-	<a href="{base}/videos" class="btn variant-filled-primary">More Simmons Videos (+ Past i3s)</a>
+<div class="flex items-center justify-center flex-col">
+	<div class="max-w-[720px] w-full h-full space-y-4">
+		<!-- svelte-ignore a11y_media_has_caption -->
+		<video
+			class="h-full w-full rounded-container-token max-w-[720px]"
+			preload="none"
+			poster={i3_thumbnail}
+			controls
+		>
+			<source src={i3_video} type="video/mp4" />
+			<!-- <track default kind="captions" src={i3_captions} srclang="en" label="English" /> -->
+		</video>
+		<a href="{base}/videos" class="btn variant-filled-primary w-full"
+			>More Simmons Videos (+ Past i3s)</a
+		>
+	</div>
 </div>
 
 <h1 class="h1">Simmons {data.rexData.name} Schedule</h1>
