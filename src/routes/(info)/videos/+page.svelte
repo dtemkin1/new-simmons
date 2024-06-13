@@ -8,6 +8,10 @@
 
 	const vidData: vidDataType[] = [
 		{
+			title: '2024 i3',
+			link: 'https://www.youtube.com/embed/I8srdQN3FYg'
+		},
+		{
 			title: '2023 i3',
 			link: 'https://player.vimeo.com/video/829417327'
 		},
@@ -29,7 +33,7 @@
 		},
 		{
 			title: '2018 i3',
-			link: 'https://youtube.com/embed/zF6hUza_sEs',
+			link: 'https://www.youtube.com/embed/zF6hUza_sEs',
 			beforeDescription: 'Welcome to the Sponge!',
 			afterDescription: ''
 		},
@@ -84,6 +88,8 @@
 	<iframe
 		class="aspect-video w-full border-none rounded-container-token"
 		src={vid.link}
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+		referrerpolicy="strict-origin-when-cross-origin"
 		allowfullscreen
 		title={vid.title}
 	></iframe>
