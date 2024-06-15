@@ -1,12 +1,5 @@
 <script lang="ts">
-	import i3_video from '$lib/assets/i3.mp4';
-	// import i3_captions from '$lib/assets/i3_captions.vtt';
-	import i3_thumbnail from '$lib/assets/i3_thumbnail.jpg';
-
 	import { base } from '$app/paths';
-
-	// import { Table } from '@skeletonlabs/skeleton';
-	// import { tableMapperValues } from '@skeletonlabs/skeleton';
 
 	import type { PageData } from './$types';
 	import { process_raw_data, timeMaker } from './rex_process';
@@ -25,16 +18,14 @@
 
 <div class="flex items-center justify-center flex-col">
 	<div class="max-w-[720px] w-full h-full space-y-4">
-		<!-- svelte-ignore a11y_media_has_caption -->
-		<video
-			class="h-full w-full rounded-container-token max-w-[720px]"
-			preload="none"
-			poster={i3_thumbnail}
-			controls
-		>
-			<source src={i3_video} type="video/mp4" />
-			<!-- <track default kind="captions" src={i3_captions} srclang="en" label="English" /> -->
-		</video>
+		<iframe
+			class="h-full aspect-video max-w-full rounded-container-token w-[720px] border-0"
+			src="https://www.youtube.com/embed/I8srdQN3FYg?si=S8XKefVEezeJpQN0"
+			title="YouTube video player"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			referrerpolicy="strict-origin-when-cross-origin"
+			allowfullscreen
+		></iframe>
 		<a href="{base}/videos" class="btn variant-filled-primary w-full">Watch more Simmons videos!</a>
 	</div>
 </div>
