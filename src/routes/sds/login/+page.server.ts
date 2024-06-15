@@ -7,7 +7,7 @@ import { dev } from '$app/environment';
 import { db } from '$lib/server';
 import { sds_users } from '$lib/server/schema';
 import { getGroups, verifyPasswordUnhashed } from '$lib/server/dbUtils';
-import { SDS_HOME_URL, SDS_LOGIN_URL } from '$lib/config';
+import { SDS_HOME_URL } from '$lib/config';
 import serialize from 'locutus/php/var/serialize';
 import { eq } from 'drizzle-orm';
 
@@ -72,7 +72,8 @@ export const actions = {
 			path: '.',
 			...sessionCookie.attributes
 		});
-		redirect(302, SDS_LOGIN_URL);
+
+		return { message: 'Successfully logged out!' };
 	}
 } satisfies Actions;
 

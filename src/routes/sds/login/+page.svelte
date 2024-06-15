@@ -37,12 +37,7 @@
 				background: 'variant-filled-error'
 			};
 		} else if (result.type == 'redirect') {
-			if (result.location == SDS_LOGIN_URL) {
-				resultToast = {
-					message: 'Successfully logged out!',
-					background: 'variant-filled-success'
-				};
-			} else if (result.location == SDS_HOME_URL) {
+			if (result.location == SDS_HOME_URL) {
 				resultToast = {
 					message: 'Successfully logged in!',
 					background: 'variant-filled-success'
@@ -74,7 +69,7 @@
 				method="post"
 				use:enhance={() => {
 					return async ({ result, update }) => {
-						update({ invalidateAll: true });
+						update();
 						toastHandler(result);
 					};
 				}}
