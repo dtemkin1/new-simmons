@@ -1,7 +1,12 @@
 <script lang="ts">
 	import type { Office, Person } from '$lib/data/simGov';
+	import defaultImg from '$lib/assets/officers/photo.jpg?enhanced';
 
-	let { office, people, img }: { office: Office; people: Person[]; img: Promise<any> } = $props();
+	let {
+		office,
+		people,
+		img
+	}: { office: Office; people: Person[]; img: Promise<typeof defaultImg> } = $props();
 </script>
 
 <div class="bg-surface-50-900-token p-8">
@@ -9,9 +14,9 @@
 	<div class="flex space-x-4">
 		<div class="w-16 h-16 bg-surface-50-800-token rounded-full overflow-hidden">
 			{#await img}
-				<enhanced:img src="../assets/officers/photo.jpg" alt={name}></enhanced:img>
+				<enhanced:img src={defaultImg} alt={office.full_title}></enhanced:img>
 			{:then userImg}
-				<enhanced:img src={userImg.default} alt={name}></enhanced:img>
+				<enhanced:img src={userImg.default} alt={office.full_title}></enhanced:img>
 			{/await}
 		</div>
 		<div class="space-y-1">

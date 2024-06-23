@@ -3,6 +3,7 @@
 	import PeopleModal from './PeopleModal.svelte';
 
 	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
+	import defaultImg from '$lib/assets/officers/photo.jpg?enhanced';
 
 	const modalStore = getModalStore();
 
@@ -52,14 +53,14 @@
 	});
 
 	const [imageName, imageExtension] = [...relevantIncumbents[0].photo.split('.')];
-	const image =
+	const image: Promise<typeof defaultImg> =
 		imageExtension == 'png'
 			? import(`../assets/officers/${imageName}.png?enhanced`)
 			: imageExtension == 'jpg'
 				? import(`../assets/officers/${imageName}.jpg?enhanced`)
 				: imageExtension == 'jpeg'
 					? import(`../assets/officers/${imageName}.jpeg?enhanced`)
-					: import(`../assets/officers/photo.jpg?enhanced`);
+					: defaultImg;
 
 	const modalComponent: ModalComponent = {
 		ref: PeopleModal,
@@ -77,11 +78,7 @@
 >
 	<header class="card-header">
 		{#await image}
-			<enhanced:img
-				class="w-full h-full rounded-full"
-				src="../assets/officers/photo.jpg"
-				alt="office"
-			></enhanced:img>
+			<enhanced:img class="w-full h-full rounded-full" src={defaultImg} alt="office"></enhanced:img>
 		{:then userImg}
 			<enhanced:img class="w-full h-full rounded-full" src={userImg.default} alt="office"
 			></enhanced:img>

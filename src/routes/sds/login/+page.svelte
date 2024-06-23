@@ -19,7 +19,7 @@
 
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import type { ToastSettings } from '@skeletonlabs/skeleton';
-	import { SDS_HOME_URL, SDS_LOGIN_URL } from '$lib/config';
+	import { SDS_HOME_URL } from '$lib/config';
 
 	const toastStore = getToastStore();
 
