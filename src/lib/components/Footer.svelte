@@ -1,10 +1,22 @@
 <script lang="ts">
 	import { AppBar, modeCurrent } from '@skeletonlabs/skeleton';
 
-	import mit_logo_light from '$lib/assets/mit_logo/mit_logo_std_rgb_white.png?enhanced';
-	import mit_logo_dark from '$lib/assets/mit_logo/mit_logo_std_rgb_black.png?enhanced';
+	// TODO: FIX TYPE
+	const mit_logos: Record<string, any> = import.meta.glob(
+		'../assets/mit_logo/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
+		{
+			eager: true,
+			query: {
+				enhanced: true
+			}
+		}
+	);
 
-	let mit_logo = $derived($modeCurrent ? mit_logo_dark : mit_logo_light);
+	let mit_logo = $derived(
+		$modeCurrent
+			? mit_logos['../assets/mit_logo/mit_logo_std_rgb_black.png'].default
+			: mit_logos['../assets/mit_logo/mit_logo_std_rgb_white.png'].default
+	);
 </script>
 
 <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
