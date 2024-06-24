@@ -38,7 +38,7 @@ export const process_raw_data = (data: TRexAPIResponse) => {
 	});
 	const by_date: Record<string, TRexEvent[]> = {};
 	all_events.forEach((rexEvent) => {
-		if (rexEvent.dorm.toLowerCase().includes('simmons')) {
+		if (rexEvent.dorm.some((d) => d.toLowerCase().includes('simmons'))) {
 			const date = get_date_bucket(rexEvent, 4);
 			if (!by_date[dateMaker.format(date)]) {
 				by_date[dateMaker.format(date)] = [];

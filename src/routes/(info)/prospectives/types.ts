@@ -19,7 +19,7 @@ export type TRexAPIColors = {
 
 export type TRexEventResponse = {
 	name: string;
-	dorm: string;
+	dorm: string[];
 	/** The subcommunity or living group hosting this event, if any */
 	group: string | null;
 	location: string;
@@ -31,7 +31,7 @@ export type TRexEventResponse = {
 
 export type TRexEvent = {
 	name: string;
-	dorm: string;
+	dorm: string[];
 	/** The subcommunity or living group hosting this event, if any */
 	group: string | null;
 	location: string;
