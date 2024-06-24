@@ -56,5 +56,5 @@ export const process_raw_data = (data: TRexAPIResponse) => {
 		by_date[date].sort((a, b) => a.start.getTime() - b.start.getTime());
 	});
 
-	return { ...by_date };
+	return by_date;
 };
