@@ -3,7 +3,6 @@
 	import PeopleModal from './PeopleModal.svelte';
 
 	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
-	import defaultImg from '$lib/assets/officers/photo.jpg?enhanced';
 
 	const modalStore = getModalStore();
 
@@ -52,20 +51,27 @@
 		return people[incumbent];
 	});
 
-	const [imageName, imageExtension] = [...relevantIncumbents[0].photo.split('.')];
-	const image: Promise<typeof defaultImg> =
-		imageExtension == 'png'
-			? import(`../assets/officers/${imageName}.png?enhanced`)
-			: imageExtension == 'jpg'
-				? import(`../assets/officers/${imageName}.jpg?enhanced`)
-				: imageExtension == 'jpeg'
-					? import(`../assets/officers/${imageName}.jpeg?enhanced`)
-					: defaultImg;
+	// TODO: FIX TYPE
+	const images: Record<string, any> = import.meta.glob(
+		'../assets/officers/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
+		{
+			eager: true,
+			query: {
+				enhanced: true
+			}
+		}
+	);
+
+	const image = (
+		images['../assets/officers/' + relevantIncumbents[0].photo] ??
+		images['../assets/officers/photo.jpg']
+	).default;
 
 	const modalComponent: ModalComponent = {
 		ref: PeopleModal,
 		props: { office: offices[office], people: relevantIncumbents, img: image }
 	};
+
 	const modal: ModalSettings = {
 		type: 'component',
 		component: modalComponent
@@ -77,12 +83,7 @@
 	onclick={() => modalStore.trigger(modal)}
 >
 	<header class="card-header">
-		{#await image}
-			<enhanced:img class="w-full h-full rounded-full" src={defaultImg} alt="office"></enhanced:img>
-		{:then userImg}
-			<enhanced:img class="w-full h-full rounded-full" src={userImg.default} alt="office"
-			></enhanced:img>
-		{/await}
+		<enhanced:img class="w-full h-full rounded-full" src={image} alt="office"></enhanced:img>
 	</header>
 	<section class="p-4 font-bold">
 		{@html relevantIncumbents.map((person) => person.name).join('/<wbr>')}
