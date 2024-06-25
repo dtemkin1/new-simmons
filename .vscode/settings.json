@@ -112,5 +112,6 @@
 		"transition",
 		"width",
 		"zIndex"
-	]
+	],
+	"eslint.useFlatConfig": true
 }
