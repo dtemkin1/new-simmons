@@ -33,8 +33,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       oslo:
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^1.2.1
+        version: 1.2.1
       pg:
         specifier: ^8.12.0
         version: 8.12.0
@@ -2244,6 +2244,9 @@ packages:
 
   oslo@1.2.0:
     resolution: {integrity: sha512-OoFX6rDsNcOQVAD2gQD/z03u4vEjWZLzJtwkmgfRF+KpQUXwdgEXErD7zNhyowmHwHefP+PM9Pw13pgpHMRlzw==}
+
+  oslo@1.2.1:
+    resolution: {integrity: sha512-HfIhB5ruTdQv0XX2XlncWQiJ5SIHZ7NHZhVyHth0CSZ/xzge00etRyYy/3wp/Dsu+PkxMC+6+B2lS/GcKoewkA==}
 
   p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
@@ -4738,6 +4741,11 @@ snapshots:
       word-wrap: 1.2.5
 
   oslo@1.2.0:
+    dependencies:
+      '@node-rs/argon2': 1.7.0
+      '@node-rs/bcrypt': 1.9.0
+
+  oslo@1.2.1:
     dependencies:
       '@node-rs/argon2': 1.7.0
       '@node-rs/bcrypt': 1.9.0
