@@ -19,7 +19,7 @@
 
 		if (result.type == 'success') {
 			resultToast = {
-				message: 'Multiple users matched your query.',
+				message: `${result.data?.data.length ?? 'Multiple'} users matched your query.`,
 				background: 'variant-filled-success'
 			};
 		} else if (result.type == 'failure') {
