@@ -6,11 +6,11 @@
 		userData,
 		headers
 	}: {
-		userData: {
+		userData?: {
 			username?: string | null;
 			[x: string]: string | number | null | undefined;
 		}[];
-		headers: Record<keyof (typeof userData)[0], string>;
+		headers: Record<string, string>;
 	} = $props();
 
 	let preloadUserEntry = (username: string) => {
@@ -20,27 +20,29 @@
 	let dataToUse = Object.entries(headers);
 </script>
 
-<div class="table-container">
-	<table class="table table-compact table-hover table-interactive">
-		<thead>
-			<tr>
-				{#each dataToUse as [_key, value]}
-					<th>{value}</th>
-				{/each}
-			</tr>
-		</thead>
-		<tbody>
-			{#each userData as row}
-				<tr
-					onclick={() => goto(`${SDS_BASE}/directory/entry?username=${row.username ?? ''}`)}
-					onmouseenter={() => preloadUserEntry(row.username ?? '')}
-					ontouchstart={() => preloadUserEntry(row.username ?? '')}
-				>
-					{#each dataToUse as [key, _value]}
-						<td>{row[key] ?? ''}</td>
+{#if userData}
+	<div class="table-container">
+		<table class="table table-compact table-hover table-interactive">
+			<thead>
+				<tr>
+					{#each dataToUse as [_key, value]}
+						<th>{value}</th>
 					{/each}
 				</tr>
-			{/each}
-		</tbody>
-	</table>
-</div>
+			</thead>
+			<tbody>
+				{#each userData as row}
+					<tr
+						onclick={() => goto(`${SDS_BASE}/directory/entry?username=${row.username ?? ''}`)}
+						onmouseenter={() => preloadUserEntry(row.username ?? '')}
+						ontouchstart={() => preloadUserEntry(row.username ?? '')}
+					>
+						{#each dataToUse as [key, _value]}
+							<td>{row[key] ?? ''}</td>
+						{/each}
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
+{/if}
