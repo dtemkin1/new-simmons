@@ -69,14 +69,14 @@
 <Toast />
 
 <!-- App Shell -->
-<div class="flex flex-col h-screen w-full overflow-hidden">
-	<header>
+<div class="w-full h-full flex flex-col overflow-hidden">
+	<header class="flex-none z-10">
 		<!-- App Bar -->
 		<Header />
 	</header>
 
 	<div class="flex-auto w-full h-full flex overflow-hidden">
-		<aside class="flex-none overflow-x-hidden overflow-y-auto">
+		<aside class="flex-none overflow-x-hidden overflow-y-auto w-auto">
 			{#if $page.url.pathname.includes('/sds') && innerWidth && innerWidth >= 640}
 				<DBSidebar username={$page.data.username} groups={$page.data.groups} />
 			{/if}
@@ -87,23 +87,28 @@
 			bind:this={pageElement}
 			class="flex-1 overflow-x-hidden flex flex-col"
 			class:scroll-smooth={!$prefersReducedMotionStore}
+			style:scrollbar-gutter="auto"
+			on:scroll
 		>
 			<main class="flex-auto">
 				{@render children()}
 			</main>
 			{#if !$page.url.pathname.includes('/sds')}
-				<Footer />
+				<footer class="flex-none">
+					<Footer />
+				</footer>
 			{/if}
 		</div>
 	</div>
 
 	<!-- Page Footer -->
-	<footer class="flex-none">
-		{#if $page.url.pathname.includes('/sds')}
+	{#if $page.url.pathname.includes('/sds')}
+		<footer class="flex-none">
+		
 			{#if innerWidth && innerWidth < 640}
 				<DBFooter username={$page.data.username} groups={$page.data.groups} />
 			{/if}
 			<Footer />
-		{/if}
-	</footer>
+		</footer>
+	{/if}
 </div>
