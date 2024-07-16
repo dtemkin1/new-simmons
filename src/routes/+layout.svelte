@@ -104,7 +104,6 @@
 	<!-- Page Footer -->
 	{#if $page.url.pathname.includes('/sds')}
 		<footer class="flex-none">
-		
 			{#if innerWidth && innerWidth < 640}
 				<DBFooter username={$page.data.username} groups={$page.data.groups} />
 			{/if}
