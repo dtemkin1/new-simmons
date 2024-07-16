@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell } from '@skeletonlabs/skeleton';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import HeaderDrawer from '$lib/components/HeaderDrawer.svelte';
@@ -9,6 +8,7 @@
 
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+
 	let { children } = $props();
 
 	// Floating UI for Popups
@@ -42,7 +42,6 @@
 	});
 
 	let innerWidth: number | undefined = $state();
-	let allyPageSmoothScroll = $derived(!$prefersReducedMotionStore ? 'scroll-smooth' : '');
 </script>
 
 <svelte:head>
@@ -70,34 +69,37 @@
 <Toast />
 
 <!-- App Shell -->
-<AppShell regionPage={allyPageSmoothScroll}>
-	<svelte:fragment slot="header">
+<div class="flex flex-col h-screen w-full overflow-hidden">
+	<header>
 		<!-- App Bar -->
 		<Header />
-	</svelte:fragment>
+	</header>
 
-	<svelte:fragment slot="sidebarLeft">
-		{#if $page.url.pathname.includes('/sds') && innerWidth && innerWidth >= 640}
-			<DBSidebar username={$page.data.username} groups={$page.data.groups} />
-		{/if}
-	</svelte:fragment>
+	<div class="flex-auto w-full h-full flex overflow-hidden">
+		<aside class="flex-none overflow-x-hidden overflow-y-auto">
+			{#if $page.url.pathname.includes('/sds') && innerWidth && innerWidth >= 640}
+				<DBSidebar username={$page.data.username} groups={$page.data.groups} />
+			{/if}
+		</aside>
 
-	<!-- Page Route Content -->
-	{@render children()}
+		<!-- Page Route Content -->
+		<div class="flex-1 overflow-x-hidden flex flex-col">
+			<main class="flex-auto">
+				{@render children()}
+			</main>
+			{#if !$page.url.pathname.includes('/sds')}
+				<Footer />
+			{/if}
+		</div>
+	</div>
 
 	<!-- Page Footer -->
-	<svelte:fragment slot="pageFooter">
-		{#if !$page.url.pathname.includes('/sds')}
-			<Footer />
-		{/if}
-	</svelte:fragment>
-
-	<svelte:fragment slot="footer">
+	<footer class="flex-none">
 		{#if $page.url.pathname.includes('/sds')}
 			{#if innerWidth && innerWidth < 640}
 				<DBFooter username={$page.data.username} groups={$page.data.groups} />
 			{/if}
 			<Footer />
 		{/if}
-	</svelte:fragment>
-</AppShell>
+	</footer>
+</div>
