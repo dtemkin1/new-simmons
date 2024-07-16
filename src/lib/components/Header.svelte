@@ -15,7 +15,7 @@
 
 <AppBar>
 	<svelte:fragment slot="lead">
-		<a href={base}>
+		<a href="/">
 			<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png"
 			></enhanced:img>
 		</a>
