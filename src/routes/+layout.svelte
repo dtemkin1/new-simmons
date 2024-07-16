@@ -13,7 +13,7 @@
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { storePopup, prefersReducedMotionStore } from '@skeletonlabs/skeleton';
+	import { prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 	// Initalize Drawer and Modal
@@ -33,14 +33,14 @@
 	afterNavigate((params) => {
 		// Scroll to top
 		const isNewPage = params.from?.url.pathname !== params.to?.url.pathname;
-		const elemPage = document.querySelector('#page');
-		if (isNewPage && elemPage !== null) {
-			elemPage.scrollTop = 0;
+		if (isNewPage && pageElement) {
+			pageElement.scrollTop = 0;
 		}
 		// Scroll heading into view
 		scrollHeadingIntoView();
 	});
 
+	let pageElement: HTMLElement | null | undefined = $state();
 	let innerWidth: number | undefined = $state();
 </script>
 
@@ -83,7 +83,11 @@
 		</aside>
 
 		<!-- Page Route Content -->
-		<div class="flex-1 overflow-x-hidden flex flex-col">
+		<div
+			bind:this={pageElement}
+			class="flex-1 overflow-x-hidden flex flex-col"
+			class:scroll-smooth={!$prefersReducedMotionStore}
+		>
 			<main class="flex-auto">
 				{@render children()}
 			</main>
