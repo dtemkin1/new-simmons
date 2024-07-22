@@ -61,7 +61,7 @@
 		"drizzle-orm": "^0.31.4",
 		"locutus": "^2.0.32",
 		"lucia": "^3.2.0",
-		"lucide-svelte": "^0.399.0",
+		"lucide-svelte": "^0.414.0",
 		"md5": "^2.3.0",
 		"oslo": "^1.2.1",
 		"pg": "^8.12.0",
