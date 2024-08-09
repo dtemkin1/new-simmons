@@ -1,7 +1,7 @@
 import { Lucia, TimeSpan } from 'lucia';
 import { dev } from '$app/environment';
 import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
-import { OAuth2Client, generateCodeVerifier } from 'oslo/oauth2';
+import { Okta, generateCodeVerifier } from 'arctic';
 import unserialize from 'locutus/php/var/unserialize';
 
 import { env } from '$env/dynamic/private';
@@ -73,20 +73,27 @@ interface DatabaseSessionAttributes {
 	data: string | null;
 }
 
-const { CLIENT_ID } = env;
+// START OKTA WORKFLOW
 
-const baseURI = 'https://petrock.mit.edu';
+const { OKTA_CLIENT_ID, OKTA_CLIENT_SECRET } = env;
 
-const authorizeEndpoint = `${baseURI}/touchstone/oidc/authorization`;
-const tokenEndpoint = `${baseURI}/oidc/token`;
-export const userInfoEndpoint = `${baseURI}/oidc/userinfo`;
-export const publicKeyEndpoint = `${baseURI}/oidc/jwks`;
+export const domain = 'okta.mit.edu';
 
-export const scopes = ['openid', 'email', 'profile'];
-
-export const client = new OAuth2Client(CLIENT_ID ?? '', authorizeEndpoint, tokenEndpoint, {
-	// TODO: CHANGE WHEN PERMANENT URL FOUND
-	redirectURI: `https://new-simmons-mit.netlify.app/auth/callback/petrock`
-});
+export const okta = new Okta(
+	domain,
+	null,
+	OKTA_CLIENT_ID,
+	OKTA_CLIENT_SECRET,
+	'https://new-simmons-mit.netlify.app/auth/callback/okta'
+);
 
 export const codeVerifier = generateCodeVerifier();
+export const scopes = [
+	'openid',
+	'email',
+	'profile',
+	// 'address',
+	// 'phone',
+	'offline_access'
+	// 'groups'
+];

@@ -14,6 +14,9 @@ importers:
       '@lucia-auth/adapter-drizzle':
         specifier: ^1.0.7
         version: 1.0.7(lucia@3.2.0)
+      arctic:
+        specifier: 2.0.0-next.5
+        version: 2.0.0-next.5
       css-tree:
         specifier: ^2.3.1
         version: 2.3.1
@@ -961,6 +964,21 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
+  '@oslojs/asn1@0.2.2':
+    resolution: {integrity: sha512-/c7DTaOdmk3Xb482b4CFnPdWLo5e2WQuozhc89KVb91kohA+VvVNTd9IPyLsZpDUf9u3iwP4HcuMEXBcYmGFnQ==}
+
+  '@oslojs/binary@0.2.3':
+    resolution: {integrity: sha512-pBJvvl5wpBBmkbP8cMZvPXzxPd7WN+NDBHPEg2N6WTDSnYCCPmqghIz6W+Cw16hhAju9wgmOeHryjHFbNezr1w==}
+
+  '@oslojs/crypto@0.6.0':
+    resolution: {integrity: sha512-MAwQt2BwW/oLvYaX1SuVHBqBXV+3CsF7ied23LDqeVeesFTPxLLIqW6pbQ6SMUPnGEJXQx4OTfm2BYSLLvp5Hg==}
+
+  '@oslojs/encoding@0.3.0':
+    resolution: {integrity: sha512-i374LSDXuo2l+waPlejutIkw1zOA1wWxpvaXwQgyGsr5eZwX29hH1KIKFopPTriR4DKH+7nL7c5wNx16a/6voQ==}
+
+  '@oslojs/oauth2@0.5.0':
+    resolution: {integrity: sha512-t70+e4EgnzTbU4MrUWXzqWN2A6RJrlSSvwwuBv6E0Ap6/nsIXrjsdRWeTcSvvXTcC6fi0YdWaqEWLipcEm2Cgw==}
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -1280,6 +1298,9 @@ packages:
   anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
+
+  arctic@2.0.0-next.5:
+    resolution: {integrity: sha512-5d2miFSz5v1rTD+OOS5vmzqwgdWXFRJrnjVV0WxfDaADmt0afpjHAOGN5kaNQoHMsEJs+gCidGM92VNhIf6Hng==}
 
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
@@ -3367,6 +3388,21 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
+  '@oslojs/asn1@0.2.2':
+    dependencies:
+      '@oslojs/binary': 0.2.3
+
+  '@oslojs/binary@0.2.3': {}
+
+  '@oslojs/crypto@0.6.0':
+    dependencies:
+      '@oslojs/asn1': 0.2.2
+      '@oslojs/binary': 0.2.3
+
+  '@oslojs/encoding@0.3.0': {}
+
+  '@oslojs/oauth2@0.5.0': {}
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -3701,6 +3737,12 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
+
+  arctic@2.0.0-next.5:
+    dependencies:
+      '@oslojs/crypto': 0.6.0
+      '@oslojs/encoding': 0.3.0
+      '@oslojs/oauth2': 0.5.0
 
   arg@5.0.2: {}
 

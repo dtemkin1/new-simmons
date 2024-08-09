@@ -1,20 +1,14 @@
-import { generateState } from 'oslo/oauth2';
 import { redirect } from '@sveltejs/kit';
-
-import { client as petrock, scopes as petrock_scopes, codeVerifier } from '$lib/server/auth';
+import { generateState } from 'arctic';
+import { okta, codeVerifier, scopes } from '$lib/server/auth';
 
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function GET(event: RequestEvent): Promise<Response> {
 	const state = generateState();
+	const url = okta.createAuthorizationURL(state, codeVerifier, scopes);
 
-	const url = await petrock.createAuthorizationURL({
-		state: state,
-		codeVerifier: codeVerifier,
-		scopes: petrock_scopes
-	});
-
-	event.cookies.set('petrock_state', state, {
+	event.cookies.set('okta_oauth_state', state, {
 		path: '/',
 		secure: import.meta.env.PROD,
 		httpOnly: true,

@@ -117,7 +117,7 @@
 			</form>
 			<hr />
 			<form class="flex flex-col grow">
-				<a href="{base}/auth/signin/petrock" type="button" class="btn variant-filled-success"
+				<a href="{base}/auth/signin/okta" type="button" class="btn variant-filled-success"
 					>Sign In with Touchstone</a
 				>
 			</form>
