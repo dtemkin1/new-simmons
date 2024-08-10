@@ -22,6 +22,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 
 	// verify state
 	if (!state || !stateCookie || !code || stateCookie !== state || !codeVerifier) {
+		console.log('state mismatch');
 		return new Response(null, {
 			status: 400
 		});
@@ -59,10 +60,12 @@ export async function GET(event: RequestEvent): Promise<Response> {
 			});
 		} else {
 			// user not found
+			console.log('user not found: ', username);
 			return new Response(null, {
 				status: 400
 			});
 		}
+		console.log('oktaUser: ', oktaUser);
 		return new Response(null, {
 			status: 302,
 			headers: {
@@ -71,6 +74,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		});
 	} catch (e) {
 		// the specific error message depends on the provider
+		console.log('error: ', e);
 		if (e instanceof OAuth2RequestError) {
 			// Invalid authorization code, credentials, or redirect URI
 			// const code = e.code;
