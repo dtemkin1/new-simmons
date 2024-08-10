@@ -1,5 +1,5 @@
 import { ArcticFetchError, OAuth2RequestError } from 'arctic';
-import { okta, lucia, codeVerifier, domain } from '$lib/server/auth';
+import { okta, lucia, domain } from '$lib/server/auth';
 
 import { db } from '$lib/server';
 
@@ -12,11 +12,16 @@ import { sds_users } from '$lib/server/schema';
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function GET(event: RequestEvent): Promise<Response> {
-	const code = event.url.searchParams.get('code');
-	const state = event.url.searchParams.get('state');
-	const storedState = event.cookies.get('okta_oauth_state') ?? null;
+	const cookies = event.cookies;
+	const stateCookie = cookies.get('okta_oauth_state') ?? null;
+	const codeVerifier = cookies.get('code_verifier') ?? null;
 
-	if (!code || !state || !storedState || state !== storedState) {
+	const url = event.url;
+	const state = url.searchParams.get('state');
+	const code = url.searchParams.get('code');
+
+	// verify state
+	if (!state || !stateCookie || !code || stateCookie !== state || !codeVerifier) {
 		return new Response(null, {
 			status: 400
 		});

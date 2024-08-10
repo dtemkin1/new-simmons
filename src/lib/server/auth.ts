@@ -1,7 +1,7 @@
 import { Lucia, TimeSpan } from 'lucia';
 import { dev } from '$app/environment';
 import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
-import { Okta, generateCodeVerifier } from 'arctic';
+import { Okta } from 'arctic';
 import unserialize from 'locutus/php/var/unserialize';
 
 import { env } from '$env/dynamic/private';
@@ -87,7 +87,6 @@ export const okta = new Okta(
 	'https://new-simmons-mit.netlify.app/auth/callback/okta'
 );
 
-export const codeVerifier = generateCodeVerifier();
 export const scopes = [
 	'openid',
 	'email',
