@@ -25,7 +25,6 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		state !== storedState ||
 		storedCodeVerifier === null
 	) {
-		console.log('state mismatch');
 		return new Response(null, {
 			status: 400
 		});
@@ -59,12 +58,10 @@ export async function GET(event: RequestEvent): Promise<Response> {
 			});
 		} else {
 			// user not found
-			console.log('user not found: ', username);
 			return new Response(null, {
 				status: 400
 			});
 		}
-		console.log('oktaUser: ', oktaUser);
 		return new Response(null, {
 			status: 302,
 			headers: {
@@ -73,7 +70,6 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		});
 	} catch (e) {
 		// the specific error message depends on the provider
-		console.log('error: ', e);
 		if (e instanceof OAuth2RequestError) {
 			// Invalid authorization code, credentials, or redirect URI
 			// const code = e.code;
@@ -95,22 +91,13 @@ export async function GET(event: RequestEvent): Promise<Response> {
 }
 
 interface OktaUser {
-	// profile
+	sub: string;
 	name: string;
-	family_name: string;
-	given_name: string;
-	middle_name: string;
-	nickname: string;
-	preferred_username: string;
-	profile: string;
-	picture: string;
-	website: string;
-	gender: string;
-	birthdate: string;
-	zoneinfo: string;
 	locale: string;
-	updated_at: string;
-	// email
 	email: string;
-	email_verified: string;
+	preferred_username: string; // same as email
+	given_name: string;
+	family_name: string;
+	zoneinfo: string;
+	email_verified: boolean;
 }
