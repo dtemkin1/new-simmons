@@ -82,7 +82,7 @@ export const domain = 'okta.mit.edu';
 export const okta = new Okta(
 	domain,
 	null,
-	OKTA_CLIENT_ID,
-	OKTA_CLIENT_SECRET,
+	OKTA_CLIENT_ID ?? '',
+	OKTA_CLIENT_SECRET ?? '',
 	'https://new-simmons-mit.netlify.app/auth/callback/okta'
 );
