@@ -18,7 +18,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		sameSite: 'lax'
 	});
 
-	event.cookies.set('code_verifier', state, {
+	event.cookies.set('code_verifier', codeVerifier, {
 		path: '/',
 		secure: import.meta.env.PROD,
 		httpOnly: true,

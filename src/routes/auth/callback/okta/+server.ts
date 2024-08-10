@@ -32,18 +32,6 @@ export async function GET(event: RequestEvent): Promise<Response> {
 	}
 
 	try {
-		// const accessToken = tokens.accessToken();
-		// const idToken = parseJWT(tokens.idToken())!.payload;
-		// const accessTokenExpiresAt = tokens.accessTokenExpiresAt();
-		// const refreshToken = tokens.refreshToken();
-
-		// const oktaUserResponse = await fetch(domain + '/oauth2/v1/userinfo', {
-		// 	headers: {
-		// 		Authorization: `Bearer ${accessToken}`
-		// 	}
-		// });
-		// const oktaUser: OktaUser = await oktaUserResponse.json();
-
 		const tokens = await okta.validateAuthorizationCode(code, storedCodeVerifier);
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const accessToken = tokens.accessToken();
