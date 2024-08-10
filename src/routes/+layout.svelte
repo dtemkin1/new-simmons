@@ -88,7 +88,7 @@
 			class="flex-1 overflow-x-hidden flex flex-col"
 			class:scroll-smooth={!$prefersReducedMotionStore}
 			style:scrollbar-gutter="auto"
-			on:scroll
+			onscroll
 		>
 			<main class="flex-auto">
 				{@render children()}

@@ -1,5 +1,5 @@
-import { ArcticFetchError, OAuth2RequestError } from 'arctic';
-import { okta, lucia, domain } from '$lib/server/auth';
+import { ArcticFetchError, OAuth2RequestError, decodeIdToken } from 'arctic';
+import { okta, lucia } from '$lib/server/auth';
 
 import { db } from '$lib/server';
 
@@ -28,17 +28,20 @@ export async function GET(event: RequestEvent): Promise<Response> {
 	}
 
 	try {
-		const tokens = await okta.validateAuthorizationCode(code, codeVerifier);
-		const accessToken = tokens.accessToken();
+		// const accessToken = tokens.accessToken();
+		// const idToken = parseJWT(tokens.idToken())!.payload;
 		// const accessTokenExpiresAt = tokens.accessTokenExpiresAt();
 		// const refreshToken = tokens.refreshToken();
 
-		const oktaUserResponse = await fetch(domain + '/oauth2/v1/userinfo', {
-			headers: {
-				Authorization: `Bearer ${accessToken}`
-			}
-		});
-		const oktaUser: OktaUser = await oktaUserResponse.json();
+		// const oktaUserResponse = await fetch(domain + '/oauth2/v1/userinfo', {
+		// 	headers: {
+		// 		Authorization: `Bearer ${accessToken}`
+		// 	}
+		// });
+		// const oktaUser: OktaUser = await oktaUserResponse.json();
+
+		const tokens = await okta.validateAuthorizationCode(code, codeVerifier);
+		const oktaUser = decodeIdToken(tokens.idToken()) as OktaUser;
 
 		const username = oktaUser.email.split('@')[0];
 		const existingUser = await db.select().from(sds_users).where(eq(sds_users.username, username));
