@@ -1,5 +1,5 @@
 import { ArcticFetchError, OAuth2RequestError } from 'arctic';
-import { okta, lucia, domain } from '$lib/server/auth';
+import { okta, lucia } from '$lib/server/auth';
 
 import { db } from '$lib/server';
 
@@ -35,7 +35,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		const tokens = await okta.validateAuthorizationCode(code, storedCodeVerifier);
 		const accessToken = tokens.accessToken();
 
-		const oktaUserResponse = await fetch(domain + '/oauth2/v1/userinfo', {
+		const oktaUserResponse = await fetch('https://okta.mit.edu/oauth2/v1/userinfo', {
 			headers: {
 				Authorization: `Bearer ${accessToken}`
 			}
