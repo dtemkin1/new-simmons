@@ -86,13 +86,3 @@ export const okta = new Okta(
 	OKTA_CLIENT_SECRET,
 	'https://new-simmons-mit.netlify.app/auth/callback/okta'
 );
-
-export const scopes = [
-	'openid',
-	'email',
-	'profile',
-	// 'address',
-	// 'phone',
-	'offline_access'
-	// 'groups'
-];

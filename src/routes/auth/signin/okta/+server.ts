@@ -1,12 +1,13 @@
 import { redirect } from '@sveltejs/kit';
 import { generateState, generateCodeVerifier } from 'arctic';
-import { okta, scopes } from '$lib/server/auth';
+import { okta } from '$lib/server/auth';
 
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function GET(event: RequestEvent): Promise<Response> {
 	const state = generateState();
 	const codeVerifier = generateCodeVerifier();
+	const scopes = ['openid', 'email', 'profile'];
 	const url = okta.createAuthorizationURL(state, codeVerifier, scopes);
 
 	event.cookies.set('okta_oauth_state', state, {

@@ -12,16 +12,19 @@ import { sds_users } from '$lib/server/schema';
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function GET(event: RequestEvent): Promise<Response> {
-	const cookies = event.cookies;
-	const stateCookie = cookies.get('okta_oauth_state') ?? null;
-	const codeVerifier = cookies.get('code_verifier') ?? null;
+	const state = event.url.searchParams.get('state');
+	const code = event.url.searchParams.get('code');
 
-	const url = event.url;
-	const state = url.searchParams.get('state');
-	const code = url.searchParams.get('code');
+	const storedState = event.cookies.get('okta_oauth_state') ?? null;
+	const storedCodeVerifier = event.cookies.get('code_verifier') ?? null;
 
 	// verify state
-	if (!state || !stateCookie || !code || stateCookie !== state || !codeVerifier) {
+	if (
+		code === null ||
+		storedState === null ||
+		state !== storedState ||
+		storedCodeVerifier === null
+	) {
 		console.log('state mismatch');
 		return new Response(null, {
 			status: 400
@@ -41,8 +44,11 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		// });
 		// const oktaUser: OktaUser = await oktaUserResponse.json();
 
-		const tokens = await okta.validateAuthorizationCode(code, codeVerifier);
-		const oktaUser = decodeIdToken(tokens.idToken()) as OktaUser;
+		const tokens = await okta.validateAuthorizationCode(code, storedCodeVerifier);
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const accessToken = tokens.accessToken();
+		const idToken = tokens.idToken();
+		const oktaUser = decodeIdToken(idToken) as OktaUser;
 
 		const username = oktaUser.email.split('@')[0];
 		const existingUser = await db.select().from(sds_users).where(eq(sds_users.username, username));
