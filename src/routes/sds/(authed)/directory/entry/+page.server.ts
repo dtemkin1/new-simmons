@@ -82,22 +82,22 @@ export const load: PageServerLoad = async ({ parent, url }) => {
 
 		const typeGen =
 			userPreliminary?.type && userPreliminary.type !== 'U'
-				? (
+				? ((
 						await tsx
 							.select({ description: user_types.description })
 							.from(user_types)
 							.where(eq(user_types.type, userPreliminary.type))
-					)[0].description ?? ''
+					)[0].description ?? '')
 				: '';
 
 		const graGen =
 			userPreliminary?.room && userPreliminary.room !== ''
-				? (
+				? ((
 						await tsx
 							.select({ gra: rooms.gra })
 							.from(rooms)
 							.where(eq(rooms.room, userPreliminary.room))
-					)[0].gra ?? ''
+					)[0].gra ?? '')
 				: '';
 
 		if (userPreliminary != null) {

@@ -49,12 +49,12 @@ export const load: PageServerLoad = async ({ parent }) => {
 		const randomResident = (await residentsQuery)[0];
 		const typeDescription =
 			randomResident.type != null && randomResident.type !== 'U'
-				? (
+				? ((
 						await tsx
 							.select({ description: user_types.description })
 							.from(user_types)
 							.where(eq(user_types.type, randomResident.type))
-					)[0].description ?? ''
+					)[0].description ?? '')
 				: '';
 		// ? (await connection.oneFirst(
 		// 		sql.typeAlias(
