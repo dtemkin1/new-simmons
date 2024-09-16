@@ -58,7 +58,7 @@
 		"@floating-ui/dom": "1.6.11",
 		"@lucia-auth/adapter-drizzle": "^1.1.0",
 		"arctic": "2.0.0-next.5",
-		"css-tree": "^2.3.1",
+		"css-tree": "^3.0.0",
 		"drizzle-orm": "^0.33.0",
 		"locutus": "^2.0.32",
 		"lucia": "^3.2.0",
