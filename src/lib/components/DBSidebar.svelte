@@ -49,6 +49,7 @@
 			<svelte:fragment slot="lead">
 				{#each userLinks as tileLinks}
 					{#if tileLinks.links.length > 0}
+						{@const Icon = tileLinks.icon}
 						<AppRailTile
 							bind:group={currentTile}
 							name={tileLinks.id}
@@ -62,7 +63,7 @@
 						>
 							<svelte:fragment slot="lead">
 								<div class="flex justify-center items-center">
-									<svelte:component this={tileLinks.icon} size={'1.5rem'}></svelte:component>
+									<Icon size={'1.5rem'}></Icon>
 								</div>
 							</svelte:fragment>
 							<span>{tileLinks.name}</span>

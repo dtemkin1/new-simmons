@@ -20,7 +20,7 @@
 			></enhanced:img>
 		</a>
 	</svelte:fragment>
-	<a href={base}><strong class="text-xl uppercase">Simmons Hall</strong></a>
+	<a href="/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
 	<svelte:fragment slot="trail">
 		<div class="hidden md:inline-flex gap-4 items-center">
 			{#each headerLinks as page}

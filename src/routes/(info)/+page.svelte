@@ -1,5 +1,3 @@
-<script context="module" src="https://player.vimeo.com/api/player.js"></script>
-
 <script lang="ts">
 	import { base } from '$app/paths';
 </script>
