@@ -15,8 +15,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(drizzle-orm@0.33.0(@types/pg@8.11.6)(pg@8.12.0))(lucia@3.2.0)
       arctic:
-        specifier: 2.0.0-next.7
-        version: 2.0.0-next.7
+        specifier: 2.0.0-next.9
+        version: 2.0.0-next.9
       css-tree:
         specifier: ^3.0.0
         version: 3.0.0
@@ -986,9 +986,6 @@ packages:
   '@oslojs/jwt@0.1.0':
     resolution: {integrity: sha512-g6JHWeCl9OkHLeoaaKUZoQUfCzhn2U5hYnyoT7/Uh/HY0AGpf0odmFViW6AhPKaOOVXKITvoOArEhec1vEd6GA==}
 
-  '@oslojs/oauth2@0.5.0':
-    resolution: {integrity: sha512-t70+e4EgnzTbU4MrUWXzqWN2A6RJrlSSvwwuBv6E0Ap6/nsIXrjsdRWeTcSvvXTcC6fi0YdWaqEWLipcEm2Cgw==}
-
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -1302,8 +1299,8 @@ packages:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
 
-  arctic@2.0.0-next.7:
-    resolution: {integrity: sha512-3z4AuPBwSP1VxN3MyOSEDriW3RudXdRm7OAG1MB0Y8DvihNtABA9ODychtXL5+Ecbi+80QUs9lZZag2BQWqh5A==}
+  arctic@2.0.0-next.9:
+    resolution: {integrity: sha512-VUi47ekY8oWEa+NE4AcEl5fwZF5lMn0/PCQUsPieLP8wFVXVFR+vxDKESkMQg+d8Ffd7LBLXWW/DTIgvD8zRtw==}
 
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
@@ -3386,8 +3383,6 @@ snapshots:
     dependencies:
       '@oslojs/encoding': 0.4.1
 
-  '@oslojs/oauth2@0.5.0': {}
-
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -3722,12 +3717,11 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  arctic@2.0.0-next.7:
+  arctic@2.0.0-next.9:
     dependencies:
       '@oslojs/crypto': 0.6.0
       '@oslojs/encoding': 0.4.1
       '@oslojs/jwt': 0.1.0
-      '@oslojs/oauth2': 0.5.0
 
   arg@5.0.2: {}
 
