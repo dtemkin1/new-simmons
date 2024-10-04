@@ -15,12 +15,12 @@
 
 <AppBar>
 	<svelte:fragment slot="lead">
-		<a href="/">
-			<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png"
-			></enhanced:img>
+		<a href="/" class="flex gap-4 items-center">
+			<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png" />
+			<strong class="text-xl uppercase">Simmons Hall</strong>
 		</a>
 	</svelte:fragment>
-	<a href="/"><strong class="text-xl uppercase">Simmons Hall</strong></a>
+
 	<svelte:fragment slot="trail">
 		<div class="hidden md:inline-flex gap-4 items-center">
 			{#each headerLinks as page}
