@@ -3,6 +3,7 @@
 	import PeopleModal from './PeopleModal.svelte';
 
 	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
+	import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img';
 
 	const modalStore = getModalStore();
 
@@ -52,7 +53,7 @@
 	});
 
 	// TODO: FIX TYPE
-	const images: Record<string, any> = import.meta.glob(
+	const images: Record<string, { default: EnhancedImgAttributes['src'] }> = import.meta.glob(
 		'../assets/officers/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
 		{
 			eager: true,

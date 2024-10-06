@@ -1,27 +1,14 @@
 <script lang="ts">
 	import { AppBar, modeCurrent } from '@skeletonlabs/skeleton';
+	import logo_black from '../assets/mit_logo/mit_logo_std_rgb_black.png?enhanced';
+	import logo_white from '../assets/mit_logo/mit_logo_std_rgb_white.png?enhanced';
 
-	// TODO: FIX TYPE
-	const mit_logos: Record<string, any> = import.meta.glob(
-		'../assets/mit_logo/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
-		{
-			eager: true,
-			query: {
-				enhanced: true
-			}
-		}
-	);
-
-	let mit_logo = $derived(
-		$modeCurrent
-			? mit_logos['../assets/mit_logo/mit_logo_std_rgb_black.png'].default
-			: mit_logos['../assets/mit_logo/mit_logo_std_rgb_white.png'].default
-	);
+	let mit_logo = $derived($modeCurrent ? logo_black : logo_white);
 </script>
 
 <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 	<svelte:fragment slot="lead">
-		<a href="https://web.mit.edu/">
+		<a href="https://web.mit.edu/" aria-label="MIT Logo">
 			<enhanced:img class="max-h-12 w-auto" alt="MIT Logo" src={mit_logo}></enhanced:img>
 		</a>
 	</svelte:fragment>

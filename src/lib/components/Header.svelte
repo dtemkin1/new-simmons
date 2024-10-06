@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { AppBar, LightSwitch, getDrawerStore } from '@skeletonlabs/skeleton';
 	import { Menu } from 'lucide-svelte';
