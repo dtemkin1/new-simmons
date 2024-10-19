@@ -2,7 +2,11 @@
 	import type { PageData } from './$types';
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 
-	export let data: PageData;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 
 	const dateFormatter = new Intl.DateTimeFormat('en-US', {
 		year: 'numeric',

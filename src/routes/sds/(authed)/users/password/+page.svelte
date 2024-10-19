@@ -3,11 +3,15 @@
 	import { enhance } from '$app/forms';
 
 	import type { PageData } from './$types';
-	export let data: PageData;
 	import type { ActionResult } from '@sveltejs/kit';
 
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import type { ToastSettings } from '@skeletonlabs/skeleton';
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 
 	const toastStore = getToastStore();
 

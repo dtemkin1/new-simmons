@@ -2,11 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
-	let {
-		data = { years: [], lounges: [], gras: [] },
-		enhanceFunc,
-		actionLocation
-	}: {
+	interface Props {
 		data: {
 			years: readonly (number | null)[];
 			lounges: readonly { lounge: string | null; description: string | null }[];
@@ -14,7 +10,13 @@
 		};
 		enhanceFunc?: SubmitFunction;
 		actionLocation?: string;
-	} = $props();
+	}
+
+	let {
+		data = { years: [], lounges: [], gras: [] },
+		enhanceFunc,
+		actionLocation
+	}: Props = $props();
 </script>
 
 <form

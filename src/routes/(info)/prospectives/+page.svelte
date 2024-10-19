@@ -3,7 +3,11 @@
 
 	import type { PageData } from './$types';
 	import { process_raw_data, timeMaker } from './rex_process';
-	export let data: PageData;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 
 	const rexData = process_raw_data(data.rexData);
 </script>

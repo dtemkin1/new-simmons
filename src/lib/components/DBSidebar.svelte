@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { AppRail, AppRailAnchor, AppRailTile } from '@skeletonlabs/skeleton';
 
-	let { username = null, groups = [] }: { username: string | null; groups: readonly string[] } =
-		$props();
+	interface Props {
+		username: string | null;
+		groups: readonly string[];
+	}
+
+	let { username = null, groups = [] }: Props = $props();
 
 	import { page } from '$app/stores';
 	import { CircleUser } from 'lucide-svelte';
@@ -46,7 +50,7 @@
 <div class="h-full flex flex-row">
 	{#if $page.data.username}
 		<AppRail>
-			<svelte:fragment slot="lead">
+			{#snippet lead()}
 				{#each userLinks as tileLinks}
 					{#if tileLinks.links.length > 0}
 						{@const Icon = tileLinks.icon}
@@ -61,23 +65,23 @@
 								}
 							}}
 						>
-							<svelte:fragment slot="lead">
+							{#snippet lead()}
 								<div class="flex justify-center items-center">
 									<Icon size={'1.5rem'}></Icon>
 								</div>
-							</svelte:fragment>
+							{/snippet}
 							<span>{tileLinks.name}</span>
 						</AppRailTile>
 					{/if}
 				{/each}
-			</svelte:fragment>
-			<svelte:fragment slot="trail">
+			{/snippet}
+			{#snippet trail()}
 				<AppRailAnchor href={SDS_LOGIN_URL} title="Account"
-					><svelte:fragment slot="lead">
+					>{#snippet lead()}
 						<CircleUser size={'1.5rem'} />
-					</svelte:fragment>{username ?? 'Guest'}</AppRailAnchor
+					{/snippet}{username ?? 'Guest'}</AppRailAnchor
 				>
-			</svelte:fragment>
+			{/snippet}
 		</AppRail>
 		{#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}
 			<section class="p-4 space-y-4 md:w-72 w-screen bg-surface-100-800-token">

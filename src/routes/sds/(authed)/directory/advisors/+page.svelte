@@ -2,10 +2,13 @@
 	import type { PageData } from './$types';
 	import { base } from '$app/paths';
 
-	export let data: PageData;
-
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 	import PeopleTable from '$lib/components/PeopleTable.svelte';
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 </script>
 
 {#await data.advisors}

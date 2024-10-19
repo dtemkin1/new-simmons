@@ -1,8 +1,13 @@
 <script lang="ts">
-	export let text;
 	text;
-	export let raw;
+	interface Props {
+		text: any;
+		raw: any;
+		children?: import('svelte').Snippet;
+	}
+
+	let { text, raw, children }: Props = $props();
 	raw;
 </script>
 
-<slot />
+{@render children?.()}

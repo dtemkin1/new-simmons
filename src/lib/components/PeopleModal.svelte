@@ -2,11 +2,13 @@
 	import type { Office, Person } from '$lib/data/simGov';
 	import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img';
 
-	let {
-		office,
-		people,
-		img
-	}: { office: Office; people: Person[]; img: EnhancedImgAttributes['src'] } = $props();
+	interface Props {
+		office: Office;
+		people: Person[];
+		img: EnhancedImgAttributes['src'];
+	}
+
+	let { office, people, img }: Props = $props();
 </script>
 
 <div class="bg-surface-50-900-token p-8">

@@ -2,16 +2,15 @@
 	import { goto, preloadData } from '$app/navigation';
 	import { SDS_BASE } from '$lib/config';
 
-	let {
-		userData,
-		headers
-	}: {
+	interface Props {
 		userData?: {
 			username?: string | null;
 			[x: string]: string | number | null | undefined;
 		}[];
 		headers: Record<string, string>;
-	} = $props();
+	}
+
+	let { userData, headers }: Props = $props();
 
 	let preloadUserEntry = (username: string) => {
 		preloadData(`${SDS_BASE}/directory/entry?username=${username}`);

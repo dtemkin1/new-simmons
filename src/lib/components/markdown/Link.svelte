@@ -1,6 +1,11 @@
 <script lang="ts">
-	export let href = '';
-	export let title: string | undefined = undefined;
+	interface Props {
+		href?: string;
+		title?: string | undefined;
+		children?: import('svelte').Snippet;
+	}
+
+	let { href = '', title = undefined, children }: Props = $props();
 </script>
 
-<a class="anchor" {href} {title}><slot /></a>
+<a class="anchor" {href} {title}>{@render children?.()}</a>

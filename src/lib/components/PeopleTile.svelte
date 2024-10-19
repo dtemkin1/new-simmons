@@ -8,7 +8,10 @@
 	const modalStore = getModalStore();
 
 	// export let office: keyof typeof offices;
-	let { office }: { office: keyof typeof offices } = $props();
+	interface Props {
+		office: keyof typeof offices;
+	}
+	let { office }: Props = $props();
 
 	const officerColor = {
 		//house team

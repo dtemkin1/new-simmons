@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
 
-	let { username = null, groups = [] }: { username: string | null; groups: readonly string[] } =
-		$props();
+	interface Props {
+		username: string | null;
+		groups: readonly string[];
+	}
+
+	let { username = null, groups = [] }: Props = $props();
 
 	import { page } from '$app/stores';
 	import { CircleUser } from 'lucide-svelte';
@@ -103,22 +107,22 @@
 						}
 					}}
 				>
-					<svelte:fragment slot="lead">
+					{#snippet lead()}
 						<div class="flex justify-center items-center">
 							<Icon size={'1.5rem'}></Icon>
 						</div>
-					</svelte:fragment>
+					{/snippet}
 					<span class="font-bold text-xs">{tileLinks.name}</span>
 				</TabAnchor>
 			{/if}
 		{/each}
 
 		<TabAnchor href={SDS_LOGIN_URL} title="Account"
-			><svelte:fragment slot="lead">
+			>{#snippet lead()}
 				<div class="flex justify-center items-center">
 					<CircleUser size={'1.5rem'} />
 				</div>
-			</svelte:fragment><span class="font-bold text-xs">{username ?? 'Guest'}</span></TabAnchor
+			{/snippet}<span class="font-bold text-xs">{username ?? 'Guest'}</span></TabAnchor
 		>
 	</TabGroup>
 {/if}

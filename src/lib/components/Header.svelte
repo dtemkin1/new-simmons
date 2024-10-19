@@ -13,14 +13,14 @@
 </script>
 
 <AppBar>
-	<svelte:fragment slot="lead">
+	{#snippet lead()}
 		<a href="/" class="flex gap-4 items-center">
 			<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png" />
 			<strong class="text-xl uppercase">Simmons Hall</strong>
 		</a>
-	</svelte:fragment>
+	{/snippet}
 
-	<svelte:fragment slot="trail">
+	{#snippet trail()}
 		<div class="hidden md:inline-flex gap-4 items-center">
 			{#each headerLinks as page}
 				<a
@@ -48,5 +48,5 @@
 				<Menu size={'2rem'} />
 			</button>
 		</div>
-	</svelte:fragment>
+	{/snippet}
 </AppBar>

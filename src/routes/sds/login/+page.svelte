@@ -5,8 +5,6 @@
 	import { redirect } from '@sveltejs/kit';
 	import { base } from '$app/paths';
 
-	export let data: PageData;
-
 	let error: boolean | null = null;
 
 	onMount(() => {
@@ -20,6 +18,11 @@
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import type { ToastSettings } from '@skeletonlabs/skeleton';
 	import { SDS_HOME_URL } from '$lib/config';
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 
 	const toastStore = getToastStore();
 

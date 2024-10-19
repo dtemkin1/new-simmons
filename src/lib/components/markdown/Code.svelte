@@ -1,6 +1,10 @@
 <script lang="ts">
-	export let lang: string;
-	export let text: string;
+	interface Props {
+		lang: string;
+		text: string;
+	}
+
+	let { lang, text }: Props = $props();
 </script>
 
 <pre class="pre" class:lang><code class="code">{text}</code></pre>

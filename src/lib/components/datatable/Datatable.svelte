@@ -10,7 +10,11 @@
 	//Load local data
 	// import data from '$lib/components/client/data';
 	// export let data: { head: string[]; body: string[][] };
-	let { data }: { data: { head: string[]; body: string[][] } } = $props();
+	interface Props {
+		data: { head: string[]; body: string[][] };
+	}
+
+	let { data }: Props = $props();
 
 	//Import handler from SSD
 	import { DataHandler } from '@vincjo/datatables';

@@ -1,40 +1,46 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { enhance } from '$app/forms';
 	import { Stepper, Step } from '@skeletonlabs/skeleton';
 	import type { ActionData } from './$types';
 	import { invalidateAll } from '$app/navigation';
 
-	let usertype: string | undefined;
-	let username: string | undefined;
-	let title: string | undefined;
-	let first_name: string | undefined;
-	let last_name: string | undefined;
-	let room: string | undefined;
-	let class_year: number | undefined;
+	let usertype: string | undefined = $state();
+	let username: string | undefined = $state();
+	let title: string | undefined = $state();
+	let first_name: string | undefined = $state();
+	let last_name: string | undefined = $state();
+	let room: string | undefined = $state();
+	let class_year: number | undefined = $state();
 
-	let immortal: boolean | undefined;
-	let hidden: boolean | undefined;
+	let immortal: boolean | undefined = $state();
+	let hidden: boolean | undefined = $state();
 
-	let submit_button: HTMLButtonElement;
-	let fetch_button: HTMLButtonElement;
-	let reenable_button: HTMLButtonElement;
+	let submit_button: HTMLButtonElement = $state();
+	let fetch_button: HTMLButtonElement = $state();
+	let reenable_button: HTMLButtonElement = $state();
 
-	export let form: ActionData;
 	// export let data: PageData;
 
 	const sixMonthsAhead = new Date();
 	sixMonthsAhead.setMonth(sixMonthsAhead.getMonth() + 6);
 
-	$: locked_usertype = usertype == undefined || !(usertype?.length > 0);
-	$: locked_username = username == undefined || !(username?.length > 0);
-	$: fetch_userdetails = usertype ? !['OTHER', 'temp'].includes(usertype) : false;
-	$: generated_class_year =
-		form?.userData?.item.affiliations[0].type == 'student' &&
-		form?.userData?.item.affiliations[0].classYear &&
-		!Number.isNaN(Number(form?.userData?.item.affiliations[0].classYear))
-			? sixMonthsAhead.getFullYear() + 4 - Number(form?.userData?.item.affiliations[0].classYear)
-			: null;
-	$: locked_userdetails = fetch_userdetails ? !form?.fetchSuccess && !form?.fetchError : false;
+	let locked_usertype = $derived(usertype == undefined || !(usertype?.length > 0));
+	let locked_username = $derived(username == undefined || !(username?.length > 0));
+	let fetch_userdetails = $derived(usertype ? !['OTHER', 'temp'].includes(usertype) : false);
+	let generated_class_year;
+	run(() => {
+		generated_class_year =
+			form?.userData?.item.affiliations[0].type == 'student' &&
+			form?.userData?.item.affiliations[0].classYear &&
+			!Number.isNaN(Number(form?.userData?.item.affiliations[0].classYear))
+				? sixMonthsAhead.getFullYear() + 4 - Number(form?.userData?.item.affiliations[0].classYear)
+				: null;
+	});
+	let locked_userdetails = $derived(
+		fetch_userdetails ? !form?.fetchSuccess && !form?.fetchError : false
+	);
 
 	function onNextHandler(e: {
 		detail: { state: { current: number; total: number }; step: number };
@@ -91,9 +97,14 @@
 		toastStore.trigger(resultToast);
 	}
 
-	let reenableUser: string | undefined = undefined;
+	let reenableUser: string | undefined = $state(undefined);
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+	interface Props {
+		form: ActionData;
+	}
+
+	let { form = $bindable() }: Props = $props();
 	const modalStore = getModalStore();
 	const oldUserModal: ModalSettings = {
 		type: 'prompt',
@@ -112,7 +123,7 @@
 		}
 	};
 
-	let times_submitted = 0;
+	let times_submitted = $state(0);
 </script>
 
 <div class="flex flex-col w-full h-full p-4 text-center items-center justify-center space-y-4">
@@ -120,7 +131,9 @@
 	{#key times_submitted}
 		<Stepper on:next={onNextHandler} on:complete={onCompleteHandler} buttonCompleteLabel="Submit">
 			<Step locked={locked_usertype}>
-				<svelte:fragment slot="header">User Type</svelte:fragment>
+				{#snippet header()}
+					User Type
+				{/snippet}
 				<select class="select" bind:value={usertype}>
 					<option value="AHM">AHM (Associate Housemaster)</option>
 					<option value="GRA">GRA (GRA)</option>
@@ -132,14 +145,16 @@
 					<option value="U" selected>U (Undergraduate)</option>
 					<option value="VS">VS (Visiting Scholar)</option>
 				</select>
-				<svelte:fragment slot="navigation">
-					<button class="btn variant-ghost-error" on:click={() => modalStore.trigger(oldUserModal)}
+				{#snippet navigation()}
+					<button class="btn variant-ghost-error" onclick={() => modalStore.trigger(oldUserModal)}
 						>Reenable User</button
 					>
-				</svelte:fragment>
+				{/snippet}
 			</Step>
 			<Step locked={locked_username}>
-				<svelte:fragment slot="header">Username</svelte:fragment>
+				{#snippet header()}
+					Username
+				{/snippet}
 				<input
 					class="input"
 					title="Username"
@@ -150,7 +165,9 @@
 				/>
 			</Step>
 			<Step locked={locked_userdetails}>
-				<svelte:fragment slot="header">User Details</svelte:fragment>
+				{#snippet header()}
+					User Details
+				{/snippet}
 
 				<label class="label">
 					<span>Title</span>
@@ -228,7 +245,9 @@
 				</div>
 			</Step>
 			<Step>
-				<svelte:fragment slot="header">Confirm</svelte:fragment>
+				{#snippet header()}
+					Confirm
+				{/snippet}
 				<p>Review the information below and click "Submit" to add the directory entry.</p>
 				<div class="grid-cols-2">
 					<div class="flex flex-col space-y-2">
@@ -259,7 +278,7 @@
 			};
 		}}
 	>
-		<input type="hidden" name="kerberosId" value={username} on:change={() => invalidateAll()} />
+		<input type="hidden" name="kerberosId" value={username} onchange={() => invalidateAll()} />
 		<button class="btn variant-filled-primary" type="submit" bind:this={fetch_button}
 			>Click to Fetch Details</button
 		>

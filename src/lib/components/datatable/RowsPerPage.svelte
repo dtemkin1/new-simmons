@@ -1,6 +1,11 @@
 <script lang="ts">
 	import type { DataHandler } from '@vincjo/datatables';
-	let { handler }: { handler: DataHandler } = $props();
+	interface Props {
+		handler: DataHandler;
+	}
+
+	let { handler }: Props = $props();
+
 	const rowsPerPage = handler.getRowsPerPage();
 	const options = [5, 10, 20, 50, 100];
 </script>

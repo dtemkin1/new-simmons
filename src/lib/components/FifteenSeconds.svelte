@@ -17,8 +17,12 @@
 		year: number | null;
 	}
 
+	interface Props {
+		userInfo: UserInfo;
+	}
+
 	import SvelteMarkdown from 'svelte-markdown';
-	let { userInfo }: { userInfo: UserInfo } = $props();
+	let { userInfo }: Props = $props();
 
 	import { base } from '$app/paths';
 	// import { renderer } from '$lib/components/markdown';

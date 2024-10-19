@@ -1,8 +1,6 @@
 <!-- TODO: FOR WHEN MULTIPLE RESULTS APPEAR IN DIRECTORY -->
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
-	export let form: ActionData;
-	export let data: PageData;
 
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 	import DirectorySearch from '$lib/components/DirectorySearch.svelte';
@@ -11,6 +9,12 @@
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import type { ToastSettings } from '@skeletonlabs/skeleton';
 	import type { ActionResult } from '@sveltejs/kit';
+	interface Props {
+		form: ActionData;
+		data: PageData;
+	}
+
+	let { form, data }: Props = $props();
 
 	const toastStore = getToastStore();
 

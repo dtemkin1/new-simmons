@@ -12,7 +12,11 @@
 
 	import { invalidateAll } from '$app/navigation';
 
-	export let data: PageData;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 
 	const toastStore = getToastStore();
 
@@ -182,7 +186,7 @@
 					type="button"
 					class="btn variant-filled-error"
 					value="Undo changes"
-					on:click={invalidateAll}
+					onclick={invalidateAll}
 				/>
 			</div>
 		</form>

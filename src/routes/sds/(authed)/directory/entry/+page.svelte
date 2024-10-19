@@ -4,7 +4,11 @@
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 	import { base } from '$app/paths';
 	import { ArrowLeft, Pencil, Trash } from 'lucide-svelte';
-	export let data: PageData;
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
 </script>
 
 <div class="flex items-center justify-center h-full flex-col p-4 space-y-4">
