@@ -8,8 +8,8 @@ export const load: LayoutServerLoad = async (event) => {
 		redirect(302, SDS_BASE);
 	}
 	return {
-		username: event.locals.user.id,
-		groups: await getGroups(event.locals.user.id),
+		username: event.locals.user.username,
+		groups: await getGroups(event.locals.user.username),
 		data: event.locals.session?.data
 	};
 };

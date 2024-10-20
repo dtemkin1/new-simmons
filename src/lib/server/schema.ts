@@ -11,6 +11,8 @@ import {
 	numeric
 } from 'drizzle-orm/pg-core';
 
+import type { InferSelectModel } from 'drizzle-orm';
+
 export const advisors = pgTable(
 	'advisors',
 	{
@@ -425,3 +427,6 @@ export const packages = pgTable(
 		};
 	}
 );
+
+export type User = InferSelectModel<typeof sds_users_all>;
+export type Session = InferSelectModel<typeof sds_sessions>;

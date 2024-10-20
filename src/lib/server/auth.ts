@@ -1,76 +1,99 @@
-import { Lucia, TimeSpan } from 'lucia';
-import { dev } from '$app/environment';
-import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
+// USE https://lucia-auth.com/ !!!
+
 import { Okta } from 'arctic';
-import unserialize from 'locutus/php/var/unserialize';
-
 import { env } from '$env/dynamic/private';
-import { boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
-
+import {
+	type User,
+	type Session,
+	sds_users_all as userTable,
+	sds_sessions as sessionTable
+} from './schema';
 import { db } from '.';
-import { sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
+import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/encoding';
+import { sha256 } from '@oslojs/crypto/sha2';
+import type { RequestEvent } from '@sveltejs/kit';
 
-export const sds_users_all_for_lucia = pgTable('sds_users_all', {
-	id: text('username').notNull().primaryKey(),
-	password: text('password'),
-	salt: text('salt'),
-	active: boolean('active').notNull().default(true),
-	hosts_allow: text('hosts_allow').default(sql`'%'::text`),
-	immortal: boolean('immortal').notNull().default(false)
-});
-
-export const sds_sessions_for_lucia = pgTable('sds_sessions', {
-	id: text('sid').notNull().primaryKey(),
-	userId: text('username')
-		.notNull()
-		.references(() => sds_users_all_for_lucia.id),
-	expiresAt: timestamp('expires', { withTimezone: false }).notNull(),
-	remote_addr: text('remote_addr').notNull(),
-	data: text('data')
-});
-
-const adapter = new DrizzlePostgreSQLAdapter(db, sds_sessions_for_lucia, sds_users_all_for_lucia);
-
-type DataKeys = 'reminders';
-
-export const lucia = new Lucia(adapter, {
-	sessionCookie: {
-		attributes: {
-			// set to `true` when using HTTPS
-			secure: !dev
-		}
-	},
-	sessionExpiresIn: new TimeSpan(7, 'd'),
-	getSessionAttributes: (attributes: DatabaseSessionAttributes) => {
-		let data: Partial<Record<DataKeys, Record<string, string>>> = {};
-		if (attributes.data) {
-			data = unserialize(attributes.data);
-		}
-		return {
-			data: data
-		};
-	}
-});
-
-declare module 'lucia' {
-	interface Register {
-		Lucia: typeof lucia;
-		DatabaseUserAttributes: DatabaseUserAttributes;
-		DatabaseSessionAttributes: DatabaseSessionAttributes;
-	}
+export function generateSessionToken(): string {
+	const bytes = new Uint8Array(20);
+	crypto.getRandomValues(bytes);
+	const token = encodeBase32LowerCaseNoPadding(bytes);
+	return token;
 }
 
-interface DatabaseUserAttributes {
-	password: string | null;
-	salt: string | null;
-	active: boolean;
-	hosts_allow: string;
-	immortal: boolean;
+export async function createSession(
+	token: string,
+	username: string,
+	remote_addr: string,
+	data: string | null
+): Promise<Session> {
+	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
+	const session: Session = {
+		sid: sessionId,
+		username,
+		expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+		remote_addr,
+		data: data
+	};
+	await db.insert(sessionTable).values(session);
+	return session;
 }
 
-interface DatabaseSessionAttributes {
-	remote_addr: string;
-	data: string | null;
+export async function validateSessionToken(token: string): Promise<SessionValidationResult> {
+	const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
+	const result = await db
+		.select({ user: userTable, session: sessionTable })
+		.from(sessionTable)
+		.innerJoin(userTable, eq(sessionTable.username, userTable.username))
+		.where(eq(sessionTable.sid, sessionId));
+	if (result.length < 1) {
+		return { session: null, user: null };
+	}
+	const { user, session } = result[0];
+	if (session.expires && Date.now() >= session.expires.getTime()) {
+		await db.delete(sessionTable).where(eq(sessionTable.sid, session.sid));
+		return { session: null, user: null };
+	}
+	if (session.expires && Date.now() >= session.expires.getTime() - 1000 * 60 * 60 * 24 * 15) {
+		session.expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+		await db
+			.update(sessionTable)
+			.set({
+				expires: session.expires
+			})
+			.where(eq(sessionTable.sid, session.sid));
+	}
+	return { session, user };
+}
+
+export async function invalidateSession(sessionId: string): Promise<void> {
+	await db.delete(sessionTable).where(eq(sessionTable.sid, sessionId));
+}
+
+export type SessionValidationResult =
+	| { session: Session; user: User }
+	| { session: null; user: null };
+
+export function setSessionTokenCookie(
+	event: RequestEvent,
+	token: string,
+	expiresAt: Date | null
+): void {
+	event.cookies.set('session', token, {
+		httpOnly: true,
+		sameSite: 'lax',
+		expires: expiresAt ?? undefined,
+		path: '/'
+	});
+}
+
+export function deleteSessionTokenCookie(event: RequestEvent): void {
+	event.cookies.set('session', '', {
+		httpOnly: true,
+		sameSite: 'lax',
+		maxAge: 0,
+		path: '/'
+	});
 }
 
 // START OKTA WORKFLOW
