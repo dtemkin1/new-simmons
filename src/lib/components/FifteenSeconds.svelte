@@ -21,11 +21,15 @@
 		userInfo: UserInfo;
 	}
 
-	import SvelteMarkdown from 'svelte-markdown';
+	import { Carta, Markdown } from 'carta-md';
+	import DOMPurify from 'isomorphic-dompurify';
+	import { base } from '$app/paths';
+
 	let { userInfo }: Props = $props();
 
-	import { base } from '$app/paths';
-	// import { renderer } from '$lib/components/markdown';
+	const carta = new Carta({
+		sanitizer: DOMPurify.sanitize
+	});
 
 	function getUserInfo(user: UserInfo) {
 		let username = user.username;
@@ -80,7 +84,7 @@
 	{#if userInfo.quote}
 		<footer class="card-footer">
 			<blockquote class="blockquote prose dark:prose-invert">
-				<SvelteMarkdown options={{ breaks: true }} source={userInfoGenerated.quote} />
+				<Markdown {carta} value={userInfoGenerated.quote} />
 			</blockquote>
 		</footer>
 	{/if}

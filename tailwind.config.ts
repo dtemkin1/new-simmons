@@ -11,22 +11,6 @@ export default {
 		'./src/**/*.{html,js,svelte,ts}',
 		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],
-	theme: {
-		extend: {
-			typography: () => ({
-				DEFAULT: {
-					css: {
-						'blockquote p:first-of-type::before': {
-							content: 'normal'
-						},
-						'blockquote p:last-of-type::after': {
-							content: 'normal'
-						}
-					}
-				}
-			})
-		}
-	},
 	plugins: [
 		forms,
 		typography,

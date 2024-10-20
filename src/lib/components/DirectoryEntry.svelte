@@ -1,5 +1,3 @@
-<!-- TODO: MAKE USERINFO COMPONENT -->
-
 <script lang="ts">
 	interface UserInfo {
 		cellphone: string | null;
@@ -26,11 +24,15 @@
 		userInfo: UserInfo;
 	}
 
-	import SvelteMarkdown from 'svelte-markdown';
-	let { userInfo }: Props = $props();
-
+	import { Carta, Markdown } from 'carta-md';
+	import DOMPurify from 'isomorphic-dompurify';
 	import { base } from '$app/paths';
-	// import { renderer } from '$lib/components/markdown';
+
+	const carta = new Carta({
+		sanitizer: DOMPurify.sanitize
+	});
+
+	let { userInfo }: Props = $props();
 
 	function getUserInfo(user: UserInfo) {
 		let username = user.username;
@@ -118,7 +120,8 @@
 	{#if userInfo.quote}
 		<footer class="card-footer">
 			<blockquote class="blockquote prose dark:prose-invert">
-				<SvelteMarkdown options={{ breaks: true }} source={userInfoGenerated.quote} />
+				<Markdown {carta} value={userInfoGenerated.quote} />
+				<!-- <SvelteMarkdown options={{ breaks: true }} source={userInfoGenerated.quote} /> -->
 			</blockquote>
 		</footer>
 	{/if}
