@@ -1,10 +1,14 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { enhance } from '$app/forms';
 	import { Stepper, Step } from '@skeletonlabs/skeleton';
 	import type { ActionData } from './$types';
 	import { invalidateAll } from '$app/navigation';
+
+	interface Props {
+		form: ActionData;
+	}
+
+	let { form = $bindable() }: Props = $props();
 
 	let usertype: string | undefined = $state();
 	let username: string | undefined = $state();
@@ -17,9 +21,9 @@
 	let immortal: boolean | undefined = $state();
 	let hidden: boolean | undefined = $state();
 
-	let submit_button: HTMLButtonElement = $state();
-	let fetch_button: HTMLButtonElement = $state();
-	let reenable_button: HTMLButtonElement = $state();
+	let submit_button: HTMLButtonElement | undefined = $state();
+	let fetch_button: HTMLButtonElement | undefined = $state();
+	let reenable_button: HTMLButtonElement | undefined = $state();
 
 	// export let data: PageData;
 
@@ -29,15 +33,14 @@
 	let locked_usertype = $derived(usertype == undefined || !(usertype?.length > 0));
 	let locked_username = $derived(username == undefined || !(username?.length > 0));
 	let fetch_userdetails = $derived(usertype ? !['OTHER', 'temp'].includes(usertype) : false);
-	let generated_class_year;
-	run(() => {
-		generated_class_year =
-			form?.userData?.item.affiliations[0].type == 'student' &&
+	let generated_class_year = $state(
+		form?.userData?.item.affiliations[0].type == 'student' &&
 			form?.userData?.item.affiliations[0].classYear &&
 			!Number.isNaN(Number(form?.userData?.item.affiliations[0].classYear))
-				? sixMonthsAhead.getFullYear() + 4 - Number(form?.userData?.item.affiliations[0].classYear)
-				: null;
-	});
+			? sixMonthsAhead.getFullYear() + 4 - Number(form?.userData?.item.affiliations[0].classYear)
+			: null
+	);
+
 	let locked_userdetails = $derived(
 		fetch_userdetails ? !form?.fetchSuccess && !form?.fetchError : false
 	);
@@ -47,7 +50,7 @@
 	}): void {
 		console.log('event:step', e);
 		if (e.detail.state.current == 2 && fetch_userdetails) {
-			fetch_button.click();
+			fetch_button?.click();
 		}
 	}
 
@@ -55,7 +58,7 @@
 		detail: { state: { current: number; total: number }; step: number };
 	}): void {
 		console.log('event:complete', e);
-		submit_button.click();
+		submit_button?.click();
 		usertype = undefined;
 		username = undefined;
 		title = undefined;
@@ -100,11 +103,7 @@
 	let reenableUser: string | undefined = $state(undefined);
 
 	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
-	interface Props {
-		form: ActionData;
-	}
 
-	let { form = $bindable() }: Props = $props();
 	const modalStore = getModalStore();
 	const oldUserModal: ModalSettings = {
 		type: 'prompt',
@@ -118,7 +117,7 @@
 		response: (r: string) => {
 			reenableUser = r;
 			if (reenableUser?.length > 0) {
-				reenable_button.click();
+				reenable_button?.click();
 			}
 		}
 	};
@@ -235,11 +234,11 @@
 
 				<div class="space-y-2">
 					<label class="flex items-center space-x-2">
-						<input class="checkbox" type="checkbox" bind:value={immortal} />
+						<input class="checkbox" type="checkbox" bind:checked={immortal} />
 						<p>Immortal (rarely true)</p>
 					</label>
 					<label class="flex items-center space-x-2">
-						<input class="checkbox" type="checkbox" bind:value={hidden} />
+						<input class="checkbox" type="checkbox" bind:checked={hidden} />
 						<p>Hidden (rarely true)</p>
 					</label>
 				</div>
