@@ -7,8 +7,8 @@
 <h2 class="h2">
 	<a
 		class="anchor"
-		href="https://docs.google.com/document/d/1fiCCqdlvVLdkg3OoSvqt8rNFp6M5j_LHvOuHLZjqGBI/edit?usp=sharing"
-		>Fall 2023 Information</a
+		href="https://docs.google.com/document/d/1E0uJ1Xj1AEeSXPpBMl4zYZrSN7Ef7nh44ndVMvq0GLs/edit?usp=sharing"
+		>Fall 2024 Resident Guide</a
 	>
 </h2>
 <p>Check here for important information and FAQs about the fall semester.</p>
