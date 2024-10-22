@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 // import unserialize from 'locutus/php/var/unserialize';
 // import serialize from 'locutus/php/var/serialize';
 
-// import type { Session } from './server/schema';
+import type { Session } from './server/schema';
 
 export function checkInGroup(groupName: string) {
 	return (userGroups: string[]) => {
@@ -34,10 +34,11 @@ export function sdsSetReminder(/*session: Session | null, reminderName: string, 
 	// 	session!.data.reminders = {};
 	// }
 	// session!.data.reminders[reminderName] = reminderMessage;
-	throw error(500, 'Not implemented!');
+	return error(500, 'Not implemented!');
 }
 
-export function sdsClearReminder(/*session: Session | null, reminderName: string*/) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function sdsClearReminder(session: Session | null, reminderName: string) {
 	// if (!session) {
 	// 	error(400, 'No session');
 	// }
@@ -45,18 +46,20 @@ export function sdsClearReminder(/*session: Session | null, reminderName: string
 	// 	session.data.reminders = {};
 	// }
 	// delete session.data.reminders[reminderName];
-	throw error(500, 'Not implemented!');
+	return error(500, 'Not implemented!');
 }
 
-export function sdsClearReminders(/*session: Session | null*/) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function sdsClearReminders(session: Session | null) {
 	// if (!session) {
 	// 	error(400, 'No session');
 	// }
 	// session.data.reminders = {};
-	throw error(500, 'Not implemented!');
+	return error(500, 'Not implemented!');
 }
 
-export function sdsGetReminders(/*session: Session | null*/) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function sdsGetReminders(session: Session | null) {
 	// if (!session) {
 	// 	error(400, 'No session');
 	// }
@@ -64,10 +67,11 @@ export function sdsGetReminders(/*session: Session | null*/) {
 	// 	session.data.reminders = {};
 	// }
 	// return session.data.reminders;
-	throw error(500, 'Not implemented!');
+	return error(500, 'Not implemented!');
 }
 
-export function sdsGetReminder(/*session: Session | null, reminderName: string*/) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function sdsGetReminder(session: Session | null, reminderName: string) {
 	// if (!session) {
 	// 	error(400, 'No session');
 	// }
@@ -75,5 +79,5 @@ export function sdsGetReminder(/*session: Session | null, reminderName: string*/
 	// 	session.data.reminders = {};
 	// }
 	// return session.data.reminders[reminderName];
-	throw error(500, 'Not implemented!');
+	return error(500, 'Not implemented!');
 }

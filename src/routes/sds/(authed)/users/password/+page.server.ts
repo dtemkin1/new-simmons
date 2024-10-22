@@ -24,7 +24,7 @@ export const actions = {
 			});
 		}
 
-		const username = locals.user?.id;
+		const username = locals.user?.username;
 
 		if (username == null || username == '') {
 			redirect(302, SDS_LOGIN_URL);
