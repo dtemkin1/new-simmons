@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AppBar, getModeAutoPrefers } from '@skeletonlabs/skeleton';
+	import { AppBar } from '@skeletonlabs/skeleton';
 	import logo_black from '../assets/mit_logo/mit_logo_std_rgb_black.png?enhanced';
 	import logo_white from '../assets/mit_logo/mit_logo_std_rgb_white.png?enhanced';
 </script>
