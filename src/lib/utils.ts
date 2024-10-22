@@ -29,50 +29,51 @@ export function requireGroups(userGroups: string[], ...groups: string[]) {
 	return true;
 }
 
-// export function sdsSetReminder(
-// 	session: Session | null,
-// 	reminderName: string,
-// 	reminderMessage: string
-// ) {
-// 	if (!session?.data?.reminders) {
-// 		session!.data.reminders = {};
-// 	}
-// 	session!.data.reminders[reminderName] = reminderMessage;
-// }
+export function sdsSetReminder(/*session: Session | null, reminderName: string, reminderMessage: string */) {
+	// if (!session?.data?.reminders) {
+	// 	session!.data.reminders = {};
+	// }
+	// session!.data.reminders[reminderName] = reminderMessage;
+	throw error(500, 'Not implemented!');
+}
 
-// export function sdsClearReminder(session: Session | null, reminderName: string) {
-// 	if (!session) {
-// 		error(400, 'No session');
-// 	}
-// 	if (!session.data.reminders) {
-// 		session.data.reminders = {};
-// 	}
-// 	delete session.data.reminders[reminderName];
-// }
+export function sdsClearReminder(/*session: Session | null, reminderName: string*/) {
+	// if (!session) {
+	// 	error(400, 'No session');
+	// }
+	// if (!session.data.reminders) {
+	// 	session.data.reminders = {};
+	// }
+	// delete session.data.reminders[reminderName];
+	throw error(500, 'Not implemented!');
+}
 
-// export function sdsClearReminders(session: Session | null) {
-// 	if (!session) {
-// 		error(400, 'No session');
-// 	}
-// 	session.data.reminders = {};
-// }
+export function sdsClearReminders(/*session: Session | null*/) {
+	// if (!session) {
+	// 	error(400, 'No session');
+	// }
+	// session.data.reminders = {};
+	throw error(500, 'Not implemented!');
+}
 
-// export function sdsGetReminders(session: Session | null) {
-// 	if (!session) {
-// 		error(400, 'No session');
-// 	}
-// 	if (!session.data.reminders) {
-// 		session.data.reminders = {};
-// 	}
-// 	return session.data.reminders;
-// }
+export function sdsGetReminders(/*session: Session | null*/) {
+	// if (!session) {
+	// 	error(400, 'No session');
+	// }
+	// if (!session.data.reminders) {
+	// 	session.data.reminders = {};
+	// }
+	// return session.data.reminders;
+	throw error(500, 'Not implemented!');
+}
 
-// export function sdsGetReminder(session: Session | null, reminderName: string) {
-// 	if (!session) {
-// 		error(400, 'No session');
-// 	}
-// 	if (!session.data.reminders) {
-// 		session.data.reminders = {};
-// 	}
-// 	return session.data.reminders[reminderName];
-// }
+export function sdsGetReminder(/*session: Session | null, reminderName: string*/) {
+	// if (!session) {
+	// 	error(400, 'No session');
+	// }
+	// if (!session.data.reminders) {
+	// 	session.data.reminders = {};
+	// }
+	// return session.data.reminders[reminderName];
+	throw error(500, 'Not implemented!');
+}
