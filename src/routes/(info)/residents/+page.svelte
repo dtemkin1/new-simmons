@@ -102,7 +102,7 @@
     <p>Contact our Reservations Chair at <a class="anchor" href="mailto:simmons-reservations@mit.edu">
 	simmons-reservations@mit.edu</a> for more information.</p-->
 
-<h2 class="h2"><a class="anchor" href="{base}/loungebylaws">Lounge Bylaws</a></h2>
+<h2 class="h2"><a class="anchor" href="{base}/loungepolicies">Lounge Policies</a></h2>
 <p>
 	Contact our Social Chair at <a class="anchor" href="mailto:simmons-social@mit.edu">
 		simmons-social@mit.edu</a

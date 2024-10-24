@@ -1,4 +1,4 @@
-<h1 class="h1">Lounge Bylaws</h1>
+<h1 class="h1">Lounge Policies</h1>
 <p>
 	Contact the Social Chairs at <a class="anchor" href="mailto:simmons-social-chair@mit.edu">
 		simmons-social-chair@mit.edu</a

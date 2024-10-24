@@ -2,7 +2,7 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = () => {
 	return {
-		title: `Lounge Bylaws`,
+		title: `Lounge Policies`,
 		description: ``
 	};
 };
