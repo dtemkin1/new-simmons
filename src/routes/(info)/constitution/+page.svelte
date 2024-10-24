@@ -522,7 +522,9 @@
 							with the House Manager to accomplish tasks; (e) creating a frequent (at least monthly)
 							, publicly available sustainability report detailing the environmental impact of the
 							House; (f) creating initiatives to improve said sustainability report; (g) reporting
-							to the House Chair; (h) reporting regularly to the House.
+							to the House Chair; (h) reporting regularly to the House; (i) maintaining storage room
+							W79-031 (known as the Room of Requirement, or ROR) collaboratively with the House and
+							ensuring its cleanliness, usability, and organization.
 						</li>
 						<li>
 							The inventory reports consist of names of items, quantities, last checked dates,
