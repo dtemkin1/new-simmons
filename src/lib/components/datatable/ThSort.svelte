@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DataHandler } from '@vincjo/datatables';
+	import type { DataHandler } from '@vincjo/datatables/legacy';
 	import type { Snippet } from 'svelte';
 
 	interface Props {

@@ -17,7 +17,7 @@
 	let { data }: Props = $props();
 
 	//Import handler from SSD
-	import { DataHandler } from '@vincjo/datatables';
+	import { DataHandler } from '@vincjo/datatables/legacy';
 
 	//Init data handler - CLIENT
 	const handler = new DataHandler(data.body, { rowsPerPage: 10 });
