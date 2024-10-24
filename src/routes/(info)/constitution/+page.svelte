@@ -4,7 +4,7 @@
 </script>
 
 <h1 class="h1">The Constitution of Simmons Hall</h1>
-<p>Last updated February 18th, 2024</p>
+<p>Last updated October 6th, 2024</p>
 
 <TableOfContents regionLead="font-bold uppercase" />
 

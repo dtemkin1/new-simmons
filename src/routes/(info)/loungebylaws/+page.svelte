@@ -222,4 +222,5 @@
 	<li>Amended by the House Committee 05/14/2006</li>
 	<li>Amended by the House Committee 09/10/2006</li>
 	<li>Amended by the House Committee 11/24/2019</li>
+	<li>Amended by the House Committee 10/20/2024</li>
 </ul>
