@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 // import unserialize from 'locutus/php/var/unserialize';
 // import serialize from 'locutus/php/var/serialize';
 
-import type { Session } from './server/schema';
+import type { Session } from './server/auth';
 
 export function checkInGroup(groupName: string) {
 	return (userGroups: string[]) => {

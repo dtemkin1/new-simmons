@@ -2,17 +2,16 @@
 
 import { Okta } from 'arctic';
 import { env } from '$env/dynamic/private';
-import {
-	type User,
-	type Session,
-	sds_users_all as userTable,
-	sds_sessions as sessionTable
-} from './schema';
+import { sds_users_all as userTable, sds_sessions as sessionTable } from './schema';
 import { db } from '.';
 import { eq } from 'drizzle-orm';
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/encoding';
 import { sha256 } from '@oslojs/crypto/sha2';
 import type { RequestEvent } from '@sveltejs/kit';
+import type { InferSelectModel } from 'drizzle-orm';
+
+export type User = InferSelectModel<typeof userTable>;
+export type Session = InferSelectModel<typeof sessionTable>;
 
 export function generateSessionToken(): string {
 	const bytes = new Uint8Array(20);
