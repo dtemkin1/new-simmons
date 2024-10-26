@@ -1,6 +1,7 @@
 import { db } from '$lib/server';
 import { active_directory, directory, rooms } from '$lib/server/schema';
-import { requireGroups, sdsGetReminder, sdsGetReminders } from '$lib/utils';
+import { requireGroups } from '$lib/utils';
+import { sdsGetReminder, sdsGetReminders } from '$lib/server/sessionUtils';
 import { eq, sql } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
