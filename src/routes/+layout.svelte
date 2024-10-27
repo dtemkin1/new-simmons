@@ -1,10 +1,6 @@
 <script lang="ts">
 	import '../app.postcss';
-	import Footer from '$lib/components/Footer.svelte';
-	import Header from '$lib/components/Header.svelte';
 	import HeaderDrawer from '$lib/components/HeaderDrawer.svelte';
-	import DBSidebar from '$lib/components/DBSidebar.svelte';
-	import DBFooter from '$lib/components/DBFooter.svelte';
 
 	import { page } from '$app/stores';
 

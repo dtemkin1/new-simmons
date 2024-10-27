@@ -307,8 +307,8 @@
 		/>
 		<input type="hidden" name="room" value={room ?? ''} />
 		<input type="hidden" name="class_year" value={class_year ?? generated_class_year ?? ''} />
-		<input type="hidden" name="immortal" value={immortal ?? false ?? ''} />
-		<input type="hidden" name="hidden" value={hidden ?? false ?? ''} />
+		<input type="hidden" name="immortal" value={immortal ?? 'false'} />
+		<input type="hidden" name="hidden" value={hidden ?? 'false'} />
 		<button type="submit" bind:this={submit_button}>Submit</button>
 	</form>
 	<form
