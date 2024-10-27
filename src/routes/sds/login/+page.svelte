@@ -5,6 +5,12 @@
 	import { redirect } from '@sveltejs/kit';
 	import { base } from '$app/paths';
 
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
+
 	let error: boolean | null = null;
 
 	onMount(() => {
@@ -18,11 +24,7 @@
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import type { ToastSettings } from '@skeletonlabs/skeleton';
 	import { SDS_HOME_URL } from '$lib/config';
-	interface Props {
-		data: PageData;
-	}
-
-	let { data }: Props = $props();
+	import { page } from '$app/stores';
 
 	const toastStore = getToastStore();
 
@@ -116,12 +118,17 @@
 						type="password"
 					/>
 				</label>
+				<input type="hidden" name="redirect" value={$page.url.searchParams.get('redirect')} />
 				<button type="submit" class="btn variant-filled">Sign In with Credentials</button>
 			</form>
 			<hr />
 			<form class="flex flex-col grow">
-				<a href="{base}/auth/signin/okta" type="button" class="btn variant-filled-success"
-					>Sign In with Touchstone</a
+				<a
+					href="{base}/auth/signin/okta{$page.url.searchParams.get('redirect')
+						? '?redirect=' + $page.url.searchParams.get('redirect')
+						: ''}"
+					type="button"
+					class="btn variant-filled-success">Sign In with Touchstone</a
 				>
 			</form>
 		{/if}

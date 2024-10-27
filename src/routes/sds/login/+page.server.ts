@@ -60,6 +60,9 @@ export const actions = {
 		const session = await createSession(sessionToken, username, ipAddress, serialize({}) as string);
 		setSessionTokenCookie(event, sessionToken, session.expires);
 
+		if (formData.has('redirect')) {
+			redirect(302, new URL(formData.get('redirect') as string, event.url.origin).pathname);
+		}
 		redirect(302, SDS_HOME_URL);
 	},
 	logout: async (event) => {

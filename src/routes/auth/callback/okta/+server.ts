@@ -58,6 +58,17 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		const session = await createSession(sessionToken, username, ipAddress, serialize({}) as string);
 		setSessionTokenCookie(event, sessionToken, session.expires);
 
+		const storedRedirect = event.cookies.get('okta_post_redirect');
+
+		if (storedRedirect) {
+			return new Response(null, {
+				status: 302,
+				headers: {
+					Location: new URL(storedRedirect, event.url.origin).pathname
+				}
+			});
+		}
+
 		return new Response(null, {
 			status: 302,
 			headers: {

@@ -26,5 +26,15 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		sameSite: 'lax'
 	});
 
+	if (event.url.searchParams.has('redirect')) {
+		event.cookies.set('okta_post_redirect', event.url.searchParams.get('redirect') ?? '', {
+			path: '/',
+			secure: import.meta.env.PROD,
+			httpOnly: true,
+			maxAge: 60 * 10,
+			sameSite: 'lax'
+		});
+	}
+
 	redirect(302, url.toString());
 }
