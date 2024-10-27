@@ -2,22 +2,28 @@
 	let { children } = $props();
 
 	import backgroundImg from '$lib/assets/bg.jpg?enhanced';
+	import Header from '$lib/components/Header.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 </script>
 
-<div class="h-full w-full img-bg" style="--background-image: url({backgroundImg.img.src});">
-	<div class="container h-full mx-auto flex justify-center items-center">
-		<div class="card p-8 m-8 space-y-4 max-w-5xl bg-surface-50-900-token">
-			{@render children()}
-		</div>
-	</div>
-</div>
+<enhanced:img
+	src={backgroundImg}
+	class="min-h-screen min-w-screen fixed -z-10 select-none"
+	alt="Outside of Simmons Hall in greyscale"
+/>
 
-<style>
-	:global(.img-bg) {
-		background-image: var(--background-image);
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-</style>
+<div class="grid h-full w-full grid-rows-[auto_1fr_auto] bg-transparent">
+	<!-- Header -->
+	<header class="fixed w-full top-0 z-10"><Header /></header>
+	<!-- Spacer for the header -->
+	<div class="h-[80px]"></div>
+
+	<!-- Main -->
+	<div class="container h-full mx-auto flex justify-center items-center">
+		<main class="card p-8 m-8 space-y-4 max-w-5xl bg-surface-50-900-token">
+			{@render children()}
+		</main>
+	</div>
+	<!-- Footer -->
+	<footer><Footer /></footer>
+</div>
