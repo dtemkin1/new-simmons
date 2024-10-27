@@ -1,13 +1,20 @@
 <script lang="ts">
+	import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img';
 	import { ArrowLeft } from 'lucide-svelte';
 	import { ArrowRight } from 'lucide-svelte';
 
 	let elemCarousel: HTMLDivElement | undefined = $state();
 
-	const imagesGlob: Record<string, string> = import.meta.glob('$lib/assets/carousel/image*.jpg', {
-		import: 'default',
-		eager: true
-	});
+	const imagesGlob: Record<string, EnhancedImgAttributes['src']> = import.meta.glob(
+		'$lib/assets/carousel/image*.jpg',
+		{
+			import: 'default',
+			eager: true,
+			query: {
+				enhanced: true
+			}
+		}
+	);
 
 	const images = [
 		{
@@ -115,7 +122,7 @@
 	>
 		{#each images as image}
 			<div class="snap-center rounded-container-token relative flex shrink-0 w-fit">
-				<img class="w-full" src={image.image} alt={image.title} loading="lazy" />
+				<enhanced:img class="w-full overflow-y-hidden" src={image.image} alt={image.title} />
 				<div class="absolute bottom-0 px-4 py-3 bg-surface-backdrop-token w-full">
 					<p class="text-sm font-bold text-on-surface-token">{image.title}</p>
 					<p class="text-sm text-on-surface-token">{@html image.description}</p>
