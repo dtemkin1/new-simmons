@@ -122,7 +122,7 @@
 <h2 class="h2"><a class="anchor" href="{base}/videos">Simmons Videos</a></h2>
 <p>Watch our old i3's and other videos we've made over the years.</p>
 
-<!--h2><a class="anchor" href="http://www.youtube.com/watch?v=u5kVxB63xEY">Simmons Anthem</a></h2>
+<!--h2><a class="anchor" href="http://www.youtube-nocookie.com/watch?v=u5kVxB63xEY">Simmons Anthem</a></h2>
     <p>The official anthem of Simmons Hall, the best undergraduate dormitory at the Massachusetts
     Institute of Technology, performed by our unbelievably charismatic resident vocalist Zach
     Tomlinson.</p-->

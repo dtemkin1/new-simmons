@@ -4,7 +4,7 @@
 
 <iframe
 	class="h-full aspect-video max-w-full rounded-container-token w-[720px] border-0"
-	src="https://www.youtube.com/embed/I8srdQN3FYg?si=S8XKefVEezeJpQN0"
+	src="https://www.youtube-nocookie.com/embed/I8srdQN3FYg?si=S8XKefVEezeJpQN0"
 	title="YouTube video player"
 	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 	referrerpolicy="strict-origin-when-cross-origin"
