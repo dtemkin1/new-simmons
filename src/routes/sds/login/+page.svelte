@@ -11,13 +11,9 @@
 
 	let { data }: Props = $props();
 
-	let error: boolean | null = null;
+	let error: boolean | null = $state(null);
 
-	onMount(() => {
-		if (data.auto) {
-			redirect(302, `${base}/sds/login/petrock`);
-		}
-	});
+	$inspect($page.form);
 
 	import type { ActionResult } from '@sveltejs/kit';
 
@@ -32,11 +28,13 @@
 		let resultToast: ToastSettings;
 
 		if (result.type == 'success') {
+			error = false;
 			resultToast = {
 				message: `${result.data?.message}` || '',
 				background: 'variant-filled-success'
 			};
 		} else if (result.type == 'failure') {
+			error = true;
 			resultToast = {
 				message: `${result.data?.message}` || '',
 				background: 'variant-filled-error'
@@ -46,6 +44,7 @@
 				result.location == SDS_HOME_URL ||
 				result.location == $page.url.searchParams.get('redirect')
 			) {
+				error = false;
 				resultToast = {
 					message: 'Successfully logged in!',
 					background: 'variant-filled-success'

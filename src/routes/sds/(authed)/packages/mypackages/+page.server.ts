@@ -25,7 +25,8 @@ export const load: PageServerLoad = async ({ parent }) => {
 			num_perishable: sum(subquery.perishable_count),
 			earliest_sure: min(subquery.latest_checkin)
 		})
-		.from(subquery);
+		.from(subquery)
+		.limit(1);
 
 	// const packages = pool.one(
 	// 	sql.typeAlias(
