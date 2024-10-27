@@ -42,7 +42,10 @@
 				background: 'variant-filled-error'
 			};
 		} else if (result.type == 'redirect') {
-			if (result.location == SDS_HOME_URL) {
+			if (
+				result.location == SDS_HOME_URL ||
+				result.location == $page.url.searchParams.get('redirect')
+			) {
 				resultToast = {
 					message: 'Successfully logged in!',
 					background: 'variant-filled-success'
