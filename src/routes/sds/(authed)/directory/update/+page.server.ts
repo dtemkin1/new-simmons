@@ -5,6 +5,7 @@ import { sdsGetReminder, sdsGetReminders } from '$lib/server/sessionUtils';
 import { eq, sql } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
+import DOMPurify from 'isomorphic-dompurify';
 
 export const actions = {
 	default: async ({ request, locals }) => {
@@ -17,7 +18,7 @@ export const actions = {
 		const home_city = (data.get('home_city') as string | null) ?? '';
 		const home_state = (data.get('home_state') as string | null) ?? '';
 		const home_country = (data.get('home_country') as string | null) ?? '';
-		const quote = (data.get('quote') as string | null) ?? '';
+		const quote = DOMPurify.sanitize((data.get('quote') as string | null) ?? ''); // Sanitize the quote!
 		const favorite_category = (data.get('favorite_category') as string | null) ?? '';
 		const favorite_value = (data.get('favorite_value') as string | null) ?? '';
 		const showreminders = (data.get('showreminders') as boolean | null) ?? false;
