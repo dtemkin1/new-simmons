@@ -8,7 +8,7 @@
 
 <enhanced:img
 	src={backgroundImg}
-	class="min-h-screen min-w-screen fixed -z-10 select-none"
+	class="min-h-screen min-w-screen fixed -z-10 select-none object-cover"
 	alt="Outside of Simmons Hall in greyscale"
 />
 
