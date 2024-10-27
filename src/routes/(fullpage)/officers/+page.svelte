@@ -2,10 +2,8 @@
 	import PeopleTile from '$lib/components/PeopleTile.svelte';
 </script>
 
-<div class="h-full w-full overflow-auto">
-	<div
-		class="md:grid-cols-10 max-md:grid-rows-10 max-md:grid-flow-col grid gap-x-4 gap-y-12 p-4 w-full h-full"
-	>
+<div class="h-full w-screen overflow-auto">
+	<div class="md:grid-cols-10 max-md:grid-rows-10 max-md:grid-flow-col grid gap-x-4 gap-y-12 p-4">
 		<!-- ROW 1 -->
 		<PeopleTile office="hoh" />
 		<PeopleTile office="associate_hoh" />

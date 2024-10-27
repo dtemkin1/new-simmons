@@ -98,7 +98,7 @@
 
 <a
 	href="https://www.youtube.com/playlist?list=PLF877AC8074471EBF"
-	class="btn variant-filled-primary"
+	class="btn variant-filled-primary w-full"
 >
-	(Some Simmons i3 videos from ancient history)
+	Watch i3 videos from Simmons history!
 </a>

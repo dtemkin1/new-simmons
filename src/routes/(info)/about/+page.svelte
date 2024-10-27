@@ -111,11 +111,11 @@
 	<!-- Full Images -->
 	<div
 		bind:this={elemCarousel}
-		class="snap-x snap-mandatory scroll-smooth flex g-0 overflow-x-hidden max-w-[800px] aspect-[8/5] rounded-container-token"
+		class="snap-x snap-mandatory scroll-smooth flex overflow-x-auto max-w-[800px] aspect-[8/5] rounded-container-token"
 	>
 		{#each images as image}
 			<div class="snap-center rounded-container-token relative flex shrink-0 w-fit">
-				<img class="w-full" src={image.image} alt={image.title} />
+				<img class="w-full" src={image.image} alt={image.title} loading="lazy" />
 				<div class="absolute bottom-0 px-4 py-3 bg-surface-backdrop-token w-full">
 					<p class="text-sm font-bold text-on-surface-token">{image.title}</p>
 					<p class="text-sm text-on-surface-token">{@html image.description}</p>

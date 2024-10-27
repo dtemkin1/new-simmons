@@ -5,7 +5,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 </script>
 
-<div class="grid h-full w-full grid-rows-[auto_1fr_auto] bg-transparent">
+<div class="grid h-full w-full grid-rows-[auto_1fr_auto] bg-transparent overflow-x-hidden">
 	<!-- Header -->
 	<header class="sticky top-0 z-10"><Header /></header>
 	<!-- Main -->

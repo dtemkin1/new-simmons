@@ -20,7 +20,7 @@
 
 	<!-- Main -->
 	<div class="container h-full mx-auto flex justify-center items-center">
-		<main class="card p-8 m-8 space-y-4 max-w-5xl bg-surface-50-900-token">
+		<main class="rounded-token p-8 m-4 space-y-4 max-w-5xl bg-surface-50-900-token">
 			{@render children()}
 		</main>
 	</div>
