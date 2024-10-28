@@ -2,7 +2,8 @@
 	<p>
 		If you would like to reserve a room, fill out <a
 			class="anchor"
-			href="https://forms.gle/AAATZyGkxyz5KVYE7">this Google form.</a
+			href="https://docs.google.com/forms/d/e/1FAIpQLSdRRbrEzUpdnS4ziy0nQf-DPG6m6gp5FXXe0mO5j75PR9nyaQ/viewform"
+			>this Google form.</a
 		>
 	</p>
 
