@@ -78,23 +78,21 @@ export const load: PageServerLoad = async ({ parent, locals }) => {
 	// 	'active_directory'
 	// )`SELECT * FROM active_directory WHERE username=${username ?? ''}`;
 
-	const result = db.transaction(async (tsx) => {
-		const resident = (
-			await tsx
-				.select()
-				.from(active_directory)
-				.where(eq(active_directory.username, username ?? ''))
-		)[0];
+	const result = db
+		.select()
+		.from(active_directory)
+		.where(eq(active_directory.username, username ?? ''))
+		.then(async (residentQuery) => {
+			const resident = residentQuery[0];
+			const phones = (
+				await db
+					.select({ phone1: rooms.phone1, phone2: rooms.phone2 })
+					.from(rooms)
+					.where(eq(rooms.room, sql`${resident.room}`))
+			)[0];
 
-		const phones = (
-			await tsx
-				.select({ phone1: rooms.phone1, phone2: rooms.phone2 })
-				.from(rooms)
-				.where(eq(rooms.room, sql`${resident.room}`))
-		)[0];
-
-		return { ...resident, ...phones };
-	});
+			return { ...resident, ...phones };
+		});
 
 	// const result = pool.transaction(async (connection) => {
 	// 	const resident = await connection.one(query);

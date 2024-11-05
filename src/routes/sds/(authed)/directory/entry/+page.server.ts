@@ -54,60 +54,59 @@ export const load: PageServerLoad = async ({ parent, url }) => {
 	// 	sql.typeAlias('gra')`SELECT DISTINCT gra FROM rooms WHERE LENGTH(TRIM(gra))>0 ORDER BY gra`
 	// );
 
-	const user = db.transaction(async (tsx) => {
-		const userQuery = tsx
-			.select({
-				username: directory.username,
-				room: directory.room,
-				email: directory.email,
-				lastname: directory.lastname,
-				firstname: directory.firstname,
-				title: directory.title,
-				phone: directory.phone,
-				year: directory.year,
-				type: directory.type,
-				quote: directory.quote,
-				favorite_category: directory.favorite_category,
-				favorite_value: directory.favorite_value,
-				cellphone: directory.cellphone,
-				homepage: directory.homepage,
-				home_city: directory.home_city,
-				home_state: directory.home_state,
-				home_country: directory.home_country
-			})
-			.from(directory)
-			.where(eq(directory.username, username));
+	const user = db
+		.select({
+			username: directory.username,
+			room: directory.room,
+			email: directory.email,
+			lastname: directory.lastname,
+			firstname: directory.firstname,
+			title: directory.title,
+			phone: directory.phone,
+			year: directory.year,
+			type: directory.type,
+			quote: directory.quote,
+			favorite_category: directory.favorite_category,
+			favorite_value: directory.favorite_value,
+			cellphone: directory.cellphone,
+			homepage: directory.homepage,
+			home_city: directory.home_city,
+			home_state: directory.home_state,
+			home_country: directory.home_country
+		})
+		.from(directory)
+		.where(eq(directory.username, username))
+		.then(async (userQuery) => {
+			const userPreliminary = userQuery[0];
 
-		const userPreliminary = (await userQuery)[0];
+			const typeGen =
+				userPreliminary?.type && userPreliminary.type !== 'U'
+					? ((
+							await db
+								.select({ description: user_types.description })
+								.from(user_types)
+								.where(eq(user_types.type, userPreliminary.type))
+						)[0].description ?? '')
+					: '';
 
-		const typeGen =
-			userPreliminary?.type && userPreliminary.type !== 'U'
-				? ((
-						await tsx
-							.select({ description: user_types.description })
-							.from(user_types)
-							.where(eq(user_types.type, userPreliminary.type))
-					)[0].description ?? '')
-				: '';
+			const graGen =
+				userPreliminary?.room && userPreliminary.room !== ''
+					? ((
+							await db
+								.select({ gra: rooms.gra })
+								.from(rooms)
+								.where(eq(rooms.room, userPreliminary.room))
+						)[0].gra ?? '')
+					: '';
 
-		const graGen =
-			userPreliminary?.room && userPreliminary.room !== ''
-				? ((
-						await tsx
-							.select({ gra: rooms.gra })
-							.from(rooms)
-							.where(eq(rooms.room, userPreliminary.room))
-					)[0].gra ?? '')
-				: '';
-
-		if (userPreliminary != null) {
-			userPreliminary.type = typeGen;
-			const userWithGra = { gra: graGen, ...userPreliminary };
-			return userWithGra;
-		} else {
-			return null;
-		}
-	});
+			if (userPreliminary != null) {
+				userPreliminary.type = typeGen;
+				const userWithGra = { gra: graGen, ...userPreliminary };
+				return userWithGra;
+			} else {
+				return null;
+			}
+		});
 
 	// const user = pool.transaction(async (connection) => {
 	// 	const userQuery = sql.typeAlias('user')`
