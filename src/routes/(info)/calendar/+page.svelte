@@ -1,7 +1,7 @@
 <p>
 	To reserve a space, please fill out the following <a
 		class="anchor"
-		href="https://docs.google.com/forms/d/e/1FAIpQLSdRRbrEzUpdnS4ziy0nQf-DPG6m6gp5FXXe0mO5j75PR9nyaQ/viewform"
+		href="https://docs.google.com/forms/d/e/1FAIpQLSfkty3MZWQlQmZbkCQJ3DLjwbRInShiQGaX_GVMSEWq4os5xA/viewform"
 		>form</a
 	>. If there are any issues, please contact our Reservations Chair at
 	<a class="anchor" href="mailto:simmons-reservations@mit.edu">simmons-reservations@mit.edu</a>.
