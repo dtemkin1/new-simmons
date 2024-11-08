@@ -20,8 +20,8 @@
 </script>
 
 {#if userData}
-	<div class="table-container">
-		<table class="table table-compact table-hover table-interactive">
+	<div class="table-wrap">
+		<table class="table">
 			<thead>
 				<tr>
 					{#each dataToUse as [_key, value]}
@@ -29,12 +29,13 @@
 					{/each}
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="hover:[&>tr]:preset-tonal-primary">
 				{#each userData as row}
 					<tr
 						onclick={() => goto(`${SDS_BASE}/directory/entry?username=${row.username ?? ''}`)}
 						onmouseenter={() => preloadUserEntry(row.username ?? '')}
 						ontouchstart={() => preloadUserEntry(row.username ?? '')}
+						class="cursor-pointer"
 					>
 						{#each dataToUse as [key, _value]}
 							<td>{row[key] ?? ''}</td>

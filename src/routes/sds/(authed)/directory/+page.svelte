@@ -2,13 +2,13 @@
 <script lang="ts">
 	import type { ActionData, PageData } from './$types';
 
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { ProgressRing, type ToastContext } from '@skeletonlabs/skeleton-svelte';
 	import DirectorySearch from '$lib/components/DirectorySearch.svelte';
 	import PeopleTable from '$lib/components/PeopleTable.svelte';
 
-	import { getToastStore } from '@skeletonlabs/skeleton';
-	import type { ToastSettings } from '@skeletonlabs/skeleton';
+	import { getContext } from 'svelte';
 	import type { ActionResult } from '@sveltejs/kit';
+
 	interface Props {
 		form: ActionData;
 		data: PageData;
@@ -16,40 +16,35 @@
 
 	let { form, data }: Props = $props();
 
-	const toastStore = getToastStore();
+	export const toast: ToastContext = getContext('toast');
 
 	function toastHandler(result: ActionResult) {
-		let resultToast: ToastSettings;
-
 		if (result.type == 'success') {
-			resultToast = {
-				message: `${result.data?.data.length ?? 'Multiple'} users matched your query.`,
-				background: 'variant-filled-success'
-			};
+			toast.create({
+				description: `${result.data?.data.length ?? 'Multiple'} users matched your query.`,
+				type: 'success'
+			});
 		} else if (result.type == 'failure') {
-			resultToast = {
-				message: 'Simmons Directory is very unhappy. No results found.',
-				background: 'variant-filled-error'
-			};
+			toast.create({
+				description: 'Simmons Directory is very unhappy. No results found.',
+				type: 'error'
+			});
 		} else if (result.type == 'redirect') {
-			resultToast = {
-				message: 'User found!',
-				background: 'variant-filled-success'
-			};
+			toast.create({
+				description: 'User found!',
+				type: 'success'
+			});
 		} else {
-			resultToast = {
-				message: 'Unknown form result',
-				background: 'variant-filled'
-			};
+			toast.create({
+				description: 'Unknown form result'
+			});
 		}
-
-		toastStore.trigger(resultToast);
 	}
 </script>
 
-<div class="flex items-center justify-center h-full flex-col w-full p-4 space-y-4">
+<div class="flex h-full w-full flex-col items-center justify-center space-y-4 p-4">
 	{#await Promise.all([data.years, data.lounges, data.gras])}
-		<div class="p-4"><ProgressRadial /></div>
+		<div class="p-4"><ProgressRing value={null} /></div>
 	{:then [years, lounges, gras]}
 		<PeopleTable
 			userData={form?.data}

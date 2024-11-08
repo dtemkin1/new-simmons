@@ -20,17 +20,19 @@
 	Institute, and we can't wait to show you why.
 </p>
 
-<div class="flex items-center justify-center flex-col">
-	<div class="max-w-[720px] w-full h-full space-y-4">
+<div class="flex flex-col items-center justify-center">
+	<div class="h-full w-full max-w-[720px] space-y-4">
 		<iframe
-			class="h-full aspect-video max-w-full rounded-container-token w-[720px] border-0"
+			class="aspect-video h-full w-[720px] max-w-full rounded-container border-0"
 			src="https://www.youtube-nocookie.com/embed/I8srdQN3FYg?si=S8XKefVEezeJpQN0"
 			title="YouTube video player"
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 			referrerpolicy="strict-origin-when-cross-origin"
 			allowfullscreen
 		></iframe>
-		<a href="{base}/videos" class="btn variant-filled-primary w-full">Watch more Simmons videos!</a>
+		<a href="{base}/videos" class="btn w-full preset-filled-primary-500"
+			>Watch more Simmons videos!</a
+		>
 	</div>
 </div>
 
@@ -39,8 +41,8 @@
 	<h2 class="h2">
 		{date}
 	</h2>
-	<div class="table-container">
-		<table class="table table-compact table-hover">
+	<div class="table-wrap">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>Time</th>
@@ -48,7 +50,7 @@
 					<th>Location</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="hover:[&>tr]:preset-tonal-primary">
 				{#each events as row}
 					<tr>
 						<td class="!whitespace-normal"

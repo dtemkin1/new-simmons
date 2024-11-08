@@ -20,7 +20,7 @@
 </script>
 
 <form
-	class="card p-8 flex flex-col space-y-4"
+	class="card flex flex-col space-y-4 border p-4 border-surface-200-800 preset-filled-surface-100-900"
 	method="POST"
 	use:enhance={enhanceFunc}
 	action={actionLocation}
@@ -28,27 +28,27 @@
 >
 	<h2 class="h2 self-center text-center">Simmons Hall Directory</h2>
 	<label class="label">
-		<span>Firstname</span>
+		<span class="label-text">Firstname</span>
 		<input class="input" name="firstname" type="search" autocomplete="given-name" />
 	</label>
 	<label class="label">
-		<span>Lastname</span>
+		<span class="label-text">Lastname</span>
 		<input class="input" name="lastname" type="search" autocomplete="family-name" />
 	</label>
 	<label class="label">
-		<span>Title</span>
+		<span class="label-text">Title</span>
 		<input class="input" name="title" type="search" autocomplete="honorific-prefix" />
 	</label>
 	<label class="label">
-		<span>Username</span>
+		<span class="label-text">Username</span>
 		<input class="input" name="username" type="search" autocomplete="username" />
 	</label>
 	<label class="label">
-		<span>Room</span>
+		<span class="label-text">Room</span>
 		<input class="input" name="room" type="search" />
 	</label>
 	<label class="label">
-		<span>Year</span>
+		<span class="label-text">Year</span>
 		<select class="select" name="year">
 			<option selected value="">[Any]</option>
 			{#each data.years as year}
@@ -58,7 +58,7 @@
 		</select>
 	</label>
 	<label class="label">
-		<span>Lounge</span>
+		<span class="label-text">Lounge</span>
 		<select class="select" name="lounge">
 			<option selected value="">[Any]</option>
 			{#each data.lounges as lounge}
@@ -67,7 +67,7 @@
 		</select>
 	</label>
 	<label class="label">
-		<span>GRA</span>
+		<span class="label-text">GRA</span>
 		<select class="select" name="gra">
 			<option selected value="">[Any]</option>
 			{#each data.gras as gra}
@@ -75,7 +75,7 @@
 			{/each}
 		</select>
 	</label>
-	<button class="btn variant-filled-success">Search</button>
+	<button class="btn preset-filled-success-500">Search</button>
 	<p>
 		Enter data in any or all of the above fields. <code class="code">%</code> matches anything -
 		e.g. username <code class="code">dram%</code> matches <code class="code">dramage</code>.

@@ -35,14 +35,14 @@
 
 <h1 class="h1">Resident Scholar Program</h1>
 <div
-	class="btn-group-vertical lg:btn-group variant-filled justify-center w-full lg:w-min self-center"
+	class="btn-group-vertical w-full justify-center self-center preset-filled lg:btn-group lg:w-min"
 >
 	{#each pages as page}
 		<a
 			type="button"
 			href={page.url}
-			class:!variant-filled-primary={page.url === current_page}
-			class:hover:variant-soft-primary={page.url !== current_page}
+			class:!preset-filled-primary-500={page.url === current_page}
+			class:hover:preset-tonal-primary-500={page.url !== current_page}
 		>
 			{page.name}
 		</a>

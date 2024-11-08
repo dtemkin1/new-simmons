@@ -7,10 +7,10 @@
 	<a class="anchor" href="mailto:simmons-reservations@mit.edu">simmons-reservations@mit.edu</a>.
 </p>
 
-<div class="relative w-full h-96">
+<div class="relative h-96 w-full">
 	<iframe
 		src="https://calendar.google.com/calendar/embed?src=q7grvgnsuk3hoh1o28srmi672k%40group.calendar.google.com&ctz=America%2FNew_York"
-		class="absolute top-0 left-0 w-full h-full border-none rounded-container-token"
+		class="absolute left-0 top-0 h-full w-full rounded-container border-none"
 		aria-hidden="false"
 		title="Simmons Reservations"
 	></iframe>

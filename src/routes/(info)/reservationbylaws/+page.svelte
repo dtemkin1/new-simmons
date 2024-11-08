@@ -4,14 +4,14 @@
 		simmons-reservations@mit.edu</a
 	> for more information.
 </p>
-<hr />
-<ol class="list-decimal list-outside ml-6 py-2">
+<hr class="hr" />
+<ol class="ml-6 list-outside list-decimal py-2">
 	<li>
 		The Reservation Chair will deal with public space reservations. Public spaces are found on the
 		first floor and east side of the second floor. Specifically, the reservation chair will
 		coordinate reservations of the multi-purpose Room (MPR), dining room, conference room, 2nd floor
 		study area, Athena lounge, mailbox lounge, night caf&eacute; lounge, and kitchen.
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				The night caf&eacute; business must be informed of reservations in the night caf&eacute;
 				lounge during operating times.
@@ -25,7 +25,7 @@
 	<li>
 		Reservations will be taken from the following types of groups and approved by the indicated
 		party.
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				Simmons only: Reservation Chair unless the event is large or long*, in which case the House
 				Committee.
@@ -44,7 +44,7 @@
 			</li>
 			<li>
 				No MIT group affiliation
-				<ol class="list-decimal list-outside ml-6 py-2">
+				<ol class="ml-6 list-outside list-decimal py-2">
 					<li>
 						Simmons resident requesting reservation: Reservation Chair unless the event is large or
 						long, in which case the House Committee.
@@ -62,7 +62,7 @@
 	</li>
 	<li>
 		Advance reservations
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				Events organized by official MIT groups (e.g., alumni organization, administration) and
 				Simmons government or house-team member sponsored events can be made up to one year in
@@ -88,7 +88,7 @@
 	</li>
 	<li>
 		Spontaneous use
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				Individuals and groups (less than 50 people) led by a Simmons resident who will be present
 				throughout the event can use any of the available reservable spaces. Larger spontaneous
@@ -100,7 +100,7 @@
 	</li>
 	<li>
 		Prohibited reservation times
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				Reservation requests for events that take place during campus preview weekend, Rush, REX, or
 				freshman orientation should be rejected unless they are FOR these programs.
@@ -119,7 +119,7 @@
 	</li>
 	<li>
 		Fees and forms
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				Costs related to setup/breakdown labor, housekeeping, and damages will be charged to the
 				responsible person or group by the Simmons Hall House Manager.
@@ -144,7 +144,7 @@
 	</li>
 	<li>
 		Notices
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				A list of reservations should be posted online and at desk. Reasonable effort should be made
 				to ensure that the notices are current.
@@ -152,12 +152,12 @@
 		</ol>
 	</li>
 </ol>
-<hr />
+<hr class="hr" />
 <p>
 	These are guidelines and will not cover every eventuality. The Reservation Chair and Committee
 	should use their best judgment or consult the House Committee when these bylaws are insufficient.
 </p>
-<ul class="list-disc list-outside ml-6 py-2">
+<ul class="ml-6 list-outside list-disc py-2">
 	<li>
 		Formulated by: Julian Caballero, Nupur Garg, Katherine Leskin, Andrew Lukmann, and Alison
 		Taylor. Fall 2004

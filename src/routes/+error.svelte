@@ -10,7 +10,7 @@
 	}
 </script>
 
-<div class="h-full w-full flex flex-col space-y-2 justify-center items-center text-center">
+<div class="flex h-full w-full flex-col items-center justify-center space-y-2 text-center">
 	<h1 class="h1">
 		{$page.status}: {$page.error?.message}
 		<span>😔</span>
@@ -18,7 +18,7 @@
 	{#if $page.status === 404}
 		<p>Sorry, but the page you were trying to view does not exist.</p>
 		<p>It looks like this was the result of either:</p>
-		<ul class="list-disc list-outside ml-6 py-2">
+		<ul class="ml-6 list-outside list-disc py-2">
 			<li>a mistyped address</li>
 			<li>an out-of-date link</li>
 		</ul>

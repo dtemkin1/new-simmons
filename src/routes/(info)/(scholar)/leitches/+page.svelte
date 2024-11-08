@@ -2,7 +2,7 @@
 <img
 	src="https://essigmann.mit.edu/sites/default/files/images/Bill%20and%20Betsy.jpg"
 	alt="Bill and Betsy Leitch"
-	class="self-center h-80"
+	class="h-80 self-center"
 />
 
 <p>

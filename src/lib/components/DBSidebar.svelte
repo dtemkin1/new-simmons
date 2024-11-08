@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AppRail, AppRailAnchor, AppRailTile } from '@skeletonlabs/skeleton';
+	import { Nav } from '@skeletonlabs/skeleton-svelte';
 
 	interface Props {
 		username: string | null;
@@ -16,11 +16,11 @@
 
 	onNavigate((params) => {
 		if (params.to?.url.pathname.includes('/sds')) {
-			currentTile = 0;
+			currentTile = '';
 		}
 	});
 
-	let currentTile = $state(0);
+	let currentTile = $state('');
 	let userLinks: typeof sdsLinks = $derived(
 		sdsLinks.reduce(
 			(acc, linkGroup) => {
@@ -47,61 +47,53 @@
 	);
 </script>
 
-<div class="h-full flex flex-row">
+<div class="flex h-full flex-row">
 	{#if $page.data.username}
-		<AppRail>
-			{#snippet lead()}
+		<Nav bind:value={currentTile}>
+			{#snippet tiles()}
 				{#each userLinks as tileLinks}
 					{#if tileLinks.links.length > 0}
 						{@const Icon = tileLinks.icon}
-						<AppRailTile
-							bind:group={currentTile}
-							name={tileLinks.id}
-							value={tileLinks.value}
+						<Nav.Tile
+							id={tileLinks.value}
 							title={tileLinks.id}
 							onclick={() => {
 								if (currentTile == tileLinks.value) {
-									currentTile = 0;
+									currentTile = '';
 								}
 							}}
+							label={tileLinks.name}
 						>
-							{#snippet lead()}
-								<div class="flex justify-center items-center">
-									<Icon size={'1.5rem'}></Icon>
-								</div>
-							{/snippet}
-							<span>{tileLinks.name}</span>
-						</AppRailTile>
+							<Icon />
+						</Nav.Tile>
 					{/if}
 				{/each}
 			{/snippet}
-			{#snippet trail()}
-				<AppRailAnchor href={SDS_LOGIN_URL} title="Account"
-					>{#snippet lead()}
-						<CircleUser size={'1.5rem'} />
-					{/snippet}{username ?? 'Guest'}</AppRailAnchor
-				>
+			{#snippet footer()}
+				<Nav.Tile href={SDS_LOGIN_URL} title="Account" label={username ?? 'Guest'}>
+					<CircleUser />
+				</Nav.Tile>
 			{/snippet}
-		</AppRail>
-		{#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}
-			<section class="p-4 space-y-4 md:w-72 w-screen bg-surface-100-800-token">
-				<nav class="list-nav md:pr-0 pr-20">
+		</Nav>
+		{#if Number(currentTile) !== 0 && userLinks[Number(currentTile) - 1].links.length > 0}
+			<section class="w-screen space-y-4 p-4 bg-surface-100-900 md:w-72">
+				<nav class="list-nav pr-20 md:pr-0">
 					<ul>
 						{#each activeGroup.links as link}
 							<li>
 								<a
 									href={link.href}
-									class="whitespace-normal text-left btn"
-									class:!bg-primary-active-token={link.href === $page.url.pathname}
+									class="btn whitespace-normal text-left"
+									class:!bg-primary-active={link.href === $page.url.pathname}
 									class:pointer-events-none={link.badge === 'Incomplete'}
 									class:opacity-50={link.badge === 'Incomplete'}
 									aria-disabled={link.badge === 'Incomplete'}
 								>
 									<span class="flex-auto">{link.label}</span>
 									{#if link.badge}<span
-											class="badge variant-filled-secondary"
-											class:variant-filled-error={link.badge == 'Incomplete'}
-											class:variant-filled-warning={link.badge == 'Work in Progress'}
+											class="badge preset-filled-secondary-500"
+											class:preset-filled-error-500={link.badge == 'Incomplete'}
+											class:preset-filled-warning-500={link.badge == 'Work in Progress'}
 											>{link.badge}</span
 										>{/if}
 								</a>

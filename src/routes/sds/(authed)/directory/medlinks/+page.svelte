@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 	import { base } from '$app/paths';
 
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { ProgressRing } from '@skeletonlabs/skeleton-svelte';
 	import PeopleTable from '$lib/components/PeopleTable.svelte';
 	interface Props {
 		data: PageData;
@@ -12,12 +12,12 @@
 </script>
 
 {#await data.medlinks}
-	<div class="flex items-center justify-center h-full flex-col w-full p-4">
-		<div class="p-4"><ProgressRadial /></div>
+	<div class="flex h-full w-full flex-col items-center justify-center p-4">
+		<div class="p-4"><ProgressRing value={null} /></div>
 	</div>
 {:then medlinks}
-	<div class="flex items-center justify-start h-full flex-col w-full p-4">
-		<h2 class="h2 text-center p-2">Medlinks</h2>
+	<div class="flex h-full w-full flex-col items-center justify-start p-4">
+		<h2 class="h2 p-2 text-center">Medlinks</h2>
 		<p class="text-center">
 			Medlinks serve as liaisons between undergraduate students and MIT Medical. They can answer
 			questions about MIT Medical's policies and services and can help you figure out when and how
@@ -31,7 +31,7 @@
 			>.
 		</p>
 		{#if data.groups.includes('ADMINISTRATORS')}
-			<p class="text-center pb-2">
+			<p class="pb-2 text-center">
 				<a class="anchor" href="{base}/sds/directory/medlink_setup">Edit List</a>
 				<!-- TODO: MAKE MEDLINK SETUP PAGE -->
 			</p>

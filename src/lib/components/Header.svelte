@@ -1,33 +1,37 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { AppBar, LightSwitch, getDrawerStore } from '@skeletonlabs/skeleton';
+	// import { AppBar, LightSwitch, getDrawerStore } from '@skeletonlabs/skeleton-svelte';
+	import { AppBar } from '@skeletonlabs/skeleton-svelte';
+	import LightSwitch from '$lib/components/LightSwitch.svelte';
 	import { Menu } from 'lucide-svelte';
-	import type { DrawerSettings } from '@skeletonlabs/skeleton';
+	// import type { DrawerSettings } from '@skeletonlabs/skeleton-svelte';
+	import { Modal } from '@skeletonlabs/skeleton-svelte';
 
 	import { headerLinks } from '$lib/data/navLinks';
+	import HeaderDrawer from './HeaderDrawer.svelte';
 
 	let current_page = $derived($page.url.pathname);
+	let headerDrawerOpen = $state(false);
 
-	const drawerStore = getDrawerStore();
-	const navDrawer: DrawerSettings = { id: 'nav' };
+	// const drawerStore = getDrawerStore();
+	// const navDrawer: DrawerSettings = { id: 'nav' };
 </script>
 
 <AppBar>
 	{#snippet lead()}
-		<a href="/" class="flex gap-4 items-center">
+		<a href="/" class="flex items-center gap-4">
 			<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png" />
 			<strong class="text-xl uppercase">Simmons Hall</strong>
 		</a>
 	{/snippet}
 
 	{#snippet trail()}
-		<div class="hidden md:inline-flex gap-4 items-center">
+		<div class="hidden items-center gap-4 md:inline-flex">
 			{#each headerLinks as page}
 				<a
-					class="btn btn-sm"
-					class:variant-filled-primary={page.url === current_page}
-					class:hover:variant-soft-primary={page.url !== current_page}
-					class:variant-surface={page.url !== current_page}
+					class="btn"
+					class:hover:preset-tonal={page.url !== current_page}
+					class:preset-filled-primary-500={page.url == current_page}
 					href={page.url}
 				>
 					{page.name}
@@ -36,17 +40,23 @@
 			<LightSwitch />
 		</div>
 		<div class="md:hidden">
-			<button
-				onclick={() => {
-					drawerStore.open(navDrawer);
-				}}
-				type="button"
-				class="btn-icon"
-				id="navMenu"
-				aria-label="Navigation Menu"
+			<Modal
+				bind:open={headerDrawerOpen}
+				triggerBase="btn btn-icon hover:preset-tonal"
+				contentBase="bg-surface-100-900 p-4 space-y-4 shadow-xl w-[480px] h-screen"
+				positionerJustify="justify-start"
+				positionerAlign=""
+				positionerPadding=""
+				transitionsPositionerIn={{ x: -480, duration: 200 }}
+				transitionsPositionerOut={{ x: -480, duration: 200 }}
 			>
-				<Menu size={'2rem'} />
-			</button>
+				{#snippet trigger()}
+					<Menu />
+				{/snippet}
+				{#snippet content()}
+					<HeaderDrawer drawerState={headerDrawerOpen} />
+				{/snippet}
+			</Modal>
 		</div>
 	{/snippet}
 </AppBar>

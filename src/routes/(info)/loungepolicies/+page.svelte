@@ -4,8 +4,8 @@
 		simmons-social-chair@mit.edu</a
 	> for more information.
 </p>
-<hr />
-<ol class="list-[upper-roman] list-outside ml-6 py-2">
+<hr class="hr" />
+<ol class="ml-6 list-outside list-[upper-roman] py-2">
 	<li>
 		<h2 class="font-bold uppercase">Purpose</h2>
 		<p>
@@ -26,9 +26,9 @@
 	</li>
 	<li>
 		<h2 class="font-bold uppercase">Condition for Lounge Recognition</h2>
-		<ol class="list-[upper-roman] list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-[upper-roman] py-2">
 			<li>Lounges must have no less than 5 members.</li>
-			<ol class="list-decimal list-outside ml-6 py-2">
+			<ol class="ml-6 list-outside list-decimal py-2">
 				<li>
 					Allowances will be made for the period between the start of each semester and the second
 					house meeting of that semester, so that new members may be recruited through rush or other
@@ -38,7 +38,7 @@
 			<li>
 				Lounges must make a reasonable effort to increase social involvement and inclusivity within
 				Simmons at least once a semester. This may include:
-				<ol class="list-decimal list-outside ml-6 py-2">
+				<ol class="ml-6 list-outside list-decimal py-2">
 					<li>Participating in fall and/or spring lounge rush, or</li>
 					<li>
 						Increasing lounge membership by at least one member over the course of a semester, or
@@ -46,7 +46,7 @@
 					<li>
 						Running a lounge event that is publicly advertised to non-lounge members, through
 						posters, emails, etc.
-						<ol class="list-[lower-alpha] list-outside ml-6 py-2">
+						<ol class="ml-6 list-outside list-[lower-alpha] py-2">
 							<li>
 								Funds for said event may be requested from the house committee or social chair(s)
 								and need not come directly from lounge funds.
@@ -58,7 +58,7 @@
 			</li>
 			<li>
 				Lounges must complete all reasonable requests made by Social Chairs.
-				<ol class="list-decimal list-outside ml-6 py-2">
+				<ol class="ml-6 list-outside list-decimal py-2">
 					<li>
 						A reasonable request is defined as a task the lounge or lounge representative can do in
 						both the allotted amount of time, and without defying policies set by MIT or Simmons
@@ -77,7 +77,7 @@
 	</li>
 	<li>
 		<h2 class="font-bold uppercase">The Signup Process</h2>
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				The social chair(s) shall be responsible for ensuring that the signup process runs smoothly
 				and is effectively publicized to the house.
@@ -94,7 +94,7 @@
 			</li>
 			<li>
 				New lounges must submit the following to the lounge creation form:
-				<ol class="list-decimal list-outside ml-6 py-2">
+				<ol class="ml-6 list-outside list-decimal py-2">
 					<li>Lounge social group name</li>
 					<li>Lounge representative</li>
 					<li>A list of at least 5 usernames of members</li>
@@ -114,7 +114,7 @@
 			<li>
 				Social Chairs, under any circumstances, may <em class="italic">not</em> open lounge signups
 				to any students after lounge funds are allocated.
-				<ol class="list-decimal list-outside ml-6 py-2">
+				<ol class="ml-6 list-outside list-decimal py-2">
 					<li>
 						For newly created lounges, defined as lounges created during the current semester’s add
 						period, if all members listed in the lounge creation form did not join within the add
@@ -122,7 +122,7 @@
 						authorized admin may either use administrative powers to add the designated individuals
 						to their lounge, or enable lounge sign ups during a specified ten minute period to allow
 						the particular users to join.
-						<ol class="list-[lower-alpha] list-outside ml-6 py-2">
+						<ol class="ml-6 list-outside list-[lower-alpha] py-2">
 							<li>
 								No other users (users not listed in the respective lounge’s signup form) may join
 								during this ten minute period. Social Chairs reserve the right to remove any
@@ -136,7 +136,7 @@
 	</li>
 	<li>
 		<h2 class="font-bold uppercase">Membership and Funding</h2>
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				Every resident of Simmons Hall is eligible to become a member of one lounge of their choice
 				during any given term. Between the membership deadline and the beginning of the next term,
@@ -160,7 +160,7 @@
 	</li>
 	<li>
 		<h2 class="font-bold uppercase">Use of Funds</h2>
-		<ol class="list-decimal list-outside ml-6 py-2">
+		<ol class="ml-6 list-outside list-decimal py-2">
 			<li>
 				Lounge social groups may use lounge funds for events provided that all lounge members are
 				aware of this fact at least two days in advance. Additionally, the event must be approved by
@@ -211,8 +211,8 @@
 	</li>
 </ol>
 
-<hr />
-<ul class="list-disc list-outside ml-6 py-2">
+<hr class="hr" />
+<ul class="ml-6 list-outside list-disc py-2">
 	<li>Approved by the House Committee 11/3/2002</li>
 	<li>Amended by the House Committee 12/8/2002</li>
 	<li>Amended by the House Committee 04/6/2003</li>

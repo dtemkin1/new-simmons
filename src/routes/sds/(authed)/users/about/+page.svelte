@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { VERSION as svelteVersion } from 'svelte/compiler';
 	import { VERSION as svelteKitVersion } from '@sveltejs/kit';
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { ProgressRing } from '@skeletonlabs/skeleton-svelte';
 
 	import type { PageData } from './$types';
 	interface Props {
@@ -12,11 +12,11 @@
 </script>
 
 {#await Promise.all( [data.dbName, data.version, data.itChair, data.admins, data.mods, data.housecommLeadership, data.financialAdmins] )}
-	<div class="flex flex-col items-center justify-center h-full gap-4 w-full self-center p-4">
-		<div class="p-4"><ProgressRadial /></div>
+	<div class="flex h-full w-full flex-col items-center justify-center gap-4 self-center p-4">
+		<div class="p-4"><ProgressRing value={null} /></div>
 	</div>
 {:then [dbName, version, itChair, admins, mods, housecommLeadership, financialAdmins]}
-	<div class="flex flex-col items-center h-full gap-4 w-full self-center p-4">
+	<div class="flex h-full w-full flex-col items-center gap-4 self-center p-4">
 		<div class="self-center">
 			<h1 class="h1 text-center">About the Simmons DB</h1>
 		</div>
@@ -28,7 +28,7 @@
 			<span class="font-bold italic">Simmons DB 2.0:</span>
 			dtemkin, 2026
 		</p>
-		<div class="flex flex-col self-center gap-4">
+		<div class="flex flex-col gap-4 self-center">
 			<div class="flex flex-row items-start gap-4">
 				<div class="">
 					<a class="anchor font-bold" href="mailto:simmons-tech@mit.edu"

@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="bg-surface-50-900-token flex flex-col items-center p-4 justify-center h-full align-center gap-2 text-center"
+	class="bg-surface-50-900 align-center flex h-full flex-col items-center justify-center gap-2 p-4 text-center"
 >
 	<h1 class="h1">
 		{$page.status}: {$page.error?.message}

@@ -1,23 +1,29 @@
-import { join } from 'path';
 import type { Config } from 'tailwindcss';
+
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
-import { skeleton } from '@skeletonlabs/tw-plugin';
-import { Simmons } from './src/Simmons';
+
+import { join } from 'path';
+import { skeleton } from '@skeletonlabs/skeleton/plugin';
+// import * as themes from '@skeletonlabs/skeleton/themes';
+
+import Simmons from './src/Simmons';
 
 export default {
 	darkMode: 'selector',
 	content: [
 		'./src/**/*.{html,js,svelte,ts}',
-		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
+		join(require.resolve('@skeletonlabs/skeleton-svelte'), '../**/*.{html,js,svelte,ts}')
 	],
+	theme: {
+		extend: {}
+	},
 	plugins: [
 		forms,
 		typography,
 		skeleton({
-			themes: {
-				custom: [Simmons]
-			}
+			// NOTE: each theme included will be added to your CSS bundle
+			themes: [Simmons]
 		})
 	]
-} satisfies Config;
+} as Config;

@@ -5,7 +5,7 @@
 	import Header from '$lib/components/Header.svelte';
 
 	import DBSidebar from '$lib/components/DBSidebar.svelte';
-	import DBFooter from '$lib/components/DBFooter.svelte';
+	// import DBFooter from '$lib/components/DBFooter.svelte';
 
 	import { page } from '$app/stores';
 
@@ -14,22 +14,22 @@
 
 <svelte:window bind:innerWidth />
 
-<div class="w-full h-full flex flex-col overflow-hidden">
-	<header class="flex-none z-10">
+<div class="flex h-full w-full flex-col overflow-hidden">
+	<header class="z-10 flex-none">
 		<Header />
 	</header>
 
-	<div class="flex-auto w-full h-full flex overflow-hidden">
-		<aside class="flex-none overflow-x-hidden overflow-y-auto w-auto">
+	<div class="flex h-full w-full flex-auto overflow-hidden">
+		<aside class="w-auto flex-none overflow-y-auto overflow-x-hidden">
 			{#if innerWidth && innerWidth >= 640}
 				<DBSidebar username={$page.data.username} groups={$page.data.groups} />
 			{/if}
 		</aside>
 
-		<div class="flex-1 overflow-x-hidden flex flex-col" style:scrollbar-gutter="auto">
+		<div class="flex flex-1 flex-col overflow-x-hidden" style:scrollbar-gutter="auto">
 			<main class="flex-auto">
-				<div class="bg-surface-100-800-token w-full h-full">
-					<div class="bg-surface-50-900-token h-full w-full rounded-container-token">
+				<div class="h-full w-full">
+					<div class="bg-surface-50-900 h-full w-full rounded-container">
 						{@render children()}
 					</div>
 				</div>
@@ -38,9 +38,9 @@
 	</div>
 
 	<footer class="flex-none">
-		{#if innerWidth && innerWidth < 640}
+		<!-- {#if innerWidth && innerWidth < 640}
 			<DBFooter username={$page.data.username} groups={$page.data.groups} />
-		{/if}
+		{/if} -->
 		<Footer />
 	</footer>
 </div>

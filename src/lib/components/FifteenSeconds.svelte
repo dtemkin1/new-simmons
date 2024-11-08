@@ -1,5 +1,3 @@
-<!-- TODO: MAKE USERINFO COMPONENT -->
-
 <script lang="ts">
 	interface UserInfo {
 		favorite_category: string | null;
@@ -54,19 +52,21 @@
 	let userInfoGenerated = getUserInfo(userInfo);
 </script>
 
-<div class="card">
-	<header class="card-header text-center">
+<div
+	class="card w-full max-w-md border p-4 text-center border-surface-200-800 preset-filled-surface-100-900"
+>
+	<header>
 		<a href={`${base}/sds/directory/entry?username=${userInfoGenerated.username}`} class="anchor"
 			>{userInfoGenerated.name}</a
 		>
 		{#if userInfoGenerated.type !== ''}
-			<br /><span class="text-sm text-surface-500-400-token">{userInfoGenerated.type}</span>
+			<br /><span class="text-surface-500-400 text-sm">{userInfoGenerated.type}</span>
 		{/if}
 	</header>
-	<section class="p-4 flex items-center justify-center">
-		<div class="flex flex-col self-center items-center justify-center space-y-1">
+	<article class="flex items-center justify-center p-4">
+		<div class="flex flex-col items-center justify-center space-y-1 self-center">
 			{#each userInfoGenerated.tags as tag}
-				<div class="flex flex-row space-x-1 justify-center items-center flex-wrap">
+				<div class="flex flex-row flex-wrap items-center justify-center space-x-1">
 					<span class="text-right">{tag[0]}:</span>
 					<span class="text-left"
 						>{#if tag[0] == 'URL' && typeof tag[1] == 'string'}
@@ -79,11 +79,11 @@
 				</div>
 			{/each}
 		</div>
-	</section>
+	</article>
 
 	{#if userInfo.quote}
-		<footer class="card-footer">
-			<blockquote class="blockquote prose dark:prose-invert">
+		<footer>
+			<blockquote class="prose blockquote text-left dark:prose-invert">
 				<Markdown {carta} value={userInfoGenerated.quote} />
 			</blockquote>
 		</footer>

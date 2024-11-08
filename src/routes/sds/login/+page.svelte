@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import { enhance } from '$app/forms';
-	import { redirect } from '@sveltejs/kit';
 	import { base } from '$app/paths';
+	import { type ToastContext } from '@skeletonlabs/skeleton-svelte';
 
 	interface Props {
 		data: PageData;
@@ -13,61 +13,54 @@
 
 	let error: boolean | null = $state(null);
 
-	$inspect($page.form);
-
 	import type { ActionResult } from '@sveltejs/kit';
 
-	import { getToastStore } from '@skeletonlabs/skeleton';
-	import type { ToastSettings } from '@skeletonlabs/skeleton';
 	import { SDS_HOME_URL } from '$lib/config';
 	import { page } from '$app/stores';
 
-	const toastStore = getToastStore();
+	export const toast: ToastContext = getContext('toast');
 
 	function toastHandler(result: ActionResult) {
-		let resultToast: ToastSettings;
-
 		if (result.type == 'success') {
 			error = false;
-			resultToast = {
-				message: `${result.data?.message}` || '',
-				background: 'variant-filled-success'
-			};
+			toast.create({
+				description: `${result.data?.message}` || '',
+				type: 'success'
+			});
 		} else if (result.type == 'failure') {
 			error = true;
-			resultToast = {
-				message: `${result.data?.message}` || '',
-				background: 'variant-filled-error'
-			};
+			toast.create({
+				description: `${result.data?.message}` || '',
+				type: 'error'
+			});
 		} else if (result.type == 'redirect') {
 			if (
 				result.location == SDS_HOME_URL ||
 				result.location == $page.url.searchParams.get('redirect')
 			) {
 				error = false;
-				resultToast = {
-					message: 'Successfully logged in!',
-					background: 'variant-filled-success'
-				};
+				toast.create({
+					description: 'Successfully logged in!',
+					type: 'success'
+				});
 			} else {
-				resultToast = {
-					message: 'Redirecting...',
-					background: 'variant-filled-success'
-				};
+				toast.create({
+					description: 'Redirecting...',
+					type: 'success'
+				});
 			}
 		} else {
-			resultToast = {
-				message: 'Unknown form result',
-				background: 'variant-filled'
-			};
+			toast.create({
+				description: 'Unknown form result'
+			});
 		}
-
-		toastStore.trigger(resultToast);
 	}
 </script>
 
-<div class="flex items-center justify-center h-full">
-	<div class="card p-8 flex flex-col space-y-4 max-w-5xl m-8">
+<div class="flex h-full items-center justify-center">
+	<div
+		class="card m-8 flex max-w-5xl flex-col space-y-4 border p-8 border-surface-200-800 preset-filled-surface-100-900"
+	>
 		{#if data.session}
 			<p class="text-center">
 				You are currently logged in as <span class="font-bold">{data.username ?? 'Guest'}</span>.
@@ -81,15 +74,15 @@
 					};
 				}}
 				action="?/logout"
-				class="flex flex-col gap-4 grow"
+				class="flex grow flex-col gap-4"
 			>
-				<button type="submit" class="btn variant-filled-error">Sign out</button>
+				<button type="submit" class="btn preset-filled-error-500">Sign out</button>
 			</form>
 		{:else}
 			<h2 class="h2 text-center">Sign in to Simmons DB</h2>
 			<form
 				method="post"
-				class="flex flex-col gap-4 grow"
+				class="flex grow flex-col gap-4"
 				use:enhance={() => {
 					return async ({ result, update }) => {
 						update();
@@ -99,7 +92,7 @@
 				action="?/login"
 			>
 				<label class="label">
-					<span>Username</span>
+					<span class="label-text">Username</span>
 					<input
 						class="input"
 						name="username"
@@ -110,7 +103,7 @@
 					/>
 				</label>
 				<label class="label">
-					<span>Password</span>
+					<span class="label-text">Password</span>
 					<input
 						class="input"
 						name="password"
@@ -121,16 +114,16 @@
 					/>
 				</label>
 				<input type="hidden" name="redirect" value={$page.url.searchParams.get('redirect')} />
-				<button type="submit" class="btn variant-filled">Sign In with Credentials</button>
+				<button type="submit" class="btn preset-filled">Sign In with Credentials</button>
 			</form>
-			<hr />
-			<form class="flex flex-col grow">
+			<hr class="hr" />
+			<form class="flex grow flex-col">
 				<a
 					href="{base}/auth/signin/okta{$page.url.searchParams.get('redirect')
 						? '?redirect=' + $page.url.searchParams.get('redirect')
 						: ''}"
 					type="button"
-					class="btn variant-filled-success">Sign In with Touchstone</a
+					class="btn preset-filled-success-500">Sign In with Touchstone</a
 				>
 			</form>
 		{/if}

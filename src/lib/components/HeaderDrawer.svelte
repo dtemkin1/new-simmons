@@ -1,20 +1,24 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
-	import { LightSwitch, getDrawerStore } from '@skeletonlabs/skeleton';
 	import { headerLinks } from '$lib/data/navLinks';
+	import LightSwitch from '$lib/components/LightSwitch.svelte';
 
-	const drawerStore = getDrawerStore();
+	interface Props {
+		drawerState?: boolean;
+	}
+
+	let { drawerState = $bindable(false) }: Props = $props();
 
 	let current_page = $derived($page.url.pathname);
 </script>
 
-<div class="flex flex-col gap-2 min-h-full items-center">
+<div class="flex min-h-full flex-col items-center gap-2">
 	<a
 		href="{base}/"
-		class="inline-flex items-center gap-4 mt-12 mb-4 self-center"
+		class="mb-4 mt-12 inline-flex items-center gap-4 self-center"
 		onclick={() => {
-			drawerStore.close();
+			drawerState = !drawerState;
 		}}
 	>
 		<enhanced:img alt="Simmons Logo" class="max-h-12 w-auto" src="$lib/assets/logo_crop.png"
@@ -25,17 +29,16 @@
 	{#each headerLinks as page}
 		<a
 			onclick={() => {
-				drawerStore.close();
+				drawerState = !drawerState;
 			}}
 			class="btn w-min"
-			class:variant-filled-primary={page.url === current_page}
-			class:hover:variant-soft-primary={page.url !== current_page}
-			class:variant-surface={page.url !== current_page}
+			class:hover:preset-tonal={page.url !== current_page}
+			class:preset-filled-primary-500={page.url == current_page}
 			href={page.url}
 		>
 			{page.name}
 		</a>
 	{/each}
 	<div class="grow"></div>
-	<LightSwitch class="self-center mb-12" />
+	<LightSwitch />
 </div>

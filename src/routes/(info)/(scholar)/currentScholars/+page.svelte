@@ -1,4 +1,4 @@
-<ul class="list-disc list-outside ml-6 py-2">
+<ul class="ml-6 list-outside list-disc py-2">
 	<li><a href="#hughes" class="anchor">Shannon Hughes</a><br /></li>
 	<li><a href="#ribbeck" class="anchor">Katharina Ribbeck</a><br /></li>
 	<li><a href="#rosario" class="anchor">Nelly Rosario</a><br /></li>
@@ -15,14 +15,14 @@
 			alt="Shannon Hughes"
 		/>
 	</div>
-	<div class="inline-block ml-5">
+	<div class="ml-5 inline-block">
 		Email: <a class="anchor" href="mailto:skalford@mit.edu">skalford@mit.edu</a><br />
 		Phone: (617) 258-9488<br />
 		Office: 56-378<br />
 		Courses: 20.109<br />
 		<br />
 		Research areas:
-		<ul class="list-disc list-outside ml-6 py-2">
+		<ul class="ml-6 list-outside list-disc py-2">
 			<li>Systems Biology</li>
 		</ul>
 	</div>
@@ -49,7 +49,7 @@
 	performing and communicating their science.
 </p>
 
-<hr />
+<hr class="hr" />
 
 <h2 class="h2" id="ribbeck">Katharina Ribbeck, PhD</h2>
 <h3 class="h3">Eugene Bell Career Development Professor of Tissue Engineering (MIT)</h3>
@@ -60,7 +60,7 @@
 			alt="Katharina Ribbeck"
 		/>
 	</div>
-	<div class="inline-block ml-5">
+	<div class="ml-5 inline-block">
 		Email: <a class="anchor" href="mailto:ribbeck@mit.edu">ribbeck@mit.edu</a><br />
 		Phone: (617) 715-4575<br />
 		Office: 56-341C<br />
@@ -68,7 +68,7 @@
 		Courses: 20.363J, 20.380, 20.463J<br />
 		<br />
 		Research areas:
-		<ul class="list-disc list-outside ml-6 py-2">
+		<ul class="ml-6 list-outside list-disc py-2">
 			<li>Biomaterials</li>
 			<li>Biophysics</li>
 			<li>Microbial Pathogenesis</li>
@@ -97,7 +97,7 @@
 	properties of biological gels.
 </p>
 
-<hr />
+<hr class="hr" />
 
 <h2 class="h2" id="rosario">Nelly Rosario</h2>
 <h3 class="h3">Novelist, Senior Lecturer (Texas State University)</h3>
@@ -109,7 +109,7 @@
 			alt="Nelly Rosario"
 		/>
 	</div>
-	<div class="inline-block ml-5">
+	<div class="ml-5 inline-block">
 		Email: <a class="anchor" href="mailto:nr12@txstate.edu">nr12@txstate.edu</a>
 	</div>
 </div>
@@ -137,7 +137,7 @@
 	tandem.”
 </p>
 
-<hr />
+<hr class="hr" />
 
 <h2 class="h2" id="randolph">Robert Randolph</h2>
 <h3 class="h3">Chaplain to the Institute (MIT)</h3>
@@ -149,7 +149,7 @@
 			alt="Robert Randolph"
 		/>
 	</div>
-	<div class="inline-block ml-5">
+	<div class="ml-5 inline-block">
 		Email: <a class="anchor" href="mailto:randolph@mit.edu">randolph@mit.edu</a><br />
 		Phone: (617) 258-5484<br />
 		Office: W11-128<br />

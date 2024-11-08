@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { ProgressRing } from '@skeletonlabs/skeleton-svelte';
 
 	interface Props {
 		data: PageData;
@@ -15,9 +15,9 @@
 	});
 </script>
 
-<div class="flex flex-col w-full h-full p-4 text-center items-center justify-center">
+<div class="flex h-full w-full flex-col items-center justify-center p-4 text-center">
 	{#await data.packages}
-		<ProgressRadial />
+		<ProgressRing value={null} />
 	{:then packageData}
 		{#if packageData.num_packages && parseInt(packageData.num_packages) > 0}
 			<p>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import FifteenSeconds from '$lib/components/FifteenSeconds.svelte';
 	import { base } from '$app/paths';
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { ProgressRing } from '@skeletonlabs/skeleton-svelte';
 
 	import type { PageData } from './$types';
 	interface Props {
@@ -12,17 +12,17 @@
 </script>
 
 {#await data.randomResident}
-	<div class="flex items-center justify-center h-full w-full">
-		<ProgressRadial />
+	<div class="flex h-full w-full items-center justify-center">
+		<ProgressRing value={null} />
 	</div>
 {:then randomResident}
-	<div class="flex flex-col items-center p-4 h-full gap-4">
+	<div class="flex h-full flex-col items-center gap-4 p-4">
 		<div class="self-center">
 			<h1 class="h1 text-center">Welcome to the Simmons DB</h1>
 		</div>
 		<div class="self-center">
 			<h2 class="h2 text-center">15 Seconds Of Frame</h2>
-			<p class="mt-0 italic text-center">
+			<p class="mt-0 text-center italic">
 				<a class="anchor" href="{base}/sds/directory">Simmons Hall Resident</a> of the Moment
 			</p>
 		</div>
@@ -54,7 +54,7 @@
 
 			<p>
 				The Simmons DB is set up to use <a
-					class="font-bold anchor"
+					class="anchor font-bold"
 					href="https://ist.mit.edu/touchstone"
 					>Touchstone Authentication
 				</a>

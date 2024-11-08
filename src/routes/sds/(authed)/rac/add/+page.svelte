@@ -1,6 +1,8 @@
-<script lang="ts">
+<!-- TODO: reimplement stepper :( -->
+
+<!-- <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Stepper, Step } from '@skeletonlabs/skeleton';
+	import { Stepper, Step } from '@skeletonlabs/skeleton-svelte';
 	import type { ActionData } from './$types';
 	import { invalidateAll } from '$app/navigation';
 
@@ -71,8 +73,8 @@
 		times_submitted++;
 	}
 
-	import { getToastStore } from '@skeletonlabs/skeleton';
-	import type { ToastSettings } from '@skeletonlabs/skeleton';
+	import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+	import type { ToastSettings } from '@skeletonlabs/skeleton-svelte';
 	import type { ActionResult } from '@sveltejs/kit';
 
 	const toastStore = getToastStore();
@@ -83,17 +85,17 @@
 		if (result.type == 'success') {
 			resultToast = {
 				message: `${result.data?.message}` || '',
-				background: 'variant-filled-success'
+				background: 'preset-filled-success-500'
 			};
 		} else if (result.type == 'failure') {
 			resultToast = {
 				message: `${result.data?.message}` || '',
-				background: 'variant-filled-error'
+				background: 'preset-filled-error-500'
 			};
 		} else {
 			resultToast = {
 				message: 'Unknown form result',
-				background: 'variant-filled'
+				background: 'preset-filled'
 			};
 		}
 
@@ -102,7 +104,7 @@
 
 	let reenableUser: string | undefined = $state(undefined);
 
-	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton';
+	import { getModalStore, type ModalSettings } from '@skeletonlabs/skeleton-svelte';
 
 	const modalStore = getModalStore();
 	const oldUserModal: ModalSettings = {
@@ -145,8 +147,9 @@
 					<option value="VS">VS (Visiting Scholar)</option>
 				</select>
 				{#snippet navigation()}
-					<button class="btn variant-ghost-error" onclick={() => modalStore.trigger(oldUserModal)}
-						>Reenable User</button
+					<button
+						class="btn preset-tonal-error-500 preset-outlined-error-500"
+						onclick={() => modalStore.trigger(oldUserModal)}>Reenable User</button
 					>
 				{/snippet}
 			</Step>
@@ -278,7 +281,7 @@
 		}}
 	>
 		<input type="hidden" name="kerberosId" value={username} onchange={() => invalidateAll()} />
-		<button class="btn variant-filled-primary" type="submit" bind:this={fetch_button}
+		<button class="btn preset-filled-primary-500" type="submit" bind:this={fetch_button}
 			>Click to Fetch Details</button
 		>
 	</form>
@@ -322,10 +325,11 @@
 		}}
 	>
 		<input type="hidden" name="username" bind:value={reenableUser} />
-		<button class="btn variant-filled-primary" type="submit" bind:this={reenable_button}
+		<button class="btn preset-filled-primary-500" type="submit" bind:this={reenable_button}
 			>Reenable User</button
 		>
 	</form>
-</div>
+</div> -->
 
 <!-- TODO: ADD REENABLE USER -->
+<!-- TODO: RECREATE WITHOUT USING STEPPER -->

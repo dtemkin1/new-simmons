@@ -107,32 +107,34 @@
 
 <h1 class="h1">About</h1>
 <div
-	class="p-4 grid grid-cols-[auto_1fr_auto] gap-0 md:gap-4 items-center content-center self-center"
+	class="grid grid-cols-[auto_1fr_auto] content-center items-center gap-0 self-center p-4 md:gap-4"
 >
 	<!-- Button: Left -->
-	<button type="button" class="btn-icon variant-filled hidden md:block" onclick={carouselLeft}>
-		<div class="flex justify-center items-center">
+	<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselLeft}>
+		<div class="flex items-center justify-center">
 			<ArrowLeft />
 		</div>
 	</button>
 	<!-- Full Images -->
 	<div
 		bind:this={elemCarousel}
-		class="snap-x snap-mandatory scroll-smooth flex overflow-x-auto max-w-[800px] rounded-container-token"
+		class="flex max-w-[800px] snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-container"
 	>
 		{#each images as image}
-			<div class="snap-center rounded-container-token relative flex shrink-0 g-0 w-fit">
-				<enhanced:img class="w-full h-full overflow-y-hidden" src={image.image} alt={image.title} />
-				<div class="absolute bottom-0 px-4 py-3 bg-surface-backdrop-token w-full">
-					<p class="text-sm font-bold text-on-surface-token">{image.title}</p>
-					<p class="text-sm text-on-surface-token">{@html image.description}</p>
+			<div class="g-0 relative flex w-fit shrink-0 snap-center rounded-container">
+				<enhanced:img class="h-full w-full overflow-y-hidden" src={image.image} alt={image.title} />
+				<div
+					class="absolute bottom-0 w-full !bg-opacity-60 px-4 py-3 backdrop-blur bg-surface-100-900"
+				>
+					<p class="text-on-surface text-sm font-bold">{image.title}</p>
+					<p class="text-on-surface text-sm">{@html image.description}</p>
 				</div>
 			</div>
 		{/each}
 	</div>
 	<!-- Button: Right -->
-	<button type="button" class="btn-icon variant-filled hidden md:block" onclick={carouselRight}>
-		<div class="flex justify-center items-center">
+	<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselRight}>
+		<div class="flex items-center justify-center">
 			<ArrowRight />
 		</div>
 	</button>
@@ -151,7 +153,7 @@
 </p>
 <h2 class="h2">Heads Of House</h2>
 <p>The Head of House team consists of:</p>
-<ul class="list-disc list-outside ml-6 py-2">
+<ul class="ml-6 list-outside list-disc py-2">
 	<li>
 		<a class="anchor" href="mailto:djperrea@mit.edu">David Perreault</a>, Joseph F. and Nancy P.
 		Keithley Professor in Electrical Engineering & Computer Science

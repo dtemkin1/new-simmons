@@ -1,5 +1,5 @@
-<script lang="ts">
-	import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
+<!-- <script lang="ts">
+	import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton-svelte';
 
 	interface Props {
 		username: string | null;
@@ -48,9 +48,9 @@
 </script>
 
 {#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}
-	<div class="bg-surface-50-900-token">
+	<div class="bg-surface-50-900">
 		<section
-			class="p-4 pt-4 space-y-4 w-screen overflow-y-auto bg-surface-100-800-token rounded-container-token"
+			class="p-4 pt-4 space-y-4 w-screen overflow-y-auto bg-surface-100-800 rounded-container"
 		>
 			<nav class="list-nav max-h-96">
 				<ul>
@@ -59,16 +59,16 @@
 							<a
 								href={link.href}
 								class="whitespace-normal text-left btn"
-								class:!bg-primary-active-token={link.href === $page.url.pathname}
+								class:!bg-primary-active={link.href === $page.url.pathname}
 								class:pointer-events-none={link.badge === 'Incomplete'}
 								class:opacity-50={link.badge === 'Incomplete'}
 								aria-disabled={link.badge === 'Incomplete'}
 							>
 								<span class="flex-auto">{link.label}</span>
 								{#if link.badge}<span
-										class="badge variant-filled-secondary"
-										class:variant-filled-error={link.badge == 'Incomplete'}
-										class:variant-filled-warning={link.badge == 'Work in Progress'}
+										class="badge preset-filled-secondary-500"
+										class:preset-filled-error-500={link.badge == 'Incomplete'}
+										class:preset-filled-warning-500={link.badge == 'Work in Progress'}
 										>{link.badge}</span
 									>{/if}
 							</a>
@@ -83,12 +83,12 @@
 {#if $page.data.username}
 	<TabGroup
 		justify="justify-left"
-		active="variant-filled-primary"
-		hover="hover:variant-soft-primary"
+		active="preset-filled-primary-500"
+		hover="hover:preset-tonal-primary-500"
 		flex="flex-1 lg:flex-none"
 		rounded=""
 		border=""
-		class="bg-surface-100-800-token w-full"
+		class="bg-surface-100-800 w-full"
 	>
 		{#each userLinks as tileLinks}
 			{#if tileLinks.links.length > 0}
@@ -125,4 +125,6 @@
 			{/snippet}<span class="font-bold text-xs">{username ?? 'Guest'}</span></TabAnchor
 		>
 	</TabGroup>
-{/if}
+{/if} -->
+
+<!-- TODO: RECREATE -->
