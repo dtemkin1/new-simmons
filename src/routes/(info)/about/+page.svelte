@@ -118,16 +118,14 @@
 	<!-- Full Images -->
 	<div
 		bind:this={elemCarousel}
-		class="flex max-w-[800px] snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-container"
+		class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-container"
 	>
 		{#each images as image}
 			<div class="g-0 relative flex w-fit shrink-0 snap-center rounded-container">
 				<enhanced:img class="h-full w-full overflow-y-hidden" src={image.image} alt={image.title} />
-				<div
-					class="absolute bottom-0 w-full !bg-opacity-60 px-4 py-3 backdrop-blur bg-surface-100-900"
-				>
-					<p class="text-on-surface text-sm font-bold">{image.title}</p>
-					<p class="text-on-surface text-sm">{@html image.description}</p>
+				<div class="absolute bottom-0 w-full bg-surface-900 !bg-opacity-60 px-4 py-3 backdrop-blur">
+					<p class="text-sm font-bold text-surface-contrast-900">{image.title}</p>
+					<p class="text-sm text-surface-contrast-900">{@html image.description}</p>
 				</div>
 			</div>
 		{/each}
