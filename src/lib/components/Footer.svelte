@@ -19,7 +19,7 @@
 			</address>
 		</div>
 		<div class="place-content-end">
-			<p class="text-right text-sm">
+			<p class="text-end text-sm">
 				Copyright &copy; {new Date().getFullYear()} Simmons Hall<br /><a
 					class="anchor"
 					href="https://accessibility.mit.edu/">Accessibility</a
