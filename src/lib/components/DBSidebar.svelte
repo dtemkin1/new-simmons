@@ -7,6 +7,7 @@
 
 	import { CircleUser } from 'lucide-svelte';
 	import { Menu } from 'lucide-svelte';
+	import { X } from 'lucide-svelte';
 
 	interface Props {
 		username: string | null;
@@ -49,22 +50,26 @@
 			links: []
 		}
 	);
+
+	let menuOrClose = $derived(currentTile === '' || currentTile === 'menu');
 </script>
 
 <div class="flex h-full flex-row bg-surface-100-900">
-	<div class="float-start h-full overflow-y-auto">
+	<div class="float-start h-full overflow-y-auto overflow-x-hidden">
 		{#if $page.data.username}
 			<Nav.Rail bind:value={currentTile} {expanded}>
 				{#snippet header()}
 					<Nav.Tile
 						id="menu"
-						labelExpanded="Menu"
+						labelExpanded={menuOrClose ? 'Menu' : 'Close'}
 						onclick={() => {
-							expanded = !expanded;
+							if (menuOrClose) {
+								expanded = !expanded;
+							}
 						}}
-						active=""
+						active="hover:preset-filled-surface-50-950"
 					>
-						<Menu />
+						{#if menuOrClose}<Menu />{:else}<X />{/if}
 					</Nav.Tile>
 				{/snippet}
 				{#snippet tiles()}
@@ -87,7 +92,6 @@
 						title="Account"
 						label={username ?? 'Guest'}
 						labelExpanded={username ?? 'Guest'}
-						selected={$page.url.pathname === SDS_LOGIN_URL}
 					>
 						<CircleUser />
 					</Nav.Tile>
