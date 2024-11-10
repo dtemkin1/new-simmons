@@ -15,7 +15,9 @@
 		</div>
 		<div class="place-self-center">
 			<address class="text-center text-sm">
-				229 Vassar St.<br />Cambridge, MA 02139
+				229 Vassar St.
+				<br />
+				Cambridge, MA 02139
 			</address>
 		</div>
 		<div class="place-content-end">
