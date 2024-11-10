@@ -1,6 +1,6 @@
-import type { TRexAPIResponse, TRexEvent, TRexEventResponse } from './types';
+import type { TRexAPIResponse, TRexRawEvent, TRexProcessedEvent } from './types';
 
-export const get_date_bucket = (event: TRexEventResponse, cutoff: number) => {
+export const get_date_bucket = (event: TRexRawEvent, cutoff: number) => {
 	const date = new Date(event.start);
 	if (date.getHours() < cutoff) {
 		date.setDate(date.getDate() - 1);
@@ -27,6 +27,10 @@ function isEqual(startDate: Date, endDate: Date) {
 	);
 }
 
+function numDigits(x: number) {
+	return (Math.log10((x ^ (x >> 31)) - (x >> 31)) | 0) + 1;
+}
+
 export const process_raw_data = (data: TRexAPIResponse) => {
 	const all_events = data.events;
 	const all_dates: Date[] = [];
@@ -36,14 +40,17 @@ export const process_raw_data = (data: TRexAPIResponse) => {
 			all_dates.push(date);
 		}
 	});
-	const by_date: Record<string, TRexEvent[]> = {};
+	const by_date: Record<string, TRexProcessedEvent[]> = {};
 	all_events.forEach((rexEvent) => {
 		if (rexEvent.dorm.some((d) => d.toLowerCase().includes('simmons'))) {
 			const date = get_date_bucket(rexEvent, 4);
-			if (!by_date[dateMaker.format(date)]) {
-				by_date[dateMaker.format(date)] = [];
+			const dateString = `${date.getFullYear()}-${numDigits(date.getMonth() + 1) >= 1 ? '' : '0'}${date.getMonth() + 1}-${numDigits(date.getDate() + 1) >= 1 ? '' : '0'}${date.getDate()}`;
+
+			if (!by_date[dateString]) {
+				by_date[dateString] = [];
 			}
-			by_date[dateMaker.format(date)].push({
+
+			by_date[dateString].push({
 				...rexEvent,
 				start: new Date(rexEvent.start),
 				end: new Date(rexEvent.end)

@@ -1,42 +1,61 @@
-export type TRexAPIResponse = {
-	/** The title of the current experience, such as "REX 2023" */
-	name: string;
-	/** ISO Date string of when the current JSON of events was published */
-	published: string;
-	events: TRexEventResponse[];
+// copied from https://github.com/mit-dormcon/website/blob/main/components/t-rex/types.ts
+
+/** Raw API output */
+export interface TRexAPIResponse {
+	name: string; // The title of the current experience, such as "REX 2023"
+	published: string; // ISO Date string of when the current JSON of events was published
+	events: TRexRawEvent[];
 	dorms: string[];
 	tags: string[];
-	/** Maps event properties to background colors */
-	colors: TRexAPIColors;
-	start: string;
-	end: string;
-};
+	colors: {
+		dorms: Record<string, string>;
+		tags: Record<string, string>;
+	}; // Convert to Map<string, string>!
+	start: string; // Convert to ISO Date string!
+	end: string; // Convert to ISO Date string!
+}
 
-export type TRexAPIColors = {
-	dorms: Map<string, string>;
-	tags: Map<string, string>;
-};
-
-export type TRexEventResponse = {
+/** Event details */
+export interface TRexRawEvent {
 	name: string;
 	dorm: string[];
-	/** The subcommunity or living group hosting this event, if any */
-	group: string | null;
 	location: string;
-	start: string;
-	end: string;
-	description: string;
+	start: string; // Convert to ISO Date string!
+	end: string; // Convert to ISO Date string!
 	tags: string[];
-};
+	description: string;
+	group: string | null; // The subcommunity or living group hosting this event, if any
+}
 
-export type TRexEvent = {
+/** Maps event properties to colors */
+export interface TRexRawColors {
+	dorms: Record<string, string>;
+	tags: Record<string, string>;
+}
+
+export interface TRexProcessedData {
+	name: string;
+	published: Date;
+	events: TRexProcessedEvent[];
+	dorms: string[];
+	tags: string[];
+	colors: TRexProcessedAPIColors;
+	start: Date;
+	end: Date;
+}
+
+export interface TRexProcessedEvent {
 	name: string;
 	dorm: string[];
-	/** The subcommunity or living group hosting this event, if any */
-	group: string | null;
 	location: string;
 	start: Date;
 	end: Date;
-	description: string;
 	tags: string[];
-};
+	description: string;
+	group: string | null;
+}
+
+export interface TRexProcessedAPIColors {
+	dorms: Map<string, string>;
+	tags: Map<string, string>;
+}

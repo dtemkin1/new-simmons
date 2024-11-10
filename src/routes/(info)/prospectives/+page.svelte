@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 
 	import type { PageData } from './$types';
-	import { process_raw_data, timeMaker } from './rex_process';
+	import { process_raw_data, timeMaker, dateMaker } from './rex_process';
 	interface Props {
 		data: PageData;
 	}
@@ -39,7 +39,7 @@
 <h1 class="h1">Simmons {data.rexData.name} Schedule</h1>
 {#each Object.entries(rexData) as [date, events]}
 	<h2 class="h2">
-		{date}
+		<time datetime={date}>{dateMaker.format(new Date(date))}</time>
 	</h2>
 	<div class="table-wrap">
 		<table class="table">
@@ -50,14 +50,15 @@
 					<th>Location</th>
 				</tr>
 			</thead>
-			<tbody class="hover:[&>tr]:preset-tonal-primary">
+			<tbody class="hover:[&>tr]:preset-tonal">
 				{#each events as row}
 					<tr>
-						<td class="!whitespace-normal"
-							>{`${timeMaker.format(row.start)} – ${timeMaker.format(row.end)}`}</td
-						>
-						<td class="!whitespace-normal">{row.name}</td>
-						<td class="!whitespace-normal">{row.location}</td>
+						<td>
+							<time datetime={row.start.toISOString()}>{timeMaker.format(row.start)}</time> –
+							<time datetime={row.end.toISOString()}>{timeMaker.format(row.end)}</time>
+						</td>
+						<td>{row.name}</td>
+						<td>{row.location}</td>
 					</tr>
 				{/each}
 			</tbody>

@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	// import { AppBar, LightSwitch, getDrawerStore } from '@skeletonlabs/skeleton-svelte';
 	import { AppBar } from '@skeletonlabs/skeleton-svelte';
 	import LightSwitch from '$lib/components/LightSwitch.svelte';
 	import { Menu } from 'lucide-svelte';
-	// import type { DrawerSettings } from '@skeletonlabs/skeleton-svelte';
 	import { Modal } from '@skeletonlabs/skeleton-svelte';
 
 	import { headerLinks } from '$lib/data/navLinks';
@@ -12,9 +10,6 @@
 
 	let current_page = $derived($page.url.pathname);
 	let headerDrawerOpen = $state(false);
-
-	// const drawerStore = getDrawerStore();
-	// const navDrawer: DrawerSettings = { id: 'nav' };
 </script>
 
 <AppBar>
