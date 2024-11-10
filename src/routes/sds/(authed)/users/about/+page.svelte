@@ -24,7 +24,7 @@
 			<span class="font-bold italic">Original authors:</span>
 			dramage, 2002; with bonawitz, dheera, psaindon<br />
 			<span class="font-bold italic">GovTracker:</span>
-			advay, 2006<br />
+			advay 2006, wthrowe 2008<br />
 			<span class="font-bold italic">Simmons DB 2.0:</span>
 			dtemkin, 2026
 		</p>

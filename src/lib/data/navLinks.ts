@@ -31,7 +31,7 @@ interface SDSGroups {
 	id: string;
 	name: string;
 	value: string;
-	icon: typeof Home;
+	Icon: typeof Home;
 	links: SDSLinks[];
 }
 
@@ -59,7 +59,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'home',
 		name: 'Simmons DB',
 		value: '1',
-		icon: Home,
+		Icon: Home,
 		links: [
 			{ href: `${SDS_BASE}/home`, label: 'Home', badge: '', groupNeeded: ['USERS'] },
 			{
@@ -129,7 +129,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'govtracker',
 		name: 'GovTracker',
 		value: '2',
-		icon: Vote,
+		Icon: Vote,
 		links: [
 			{
 				href: `${SDS_BASE}/loungeexpense`,
@@ -164,7 +164,7 @@ export const sdsLinks: SDSGroups[] = [
 			{
 				href: `${SDS_BASE}/govtracker/downloadagenda`,
 				label: 'Meeting Presentation',
-				badge: 'Incomplete',
+				badge: 'Work in Progress',
 				groupNeeded: ['HOUSE-COMM-LEADERSHIP']
 			}
 		]
@@ -173,7 +173,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'personal',
 		name: 'Personal Info',
 		value: '3',
-		icon: PersonStanding,
+		Icon: PersonStanding,
 		links: [
 			{
 				href: `${SDS_BASE}/directory/update`,
@@ -205,7 +205,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'packages',
 		name: 'Packages',
 		value: '4',
-		icon: Package,
+		Icon: Package,
 		links: [
 			{
 				href: `${SDS_BASE}/packages/mypackages`,
@@ -237,7 +237,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'movies',
 		name: 'Movies',
 		value: '5',
-		icon: Film,
+		Icon: Film,
 		links: [
 			{
 				href: `${SDS_BASE}/simmovies/list.php`,
@@ -275,7 +275,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'library',
 		name: 'Library',
 		value: '6',
-		icon: Library,
+		Icon: Library,
 		links: [
 			{
 				href: 'http://www.librarything.com/catalog/simmons_hall',
@@ -290,7 +290,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'administrators',
 		name: 'Admin',
 		value: '7',
-		icon: Settings,
+		Icon: Settings,
 		links: [
 			{
 				href: `${SDS_BASE}/administrators`,
@@ -334,7 +334,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'desk',
 		name: 'Desk',
 		value: '8',
-		icon: Mails,
+		Icon: Mails,
 		links: [
 			{
 				href: `${SDS_BASE}/desk/calendar`,
@@ -366,7 +366,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'rooming',
 		name: 'Rooming',
 		value: '9',
-		icon: Bed,
+		Icon: Bed,
 		links: [
 			{
 				href: `${SDS_BASE}/rac/add`,
@@ -422,7 +422,7 @@ export const sdsLinks: SDSGroups[] = [
 		id: 'lounge-admin',
 		name: 'Lounge Admin',
 		value: '10',
-		icon: Users,
+		Icon: Users,
 		links: [
 			{
 				href: `${SDS_BASE}/lounges`,

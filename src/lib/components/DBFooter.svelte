@@ -32,7 +32,7 @@
 						id: linkGroup.id,
 						name: linkGroup.name,
 						value: linkGroup.value,
-						icon: linkGroup.icon,
+						Icon: linkGroup.Icon,
 						links: allLinks
 					});
 				}
@@ -96,7 +96,7 @@
 							label={tileLinks.name}
 							labelExpanded={tileLinks.name}
 						>
-							<tileLinks.icon />
+							<tileLinks.Icon />
 						</Nav.Tile>
 					{/if}
 				{/each}

@@ -34,19 +34,20 @@
 </script>
 
 <h1 class="h1">Resident Scholar Program</h1>
-<div
-	class="btn-group-vertical w-full justify-center self-center preset-filled lg:btn-group lg:w-min"
+<nav
+	class="btn-group flex-col flex-wrap justify-center p-2 preset-outlined-surface-200-800 md:flex-row"
 >
 	{#each pages as page}
 		<a
 			type="button"
+			class="btn"
 			href={page.url}
-			class:!preset-filled-primary-500={page.url === current_page}
-			class:hover:preset-tonal-primary-500={page.url !== current_page}
+			class:!preset-filled={page.url === current_page}
+			class:hover:preset-tonal={page.url !== current_page}
 		>
 			{page.name}
 		</a>
 	{/each}
-</div>
+</nav>
 
 {@render children()}
