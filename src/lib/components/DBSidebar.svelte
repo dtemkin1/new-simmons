@@ -1,5 +1,12 @@
 <script lang="ts">
 	import { Nav } from '@skeletonlabs/skeleton-svelte';
+	import { page } from '$app/stores';
+	import { sdsLinks } from '$lib/data/navLinks';
+	import { onNavigate } from '$app/navigation';
+	import { SDS_LOGIN_URL } from '$lib/config';
+
+	import { CircleUser } from 'lucide-svelte';
+	import { Menu } from 'lucide-svelte';
 
 	interface Props {
 		username: string | null;
@@ -7,12 +14,7 @@
 	}
 
 	let { username = null, groups = [] }: Props = $props();
-
-	import { page } from '$app/stores';
-	import { CircleUser } from 'lucide-svelte';
-	import { sdsLinks } from '$lib/data/navLinks';
-	import { onNavigate } from '$app/navigation';
-	import { SDS_LOGIN_URL } from '$lib/config';
+	let expanded = $state(false);
 
 	onNavigate((params) => {
 		if (params.to?.url.pathname.includes('/sds')) {
@@ -20,7 +22,7 @@
 		}
 	});
 
-	let currentTile = $state('');
+	let currentTile: string = $state('');
 	let userLinks: typeof sdsLinks = $derived(
 		sdsLinks.reduce(
 			(acc, linkGroup) => {
@@ -43,65 +45,89 @@
 	);
 
 	let activeGroup = $derived(
-		userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] }
+		userLinks.find((linkGroup) => (currentTile ? linkGroup.value === currentTile : false)) ?? {
+			links: []
+		}
 	);
 </script>
 
-<div class="flex h-full flex-row">
-	{#if $page.data.username}
-		<Nav bind:value={currentTile}>
-			{#snippet tiles()}
-				{#each userLinks as tileLinks}
-					{#if tileLinks.links.length > 0}
-						{@const Icon = tileLinks.icon}
-						<Nav.Tile
-							id={tileLinks.value}
-							title={tileLinks.id}
-							onclick={() => {
-								if (currentTile == tileLinks.value) {
-									currentTile = '';
-								}
-							}}
-							label={tileLinks.name}
-						>
-							<Icon />
-						</Nav.Tile>
-					{/if}
-				{/each}
-			{/snippet}
-			{#snippet footer()}
-				<Nav.Tile href={SDS_LOGIN_URL} title="Account" label={username ?? 'Guest'}>
-					<CircleUser />
-				</Nav.Tile>
-			{/snippet}
-		</Nav>
-		{#if Number(currentTile) !== 0 && userLinks[Number(currentTile) - 1].links.length > 0}
-			<section class="w-screen space-y-4 p-4 bg-surface-100-900 md:w-72">
-				<nav class="list-nav pr-20 md:pr-0">
-					<ul>
-						{#each activeGroup.links as link}
-							<li>
-								<a
-									href={link.href}
-									class="btn whitespace-normal text-left"
-									class:!bg-primary-active={link.href === $page.url.pathname}
-									class:pointer-events-none={link.badge === 'Incomplete'}
-									class:opacity-50={link.badge === 'Incomplete'}
-									aria-disabled={link.badge === 'Incomplete'}
-								>
-									<span class="flex-auto">{link.label}</span>
-									{#if link.badge}<span
-											class="badge preset-filled-secondary-500"
-											class:preset-filled-error-500={link.badge == 'Incomplete'}
-											class:preset-filled-warning-500={link.badge == 'Work in Progress'}
-											>{link.badge}</span
-										>{/if}
-								</a>
-							</li>
-						{/each}
-					</ul>
-				</nav>
-			</section>
+<div class="flex h-full flex-row bg-surface-100-900">
+	<div class="float-start h-full overflow-y-auto">
+		{#if $page.data.username}
+			<Nav.Rail bind:value={currentTile} {expanded}>
+				{#snippet header()}
+					<Nav.Tile
+						id="menu"
+						labelExpanded="Menu"
+						onclick={() => {
+							expanded = !expanded;
+						}}
+						active=""
+					>
+						<Menu />
+					</Nav.Tile>
+				{/snippet}
+				{#snippet tiles()}
+					{#each userLinks as tileLinks}
+						{#if tileLinks.links.length > 0}
+							<Nav.Tile
+								id={tileLinks.value}
+								title={tileLinks.id}
+								label={tileLinks.name}
+								labelExpanded={tileLinks.name}
+							>
+								<tileLinks.icon />
+							</Nav.Tile>
+						{/if}
+					{/each}
+				{/snippet}
+				{#snippet footer()}
+					<Nav.Tile
+						href={SDS_LOGIN_URL}
+						title="Account"
+						label={username ?? 'Guest'}
+						labelExpanded={username ?? 'Guest'}
+						selected={$page.url.pathname === SDS_LOGIN_URL}
+					>
+						<CircleUser />
+					</Nav.Tile>
+				{/snippet}
+			</Nav.Rail>
 		{/if}
-	{/if}
+	</div>
+	<div class="float-start h-full overflow-y-auto">
+		{#if Number(currentTile) && userLinks[Number(currentTile) - 1].links.length > 0}
+			<nav class="w-72 p-0 bg-surface-100-900">
+				<ul class="list-inside list-none space-y-2 p-4">
+					{#each activeGroup.links as link}
+						<li>
+							<a
+								href={link.href}
+								class="btn w-full whitespace-normal text-start"
+								class:!bg-primary-500={link.href === $page.url.pathname}
+								class:pointer-events-none={link.badge === 'Incomplete'}
+								class:opacity-50={link.badge === 'Incomplete'}
+								aria-disabled={link.badge === 'Incomplete'}
+								onclick={() => (currentTile = '')}
+							>
+								<span
+									class="flex-auto"
+									class:text-primary-contrast-500={link.href === $page.url.pathname}
+									>{link.label}</span
+								>
+								{#if link.badge}
+									<span
+										class="badge preset-filled-secondary-500"
+										class:preset-filled-error-500={link.badge == 'Incomplete'}
+										class:preset-filled-warning-500={link.badge == 'Work in Progress'}
+										>{link.badge}</span
+									>
+								{/if}
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</nav>
+		{/if}
+	</div>
 </div>

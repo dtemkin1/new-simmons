@@ -68,7 +68,7 @@
 			{#each userInfoGenerated.tags as tag}
 				<div class="flex flex-row flex-wrap items-center justify-center space-x-1">
 					<span class="text-right">{tag[0]}:</span>
-					<span class="text-left"
+					<span class="text-start"
 						>{#if tag[0] == 'URL' && typeof tag[1] == 'string'}
 							<a class="anchor" href={`${tag[1].includes('://') ? '' : 'http://'}${tag[1]}`}
 								>{tag[1]}</a
@@ -83,7 +83,7 @@
 
 	{#if userInfo.quote}
 		<footer>
-			<blockquote class="prose blockquote text-left dark:prose-invert">
+			<blockquote class="prose blockquote text-start dark:prose-invert">
 				<Markdown {carta} value={userInfoGenerated.quote} />
 			</blockquote>
 		</footer>

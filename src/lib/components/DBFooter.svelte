@@ -1,5 +1,11 @@
-<!-- <script lang="ts">
-	import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton-svelte';
+<script lang="ts">
+	import { Nav } from '@skeletonlabs/skeleton-svelte';
+	import { page } from '$app/stores';
+	import { sdsLinks } from '$lib/data/navLinks';
+	import { onNavigate } from '$app/navigation';
+	import { SDS_LOGIN_URL } from '$lib/config';
+
+	import { CircleUser } from 'lucide-svelte';
 
 	interface Props {
 		username: string | null;
@@ -8,19 +14,13 @@
 
 	let { username = null, groups = [] }: Props = $props();
 
-	import { page } from '$app/stores';
-	import { CircleUser } from 'lucide-svelte';
-	import { sdsLinks } from '$lib/data/navLinks';
-	import { onNavigate } from '$app/navigation';
-	import { SDS_LOGIN_URL } from '$lib/config';
-
 	onNavigate((params) => {
 		if (params.to?.url.pathname.includes('/sds')) {
-			currentTile = 0;
+			currentTile = '';
 		}
 	});
 
-	let currentTile = $state(0);
+	let currentTile: string = $state('');
 	let userLinks: typeof sdsLinks = $derived(
 		sdsLinks.reduce(
 			(acc, linkGroup) => {
@@ -43,88 +43,75 @@
 	);
 
 	let activeGroup = $derived(
-		userLinks.find((linkGroup) => linkGroup.value === currentTile) || { links: [] }
+		userLinks.find((linkGroup) => (currentTile ? linkGroup.value === currentTile : false)) ?? {
+			links: []
+		}
 	);
+
+	$inspect(currentTile);
 </script>
 
-{#if currentTile !== 0 && userLinks[currentTile - 1].links.length > 0}
-	<div class="bg-surface-50-900">
-		<section
-			class="p-4 pt-4 space-y-4 w-screen overflow-y-auto bg-surface-100-800 rounded-container"
-		>
-			<nav class="list-nav max-h-96">
-				<ul>
+<div class="flex w-screen flex-col bg-surface-100-900">
+	<div class="float-start h-full overflow-y-auto">
+		{#if Number(currentTile) && userLinks[Number(currentTile) - 1].links.length > 0}
+			<nav class="max-h-96 p-0 bg-surface-100-900">
+				<ul class="list-inside list-none space-y-2 p-4">
 					{#each activeGroup.links as link}
 						<li>
 							<a
 								href={link.href}
-								class="whitespace-normal text-left btn"
-								class:!bg-primary-active={link.href === $page.url.pathname}
+								class="btn w-full whitespace-normal text-start"
+								class:!bg-primary-500={link.href === $page.url.pathname}
 								class:pointer-events-none={link.badge === 'Incomplete'}
 								class:opacity-50={link.badge === 'Incomplete'}
 								aria-disabled={link.badge === 'Incomplete'}
+								onclick={() => (currentTile = '')}
 							>
-								<span class="flex-auto">{link.label}</span>
-								{#if link.badge}<span
+								<span
+									class="flex-auto"
+									class:text-primary-contrast-500={link.href === $page.url.pathname}
+									>{link.label}</span
+								>
+								{#if link.badge}
+									<span
 										class="badge preset-filled-secondary-500"
 										class:preset-filled-error-500={link.badge == 'Incomplete'}
 										class:preset-filled-warning-500={link.badge == 'Work in Progress'}
 										>{link.badge}</span
-									>{/if}
+									>
+								{/if}
 							</a>
 						</li>
 					{/each}
 				</ul>
 			</nav>
-		</section>
+		{/if}
 	</div>
-{/if}
-
-{#if $page.data.username}
-	<TabGroup
-		justify="justify-left"
-		active="preset-filled-primary-500"
-		hover="hover:preset-tonal-primary-500"
-		flex="flex-1 lg:flex-none"
-		rounded=""
-		border=""
-		class="bg-surface-100-800 w-full"
-	>
-		{#each userLinks as tileLinks}
-			{#if tileLinks.links.length > 0}
-				{@const Icon = tileLinks.icon}
-				<TabAnchor
-					bind:group={currentTile}
-					selected={currentTile == tileLinks.value}
-					name={tileLinks.id}
-					value={tileLinks.value}
-					title={tileLinks.id}
-					onclick={() => {
-						if (currentTile == tileLinks.value) {
-							currentTile = 0;
-						} else {
-							currentTile = tileLinks.value;
-						}
-					}}
+	<div class="max-w-screen justify-start overflow-x-auto">
+		{#if $page.data.username}
+			<Nav.Bar bind:value={currentTile} tilesJustify="justify-start">
+				{#each userLinks as tileLinks}
+					{#if tileLinks.links.length > 0}
+						<Nav.Tile
+							id={tileLinks.value}
+							title={tileLinks.id}
+							label={tileLinks.name}
+							labelExpanded={tileLinks.name}
+						>
+							<tileLinks.icon />
+						</Nav.Tile>
+					{/if}
+				{/each}
+				<Nav.Tile
+					href={SDS_LOGIN_URL}
+					title="Account"
+					label={username ?? 'Guest'}
+					labelExpanded={username ?? 'Guest'}
+					selected={$page.url.pathname === SDS_LOGIN_URL}
 				>
-					{#snippet lead()}
-						<div class="flex justify-center items-center">
-							<Icon size={'1.5rem'}></Icon>
-						</div>
-					{/snippet}
-					<span class="font-bold text-xs">{tileLinks.name}</span>
-				</TabAnchor>
-			{/if}
-		{/each}
-
-		<TabAnchor href={SDS_LOGIN_URL} title="Account"
-			>{#snippet lead()}
-				<div class="flex justify-center items-center">
-					<CircleUser size={'1.5rem'} />
-				</div>
-			{/snippet}<span class="font-bold text-xs">{username ?? 'Guest'}</span></TabAnchor
-		>
-	</TabGroup>
-{/if} -->
-
-<!-- TODO: RECREATE -->
+					<CircleUser />
+				</Nav.Tile>
+			</Nav.Bar>
+		{/if}
+	</div>
+</div>

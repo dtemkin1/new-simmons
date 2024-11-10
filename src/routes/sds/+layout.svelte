@@ -5,7 +5,7 @@
 	import Header from '$lib/components/Header.svelte';
 
 	import DBSidebar from '$lib/components/DBSidebar.svelte';
-	// import DBFooter from '$lib/components/DBFooter.svelte';
+	import DBFooter from '$lib/components/DBFooter.svelte';
 
 	import { page } from '$app/stores';
 
@@ -20,10 +20,8 @@
 	</header>
 
 	<div class="flex h-full w-full flex-auto overflow-hidden">
-		<aside class="w-auto flex-none overflow-y-auto overflow-x-hidden">
-			{#if innerWidth && innerWidth >= 640}
-				<DBSidebar username={$page.data.username} groups={$page.data.groups} />
-			{/if}
+		<aside class="hidden w-auto flex-none overflow-y-auto overflow-x-hidden sm:block">
+			<DBSidebar username={$page.data.username} groups={$page.data.groups} />
 		</aside>
 
 		<div class="flex flex-1 flex-col overflow-x-hidden" style:scrollbar-gutter="auto">
@@ -38,9 +36,9 @@
 	</div>
 
 	<footer class="flex-none">
-		<!-- {#if innerWidth && innerWidth < 640}
+		<aside class="block sm:hidden">
 			<DBFooter username={$page.data.username} groups={$page.data.groups} />
-		{/if} -->
+		</aside>
 		<Footer />
 	</footer>
 </div>
