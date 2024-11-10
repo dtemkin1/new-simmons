@@ -17,12 +17,6 @@
 	let { username = null, groups = [] }: Props = $props();
 	let expanded = $state(false);
 
-	onNavigate((params) => {
-		if (params.to?.url.pathname.includes('/sds')) {
-			currentTile = '';
-		}
-	});
-
 	let currentTile: string = $state('');
 	let userLinks: typeof sdsLinks = $derived(
 		sdsLinks.reduce(
@@ -112,7 +106,6 @@
 								class:pointer-events-none={link.badge === 'Incomplete'}
 								class:opacity-50={link.badge === 'Incomplete'}
 								aria-disabled={link.badge === 'Incomplete'}
-								onclick={() => (currentTile = '')}
 							>
 								<span
 									class="flex-auto"

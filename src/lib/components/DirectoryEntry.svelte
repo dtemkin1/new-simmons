@@ -123,7 +123,6 @@
 		<footer>
 			<blockquote class="prose blockquote text-start dark:prose-invert">
 				<Markdown {carta} value={userInfoGenerated.quote} />
-				<!-- <SvelteMarkdown options={{ breaks: true }} source={userInfoGenerated.quote} /> -->
 			</blockquote>
 		</footer>
 	{/if}
