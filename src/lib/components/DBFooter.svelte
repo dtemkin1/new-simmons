@@ -47,8 +47,6 @@
 			links: []
 		}
 	);
-
-	$inspect(currentTile);
 </script>
 
 <div class="flex w-screen flex-col bg-surface-100-900">
