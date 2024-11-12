@@ -1,12 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
 	import { ProgressRing } from '@skeletonlabs/skeleton-svelte';
-	import DirectorySearch from '$lib/components/DirectorySearch.svelte';
-	import PeopleTable from '$lib/components/PeopleTable.svelte';
-
-	import { getContext } from 'svelte';
-	import type { ActionResult } from '@sveltejs/kit';
 
 	interface Props {
 		data: PageData;

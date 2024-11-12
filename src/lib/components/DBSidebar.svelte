@@ -2,7 +2,6 @@
 	import { Nav } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/stores';
 	import { sdsLinks } from '$lib/data/navLinks';
-	import { onNavigate } from '$app/navigation';
 	import { SDS_LOGIN_URL } from '$lib/config';
 
 	import { CircleUser } from 'lucide-svelte';
