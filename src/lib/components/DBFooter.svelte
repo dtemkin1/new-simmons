@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Nav } from '@skeletonlabs/skeleton-svelte';
+	import { Navigation } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/stores';
 	import { sdsLinks } from '$lib/data/navLinks';
 	import { onNavigate } from '$app/navigation';
@@ -87,20 +87,20 @@
 	</div>
 	<div class="max-w-screen justify-start overflow-x-auto">
 		{#if $page.data.username}
-			<Nav.Bar bind:value={currentTile} tilesJustify="justify-start">
+			<Navigation.Bar bind:value={currentTile} tilesJustify="justify-start">
 				{#each userLinks as tileLinks}
 					{#if tileLinks.links.length > 0}
-						<Nav.Tile
+						<Navigation.Tile
 							id={tileLinks.value}
 							title={tileLinks.id}
 							label={tileLinks.name}
 							labelExpanded={tileLinks.name}
 						>
 							<tileLinks.Icon />
-						</Nav.Tile>
+						</Navigation.Tile>
 					{/if}
 				{/each}
-				<Nav.Tile
+				<Navigation.Tile
 					href={SDS_LOGIN_URL}
 					title="Account"
 					label={username ?? 'Guest'}
@@ -108,8 +108,8 @@
 					selected={$page.url.pathname === SDS_LOGIN_URL}
 				>
 					<CircleUser />
-				</Nav.Tile>
-			</Nav.Bar>
+				</Navigation.Tile>
+			</Navigation.Bar>
 		{/if}
 	</div>
 </div>

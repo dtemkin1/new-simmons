@@ -3,18 +3,14 @@ import type { Config } from 'tailwindcss';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 
-import { join } from 'path';
-import { skeleton } from '@skeletonlabs/skeleton/plugin';
+import { skeleton, contentPath } from '@skeletonlabs/skeleton/plugin';
 // import * as themes from '@skeletonlabs/skeleton/themes';
 
 import Simmons from './src/Simmons';
 
 export default {
 	darkMode: 'selector',
-	content: [
-		'./src/**/*.{html,js,svelte,ts}',
-		join(require.resolve('@skeletonlabs/skeleton-svelte'), '../**/*.{html,js,svelte,ts}')
-	],
+	content: ['./src/**/*.{html,js,svelte,ts}', contentPath(import.meta.url, 'svelte')],
 	theme: {
 		extend: {}
 	},
@@ -26,4 +22,4 @@ export default {
 			themes: [Simmons]
 		})
 	]
-} as Config;
+} satisfies Config;

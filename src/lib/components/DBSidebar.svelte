@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Nav } from '@skeletonlabs/skeleton-svelte';
+	import { Navigation } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/stores';
 	import { sdsLinks } from '$lib/data/navLinks';
 	import { SDS_LOGIN_URL } from '$lib/config';
@@ -50,9 +50,9 @@
 <div class="flex h-full flex-row bg-surface-100-900">
 	<div class="float-start h-full overflow-y-auto overflow-x-hidden">
 		{#if $page.data.username}
-			<Nav.Rail bind:value={currentTile} {expanded}>
+			<Navigation.Rail bind:value={currentTile} {expanded}>
 				{#snippet header()}
-					<Nav.Tile
+					<Navigation.Tile
 						id="menu"
 						labelExpanded={menuOrClose ? 'Menu' : 'Close'}
 						onclick={() => {
@@ -63,33 +63,33 @@
 						active="hover:preset-filled-surface-50-950"
 					>
 						{#if menuOrClose}<Menu />{:else}<X />{/if}
-					</Nav.Tile>
+					</Navigation.Tile>
 				{/snippet}
 				{#snippet tiles()}
 					{#each userLinks as tileLinks}
 						{#if tileLinks.links.length > 0}
-							<Nav.Tile
+							<Navigation.Tile
 								id={tileLinks.value}
 								title={tileLinks.id}
 								label={tileLinks.name}
 								labelExpanded={tileLinks.name}
 							>
 								<tileLinks.Icon />
-							</Nav.Tile>
+							</Navigation.Tile>
 						{/if}
 					{/each}
 				{/snippet}
 				{#snippet footer()}
-					<Nav.Tile
+					<Navigation.Tile
 						href={SDS_LOGIN_URL}
 						title="Account"
 						label={username ?? 'Guest'}
 						labelExpanded={username ?? 'Guest'}
 					>
 						<CircleUser />
-					</Nav.Tile>
+					</Navigation.Tile>
 				{/snippet}
-			</Nav.Rail>
+			</Navigation.Rail>
 		{/if}
 	</div>
 	<div class="float-start h-full overflow-y-auto">
