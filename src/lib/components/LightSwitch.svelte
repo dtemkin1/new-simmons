@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	// Icons
-	import IconMoon from 'lucide-svelte/icons/moon';
-	import IconSun from 'lucide-svelte/icons/sun';
+	import { Moon, Sun } from 'lucide-svelte';
 
 	// Bind to the checked state
 	let lightMode: boolean = $state(false);
@@ -44,6 +43,6 @@
 	bind:checked={lightMode}
 	onCheckedChange={handleModeChange}
 >
-	{#snippet inactiveChild()}<IconMoon size="14" />{/snippet}
-	{#snippet activeChild()}<IconSun size="14" />{/snippet}
+	{#snippet inactiveChild()}<Moon size="14" />{/snippet}
+	{#snippet activeChild()}<Sun size="14" />{/snippet}
 </Switch>

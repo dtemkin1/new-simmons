@@ -58,23 +58,20 @@
 						<li>
 							<a
 								href={link.href}
-								class="btn w-full whitespace-normal text-start"
-								class:!bg-primary-500={link.href === $page.url.pathname}
+								class="btn h-auto w-full whitespace-normal text-start"
+								class:preset-filled-primary-500={link.href === $page.url.pathname}
+								class:hover:preset-tonal={link.href !== $page.url.pathname}
 								class:pointer-events-none={link.badge === 'Incomplete'}
 								class:opacity-50={link.badge === 'Incomplete'}
 								aria-disabled={link.badge === 'Incomplete'}
 								onclick={() => (currentTile = '')}
 							>
-								<span
-									class="flex-auto"
-									class:text-primary-contrast-500={link.href === $page.url.pathname}
-									>{link.label}</span
-								>
+								<span class="flex-auto">{link.label}</span>
 								{#if link.badge}
 									<span
 										class="badge preset-filled-secondary-500"
-										class:preset-filled-error-500={link.badge == 'Incomplete'}
-										class:preset-filled-warning-500={link.badge == 'Work in Progress'}
+										class:!preset-filled-error-500={link.badge == 'Incomplete'}
+										class:!preset-filled-warning-500={link.badge == 'Work in Progress'}
 										>{link.badge}</span
 									>
 								{/if}
