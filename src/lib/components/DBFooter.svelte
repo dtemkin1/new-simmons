@@ -8,11 +8,11 @@
 	import { CircleUser } from 'lucide-svelte';
 
 	interface Props {
-		username: string | null;
+		username: string;
 		groups: readonly string[];
 	}
 
-	let { username = null, groups = [] }: Props = $props();
+	let { username = '', groups = [] }: Props = $props();
 
 	onNavigate((params) => {
 		if (params.to?.url.pathname.includes('/sds')) {
@@ -83,30 +83,28 @@
 		{/if}
 	</div>
 	<div class="max-w-screen justify-start overflow-x-auto">
-		{#if $page.data.username}
-			<Navigation.Bar bind:value={currentTile} tilesJustify="justify-start">
-				{#each userLinks as tileLinks}
-					{#if tileLinks.links.length > 0}
-						<Navigation.Tile
-							id={tileLinks.value}
-							title={tileLinks.id}
-							label={tileLinks.name}
-							labelExpanded={tileLinks.name}
-						>
-							<tileLinks.Icon />
-						</Navigation.Tile>
-					{/if}
-				{/each}
-				<Navigation.Tile
-					href={SDS_LOGIN_URL}
-					title="Account"
-					label={username ?? 'Guest'}
-					labelExpanded={username ?? 'Guest'}
-					selected={$page.url.pathname === SDS_LOGIN_URL}
-				>
-					<CircleUser />
-				</Navigation.Tile>
-			</Navigation.Bar>
-		{/if}
+		<Navigation.Bar bind:value={currentTile} tilesJustify="justify-start">
+			{#each userLinks as tileLinks}
+				{#if tileLinks.links.length > 0}
+					<Navigation.Tile
+						id={tileLinks.value}
+						title={tileLinks.id}
+						label={tileLinks.name}
+						labelExpanded={tileLinks.name}
+					>
+						<tileLinks.Icon />
+					</Navigation.Tile>
+				{/if}
+			{/each}
+			<Navigation.Tile
+				href={SDS_LOGIN_URL}
+				title="Account"
+				label={username ?? 'Guest'}
+				labelExpanded={username ?? 'Guest'}
+				selected={$page.url.pathname === SDS_LOGIN_URL}
+			>
+				<CircleUser />
+			</Navigation.Tile>
+		</Navigation.Bar>
 	</div>
 </div>

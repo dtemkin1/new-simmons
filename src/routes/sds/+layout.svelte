@@ -20,9 +20,11 @@
 	</header>
 
 	<div class="flex h-full w-full flex-auto overflow-hidden">
-		<aside class="hidden w-auto flex-none overflow-y-auto overflow-x-hidden sm:block">
-			<DBSidebar username={$page.data.username} groups={$page.data.groups} />
-		</aside>
+		{#if $page.data.username && $page.data.groups}
+			<aside class="hidden w-auto flex-none overflow-y-auto overflow-x-hidden sm:block">
+				<DBSidebar username={$page.data.username} groups={$page.data.groups} />
+			</aside>
+		{/if}
 
 		<div class="flex flex-1 flex-col overflow-x-hidden" style:scrollbar-gutter="auto">
 			<main class="flex-auto">
@@ -36,9 +38,11 @@
 	</div>
 
 	<footer class="flex-none">
-		<aside class="block sm:hidden">
-			<DBFooter username={$page.data.username} groups={$page.data.groups} />
-		</aside>
+		{#if $page.data.username && $page.data.groups}
+			<aside class="block sm:hidden">
+				<DBSidebar username={$page.data.username} groups={$page.data.groups} />
+			</aside>
+		{/if}
 		<Footer />
 	</footer>
 </div>

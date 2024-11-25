@@ -9,11 +9,11 @@
 	import { X } from 'lucide-svelte';
 
 	interface Props {
-		username: string | null;
+		username: string;
 		groups: readonly string[];
 	}
 
-	let { username = null, groups = [] }: Props = $props();
+	let { username = '', groups = [] }: Props = $props();
 	let expanded = $state(false);
 
 	let currentTile: string = $state('');
@@ -49,48 +49,46 @@
 
 <div class="flex h-full flex-row bg-surface-100-900">
 	<div class="float-start h-full overflow-y-auto overflow-x-hidden">
-		{#if $page.data.username}
-			<Navigation.Rail bind:value={currentTile} {expanded}>
-				{#snippet header()}
-					<Navigation.Tile
-						id="menu"
-						labelExpanded={menuOrClose ? 'Menu' : 'Close'}
-						onclick={() => {
-							if (menuOrClose) {
-								expanded = !expanded;
-							}
-						}}
-						active="hover:preset-filled-surface-50-950"
-					>
-						{#if menuOrClose}<Menu />{:else}<X />{/if}
-					</Navigation.Tile>
-				{/snippet}
-				{#snippet tiles()}
-					{#each userLinks as tileLinks}
-						{#if tileLinks.links.length > 0}
-							<Navigation.Tile
-								id={tileLinks.value}
-								title={tileLinks.id}
-								label={tileLinks.name}
-								labelExpanded={tileLinks.name}
-							>
-								<tileLinks.Icon />
-							</Navigation.Tile>
-						{/if}
-					{/each}
-				{/snippet}
-				{#snippet footer()}
-					<Navigation.Tile
-						href={SDS_LOGIN_URL}
-						title="Account"
-						label={username ?? 'Guest'}
-						labelExpanded={username ?? 'Guest'}
-					>
-						<CircleUser />
-					</Navigation.Tile>
-				{/snippet}
-			</Navigation.Rail>
-		{/if}
+		<Navigation.Rail bind:value={currentTile} {expanded}>
+			{#snippet header()}
+				<Navigation.Tile
+					id="menu"
+					labelExpanded={menuOrClose ? 'Menu' : 'Close'}
+					onclick={() => {
+						if (menuOrClose) {
+							expanded = !expanded;
+						}
+					}}
+					active="hover:preset-filled-surface-50-950"
+				>
+					{#if menuOrClose}<Menu />{:else}<X />{/if}
+				</Navigation.Tile>
+			{/snippet}
+			{#snippet tiles()}
+				{#each userLinks as tileLinks}
+					{#if tileLinks.links.length > 0}
+						<Navigation.Tile
+							id={tileLinks.value}
+							title={tileLinks.id}
+							label={tileLinks.name}
+							labelExpanded={tileLinks.name}
+						>
+							<tileLinks.Icon />
+						</Navigation.Tile>
+					{/if}
+				{/each}
+			{/snippet}
+			{#snippet footer()}
+				<Navigation.Tile
+					href={SDS_LOGIN_URL}
+					title="Account"
+					label={username ?? 'Guest'}
+					labelExpanded={username ?? 'Guest'}
+				>
+					<CircleUser />
+				</Navigation.Tile>
+			{/snippet}
+		</Navigation.Rail>
 	</div>
 	<div class="float-start h-full overflow-y-auto">
 		{#if Number(currentTile) && userLinks[Number(currentTile) - 1].links.length > 0}
