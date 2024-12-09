@@ -67,8 +67,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0(@sveltejs/kit@2.9.0(@sveltejs/vite-plugin-svelte@4.0.2(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1)))
       '@sveltejs/enhanced-img':
-        specifier: ^0.4.1
-        version: 0.4.1(rollup@4.28.0)(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1))
+        specifier: ^0.4.3
+        version: 0.4.3(rollup@4.28.0)(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1))
       '@sveltejs/kit':
         specifier: ^2.9.0
         version: 2.9.0(@sveltejs/vite-plugin-svelte@4.0.2(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1))
@@ -1288,8 +1288,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.4.0
 
-  '@sveltejs/enhanced-img@0.4.1':
-    resolution: {integrity: sha512-Z0xwQWM7tfdlNYuaFsAsbjEosEZb961yP7hlvZBLlh3+Rv4tI3BboD6bUkmInj+cC66p/5rybgvEtxX5LILSuw==}
+  '@sveltejs/enhanced-img@0.4.3':
+    resolution: {integrity: sha512-hhuaZW2a+4p/niPpPnGEDWBbYy54rvvPlD3JArCyWYMbkdj825HkgyzvNZWbA0nrKDhdFNbbVVsVNBMDvPOLrQ==}
     peerDependencies:
       svelte: ^5.0.0
       vite: '>= 5.0.0'
@@ -4313,9 +4313,10 @@ snapshots:
       esbuild: 0.24.0
       set-cookie-parser: 2.7.1
 
-  '@sveltejs/enhanced-img@0.4.1(rollup@4.28.0)(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1))':
+  '@sveltejs/enhanced-img@0.4.3(rollup@4.28.0)(svelte@5.4.0)(vite@5.4.11(@types/node@22.10.1))':
     dependencies:
       magic-string: 0.30.14
+      sharp: 0.33.5
       svelte: 5.4.0
       svelte-parse-markup: 0.1.5(svelte@5.4.0)
       vite: 5.4.11(@types/node@22.10.1)
