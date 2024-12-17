@@ -59,7 +59,7 @@
 		"@oslojs/encoding": "^1.1.0",
 		"arctic": "^2.3.0",
 		"carta-md": "^4.6.7",
-		"css-tree": "^3.0.1",
+		"css-tree": "^3.1.0",
 		"dotenv": "^16.4.7",
 		"drizzle-orm": "^0.36.4",
 		"isomorphic-dompurify": "^2.18.0",
