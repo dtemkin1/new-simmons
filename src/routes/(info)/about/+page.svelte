@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img';
 	import { ArrowLeft } from 'lucide-svelte';
 	import { ArrowRight } from 'lucide-svelte';
@@ -94,7 +95,9 @@
 		}
 	}
 
-	import { onMount } from 'svelte';
+	function carouselThumbnail(index: number) {
+		if (elemCarousel) elemCarousel.scroll(elemCarousel.clientWidth * index, 0);
+	}
 
 	onMount(() => {
 		const interval = setInterval(() => {
@@ -106,36 +109,52 @@
 </script>
 
 <h1 class="h1">About</h1>
-<div
-	class="grid grid-cols-[auto_1fr_auto] content-center items-center gap-0 self-center p-4 md:gap-4"
->
-	<!-- Button: Left -->
-	<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselLeft}>
-		<div class="flex items-center justify-center">
-			<ArrowLeft />
-		</div>
-	</button>
-	<!-- Full Images -->
-	<div
-		bind:this={elemCarousel}
-		class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-container"
-	>
-		{#each images as image}
-			<div class="g-0 relative flex w-fit shrink-0 snap-center rounded-container">
-				<enhanced:img class="h-full w-full overflow-y-hidden" src={image.image} alt={image.title} />
-				<div class="absolute bottom-0 w-full bg-surface-900 !bg-opacity-60 px-4 py-3 backdrop-blur">
-					<p class="text-sm font-bold text-surface-contrast-900">{image.title}</p>
-					<p class="text-sm text-surface-contrast-900">{@html image.description}</p>
-				</div>
+<div class="w-full">
+	<div class="card grid grid-cols-[auto_1fr_auto] items-center gap-4 p-4">
+		<!-- Button: Left -->
+		<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselLeft}>
+			<div class="flex items-center justify-center">
+				<ArrowLeft size={16} />
 			</div>
-		{/each}
-	</div>
-	<!-- Button: Right -->
-	<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselRight}>
-		<div class="flex items-center justify-center">
-			<ArrowRight />
+		</button>
+		<!-- Full Images -->
+		<div bind:this={elemCarousel} class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth">
+			{#each images as image}
+				<div class="g-0 relative flex w-fit shrink-0 snap-center rounded-container">
+					<enhanced:img
+						class="h-full w-full overflow-y-hidden"
+						src={image.image}
+						alt={image.title}
+						loading="lazy"
+					/>
+					<div
+						class="absolute bottom-0 w-full bg-surface-900 !bg-opacity-60 px-4 py-3 backdrop-blur"
+					>
+						<p class="text-sm font-bold text-surface-contrast-900">{image.title}</p>
+						<p class="text-sm text-surface-contrast-900">{@html image.description}</p>
+					</div>
+				</div>
+			{/each}
 		</div>
-	</button>
+		<!-- Button: Right -->
+		<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselRight}>
+			<div class="flex items-center justify-center">
+				<ArrowRight size={16} />
+			</div>
+		</button>
+	</div>
+	<!-- <div class="card hidden grid-cols-6 gap-4 p-4 md:grid">
+		{#each images as image, i}
+			<button type="button" aria-label="View image {i}" onclick={() => carouselThumbnail(i)}>
+				<enhanced:img
+					class="rounded-container hover:brightness-125"
+					src={image.image}
+					alt={image.title}
+					loading="lazy"
+				/>
+			</button>
+		{/each}
+	</div> -->
 </div>
 <h2 class="h2">Simmons Government</h2>
 <p>

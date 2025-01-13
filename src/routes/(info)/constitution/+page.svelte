@@ -1,16 +1,12 @@
 <script lang="ts">
-	// import { TableOfContents, tocCrawler } from '@skeletonlabs/skeleton-svelte';
 	import { ArrowUp } from 'lucide-svelte';
 </script>
 
 <h1 class="h1">The Constitution of Simmons Hall</h1>
 <p>Last updated October 6th, 2024</p>
 
-<!-- <TableOfContents regionLead="font-bold uppercase" /> -->
-
 <hr class="hr" />
 
-<!-- <div use:tocCrawler={{ mode: 'generate', scrollTarget: '#page' }} class="space-y-4"> -->
 <h2 class="font-bold uppercase">Preamble</h2>
 <p>
 	For decades at MIT, dormitory communities have been developing sophisticated systems of
@@ -1136,7 +1132,6 @@
 		</ol>
 	</li>
 </ol>
-<!-- </div> -->
 
 <hr class="hr" />
 
