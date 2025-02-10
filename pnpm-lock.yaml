@@ -61,8 +61,8 @@ importers:
         specifier: 3.0.0-next.10
         version: 3.0.0-next.10(postcss@8.5.1)(tailwindcss@3.4.17)
       '@skeletonlabs/skeleton-svelte':
-        specifier: 1.0.0-next.17
-        version: 1.0.0-next.17(svelte@5.17.4)
+        specifier: 1.0.0-next.18
+        version: 1.0.0-next.18(svelte@5.17.4)
       '@sveltejs/adapter-netlify':
         specifier: ^4.4.1
         version: 4.4.1(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@6.0.11(@types/node@22.10.7)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.4)(vite@6.0.11(@types/node@22.10.7)(jiti@1.21.7)(yaml@2.7.0)))
@@ -1187,8 +1187,8 @@ packages:
   '@shikijs/vscode-textmate@10.0.1':
     resolution: {integrity: sha512-fTIQwLF+Qhuws31iw7Ncl1R3HUDtGwIipiJ9iU+UsDUwMhegFcQKQHd51nZjb7CArq0MvON8rbgCGQYWHUKAdg==}
 
-  '@skeletonlabs/skeleton-svelte@1.0.0-next.17':
-    resolution: {integrity: sha512-BgBEZB7Ud+KjlAXnj8/ROiVR/wHZQFvXFfkn20yDcZFAHhS6nTRjPHc3+PlRoYJ1+Ft76wsIWLB7LIaqkHqO0w==}
+  '@skeletonlabs/skeleton-svelte@1.0.0-next.18':
+    resolution: {integrity: sha512-wwaO65aRUAHG8NRfCfVDLKUAco+rcOq9VKN0/ff1tdrmbB++4F1U2r8VKC2QJD3ImC62aUyLnEcDVJ7K8+BkCQ==}
     peerDependencies:
       svelte: ^5.0.0
 
@@ -4129,7 +4129,7 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.1': {}
 
-  '@skeletonlabs/skeleton-svelte@1.0.0-next.17(svelte@5.17.4)':
+  '@skeletonlabs/skeleton-svelte@1.0.0-next.18(svelte@5.17.4)':
     dependencies:
       '@zag-js/accordion': 0.78.3
       '@zag-js/avatar': 0.78.3
