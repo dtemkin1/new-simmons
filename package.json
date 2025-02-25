@@ -16,7 +16,7 @@
 		"preinstall": "npx only-allow pnpm"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.19.0",
+		"@eslint/js": "^9.21.0",
 		"@playwright/test": "^1.50.1",
 		"@skeletonlabs/skeleton": "3.0.0-next.10",
 		"@skeletonlabs/skeleton-svelte": "1.0.0-next.19",
@@ -26,7 +26,7 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.16",
-		"@types/eslint__js": "^8.42.3",
+		"@types/eslint__js": "^9.14.0",
 		"@types/locutus": "^0.0.8",
 		"@types/md5": "^2.3.5",
 		"@types/node": "^22.10.7",
