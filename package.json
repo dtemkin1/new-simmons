@@ -58,7 +58,7 @@
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
 		"arctic": "^3.2.4",
-		"carta-md": "^4.6.7",
+		"carta-md": "^4.7.0",
 		"css-tree": "^3.1.0",
 		"dotenv": "^16.4.7",
 		"drizzle-orm": "^0.39.3",
