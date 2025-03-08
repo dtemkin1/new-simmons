@@ -82,11 +82,11 @@
 	We've made a number of great videos over the years. We hope you enjoy watching them!
 </p>
 
-{#each vidData as vid}
+{#each vidData as vid (vid.title)}
 	<h2 class="h2">{vid.title}</h2>
 	{#if vid.beforeDescription}<p class="italic">{vid.beforeDescription}</p>{/if}
 	<iframe
-		class="aspect-video w-full rounded-container border-none"
+		class="rounded-container aspect-video w-full border-none"
 		src={vid.link}
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 		referrerpolicy="strict-origin-when-cross-origin"
@@ -98,7 +98,7 @@
 
 <a
 	href="https://www.youtube-nocookie.com/playlist?list=PLF877AC8074471EBF"
-	class="btn w-full preset-filled-primary-500"
+	class="btn preset-filled-primary-500 w-full"
 >
 	Watch i3 videos from Simmons history!
 </a>

@@ -59,7 +59,7 @@
 
 <div class="flex h-full items-center justify-center">
 	<div
-		class="card m-8 flex max-w-5xl flex-col space-y-4 border p-8 border-surface-200-800 preset-filled-surface-100-900"
+		class="card border-surface-200-800 preset-filled-surface-100-900 m-8 flex max-w-5xl flex-col space-y-4 border p-8"
 	>
 		{#if data.session}
 			<p class="text-center">

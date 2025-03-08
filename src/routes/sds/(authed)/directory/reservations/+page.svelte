@@ -9,7 +9,7 @@
 
 	<iframe
 		src="https://calendar.google.com/calendar/embed?src=q7grvgnsuk3hoh1o28srmi672k%40group.calendar.google.com&ctz=America%2FNew_York"
-		class="h-full w-full rounded-container border-none"
+		class="rounded-container h-full w-full border-none"
 		title="Simmons Reservation Calendar"
 	></iframe>
 </div>

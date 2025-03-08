@@ -23,21 +23,21 @@
 <div class="flex flex-col items-center justify-center">
 	<div class="h-full w-full max-w-[720px] space-y-4">
 		<iframe
-			class="aspect-video h-full w-[720px] max-w-full rounded-container border-0"
+			class="rounded-container aspect-video h-full w-[720px] max-w-full border-0"
 			src="https://www.youtube-nocookie.com/embed/I8srdQN3FYg?si=S8XKefVEezeJpQN0"
 			title="YouTube video player"
 			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 			referrerpolicy="strict-origin-when-cross-origin"
 			allowfullscreen
 		></iframe>
-		<a href="{base}/videos" class="btn w-full preset-filled-primary-500"
+		<a href="{base}/videos" class="btn preset-filled-primary-500 w-full"
 			>Watch more Simmons videos!</a
 		>
 	</div>
 </div>
 
 <h1 class="h1">Simmons {data.rexData.name} Schedule</h1>
-{#each Object.entries(rexData) as [date, events]}
+{#each Object.entries(rexData) as [date, events] (date)}
 	<h2 class="h2">
 		<time datetime={date}>{dateMaker.format(new Date(date))}</time>
 	</h2>
@@ -50,8 +50,8 @@
 					<th>Location</th>
 				</tr>
 			</thead>
-			<tbody class="hover:[&>tr]:preset-tonal">
-				{#each events as row}
+			<tbody class="[&>tr]:hover:preset-tonal">
+				{#each events as row, index (index)}
 					<tr>
 						<td>
 							<time datetime={row.start.toISOString()}>{timeMaker.format(row.start)}</time> –

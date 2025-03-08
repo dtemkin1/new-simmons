@@ -8,7 +8,7 @@
 
 <enhanced:img
 	src={backgroundImg}
-	class="min-w-screen fixed -z-10 min-h-screen select-none object-cover"
+	class="fixed -z-10 min-h-screen min-w-screen object-cover select-none"
 	alt="Outside of Simmons Hall in greyscale"
 />
 
@@ -20,7 +20,7 @@
 
 	<!-- Main -->
 	<div class="container mx-auto flex h-full items-center justify-center">
-		<main class="m-4 max-w-5xl space-y-4 rounded p-8 bg-surface-50-950">
+		<main class="bg-surface-50-950 m-4 max-w-5xl space-y-4 rounded-sm p-8">
 			{@render children()}
 		</main>
 	</div>

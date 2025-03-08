@@ -10,7 +10,7 @@
 <div class="relative h-96 w-full">
 	<iframe
 		src="https://calendar.google.com/calendar/embed?src=q7grvgnsuk3hoh1o28srmi672k%40group.calendar.google.com&ctz=America%2FNew_York"
-		class="absolute left-0 top-0 h-full w-full rounded-container border-none"
+		class="rounded-container absolute top-0 left-0 h-full w-full border-none"
 		aria-hidden="false"
 		title="Simmons Reservations"
 	></iframe>

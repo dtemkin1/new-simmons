@@ -41,7 +41,7 @@
 	<div class="flex flex-col items-center gap-4 self-center p-4">
 		<h1 class="h1 self-center text-center">Password for {data.username}</h1>
 		<div
-			class="card flex flex-col space-y-4 border p-4 border-surface-200-800 preset-filled-surface-100-900"
+			class="card border-surface-200-800 preset-filled-surface-100-900 flex flex-col space-y-4 border p-4"
 		>
 			<form
 				class="flex grow flex-col gap-4"

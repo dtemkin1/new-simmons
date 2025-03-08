@@ -2,4 +2,4 @@
 	import votingPic from '$lib/assets/voting.png';
 </script>
 
-<img class="w-max rounded-container" src={votingPic} alt="Flowcart explaining Simmons voting" />
+<img class="rounded-container w-max" src={votingPic} alt="Flowcart explaining Simmons voting" />

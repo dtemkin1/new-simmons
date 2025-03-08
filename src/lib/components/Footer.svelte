@@ -3,7 +3,7 @@
 	import logo_white from '../assets/mit_logo/mit_logo_std_rgb_white.png?enhanced';
 </script>
 
-<div class="flex w-full flex-col space-y-4 p-4 bg-surface-100-900">
+<div class="bg-surface-100-900 flex w-full flex-col space-y-4 p-4">
 	<div class="grid grid-cols-3 items-center gap-4">
 		<div class="place-content-start">
 			<a href="https://web.mit.edu/" aria-label="MIT Logo">

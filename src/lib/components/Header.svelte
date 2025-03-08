@@ -22,7 +22,7 @@
 
 	{#snippet trail()}
 		<div class="hidden items-center gap-4 md:inline-flex">
-			{#each headerLinks as page}
+			{#each headerLinks as page (page.url)}
 				<a
 					class="btn"
 					class:hover:preset-tonal={page.url !== current_page}
@@ -36,7 +36,8 @@
 		</div>
 		<div class="md:hidden">
 			<Modal
-				bind:open={headerDrawerOpen}
+				open={headerDrawerOpen}
+				onOpenChange={(e) => (headerDrawerOpen = e.open)}
 				triggerBase="btn btn-icon hover:preset-tonal"
 				contentBase="bg-surface-100-900 p-4 space-y-4 shadow-xl w-[480px] h-screen"
 				positionerJustify="justify-start"

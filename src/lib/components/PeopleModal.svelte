@@ -17,7 +17,7 @@
 		<enhanced:img src={img} alt={office.full_title}></enhanced:img>
 	</div>
 	<div class="space-y-1">
-		{#each people as { full_name, email, phone, year }}
+		{#each people as { full_name, email, phone, year } (full_name)}
 			<div>
 				<div>{`${full_name}${year ? ` '${year.slice(-2)}` : ''}`}</div>
 				<div>{email}</div>

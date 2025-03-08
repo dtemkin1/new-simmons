@@ -3,7 +3,7 @@
 </script>
 
 <iframe
-	class="aspect-video h-full w-[720px] max-w-full rounded-container border-0"
+	class="rounded-container aspect-video h-full w-[720px] max-w-full border-0"
 	src="https://www.youtube-nocookie.com/embed/I8srdQN3FYg?si=S8XKefVEezeJpQN0"
 	title="YouTube video player"
 	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

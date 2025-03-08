@@ -35,7 +35,7 @@
 						>Administrators (IT Committee)</a
 					>
 					<ul class="list">
-						{#each admins as admin}
+						{#each admins as admin (admin.username)}
 							<li>
 								<span class="flex-auto"
 									>{`${admin.firstname} ${admin.lastname}${
@@ -49,7 +49,7 @@
 				<div class="">
 					<a class="anchor font-bold" href="mailto:simmons-moderators@mit.edu">Moderators</a>
 					<ul class="list">
-						{#each mods as mod}
+						{#each mods as mod (mod.username)}
 							<li><span class="flex-auto">{`${mod.firstname} ${mod.lastname}`}</span></li>
 						{/each}
 					</ul>
@@ -57,7 +57,7 @@
 				<div class="">
 					<span class="font-bold">GovTracker House Committee Editors</span>
 					<ul class="list">
-						{#each housecommLeadership as housecommLeader}
+						{#each housecommLeadership as housecommLeader (housecommLeader.username)}
 							<li>
 								<span class="flex-auto"
 									>{`${housecommLeader.firstname} ${housecommLeader.lastname}`}</span
@@ -68,16 +68,16 @@
 				</div>
 			</div>
 			<div class="flex flex-row items-center gap-4">
-				<div class="flex-grow">
+				<div class="grow">
 					<p class="italic">
 						Want to help make the Simmons DB better?<br />
 						Then join the <a class="anchor" href="mailto:simmons-tech@mit.edu">IT Committee!</a>
 					</p>
 				</div>
-				<div class="flex-grow">
+				<div class="grow">
 					<span class="font-bold">GovTracker Financial Editors</span>
 					<ul class="list">
-						{#each financialAdmins as financialAdmin}
+						{#each financialAdmins as financialAdmin (financialAdmin.username)}
 							<li>
 								<span class="flex-auto"
 									>{`${financialAdmin.firstname} ${financialAdmin.lastname}`}</span

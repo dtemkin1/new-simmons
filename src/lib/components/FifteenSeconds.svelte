@@ -53,7 +53,7 @@
 </script>
 
 <div
-	class="card w-full max-w-md border p-4 text-center border-surface-200-800 preset-filled-surface-100-900"
+	class="card border-surface-200-800 preset-filled-surface-100-900 w-full max-w-md border p-4 text-center"
 >
 	<header>
 		<a href={`${base}/sds/directory/entry?username=${userInfoGenerated.username}`} class="anchor"
@@ -65,7 +65,7 @@
 	</header>
 	<article class="flex items-center justify-center p-4">
 		<div class="flex flex-col items-center justify-center space-y-1 self-center">
-			{#each userInfoGenerated.tags as tag}
+			{#each userInfoGenerated.tags as tag (tag[0])}
 				<div class="flex flex-row flex-wrap items-center justify-center space-x-1">
 					<span class="text-end">{tag[0]}:</span>
 					<span class="text-start"
@@ -83,7 +83,7 @@
 
 	{#if userInfo.quote}
 		<footer>
-			<blockquote class="prose blockquote text-start dark:prose-invert">
+			<blockquote class="prose blockquote dark:prose-invert text-start">
 				<Markdown {carta} value={userInfoGenerated.quote} />
 			</blockquote>
 		</footer>

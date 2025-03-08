@@ -47,9 +47,9 @@
 	let menuOrClose = $derived(currentTile === '' || currentTile === 'menu');
 </script>
 
-<div class="flex h-full flex-row bg-surface-100-900">
-	<div class="float-start h-full overflow-y-auto overflow-x-hidden">
-		<Navigation.Rail bind:value={currentTile} {expanded}>
+<div class="bg-surface-100-900 flex h-full flex-row">
+	<div class="float-start h-full overflow-x-hidden overflow-y-auto">
+		<Navigation.Rail value={currentTile} onValueChange={(e) => (currentTile = e)} {expanded}>
 			{#snippet header()}
 				<Navigation.Tile
 					id="menu"
@@ -65,7 +65,7 @@
 				</Navigation.Tile>
 			{/snippet}
 			{#snippet tiles()}
-				{#each userLinks as tileLinks}
+				{#each userLinks as tileLinks (tileLinks.value)}
 					{#if tileLinks.links.length > 0}
 						<Navigation.Tile
 							id={tileLinks.value}
@@ -92,13 +92,13 @@
 	</div>
 	<div class="float-start h-full overflow-y-auto">
 		{#if Number(currentTile) && userLinks[Number(currentTile) - 1].links.length > 0}
-			<nav class="w-72 p-0 bg-surface-100-900">
+			<nav class="bg-surface-100-900 w-72 p-0">
 				<ul class="list-inside list-none space-y-2 p-4">
-					{#each activeGroup.links as link}
+					{#each activeGroup.links as link (link.href)}
 						<li>
 							<a
 								href={link.href}
-								class="btn h-auto w-full whitespace-normal text-start"
+								class="btn h-auto w-full text-start whitespace-normal"
 								class:preset-filled-primary-500={link.href === $page.url.pathname}
 								class:hover:preset-tonal={link.href !== $page.url.pathname}
 								class:pointer-events-none={link.badge === 'Incomplete'}

@@ -40,7 +40,7 @@
 <Switch
 	name="mode"
 	controlActive="bg-surface-200"
-	bind:checked={lightMode}
+	checked={lightMode}
 	onCheckedChange={handleModeChange}
 >
 	{#snippet inactiveChild()}<Moon size="14" />{/snippet}

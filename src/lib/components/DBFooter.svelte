@@ -49,16 +49,16 @@
 	);
 </script>
 
-<div class="flex w-screen flex-col bg-surface-100-900">
+<div class="bg-surface-100-900 flex w-screen flex-col">
 	<div class="float-start h-full overflow-y-auto">
 		{#if Number(currentTile) && userLinks[Number(currentTile) - 1].links.length > 0}
-			<nav class="max-h-96 p-0 bg-surface-100-900">
+			<nav class="bg-surface-100-900 max-h-96 p-0">
 				<ul class="list-inside list-none space-y-2 p-4">
-					{#each activeGroup.links as link}
+					{#each activeGroup.links as link (link.href)}
 						<li>
 							<a
 								href={link.href}
-								class="btn h-auto w-full whitespace-normal text-start"
+								class="btn h-auto w-full text-start whitespace-normal"
 								class:preset-filled-primary-500={link.href === $page.url.pathname}
 								class:hover:preset-tonal={link.href !== $page.url.pathname}
 								class:pointer-events-none={link.badge === 'Incomplete'}
@@ -83,8 +83,12 @@
 		{/if}
 	</div>
 	<div class="max-w-screen justify-start overflow-x-auto">
-		<Navigation.Bar bind:value={currentTile} tilesJustify="justify-start">
-			{#each userLinks as tileLinks}
+		<Navigation.Bar
+			value={currentTile}
+			onValueChange={(e) => (currentTile = e)}
+			tilesJustify="justify-start"
+		>
+			{#each userLinks as tileLinks (tileLinks.value)}
 				{#if tileLinks.links.length > 0}
 					<Navigation.Tile
 						id={tileLinks.value}

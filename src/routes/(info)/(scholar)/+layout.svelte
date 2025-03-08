@@ -35,9 +35,9 @@
 
 <h1 class="h1">Resident Scholar Program</h1>
 <nav
-	class="btn-group flex-col flex-wrap justify-center p-2 preset-outlined-surface-200-800 md:flex-row"
+	class="btn-group preset-outlined-surface-200-800 flex-col flex-wrap justify-center p-2 md:flex-row"
 >
-	{#each pages as page}
+	{#each pages as page (page.url)}
 		<a
 			type="button"
 			class="btn"

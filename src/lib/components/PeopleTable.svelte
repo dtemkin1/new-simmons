@@ -24,20 +24,20 @@
 		<table class="table">
 			<thead>
 				<tr>
-					{#each dataToUse as [_key, value]}
+					{#each dataToUse as [key, value] (key)}
 						<th>{value}</th>
 					{/each}
 				</tr>
 			</thead>
-			<tbody class="hover:[&>tr]:preset-tonal-primary">
-				{#each userData as row}
+			<tbody class="[&>tr]:hover:preset-tonal-primary">
+				{#each userData as row (row.username)}
 					<tr
 						onclick={() => goto(`${SDS_BASE}/directory/entry?username=${row.username ?? ''}`)}
 						onmouseenter={() => preloadUserEntry(row.username ?? '')}
 						ontouchstart={() => preloadUserEntry(row.username ?? '')}
 						class="cursor-pointer"
 					>
-						{#each dataToUse as [key, _value]}
+						{#each dataToUse as [key, _value] (key)}
 							<td>{row[key] ?? ''}</td>
 						{/each}
 					</tr>

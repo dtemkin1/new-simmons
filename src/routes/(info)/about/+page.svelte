@@ -95,9 +95,9 @@
 		}
 	}
 
-	function carouselThumbnail(index: number) {
-		if (elemCarousel) elemCarousel.scroll(elemCarousel.clientWidth * index, 0);
-	}
+	// function carouselThumbnail(index: number) {
+	// 	if (elemCarousel) elemCarousel.scroll(elemCarousel.clientWidth * index, 0);
+	// }
 
 	onMount(() => {
 		const interval = setInterval(() => {
@@ -112,15 +112,15 @@
 <div class="w-full">
 	<div class="card grid grid-cols-[auto_1fr_auto] items-center gap-4 p-4">
 		<!-- Button: Left -->
-		<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselLeft}>
+		<button type="button" class="btn-icon preset-filled hidden md:block" onclick={carouselLeft}>
 			<div class="flex items-center justify-center">
 				<ArrowLeft size={16} />
 			</div>
 		</button>
 		<!-- Full Images -->
 		<div bind:this={elemCarousel} class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth">
-			{#each images as image}
-				<div class="g-0 relative flex w-fit shrink-0 snap-center rounded-container">
+			{#each images as image (image.title)}
+				<div class="g-0 rounded-container relative flex w-fit shrink-0 snap-center">
 					<enhanced:img
 						class="h-full w-full overflow-y-hidden"
 						src={image.image}
@@ -128,16 +128,16 @@
 						loading="lazy"
 					/>
 					<div
-						class="absolute bottom-0 w-full bg-surface-900 !bg-opacity-60 px-4 py-3 backdrop-blur"
+						class="bg-surface-900 bg-opacity-60! absolute bottom-0 w-full px-4 py-3 backdrop-blur-sm"
 					>
-						<p class="text-sm font-bold text-surface-contrast-900">{image.title}</p>
-						<p class="text-sm text-surface-contrast-900">{@html image.description}</p>
+						<p class="text-surface-contrast-900 text-sm font-bold">{image.title}</p>
+						<p class="text-surface-contrast-900 text-sm">{@html image.description}</p>
 					</div>
 				</div>
 			{/each}
 		</div>
 		<!-- Button: Right -->
-		<button type="button" class="btn-icon hidden preset-filled md:block" onclick={carouselRight}>
+		<button type="button" class="btn-icon preset-filled hidden md:block" onclick={carouselRight}>
 			<div class="flex items-center justify-center">
 				<ArrowRight size={16} />
 			</div>

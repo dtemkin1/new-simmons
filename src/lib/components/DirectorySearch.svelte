@@ -20,7 +20,7 @@
 </script>
 
 <form
-	class="card flex flex-col space-y-4 border p-4 border-surface-200-800 preset-filled-surface-100-900"
+	class="card border-surface-200-800 preset-filled-surface-100-900 flex flex-col space-y-4 border p-4"
 	method="POST"
 	use:enhance={enhanceFunc}
 	action={actionLocation}
@@ -51,7 +51,7 @@
 		<span class="label-text">Year</span>
 		<select class="select" name="year">
 			<option selected value="">[Any]</option>
-			{#each data.years as year}
+			{#each data.years as year (year)}
 				<option value={year}>{year}</option>
 			{/each}
 			<option value="No year">No year</option>
@@ -61,7 +61,7 @@
 		<span class="label-text">Lounge</span>
 		<select class="select" name="lounge">
 			<option selected value="">[Any]</option>
-			{#each data.lounges as lounge}
+			{#each data.lounges as lounge (lounge.lounge)}
 				<option value={lounge.lounge}>{lounge.lounge}: {lounge.description}</option>
 			{/each}
 		</select>
@@ -70,7 +70,7 @@
 		<span class="label-text">GRA</span>
 		<select class="select" name="gra">
 			<option selected value="">[Any]</option>
-			{#each data.gras as gra}
+			{#each data.gras as gra (gra)}
 				<option value={gra}>{gra}</option>
 			{/each}
 		</select>

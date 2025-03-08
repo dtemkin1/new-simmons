@@ -16,7 +16,7 @@
 <div class="flex min-h-full flex-col items-center gap-2">
 	<a
 		href="{base}/"
-		class="mb-4 mt-12 inline-flex items-center gap-4 self-center"
+		class="mt-12 mb-4 inline-flex items-center gap-4 self-center"
 		onclick={() => {
 			drawerState = !drawerState;
 		}}
@@ -26,7 +26,7 @@
 		<strong class="text-xl uppercase">Simmons Hall</strong>
 	</a>
 	<!-- <div class="grow" /> -->
-	{#each headerLinks as page}
+	{#each headerLinks as page (page.url)}
 		<a
 			onclick={() => {
 				drawerState = !drawerState;

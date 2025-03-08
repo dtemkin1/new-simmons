@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.postcss';
+	import '../app.css';
 
 	import { page } from '$app/stores';
 	import { ToastProvider } from '@skeletonlabs/skeleton-svelte';

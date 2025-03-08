@@ -56,7 +56,7 @@
 	</h1>
 	<div class="p-2">
 		<form
-			class="card m-4 flex flex-col space-y-4 border p-4 border-surface-200-800 preset-filled-surface-100-900"
+			class="card border-surface-200-800 preset-filled-surface-100-900 m-4 flex flex-col space-y-4 border p-4"
 			method="post"
 			use:enhance={() => {
 				return async ({ result, update }) => {
@@ -123,12 +123,13 @@
 			<label>
 				<span class="label-text">Quote</span>
 				<Popover
-					bind:open={quotePopup}
+					open={quotePopup}
+					onOpenChange={(e) => (quotePopup = e.open)}
 					positioning={{ placement: 'bottom' }}
 					triggerBase="block w-full"
 					contentBase="card bg-surface-200-800 p-4 space-y-4 max-w-[320px]"
 					arrow
-					arrowBackground="!bg-surface-200 dark:!bg-surface-800"
+					arrowBackground="bg-surface-200! dark:bg-surface-800!"
 				>
 					{#snippet trigger()}
 						<textarea class="textarea font-mono" name="quote" rows="4" value={result.quote}
@@ -147,14 +148,14 @@
 			</label>
 			<label>
 				<span class="label-text">My favorite...</span>
-				<div class="input-group grid-cols-[1fr_auto_1fr] divide-x divide-surface-200-800">
+				<div class="input-group divide-surface-200-800 grid-cols-[1fr_auto_1fr] divide-x">
 					<input
 						type="text"
 						name="favorite_category"
 						value={result.favorite_category}
 						placeholder="Color"
 					/>
-					<div class="input-group-cell">is</div>
+					<div class="ig-cell">is</div>
 					<input
 						type="text"
 						name="favorite_value"
@@ -191,7 +192,7 @@
 		<h2 class="h2 p-2 text-center">Automatic Reminders</h2>
 		{#if Object.keys(data.reminders).length > 0}
 			<ul class="ml-6 list-outside list-disc py-2">
-				{#each data.reminders.value as reminder}<li>{reminder}</li>{/each}
+				{#each data.reminders.value as reminder (reminder)}<li>{reminder}</li>{/each}
 			</ul>
 		{:else}
 			<strong class="font-bold">
