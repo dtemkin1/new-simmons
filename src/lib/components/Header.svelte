@@ -10,6 +10,10 @@
 
 	let current_page = $derived($page.url.pathname);
 	let headerDrawerOpen = $state(false);
+
+	const changeDrawer = () => {
+		headerDrawerOpen = !headerDrawerOpen;
+	};
 </script>
 
 <AppBar>
@@ -34,11 +38,11 @@
 			{/each}
 			<LightSwitch />
 		</div>
-		<div class="md:hidden">
+		<div class="flex items-center md:hidden">
 			<Modal
 				open={headerDrawerOpen}
 				onOpenChange={(e) => (headerDrawerOpen = e.open)}
-				triggerBase="btn btn-icon hover:preset-tonal"
+				triggerBase="btn-icon hover:preset-tonal"
 				contentBase="bg-surface-100-900 p-4 space-y-4 shadow-xl w-[480px] h-screen"
 				positionerJustify="justify-start"
 				positionerAlign=""
@@ -50,7 +54,7 @@
 					<Menu />
 				{/snippet}
 				{#snippet content()}
-					<HeaderDrawer drawerState={headerDrawerOpen} />
+					<HeaderDrawer {changeDrawer} />
 				{/snippet}
 			</Modal>
 		</div>
