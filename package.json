@@ -59,7 +59,7 @@
 		"carta-md": "^4.8.1",
 		"css-tree": "^3.1.0",
 		"dotenv": "^16.4.7",
-		"drizzle-orm": "^0.40.0",
+		"drizzle-orm": "^0.40.1",
 		"isomorphic-dompurify": "^2.22.0",
 		"locutus": "^2.0.32",
 		"lucide-svelte": "^0.479.0",
