@@ -62,7 +62,7 @@
 		"drizzle-orm": "^0.40.1",
 		"isomorphic-dompurify": "^2.22.0",
 		"locutus": "^2.0.32",
-		"lucide-svelte": "^0.479.0",
+		"lucide-svelte": "^0.483.0",
 		"md5": "^2.3.0",
 		"pg": "^8.14.0"
 	},
